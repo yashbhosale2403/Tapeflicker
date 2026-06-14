@@ -1,0 +1,95 @@
+{% extends 'manager/base.html' %}
+{% block header_title %}Room Moderation{% endblock %}
+
+{% block content %}
+<div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+    <div>
+        <a href="{% url 'manager:chat_management' %}" class="text-xs text-mainaccent hover:underline">Back to chat rooms</a>
+        <h2 class="text-2xl font-bold text-white mt-1">{{ room.course.title }} Chat</h2>
+    </div>
+    <div class="flex gap-2">
+        <a href="{% url 'manager:chat_toggle_lock' room.id %}" class="main-btn-ghost text-xs">{% if room.is_locked %}Unlock Room{% else %}Lock Room{% endif %}</a>
+        <a href="{% url 'manager:chat_toggle_readonly' room.id %}" class="main-btn-ghost text-xs">{% if room.read_only %}Disable Read-only{% else %}Enable Read-only{% endif %}</a>
+    </div>
+</div>
+
+<form method="GET" class="glass-panel rounded-xl p-4 mb-5 flex flex-wrap gap-3">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search messages..." class="nav-search px-3 py-2 text-xs w-72">
+    <input type="text" name="user" value="{{ user_q }}" placeholder="Filter by username..." class="nav-search px-3 py-2 text-xs w-60">
+    <button class="main-btn-primary text-xs py-2 px-3">Filter</button>
+</form>
+
+<div class="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-5">
+    <div class="glass-panel rounded-xl overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-white/5">
+                <tr>
+                    <th class="px-4 py-3 text-xs text-mainmuted uppercase">Message</th>
+                    <th class="px-4 py-3 text-xs text-mainmuted uppercase">User</th>
+                    <th class="px-4 py-3 text-xs text-mainmuted uppercase">Time</th>
+                    <th class="px-4 py-3 text-xs text-mainmuted uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-mainborder">
+                {% for m in messages %}
+                <tr class="hover:bg-white/5 align-top">
+                    <td class="px-4 py-3 text-xs text-maintext max-w-[500px]">
+                        {% if m.is_deleted %}
+                        <span class="text-mainmuted italic">Deleted</span>
+                        {% else %}
+                        {{ m.content|truncatechars:180 }}
+                        {% endif %}
+                        <div class="mt-1">
+                            {% if m.is_pinned %}<span class="text-[10px] text-accent-cyan">Pinned</span>{% endif %}
+                            {% if m.is_announcement %}<span class="text-[10px] text-amber-300 ml-2">Announcement</span>{% endif %}
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 text-xs text-white">{{ m.user.username }}</td>
+                    <td class="px-4 py-3 text-xs text-mainmuted">{{ m.created_at|date:"M d, H:i" }}</td>
+                    <td class="px-4 py-3 text-xs space-x-2">
+                        <a href="{% url 'manager:chat_delete_message' m.id %}" class="text-red-400 hover:underline">Delete</a>
+                        <a href="{% url 'manager:chat_toggle_pin_message' m.id %}" class="text-mainaccent hover:underline">{% if m.is_pinned %}Unpin{% else %}Pin{% endif %}</a>
+                        <a href="{% url 'manager:chat_toggle_announcement' m.id %}" class="text-amber-300 hover:underline">{% if m.is_announcement %}Unannounce{% else %}Announce{% endif %}</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="px-4 py-10 text-center text-mainmuted">No messages found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="space-y-5">
+        <div class="glass-panel rounded-xl p-4">
+            <h3 class="text-sm text-white font-semibold mb-3">Participants</h3>
+            <div class="space-y-2 max-h-72 overflow-y-auto">
+                {% for p in participants %}
+                <div class="flex items-center justify-between gap-2 text-xs">
+                    <span class="text-white">{{ p.user.username }}</span>
+                    <span class="space-x-2">
+                        <a href="{% url 'manager:chat_mute_user' p.id %}" class="text-amber-300 hover:underline">{% if p.is_muted %}Unmute{% else %}Mute{% endif %}</a>
+                        <a href="{% url 'manager:chat_ban_user' p.id %}" class="text-red-400 hover:underline">{% if p.is_banned %}Unban{% else %}Ban{% endif %}</a>
+                    </span>
+                </div>
+                {% empty %}
+                <p class="text-xs text-mainmuted">No participants yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="glass-panel rounded-xl p-4">
+            <h3 class="text-sm text-white font-semibold mb-3">Moderation Logs</h3>
+            <div class="space-y-2 max-h-72 overflow-y-auto">
+                {% for log in logs %}
+                <div class="text-xs text-maintext border-b border-mainborder pb-2">
+                    <div class="text-white">{{ log.action }}</div>
+                    <div class="text-mainmuted">{{ log.created_at|date:"M d, H:i" }} by {{ log.actor.username|default:"system" }}</div>
+                </div>
+                {% empty %}
+                <p class="text-xs text-mainmuted">No logs yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

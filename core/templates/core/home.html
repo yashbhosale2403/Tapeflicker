@@ -1,0 +1,941 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- 1. CINEMATIC HERO SECTION -->
+<section class="relative min-h-[100vh] flex items-center pt-32 pb-20 overflow-hidden">
+    <!-- Premium Ambient Background System -->
+    <div class="ambient-bg-wrapper">
+        <!-- Layer 1: Blueprint Grid -->
+        <div class="blueprint-grid-layer"></div>
+        
+        <!-- Layer 2: Canvas Knowledge Graph -->
+        <canvas id="knowledge-graph-canvas" class="canvas-knowledge-layer"></canvas>
+        
+        <!-- Layer 3: Learning Path SVG -->
+        <svg class="svg-learning-path-layer" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.2" />
+                    <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="#00D4FF" stop-opacity="0.2" />
+                </linearGradient>
+                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="1" />
+                </linearGradient>
+            </defs>
+            
+            <!-- Learning Pathway -->
+            <path id="learningPath" d="M 100 200 C 400 150, 300 550, 700 450 C 1100 350, 1000 750, 1300 700" 
+                  fill="none" stroke="url(#pathGradient)" stroke-width="3" stroke-linecap="round" />
+            
+            <use href="#learningPath" class="glow-path-pulse" stroke="url(#glowGradient)" stroke-width="4.5" fill="none" />
+            
+            <!-- Nodes along the path -->
+            <g transform="translate(100, 200)">
+                <circle r="8" fill="#00D4FF" opacity="0.3" />
+                <circle r="4" fill="#00D4FF" />
+                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">LEARN</text>
+            </g>
+            <g transform="translate(362, 344)">
+                <circle r="8" fill="#8B5CF6" opacity="0.3" />
+                <circle r="4" fill="#8B5CF6" />
+                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">PRACTICE</text>
+            </g>
+            <g transform="translate(700, 450)">
+                <circle r="8" fill="#00D4FF" opacity="0.3" />
+                <circle r="4" fill="#00D4FF" />
+                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">BUILD</text>
+            </g>
+            <g transform="translate(1038, 556)">
+                <circle r="8" fill="#8B5CF6" opacity="0.3" />
+                <circle r="4" fill="#8B5CF6" />
+                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">CERTIFY</text>
+            </g>
+            <g transform="translate(1300, 700)">
+                <circle r="8" fill="#00D4FF" opacity="0.3" />
+                <circle r="4" fill="#00D4FF" />
+                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">GROW</text>
+            </g>
+        </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center gap-16">
+        <!-- Left Content -->
+        <div class="lg:w-1/2 text-center lg:text-left">
+            <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-accent-neon/30 text-accent-cyan text-xs font-semibold uppercase tracking-widest mb-8 reveal shadow-[0_0_20px_rgba(0,217,255,0.15)]">
+                <span class="w-2.5 h-2.5 rounded-full bg-accent-neon animate-pulse shadow-[0_0_10px_#00D9FF]"></span>
+                The Future of EdTech
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-sora font-extrabold text-white leading-[1.05] mb-8 reveal tracking-tight" style="transition-delay: 100ms;">
+                Master The Skills That Build The <br class="hidden lg:block"/>
+                <span class="text-gradient-accent relative inline-block">
+                    Future
+                    <span class="absolute -bottom-2 left-0 w-full h-1.5 bg-accent-neon/50 blur-[4px]"></span>
+                </span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-muted mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed reveal font-light" style="transition-delay: 200ms;">
+                Affordable premium tech education designed for future builders, ethical hackers, developers, and innovators. Join the revolution.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto reveal" style="transition-delay: 300ms;">
+                <a href="{% url 'courses:list' %}" class="btn-primary text-base px-8 py-4 flex justify-center items-center gap-3 shadow-[0_0_30px_rgba(0,217,255,0.3)]">
+                    Start Learning
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <a href="#demo" class="btn-outline text-base px-8 py-4 flex justify-center items-center gap-3">
+                    Watch Demo
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Visual (Mockup) -->
+        <div class="lg:w-1/2 relative reveal" style="transition-delay: 400ms;">
+            <!-- Terminal Window Container -->
+            <div class="w-full bg-mainpanel border border-mainborder rounded-lg shadow-card overflow-hidden">
+                <!-- Window Titlebar -->
+                <div class="flex items-center justify-between px-4 py-3 bg-zinc-900/60 border-b border-mainborder select-none">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
+                        <span class="text-xs text-mainmuted font-mono ml-2">session: tapeflicker-cli</span>
+                    </div>
+                    <!-- Copy CLI Command Button -->
+                    <button id="cli-copy-btn" onclick="copyCliCommand()" class="text-[10px] font-mono text-mainmuted hover:text-white px-2 py-1 bg-zinc-800 border border-mainborder rounded transition-all flex items-center gap-1.5 focus:outline-none focus:border-mainaccent">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                        <span>pip install tapeflicker</span>
+                    </button>
+                </div>
+
+                <!-- Terminal Screen Body -->
+                <div class="p-6 font-mono text-xs md:text-sm text-maindim leading-relaxed h-[280px] overflow-y-auto bg-zinc-950/40" id="terminal-screen" aria-live="polite">
+                    <!-- Lines populated dynamically by script -->
+                    <div id="terminal-history" class="space-y-4"></div>
+                    <div class="flex items-center mt-4">
+                        <span class="text-mainaccent mr-2">$</span>
+                        <span id="terminal-current-input" class="text-white"></span>
+                        <span class="w-1.5 h-4 bg-mainaccent inline-block animate-pulse ml-0.5" id="terminal-cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Inline styles to bypass style.css caching */
+    .ticker-container {
+        position: relative;
+        overflow: hidden;
+    }
+    .ticker-item {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(50%);
+        filter: blur(3px);
+        transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+    }
+    .ticker-item.active {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+        pointer-events: auto;
+    }
+    .ticker-item.exit {
+        opacity: 0;
+        transform: translateY(-50%);
+        filter: blur(3px);
+        pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .ticker-item {
+            transition: opacity 0.3s ease;
+            transform: none !important;
+            filter: none !important;
+        }
+        .ticker-item.exit {
+            transform: none !important;
+            filter: none !important;
+            opacity: 0;
+        }
+    }
+</style>
+
+<!-- 2. TRENDING CATEGORIES SECTION -->
+<section class="py-12 md:py-16 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+        <!-- Subtitle/Label -->
+        <h3 class="text-xs font-semibold tracking-[0.25em] text-muted uppercase mb-10 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent-neon animate-pulse shadow-[0_0_8px_#00D4FF]"></span>
+            Trending Topics
+        </h3>
+        
+        <!-- 5 Tickers in a single row -->
+        <div class="flex flex-row flex-wrap lg:flex-nowrap items-center justify-center gap-3 sm:gap-6 lg:gap-8 w-full">
+            
+            <!-- Ticker 1 -->
+            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
+                <div class="ticker-container w-full h-full relative" id="ticker-1" aria-live="polite">
+                    <div class="ticker-item active text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">AI Automation</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Python Dev</div>
+                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Machine Learning</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Deep Learning</div>
+                </div>
+            </div>
+            
+            <!-- Ticker 2 -->
+            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
+                <div class="ticker-container w-full h-full relative" id="ticker-2" aria-live="polite">
+                    <div class="ticker-item active text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Web Development</div>
+                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Frontend Dev</div>
+                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Backend Dev</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">API Design</div>
+                </div>
+            </div>
+            
+            <!-- Ticker 3 -->
+            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
+                <div class="ticker-container w-full h-full relative" id="ticker-3" aria-live="polite">
+                    <div class="ticker-item active text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Ethical Hacking</div>
+                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Cybersecurity</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Pentesting</div>
+                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">DevSecOps</div>
+                </div>
+            </div>
+            
+            <!-- Ticker 4 -->
+            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
+                <div class="ticker-container w-full h-full relative" id="ticker-4" aria-live="polite">
+                    <div class="ticker-item active text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Cloud Computing</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">DevOps</div>
+                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Linux Admin</div>
+                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Database Admin</div>
+                </div>
+            </div>
+            
+            <!-- Ticker 5 -->
+            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
+                <div class="ticker-container w-full h-full relative" id="ticker-5" aria-live="polite">
+                    <div class="ticker-item active text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Game Dev</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Mobile Apps</div>
+                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">UI/UX Design</div>
+                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Data Science</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<!-- 3. FEATURED COURSES SECTION -->
+<section id="courses" class="py-16 md:py-20 relative z-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+            <div class="mb-6 md:mb-0">
+                <div class="text-accent-neon font-bold text-sm uppercase tracking-widest mb-3">Curriculum</div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-sora font-bold text-white mb-6">Trending <span class="text-gradient">Courses</span></h2>
+            </div>
+            <a href="{% url 'courses:list' %}" class="btn-outline flex items-center gap-2">
+                Explore Catalog <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for course in featured_courses %}
+            <div class="gradient-border hover-lift reveal group" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                <div class="h-full bg-secondary rounded-[1.2rem] overflow-hidden flex flex-col relative z-10">
+                    <div class="relative overflow-hidden">
+                        {% if course.thumbnail %}
+                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-60 object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                        {% else %}
+                        <div class="w-full h-60 bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-b border-white/5 group-hover:scale-110 transition-transform duration-700">
+                            <span class="text-white/20 font-sora font-bold text-xl">PRO COURSE</span>
+                        </div>
+                        {% endif %}
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10">
+                            {{ course.difficulty }}
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] font-bold px-2.5 py-1 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded shadow-[0_0_10px_rgba(0,217,255,0.2)] uppercase tracking-wider">{{ course.category.name }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold font-sora text-white mb-3 line-clamp-2 leading-snug group-hover:text-accent-neon transition-colors"><a href="{% url 'courses:detail' course.id %}">{{ course.title }}</a></h3>
+                        <p class="text-muted text-sm mb-6 line-clamp-2 leading-relaxed font-light">{{ course.description }}</p>
+                        
+                        <div class="mt-auto pt-6 border-t border-white/5">
+                            <div class="flex justify-between items-end mb-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs shadow-lg">{{ course.instructor|make_list|first }}</div>
+                                    <div class="text-xs text-white font-medium">{{ course.instructor }}</div>
+                                </div>
+                                <div class="flex items-center gap-1 text-xs text-white font-bold bg-white/5 px-2 py-1 rounded border border-white/10">
+                                    <svg class="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    4.9
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    {% if course.discount_price %}
+                                    <span class="text-3xl font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
+                                    <span class="text-sm text-muted line-through ml-2">${{ course.price }}</span>
+                                    {% else %}
+                                    <span class="text-3xl font-sora font-bold text-white">${{ course.price }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 4. WHY TAPEFLICKER SECTION (Bento Grid) -->
+<section class="py-16 md:py-20 relative z-20 bg-secondary/20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-sora font-bold text-white mb-6">Why <span class="text-gradient">Tapeflicker?</span></h2>
+            <p class="text-muted max-w-2xl mx-auto text-lg">We don't just teach theory. We build practitioners ready for the modern tech landscape.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+            <!-- Bento 1 -->
+            <div class="bento-card md:col-span-2 reveal">
+                <div class="w-12 h-12 rounded-xl bg-accent-neon/10 border border-accent-neon/20 flex items-center justify-center text-accent-neon mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-sora text-white mb-3">Real-World Projects</h3>
+                <p class="text-muted leading-relaxed">Stop watching. Start building. Every course includes hands-on labs and projects that mimic actual enterprise environments.</p>
+            </div>
+            <!-- Bento 2 -->
+            <div class="bento-card bg-gradient-to-br from-accent-purple/10 to-transparent reveal" style="transition-delay: 100ms;">
+                <div class="w-12 h-12 rounded-xl bg-accent-purple/10 border border-accent-purple/20 flex items-center justify-center text-accent-purple mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-sora text-white mb-3">Cyber Labs</h3>
+                <p class="text-muted leading-relaxed text-sm">Access to premium virtual environments.</p>
+            </div>
+            <!-- Bento 3 -->
+            <div class="bento-card reveal" style="transition-delay: 200ms;">
+                <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-sora text-white mb-3">Budget-Friendly</h3>
+                <p class="text-muted leading-relaxed text-sm">Silicon Valley curriculum at a fraction of the cost.</p>
+            </div>
+            <!-- Bento 4 -->
+            <div class="bento-card md:col-span-2 bg-gradient-to-tl from-accent-neon/10 to-transparent reveal" style="transition-delay: 300ms;">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-sora text-white mb-3">Industry Elite Instructors</h3>
+                <p class="text-muted leading-relaxed">Learn directly from security analysts, senior developers, and AI researchers actively working in top tech companies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. IMMERSIVE STATS -->
+<section class="py-14 md:py-18 border-y border-white/5 relative z-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center reveal">
+            <div>
+                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+                    <span class="counter" data-target="10">0</span><span class="text-accent-neon">K+</span>
+                </div>
+                <div class="text-muted font-bold tracking-widest uppercase text-xs">Active Students</div>
+            </div>
+            <div>
+                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+                    <span class="counter" data-target="150">0</span><span class="text-accent-purple">+</span>
+                </div>
+                <div class="text-muted font-bold tracking-widest uppercase text-xs">Masterclasses</div>
+            </div>
+            <div>
+                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+                    <span class="counter" data-target="95">0</span><span class="text-accent-cyan">%</span>
+                </div>
+                <div class="text-muted font-bold tracking-widest uppercase text-xs">Success Rate</div>
+            </div>
+            <div>
+                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+                    <span class="counter" data-target="24">0</span><span class="text-green-400">/7</span>
+                </div>
+                <div class="text-muted font-bold tracking-widest uppercase text-xs">Support Hub</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. TESTIMONIALS -->
+<section class="py-16 md:py-20 relative z-20 bg-mainbg border-t border-mainborder">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold text-mainpurple uppercase tracking-widest block mb-3 font-sans">Community</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white font-sora">Loved by Engineers</h2>
+        </div>
+
+        <!-- Testimonial Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Card 1: James Doe -->
+            <div class="main-card p-8 rounded-2xl border border-mainborder flex flex-col justify-between shadow-subtle bg-mainpanel">
+                <div>
+                    <!-- Stars -->
+                    <div class="flex gap-1 text-[#00D4FF] mb-6">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <!-- Testimonial content -->
+                    <p class="text-sm md:text-base text-maindim mb-8 leading-relaxed">
+                        "The UI/UX is world-class, but the content is even better. It genuinely feels like a premium Silicon Valley product. Got my first dev job after completing the React path!"
+                    </p>
+                </div>
+                <!-- Author Metadata -->
+                <div class="flex items-center gap-4 pt-6 border-t border-mainborder">
+                    <div class="w-12 h-12 rounded-full border border-mainborder flex items-center justify-center text-white font-bold text-sm bg-[#0B1220] select-none">
+                        JD
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-white text-sm">James Doe</div>
+                        <div class="text-xs text-[#00D4FF] font-medium">Frontend Engineer @ Stripe</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Sarah Wong -->
+            <div class="main-card p-8 rounded-2xl border border-mainborder flex flex-col justify-between shadow-subtle bg-mainpanel">
+                <div>
+                    <!-- Stars -->
+                    <div class="flex gap-1 text-[#00D4FF] mb-6">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <!-- Testimonial content -->
+                    <p class="text-sm md:text-base text-maindim mb-8 leading-relaxed">
+                        "Tapeflicker's cybersecurity track goes deeper than any university course I've taken. The labs and premium interface keep me engaged for hours."
+                    </p>
+                </div>
+                <!-- Author Metadata -->
+                <div class="flex items-center gap-4 pt-6 border-t border-mainborder">
+                    <div class="w-12 h-12 rounded-full border border-mainborder flex items-center justify-center text-white font-bold text-sm bg-[#0B1220] select-none">
+                        SW
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-white text-sm">Sarah Wong</div>
+                        <div class="text-xs text-[#00D4FF] font-medium">Security Analyst</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 8. LIVE EVENTS SECTION -->
+{% if upcoming_events %}
+<section class="py-16 md:py-20 relative z-20 bg-secondary/20 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+            <div class="mb-6 md:mb-0">
+                <div class="flex items-center gap-2 text-accent-neon font-bold text-sm uppercase tracking-widest mb-3">
+                    <span class="w-2 h-2 rounded-full bg-accent-neon animate-pulse"></span> Broadcasting
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-sora text-white mb-6">Live <span class="text-gradient">Sessions</span></h2>
+            </div>
+            <a href="{% url 'core:event_list' %}" class="btn-outline">View Calendar</a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for event in upcoming_events %}
+            <div class="glass hover-lift rounded-[2rem] overflow-hidden reveal group flex flex-col h-full" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                {% if event.banner %}
+                <div class="h-48 overflow-hidden relative border-b border-white/5">
+                    <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/20 to-transparent"></div>
+                </div>
+                {% endif %}
+                <div class="p-8 flex-grow flex flex-col justify-between relative z-10">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-accent-cyan font-bold text-xs uppercase tracking-wider backdrop-blur-md">{{ event.event_type }}</div>
+                            <div class="text-xs font-semibold text-muted bg-primary/50 px-2 py-1 rounded-md border border-white/5">{{ event.date|date:"M d, Y" }}</div>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold font-sora text-white mb-4 line-clamp-2"><a href="{% url 'core:event_detail' event.id %}">{{ event.title }}</a></h3>
+                        <p class="text-muted text-sm mb-6 line-clamp-2">{{ event.description }}</p>
+                        
+                        <!-- Countdown Timer -->
+                        <div class="bg-primary/40 border border-white/5 rounded-xl p-3 flex justify-between text-center countdown-container mb-6" data-date="{{ event.date|date:'c' }}">
+                            <div>
+                                <div class="text-base font-bold font-sora text-white days">00</div>
+                                <div class="text-[9px] uppercase text-muted tracking-widest">Days</div>
+                            </div>
+                            <div class="text-muted font-bold">:</div>
+                            <div>
+                                <div class="text-base font-bold font-sora text-white hours">00</div>
+                                <div class="text-[9px] uppercase text-muted tracking-widest">Hrs</div>
+                            </div>
+                            <div class="text-muted font-bold">:</div>
+                            <div>
+                                <div class="text-base font-bold font-sora text-white minutes">00</div>
+                                <div class="text-[9px] uppercase text-muted tracking-widest">Min</div>
+                            </div>
+                            <div class="text-muted font-bold">:</div>
+                            <div>
+                                <div class="text-base font-bold font-sora text-accent-neon seconds">00</div>
+                                <div class="text-[9px] uppercase text-accent-neon tracking-widest">Sec</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/5">
+                        <a href="{% url 'core:event_detail' event.id %}" class="inline-flex items-center gap-2 text-accent-neon text-sm font-semibold group-hover:gap-3 transition-all">
+                            Register Now <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Scripts for Animations -->
+<script>
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / 50;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    };
+    
+    let animated = false;
+    window.addEventListener('scroll', () => {
+        if (!animated) {
+            const section = document.querySelector('.counter');
+            if (section && window.scrollY + window.innerHeight > section.offsetTop) {
+                animateCounters();
+                animated = true;
+            }
+        }
+    });
+
+    // Live Countdown System
+    document.addEventListener('DOMContentLoaded', () => {
+        const countdowns = document.querySelectorAll('.countdown-container');
+        
+        countdowns.forEach(container => {
+            const targetDate = new Date(container.getAttribute('data-date')).getTime();
+            
+            const daysEl = container.querySelector('.days');
+            const hoursEl = container.querySelector('.hours');
+            const minsEl = container.querySelector('.minutes');
+            const secsEl = container.querySelector('.seconds');
+            
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance < 0) {
+                    container.innerHTML = '<div class="w-full text-center text-accent-neon font-bold text-sm tracking-widest uppercase py-2">Event is Live</div>';
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                daysEl.innerText = days.toString().padStart(2, '0');
+                hoursEl.innerText = hours.toString().padStart(2, '0');
+                minsEl.innerText = minutes.toString().padStart(2, '0');
+                secsEl.innerText = seconds.toString().padStart(2, '0');
+            };
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        });
+    });
+
+    // ===== TERMINAL SHOWCASE TYPEWRITER SYSTEM =====
+    const terminalHistory = document.getElementById('terminal-history');
+    const terminalCurrentInput = document.getElementById('terminal-current-input');
+    const terminalScreen = document.getElementById('terminal-screen');
+
+    // Dynamic session configurations from server context
+    const isUserLoggedIn = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+    const userEmail = "{{ request.user.email|default:request.user.username|escapejs }}";
+    
+    // Parse user enrollments
+    const userEnrollments = [
+        {% for enrollment in user_enrollments %}
+        {
+            title: "{{ enrollment.title|escapejs }}",
+            progress: {{ enrollment.progress|default:0 }}
+        },
+        {% endfor %}
+    ];
+
+    // Build terminal command sequence based on user auth status
+    let sessionCommands = [];
+
+    if (isUserLoggedIn) {
+        sessionCommands.push({
+            input: 'tapeflicker login',
+            output: `<span class="text-mainemerald font-bold">✓</span> Welcome back, ${userEmail} (Session active)`
+        });
+
+        let progressOutput = '';
+        if (userEnrollments.length > 0) {
+            userEnrollments.forEach(e => {
+                let eqCount = Math.round(e.progress / 5);
+                let dotCount = Math.max(0, 20 - eqCount);
+                let bar = '='.repeat(eqCount) + '>' + '.'.repeat(dotCount);
+                progressOutput += `${e.title} <span class="text-mainaccent">[${bar}]</span> ${e.progress}%<br/>`;
+            });
+            progressOutput = progressOutput.slice(0, -5); // strip trailing <br/>
+        } else {
+            progressOutput = 'No courses enrolled yet. Try: <span class="text-mainaccent">tapeflicker enroll cybersecurity</span>';
+        }
+        
+        sessionCommands.push({
+            input: 'tapeflicker progress',
+            output: progressOutput
+        });
+
+        let completed = userEnrollments.find(e => e.progress === 100);
+        let certOutput = '';
+        if (completed) {
+            certOutput = `<span class="text-mainemerald font-bold">✓</span> Certificate unlocked: ${completed.title}<br/><span class="text-mainpurple font-bold">→</span> License TF-9821 exported successfully.`;
+        } else if (userEnrollments.length > 0) {
+            certOutput = `<span class="text-maindim">Progressing... Complete a course to 100% to export certificate credentials.</span>`;
+        } else {
+            certOutput = `<span class="text-maindim">Please enroll in a course to start tracking certificates.</span>`;
+        }
+        
+        sessionCommands.push({
+            input: 'tapeflicker certificate',
+            output: certOutput
+        });
+    } else {
+        sessionCommands = [
+            {
+                input: 'tapeflicker login',
+                output: '<span class="text-mainemerald font-bold">✓</span> Welcome back, guest (Session active)'
+            },
+            {
+                input: 'tapeflicker enroll cybersecurity',
+                output: '<span class="text-mainemerald font-bold">✓</span> Course enrolled: Certified Ethical Hacker (CEH) v12<br/><span class="text-mainmuted">Configuring labs sandbox environment... ready.</span>'
+            },
+            {
+                input: 'tapeflicker progress',
+                output: `Cybersecurity <span class="text-mainaccent">======================>......</span> 78%<br/>AI Fundamentals <span class="text-mainaccent">=============>..............</span> 43%<br/>Python Development <span class="text-mainaccent">===========================>..</span> 91%`
+            },
+            {
+                input: 'tapeflicker certificate',
+                output: '<span class="text-mainemerald font-bold">✓</span> Certificate unlocked: Advanced Security Analyst<br/><span class="text-mainpurple font-bold">→</span> License TF-9821-2026 exported successfully.'
+            }
+        ];
+    }
+
+    let cmdIndex = 0;
+    let charIndex = 0;
+    let isTyping = true;
+
+    function typeWriter() {
+        if (!terminalCurrentInput) return;
+        if (cmdIndex >= sessionCommands.length) {
+            setTimeout(() => {
+                terminalHistory.innerHTML = '';
+                cmdIndex = 0;
+                charIndex = 0;
+                isTyping = true;
+                typeWriter();
+            }, 4000);
+            return;
+        }
+
+        const currentCommand = sessionCommands[cmdIndex];
+
+        if (isTyping) {
+            if (charIndex < currentCommand.input.length) {
+                terminalCurrentInput.textContent += currentCommand.input.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 25 + Math.random() * 20);
+            } else {
+                isTyping = false;
+                setTimeout(() => {
+                    const historyRow = document.createElement('div');
+                    historyRow.className = 'space-y-1';
+                    historyRow.innerHTML = `
+                        <div class="flex items-center text-white"><span class="text-mainaccent mr-2">$</span>${currentCommand.input}</div>
+                        <div class="pl-4 text-maindim mt-1">${currentCommand.output}</div>
+                    `;
+                    terminalHistory.appendChild(historyRow);
+                    
+                    terminalCurrentInput.textContent = '';
+                    charIndex = 0;
+                    cmdIndex++;
+                    isTyping = true;
+                    
+                    terminalScreen.scrollTop = terminalScreen.scrollHeight;
+                    
+                    setTimeout(typeWriter, 1200);
+                }, 300);
+            }
+        }
+    }
+
+    if (terminalCurrentInput) {
+        setTimeout(typeWriter, 800);
+    }
+
+    function copyCliCommand() {
+        navigator.clipboard.writeText('pip install tapeflicker');
+        const copyBtnText = document.querySelector('#cli-copy-btn span');
+        if (copyBtnText) {
+            copyBtnText.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtnText.textContent = 'pip install tapeflicker';
+            }, 2000);
+        }
+    }
+</script>
+
+<script>
+    // Premium Vertical Tickers Animation
+    function initTicker(tickerId, delay) {
+        const ticker = document.getElementById(tickerId);
+        if (!ticker) return;
+
+        const items = ticker.querySelectorAll('.ticker-item');
+        if (items.length === 0) return;
+
+        let currentIndex = 0;
+        const totalItems = items.length;
+        const cycleInterval = 3500; // 3.5 seconds per item for readable rotation
+
+        function cycle() {
+            const currentItem = items[currentIndex];
+            const nextIndex = (currentIndex + 1) % totalItems;
+            const nextItem = items[nextIndex];
+
+            // Animate current out
+            currentItem.classList.remove('active');
+            currentItem.classList.add('exit');
+            currentItem.setAttribute('aria-hidden', 'true');
+
+            // Animate next in
+            nextItem.classList.remove('exit');
+            nextItem.classList.add('active');
+            nextItem.setAttribute('aria-hidden', 'false');
+
+            // Update index
+            currentIndex = nextIndex;
+
+            // Cleanup other items to prevent backwards sliding when reset
+            items.forEach((item, index) => {
+                if (index !== currentIndex && index !== (currentIndex - 1 + totalItems) % totalItems) {
+                    item.classList.remove('exit');
+                }
+            });
+        }
+
+        // Stagger initial cycle and consecutive interval runs
+        setTimeout(() => {
+            cycle();
+            setInterval(cycle, cycleInterval);
+        }, delay);
+    }
+
+    function initAllTickers() {
+        initTicker('ticker-1', 0);
+        initTicker('ticker-2', 300);
+        initTicker('ticker-3', 600);
+        initTicker('ticker-4', 900);
+        initTicker('ticker-5', 1200);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAllTickers);
+    } else {
+        initAllTickers();
+    }
+
+    // ===== PREMIUM BACKGROUND CANVAS SYSTEM =====
+    (function() {
+        const canvas = document.getElementById('knowledge-graph-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId = null;
+        let isVisible = true;
+        let nodes = [];
+        let numNodes = 45;
+        let connectionDist = 120;
+        let dpr = window.devicePixelRatio || 1;
+
+        // Resize handler
+        function resize() {
+            const width = canvas.offsetWidth;
+            const height = canvas.offsetHeight;
+            if (width === 0 || height === 0) {
+                setTimeout(resize, 100);
+                return;
+            }
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            // Adjust densities based on device width
+            if (window.innerWidth < 768) {
+                numNodes = 12;
+                connectionDist = 80;
+            } else {
+                numNodes = 45;
+                connectionDist = 130;
+            }
+            initNodes(width, height);
+        }
+
+        // Initialize nodes
+        function initNodes(width, height) {
+            nodes = [];
+            for (let i = 0; i < numNodes; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    radius: Math.random() * 2 + 1,
+                    color: i % 2 === 0 ? 'rgba(0, 212, 255, 0.6)' : 'rgba(139, 92, 246, 0.6)'
+                });
+            }
+        }
+
+        // Update loop
+        function update() {
+            if (!isVisible) return;
+            const width = canvas.width / dpr;
+            const height = canvas.height / dpr;
+            if (width === 0 || height === 0) {
+                animationFrameId = requestAnimationFrame(update);
+                return;
+            }
+            
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw connections
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < nodes.length; i++) {
+                const n1 = nodes[i];
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const n2 = nodes[j];
+                    const dx = n1.x - n2.x;
+                    const dy = n1.y - n2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < connectionDist) {
+                        const alpha = (1 - (dist / connectionDist)) * 0.05;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(n1.x, n1.y);
+                        ctx.lineTo(n2.x, n2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw & move nodes
+            for (let i = 0; i < nodes.length; i++) {
+                const node = nodes[i];
+                
+                node.x += node.vx;
+                node.y += node.vy;
+
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+
+                node.x = Math.max(0, Math.min(width, node.x));
+                node.y = Math.max(0, Math.min(height, node.y));
+
+                ctx.fillStyle = node.color;
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            animationFrameId = requestAnimationFrame(update);
+        }
+
+        // Initialize
+        resize();
+        window.addEventListener('resize', resize);
+        window.addEventListener('load', resize);
+
+        // Visibility / Viewport optimization
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible) {
+                        cancelAnimationFrame(animationFrameId);
+                        update();
+                    } else {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                });
+            }, { threshold: 0.05 });
+            observer.observe(canvas);
+        } else {
+            window.addEventListener('scroll', () => {
+                const rect = canvas.getBoundingClientRect();
+                isVisible = (rect.bottom > 0 && rect.top < window.innerHeight);
+            });
+        }
+        
+        update();
+    })();
+</script>
+{% endblock %}

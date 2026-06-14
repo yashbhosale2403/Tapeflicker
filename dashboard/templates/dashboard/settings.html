@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings | Tapeflicker{% endblock %}
+
+{% block content %}
+<div class="max-w-[1400px] mx-auto px-6 lg:px-8 py-24 relative z-20 flex flex-col lg:flex-row gap-10">
+    
+    <!-- SaaS Sidebar -->
+    <aside class="w-full lg:w-72 flex-shrink-0">
+        <div class="glass p-6 rounded-3xl sticky top-32 reveal border border-white/5">
+            <!-- Navigation -->
+            <nav class="space-y-1 text-sm font-medium">
+                <a href="{% url 'dashboard:home' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:text-white hover:bg-white/5 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    My Learning
+                </a>
+                <a href="{% url 'dashboard:certificates' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:text-white hover:bg-white/5 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    Certificates
+                </a>
+                <a href="{% url 'dashboard:analytics' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:text-white hover:bg-white/5 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Analytics
+                </a>
+                <a href="{% url 'dashboard:settings' %}" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent-neon/10 text-accent-neon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-grow">
+        <div class="mb-8 reveal">
+            <h1 class="text-3xl font-bold font-sora text-white mb-2">Account Settings</h1>
+            <p class="text-muted">Manage your profile, preferences, and account security.</p>
+        </div>
+        
+        <div class="glass p-8 rounded-2xl border border-white/5 reveal">
+            <form method="POST" class="space-y-6 max-w-2xl">
+                {% csrf_token %}
+                <div class="flex items-center gap-6 mb-8">
+                    {% if request.user.profile.avatar_url %}
+                    <img src="{{ request.user.profile.avatar_url }}" alt="Profile" class="w-20 h-20 rounded-full border-2 border-accent-neon object-cover">
+                    {% else %}
+                    <div class="w-20 h-20 bg-gradient-to-tr from-accent-neon to-accent-purple rounded-full p-0.5">
+                        <div class="w-full h-full bg-primary rounded-full flex items-center justify-center text-white font-bold font-sora text-2xl">
+                            {{ request.user.profile.get_initials }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Avatar Image URL</label>
+                        <input type="url" name="avatar_url" value="{{ request.user.profile.avatar_url|default:'' }}" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-accent-neon transition-colors" placeholder="https://example.com/avatar.jpg">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">First Name</label>
+                        <input type="text" name="first_name" value="{{ request.user.first_name }}" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-accent-neon transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Last Name</label>
+                        <input type="text" name="last_name" value="{{ request.user.last_name }}" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-accent-neon transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                    <input type="email" value="{{ request.user.email }}" disabled class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-muted cursor-not-allowed">
+                    <p class="text-xs text-muted mt-1">Email is managed via Firebase Authentication.</p>
+                </div>
+                
+                <div class="pt-6 border-t border-white/5 flex justify-end">
+                    <button type="submit" class="btn-primary px-8 py-3">Save Changes</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="glass p-8 rounded-2xl border border-red-500/20 mt-8 reveal">
+            <h3 class="text-xl font-bold font-sora text-red-500 mb-2">Password Reset</h3>
+            <p class="text-muted text-sm mb-4">Send a password reset email to your registered address.</p>
+            <button id="reset-pwd-btn" class="px-6 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg transition-colors font-medium text-sm">Send Reset Email</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="module">
+    import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const resetBtn = document.getElementById('reset-pwd-btn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                const auth = getAuth();
+                const userEmail = "{{ request.user.email }}";
+                
+                sendPasswordResetEmail(auth, userEmail)
+                    .then(() => {
+                        alert('Password reset email sent. Please check your inbox.');
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert('Failed to send password reset email.');
+                    });
+            });
+        }
+    });
+</script>
+{% endblock %}

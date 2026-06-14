@@ -1,0 +1,31 @@
+{% extends 'manager/base.html' %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <a href="{% url 'manager:course_content' course.id %}" class="text-xs text-mainaccent hover:underline">Back to course content</a>
+    <h2 class="text-2xl text-white font-bold mt-2">{{ title }} - {{ lesson.title }}</h2>
+</div>
+
+<div class="glass-panel p-8 rounded-xl max-w-2xl">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        <div>
+            <label class="block text-sm text-mainmuted mb-2">Resource Title</label>
+            {{ form.title }}
+        </div>
+        <div>
+            <label class="block text-sm text-mainmuted mb-2">File (optional if URL provided)</label>
+            {{ form.file }}
+        </div>
+        <div>
+            <label class="block text-sm text-mainmuted mb-2">External URL (optional if file provided)</label>
+            {{ form.external_url }}
+        </div>
+        <div class="pt-4 border-t border-mainborder flex justify-end gap-3">
+            <a href="{% url 'manager:course_content' course.id %}" class="main-btn-ghost">Cancel</a>
+            <button type="submit" class="main-btn-primary">Save Resource</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

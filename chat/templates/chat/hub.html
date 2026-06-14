@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Course Community | Tapeflicker{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-24 relative z-20">
+    <div class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-sora font-bold text-white mb-3">Course Community</h1>
+        <p class="text-muted">Join real-time discussions for the courses you are enrolled in.</p>
+    </div>
+
+    {% if rooms %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for room in rooms %}
+        <a href="{% url 'chat:course_room' room.course.id %}" class="glass rounded-2xl border border-white/10 p-6 hover-lift block">
+            <p class="text-xs uppercase tracking-widest text-accent-neon mb-2">Course Room</p>
+            <h2 class="text-white font-sora font-bold text-xl mb-2">{{ room.course.title }}</h2>
+            <p class="text-sm text-muted line-clamp-2">{{ room.course.description }}</p>
+            <div class="mt-4 text-sm text-accent-cyan font-medium">Open Chat</div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="glass rounded-3xl border border-white/10 p-10 text-center">
+        <h3 class="text-2xl font-sora font-bold text-white mb-2">No enrolled course chats yet</h3>
+        <p class="text-muted mb-6">Enroll in a course to unlock your private learning community.</p>
+        <a href="{% url 'courses:list' %}" class="btn-primary">Browse Courses</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

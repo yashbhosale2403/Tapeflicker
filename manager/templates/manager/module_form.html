@@ -1,0 +1,27 @@
+{% extends 'manager/base.html' %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <a href="{% url 'manager:course_content' course.id %}" class="text-xs text-mainaccent hover:underline">Back to course content</a>
+    <h2 class="text-2xl text-white font-bold mt-2">{{ title }} - {{ course.title }}</h2>
+</div>
+
+<div class="glass-panel p-8 rounded-xl max-w-2xl">
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        <div>
+            <label class="block text-sm text-mainmuted mb-2">Module Title</label>
+            {{ form.title }}
+        </div>
+        <div>
+            <label class="block text-sm text-mainmuted mb-2">Order</label>
+            {{ form.order }}
+        </div>
+        <div class="pt-4 border-t border-mainborder flex justify-end gap-3">
+            <a href="{% url 'manager:course_content' course.id %}" class="main-btn-ghost">Cancel</a>
+            <button type="submit" class="main-btn-primary">Save Module</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'manager/base.html' %}
+
+{% block header_title %}Students{% endblock %}
+
+{% block content %}
+<!-- Premium Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+    <div class="main-card p-5 rounded-lg border border-mainborder flex items-center justify-between shadow-subtle">
+        <div>
+            <span class="text-xs font-medium text-mainmuted uppercase tracking-wider block mb-1">Registered Students</span>
+            <span class="text-2xl font-bold text-white font-sans">{{ total_students }}</span>
+        </div>
+        <div class="w-10 h-10 rounded bg-mainborder flex items-center justify-center text-maindim">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </div>
+    </div>
+    <div class="main-card p-5 rounded-lg border border-mainborder flex items-center justify-between shadow-subtle">
+        <div>
+            <span class="text-xs font-medium text-mainmuted uppercase tracking-wider block mb-1">Active Accounts</span>
+            <span class="text-2xl font-bold text-green-400 font-sans">{{ active_students }}</span>
+        </div>
+        <div class="w-10 h-10 rounded bg-mainborder flex items-center justify-center text-green-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+    </div>
+    <div class="main-card p-5 rounded-lg border border-mainborder flex items-center justify-between shadow-subtle">
+        <div>
+            <span class="text-xs font-medium text-mainmuted uppercase tracking-wider block mb-1">System Admins</span>
+            <span class="text-2xl font-bold text-mainpurple font-sans">{{ total_admins }}</span>
+        </div>
+        <div class="w-10 h-10 rounded bg-mainborder flex items-center justify-center text-mainpurple">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-between items-center mb-8">
+    <div class="flex items-center gap-4">
+        <!-- Search Bar -->
+        <div class="relative">
+            <svg class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-mainmuted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="student-search" placeholder="Search students..." class="pl-10 pr-4 py-2 bg-mainbg border border-mainborder rounded-lg text-sm text-maintext focus:outline-none focus:border-mainaccent transition-colors w-64">
+        </div>
+    </div>
+</div>
+
+<!-- Modern Table -->
+<div class="glass-panel rounded-xl overflow-hidden">
+    <table class="w-full text-left border-collapse" id="students-table">
+        <thead>
+            <tr class="bg-white/5 border-b border-mainborder">
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider w-20">S.No.</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider">Student</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider">Email</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider">Joined Date</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider">Courses Enrolled</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider">Status</th>
+                <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-mainborder">
+            {% for student in students %}
+            <tr class="hover:bg-white/5 transition-colors group student-row">
+                <td class="py-4 px-6 text-sm text-maintext font-semibold">{{ forloop.counter }}</td>
+                <td class="py-4 px-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-mainaccent to-mainpurple flex items-center justify-center text-mainbg font-bold text-sm flex-shrink-0">
+                            {{ student.profile.get_initials|default:"S" }}
+                        </div>
+                        <div>
+                            <div class="font-medium text-white text-sm student-name">{{ student.get_full_name|default:student.username }}</div>
+                            <div class="text-xs text-mainmuted">@{{ student.username }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="py-4 px-6 text-sm text-maintext student-email">{{ student.email }}</td>
+                <td class="py-4 px-6 text-sm text-maintext">{{ student.date_joined|date:"M d, Y" }}</td>
+                <td class="py-4 px-6 text-sm text-maintext font-semibold">
+                    <span class="inline-flex items-center justify-center bg-white/5 border border-mainborder rounded-full w-8 h-8 text-xs text-mainaccent">
+                        {{ student.enrollments.count }}
+                    </span>
+                </td>
+                <td class="py-4 px-6">
+                    {% if student.is_active %}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-green-500/10 text-green-500 border border-green-500/20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Active
+                    </span>
+                    {% else %}
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-red-500/10 text-red-500 border border-red-500/20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Blocked
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="py-4 px-6 text-right">
+                    {% if not student.is_staff and not student.is_superuser %}
+                    <form method="POST" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="toggle_status">
+                        <input type="hidden" name="student_id" value="{{ student.id }}">
+                        <button type="submit" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-mainborder transition-all {% if student.is_active %}text-red-400 hover:bg-red-500/10 hover:border-red-500/25{% else %}text-green-400 hover:bg-green-500/10 hover:border-green-500/25{% endif %}">
+                            {% if student.is_active %}Block{% else %}Unblock{% endif %}
+                        </button>
+                    </form>
+                    <form method="POST" class="inline" onsubmit="return confirm('Are you sure you want to permanently delete this student account? All their course enrollments and progress will be deleted.');">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="delete_student">
+                        <input type="hidden" name="student_id" value="{{ student.id }}">
+                        <button type="submit" class="text-xs font-semibold px-3 py-1.5 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/30 transition-all ml-2">
+                            Delete
+                        </button>
+                    </form>
+                    {% else %}
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-mainaccent/10 text-mainaccent border border-mainaccent/20">
+                        🛡️ Admin Account
+                    </span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="py-12 text-center text-mainmuted">
+                    <svg class="w-12 h-12 mx-auto mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <p>No students registered yet.</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Live Search Feature
+    document.getElementById('student-search').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const rows = document.querySelectorAll('.student-row');
+        
+        rows.forEach(row => {
+            const name = row.querySelector('.student-name').textContent.toLowerCase();
+            const email = row.querySelector('.student-email').textContent.toLowerCase();
+            if (name.includes(query) || email.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}

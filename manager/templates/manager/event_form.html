@@ -1,0 +1,64 @@
+{% extends 'manager/base.html' %}
+
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center gap-4">
+    <a href="{% url 'manager:event_list' %}" class="w-10 h-10 rounded-lg bg-mainpanel border border-mainborder flex items-center justify-center text-mainmuted hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+    </a>
+    <h2 class="text-2xl font-bold text-white">{{ title }}</h2>
+</div>
+
+<div class="glass-panel p-8 rounded-xl max-w-2xl">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        <div>
+            <label class="block text-sm font-medium text-mainmuted mb-2">Event Title</label>
+            {{ form.title }}
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-mainmuted mb-2">Event Type</label>
+                {{ form.event_type }}
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-mainmuted mb-2">Date & Time</label>
+                {{ form.date }}
+            </div>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-mainmuted mb-2">Registration Link (Optional)</label>
+            {{ form.registration_link }}
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-mainmuted mb-2">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-mainmuted mb-2">Event Banner</label>
+            {{ form.banner }}
+            {% if event.banner %}
+            <p class="text-xs text-green-400 mt-2">Current: {{ event.banner.name }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="pt-4 border-t border-mainborder">
+            <label class="flex items-center gap-3 cursor-pointer">
+                {{ form.is_active }}
+                <span class="text-sm font-medium text-white">Event is Active</span>
+            </label>
+        </div>
+        
+        <div class="flex justify-end pt-6 border-t border-mainborder gap-4">
+            <a href="{% url 'manager:event_list' %}" class="px-6 py-2 rounded-lg border border-mainborder text-white hover:bg-mainpanel transition-colors text-sm font-medium">Cancel</a>
+            <button type="submit" class="px-6 py-2 rounded-lg bg-mainaccent text-black hover:bg-cyan-400 transition-colors text-sm font-bold">Save Event</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

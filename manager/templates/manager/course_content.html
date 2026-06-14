@@ -1,0 +1,77 @@
+{% extends 'manager/base.html' %}
+
+{% block header_title %}Course Content{% endblock %}
+
+{% block content %}
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+    <div>
+        <a href="{% url 'manager:course_list' %}" class="text-xs text-mainaccent hover:underline">Back to courses</a>
+        <h2 class="text-2xl font-bold text-white mt-1">{{ course.title }}</h2>
+        <p class="text-sm text-mainmuted">Manage modules, lessons, YouTube videos, preview flags, and resources.</p>
+    </div>
+    <div class="flex gap-3">
+        <a href="{% url 'manager:module_create' course.id %}" class="main-btn-ghost">+ Module</a>
+        <a href="{% url 'manager:lesson_create' course.id %}" class="main-btn-primary">+ Lesson</a>
+    </div>
+</div>
+
+<div class="space-y-5">
+    {% for module in modules %}
+    <div class="main-card p-5">
+        <div class="flex items-center justify-between gap-3 mb-4">
+            <div>
+                <h3 class="text-white font-semibold">{{ module.order }}. {{ module.title }}</h3>
+                <p class="text-xs text-mainmuted">{{ module.lessons.count }} lessons</p>
+            </div>
+            <div class="flex gap-2">
+                <a href="{% url 'manager:module_update' module.id %}" class="main-btn-ghost">Edit</a>
+                <a href="{% url 'manager:module_delete' module.id %}" class="main-btn-ghost text-red-400">Delete</a>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            {% for lesson in module.lessons.all %}
+            <div class="rounded-xl border border-mainborder bg-white/5 p-4">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                    <div>
+                        <p class="text-white text-sm font-semibold">{{ lesson.order }}. {{ lesson.title }}</p>
+                        <p class="text-xs text-mainmuted mt-1">
+                            ID: {{ lesson.youtube_video_id|default:"N/A" }} | {{ lesson.duration }}
+                            {% if lesson.is_preview %} | Preview{% endif %}
+                            {% if not lesson.is_published %} | Draft{% endif %}
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{% url 'manager:resource_create' lesson.id %}" class="main-btn-ghost">+ Resource</a>
+                        <a href="{% url 'manager:lesson_update' lesson.id %}" class="main-btn-ghost">Edit Lesson</a>
+                        <a href="{% url 'manager:lesson_delete' lesson.id %}" class="main-btn-ghost text-red-400">Delete</a>
+                    </div>
+                </div>
+                {% if lesson.resources.all %}
+                <div class="mt-3 pt-3 border-t border-mainborder space-y-2">
+                    {% for resource in lesson.resources.all %}
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-maintext">{{ resource.title }}</span>
+                        <span class="flex gap-2">
+                            <a href="{% url 'manager:resource_update' resource.id %}" class="text-mainaccent hover:underline">Edit</a>
+                            <a href="{% url 'manager:resource_delete' resource.id %}" class="text-red-400 hover:underline">Delete</a>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="rounded-xl border border-mainborder p-4 text-sm text-mainmuted">No lessons yet in this module.</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="main-card p-8 text-center">
+        <h3 class="text-white font-semibold mb-2">No modules yet</h3>
+        <p class="text-mainmuted text-sm mb-4">Start by creating a module, then add lessons with YouTube links.</p>
+        <a href="{% url 'manager:module_create' course.id %}" class="main-btn-primary">Create first module</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

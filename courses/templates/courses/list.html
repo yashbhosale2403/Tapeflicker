@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses | Tapeflicker{% endblock %}
+
+{% block content %}
+<div class="relative min-h-[90vh] overflow-hidden bg-primary pt-32 pb-24">
+    <!-- Abstract premium atmospheric blobs and cyber grid -->
+    <div class="absolute top-[-5%] left-[20%] w-[600px] h-[600px] bg-accent-purple/10 rounded-full blur-[150px] mix-blend-screen animate-pulse pointer-events-none"></div>
+    <div class="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-accent-neon/10 rounded-full blur-[130px] mix-blend-screen animate-pulse pointer-events-none" style="animation-delay: 3s;"></div>
+    <div class="cyber-grid opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+        <!-- Editorial Header -->
+        <div class="mb-20 text-center max-w-3xl mx-auto reveal">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-secondary/80 border border-white/5 text-accent-cyan text-xs font-mono font-bold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,217,255,0.1)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse"></span>
+                Interactive Sandbox Curricula
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold font-sora text-white mb-6 leading-tight tracking-tight">Explore the <span class="text-gradient-accent">Catalog</span></h1>
+            <p class="text-muted text-base md:text-lg leading-relaxed font-normal max-w-2xl mx-auto">
+                Accelerate your technical mastery with hands-on, premium courses in cybersecurity, artificial intelligence, and developer operations.
+            </p>
+        </div>
+
+        <!-- Search and Filters Panel -->
+        <div class="max-w-4xl mx-auto mb-16 reveal" style="transition-delay: 100ms;">
+            <!-- Premium Search Bar -->
+            <div class="relative flex items-center bg-[#0B1220]/80 rounded-[2rem] p-1.5 border border-white/10 group focus-within:border-accent-cyan/50 focus-within:shadow-[0_0_25px_rgba(0,217,255,0.12)] transition-all duration-300 backdrop-blur-md mb-8">
+                <span class="pl-5 text-muted group-focus-within:text-accent-cyan transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+                <input type="text" id="course-search" placeholder="Type here to search courses, modules, or instructor..." class="flex-grow bg-transparent px-4 py-3 text-white placeholder-slate-500 focus:outline-none text-sm font-medium">
+                <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-muted font-mono text-[10px] mr-3 select-none">
+                    Press <kbd class="font-sans font-bold text-white text-xs">/</kbd> to focus
+                </span>
+            </div>
+
+            <!-- Redesigned Capsule Filters -->
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="?" class="px-5 py-2.5 rounded-full border transition-all duration-300 font-bold font-mono text-[10px] tracking-wider uppercase {% if not current_category %}bg-accent-cyan/10 border-accent-cyan/40 text-accent-cyan shadow-[0_0_15px_rgba(0,217,255,0.15)]{% else %}bg-secondary/50 border-white/10 text-muted hover:border-white/30 hover:text-white{% endif %}">
+                    All Courses
+                </a>
+                {% for cat in categories %}
+                <a href="?category={{ cat.slug }}" class="px-5 py-2.5 rounded-full border transition-all duration-300 font-bold font-mono text-[10px] tracking-wider uppercase {% if current_category == cat.slug %}bg-accent-cyan/10 border-accent-cyan/40 text-accent-cyan shadow-[0_0_15px_rgba(0,217,255,0.15)]{% else %}bg-secondary/50 border-white/10 text-muted hover:border-white/30 hover:text-white{% endif %}">
+                    {{ cat.name }}
+                </a>
+                {% empty %}
+                <span class="text-muted text-sm">No categories available.</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Course Grid -->
+        <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for course in courses %}
+            <div class="course-card-wrapper gradient-border hover-lift reveal transition-all duration-500" data-title="{{ course.title|lower }}" data-desc="{{ course.description|lower }}" data-category="{{ course.category.name|lower }}" data-instructor="{{ course.instructor|lower }}" data-difficulty="{{ course.difficulty|lower }}" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                <div class="h-full bg-[#0B1220] rounded-[1.2rem] overflow-hidden flex flex-col relative z-10 group border border-white/5 hover:border-accent-cyan/30 transition-all duration-300">
+                    <div class="relative overflow-hidden aspect-[16/10] bg-slate-950">
+                        {% if course.thumbnail %}
+                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        {% else %}
+                        <div class="w-full h-full bg-gradient-to-br from-[#0B1220] to-[#111827] flex items-center justify-center border-b border-white/5 relative">
+                            <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+                            <span class="text-white/10 font-sora font-extrabold text-xs tracking-[0.2em] uppercase select-none">PRO CURRICULUM</span>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Premium gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-90"></div>
+                        
+                        <!-- Difficulty Badge with themed colors -->
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[10px] font-mono tracking-widest uppercase font-bold px-3 py-1.5 rounded-full border border-white/15 shadow-lg select-none">
+                            {% if course.difficulty == 'Beginner' %}
+                            <span class="text-accent-green">Beginner</span>
+                            {% elif course.difficulty == 'Intermediate' %}
+                            <span class="text-accent-purple">Intermediate</span>
+                            {% else %}
+                            <span class="text-accent-cyan">Advanced</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[9px] font-mono font-bold px-2.5 py-1 bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20 rounded uppercase tracking-wider">{{ course.category.name }}</span>
+                            {% if course.is_free %}
+                            <span class="text-[9px] font-mono font-bold px-2.5 py-1 bg-accent-green/10 text-accent-green border border-accent-green/20 rounded uppercase tracking-wider">FREE PATH</span>
+                            {% endif %}
+                        </div>
+                        
+                        <h3 class="text-xl font-bold font-sora text-white mb-2 line-clamp-2 leading-snug group-hover:text-accent-cyan transition-colors">
+                            <a href="{% url 'courses:detail' course.id %}">{{ course.title }}</a>
+                        </h3>
+                        <p class="text-muted text-xs mb-6 line-clamp-3 leading-relaxed font-light">{{ course.description }}</p>
+                        
+                        <!-- Stats Grid Panel -->
+                        <div class="grid grid-cols-2 gap-4 py-4 px-4 bg-white/[0.02] border border-white/5 rounded-xl mb-6 text-xs text-muted font-mono select-none">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                <span>{{ course.total_lessons }} Lessons</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>{{ course.total_duration_hours }} Hours</span>
+                            </div>
+                            <div class="flex items-center gap-2 col-span-2 pt-2.5 border-t border-white/5">
+                                <svg class="w-4 h-4 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                <span class="truncate">Instructor: {{ course.instructor }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Price and Details Button -->
+                        <div class="mt-auto flex justify-between items-center pt-4 border-t border-white/5">
+                            <div>
+                                {% if course.discount_price %}
+                                <div class="text-2xl font-bold font-sora text-accent-cyan leading-none mb-1">${{ course.discount_price }}</div>
+                                <div class="text-xs text-muted/60 line-through leading-none">${{ course.price }}</div>
+                                {% else %}
+                                <div class="text-2xl font-bold font-sora text-white leading-none">${{ course.price }}</div>
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'courses:detail' course.id %}" class="btn-outline py-2 px-5 text-[10px] tracking-widest uppercase font-bold hover:bg-accent-cyan hover:text-black hover:border-accent-cyan transition-all duration-300 rounded-[2rem]">View Path</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full">
+                <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
+                    <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold font-sora text-white mb-2">No paths available</h3>
+                <p class="text-muted text-sm max-w-xs mx-auto mb-6">We're currently preparing new premium courses. Stay tuned for catalog updates.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Real-time Filter Search Empty State -->
+        <div id="search-empty-state" class="hidden py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full">
+            <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
+                <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold font-sora text-white mb-2">No matches found</h3>
+            <p class="text-muted text-sm max-w-xs mx-auto mb-6">We couldn't find any courses matching your search query. Try searching for a different keyword.</p>
+            <button onclick="clearSearch()" class="btn-outline px-6 py-2 text-[10px] tracking-wider uppercase font-bold rounded-[2rem]">Clear Search</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('course-search');
+        const cards = document.querySelectorAll('.course-card-wrapper');
+        const emptyState = document.getElementById('search-empty-state');
+        const grid = document.getElementById('courses-grid');
+
+        if (searchInput) {
+            // Keyboard shortcut focus
+            window.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+
+            // Instant client-side search filtering
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-title') || '';
+                    const desc = card.getAttribute('data-desc') || '';
+                    const category = card.getAttribute('data-category') || '';
+                    const instructor = card.getAttribute('data-instructor') || '';
+                    const difficulty = card.getAttribute('data-difficulty') || '';
+
+                    if (
+                        title.includes(query) || 
+                        desc.includes(query) || 
+                        category.includes(query) || 
+                        instructor.includes(query) || 
+                        difficulty.includes(query)
+                    ) {
+                        card.style.display = 'block';
+                        card.classList.remove('opacity-0', 'pointer-events-none');
+                        card.classList.add('opacity-100');
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('opacity-100');
+                        card.classList.add('opacity-0', 'pointer-events-none');
+                    }
+                });
+
+                if (visibleCount === 0 && cards.length > 0) {
+                    grid.classList.add('hidden');
+                    emptyState.classList.remove('hidden');
+                } else {
+                    grid.classList.remove('hidden');
+                    emptyState.classList.add('hidden');
+                }
+            });
+        }
+
+        window.clearSearch = function() {
+            if (searchInput) {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+                searchInput.focus();
+            }
+        };
+    });
+</script>
+{% endblock %}

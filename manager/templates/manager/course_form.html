@@ -1,0 +1,130 @@
+{% extends 'manager/base.html' %}
+
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="mb-6 flex items-center gap-4">
+    <a href="{% url 'manager:course_list' %}" class="w-10 h-10 rounded-lg bg-mainpanel border border-mainborder flex items-center justify-center text-mainmuted hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+    </a>
+    <h2 class="text-2xl font-bold text-white">{{ title }}</h2>
+</div>
+
+<div class="glass-panel p-8 rounded-xl max-w-4xl">
+    <form method="POST" enctype="multipart/form-data" class="space-y-8">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div class="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+            <p class="text-red-500 text-sm">{{ form.non_field_errors.0 }}</p>
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left Column -->
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Course Title</label>
+                    {{ form.title }}
+                    {% if form.title.errors %}<p class="text-red-500 text-xs mt-1">{{ form.title.errors.0 }}</p>{% endif %}
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">URL Slug</label>
+                    {{ form.slug }}
+                    {% if form.slug.errors %}<p class="text-red-500 text-xs mt-1">{{ form.slug.errors.0 }}</p>{% endif %}
+                    <p class="text-xs text-mainmuted mt-1">Example: my-course-name (No spaces or special characters)</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-mainmuted mb-2">Category</label>
+                        {{ form.category }}
+                        {% if form.category.errors %}<p class="text-red-500 text-xs mt-1">{{ form.category.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-mainmuted mb-2">Difficulty</label>
+                        {{ form.difficulty }}
+                        {% if form.difficulty.errors %}<p class="text-red-500 text-xs mt-1">{{ form.difficulty.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Instructor Name</label>
+                    {{ form.instructor }}
+                    {% if form.instructor.errors %}<p class="text-red-500 text-xs mt-1">{{ form.instructor.errors.0 }}</p>{% endif %}
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-mainmuted mb-2">Price ($)</label>
+                        {{ form.price }}
+                        {% if form.price.errors %}<p class="text-red-500 text-xs mt-1">{{ form.price.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-mainmuted mb-2">Discount Price</label>
+                        {{ form.discount_price }}
+                        {% if form.discount_price.errors %}<p class="text-red-500 text-xs mt-1">{{ form.discount_price.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Description</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}<p class="text-red-500 text-xs mt-1">{{ form.description.errors.0 }}</p>{% endif %}
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Learning Outcomes</label>
+                    {{ form.learning_outcomes }}
+                    {% if form.learning_outcomes.errors %}<p class="text-red-500 text-xs mt-1">{{ form.learning_outcomes.errors.0 }}</p>{% endif %}
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Prerequisites</label>
+                    {{ form.prerequisites }}
+                    {% if form.prerequisites.errors %}<p class="text-red-500 text-xs mt-1">{{ form.prerequisites.errors.0 }}</p>{% endif %}
+                </div>
+                
+                <div class="flex gap-8 border-t border-mainborder pt-6">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        {{ form.is_featured }}
+                        <span class="text-sm font-medium text-white">Featured Course</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        {{ form.is_locked }}
+                        <span class="text-sm font-medium text-white">Draft (Locked)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-mainborder pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <label class="block text-sm font-medium text-mainmuted mb-2">Course Thumbnail</label>
+                {{ form.thumbnail }}
+                {% if form.thumbnail.errors %}<p class="text-red-500 text-xs mt-1">{{ form.thumbnail.errors.0 }}</p>{% endif %}
+                {% if course.thumbnail %}
+                <p class="text-xs text-green-400 mt-2">Current: {{ course.thumbnail.name }}</p>
+                {% endif %}
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-mainmuted mb-2">Course Banner (Wide)</label>
+                {{ form.banner }}
+                {% if form.banner.errors %}<p class="text-red-500 text-xs mt-1">{{ form.banner.errors.0 }}</p>{% endif %}
+                {% if course.banner %}
+                <p class="text-xs text-green-400 mt-2">Current: {{ course.banner.name }}</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="flex justify-end pt-6 border-t border-mainborder gap-4">
+            <a href="{% url 'manager:course_list' %}" class="px-6 py-2 rounded-lg border border-mainborder text-white hover:bg-mainpanel transition-colors text-sm font-medium">Cancel</a>
+            <button type="submit" class="px-6 py-2 rounded-lg bg-mainaccent text-black hover:bg-cyan-400 transition-colors text-sm font-bold">Save Course</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

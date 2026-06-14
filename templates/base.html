@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tapeflicker | Next-gen Learning Ecosystem{% endblock %}</title>
+    <meta name="description" content="Next-generation cybersecurity and tech learning ecosystem.">
+    <!-- Favicon / Logo Icon -->
+    <link rel="icon" type="image/png" href="{% static 'images/logo_icon.png' %}">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#020817', // Background
+                        secondary: '#0B1220', // Surface
+                        elevated: '#111827', // Elevated Surface
+                        accent: {
+                            neon: '#00D4FF', // Accent Cyan
+                            purple: '#8B5CF6', // Accent Purple
+                            cyan: '#00D4FF', // Accent Cyan
+                            green: '#22C55E' // Accent Green
+                        },
+                        muted: '#94A3B8', // Secondary Text
+                        'muted-text': '#64748B', // Muted Text
+                        // Map manager colors for unified fallback support
+                        mainbg: '#020817',
+                        mainpanel: '#0B1220',
+                        mainborder: '#1E293B',
+                        mainaccent: '#00D4FF',
+                        mainpurple: '#8B5CF6',
+                        mainemerald: '#22C55E',
+                        maintext: '#F8FAFC',
+                        mainmuted: '#64748B',
+                        maindim: '#94A3B8'
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.25rem',
+                        '3xl': '1.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.3">
+    <script>
+        (function () {
+            const root = document.documentElement;
+            let savedTheme = null;
+            try {
+                savedTheme = localStorage.getItem('theme');
+            } catch (e) {
+                savedTheme = null;
+            }
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            root.setAttribute('data-theme', theme);
+
+            window.toggleTheme = function () {
+                const currentTheme = root.getAttribute('data-theme') || 'dark';
+                const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                try {
+                    localStorage.setItem('theme', nextTheme);
+                } catch (e) {
+                    // Ignore storage errors
+                }
+                const toggles = document.querySelectorAll('[data-theme-toggle]');
+                toggles.forEach((toggleBtn) => {
+                    const icon = toggleBtn.querySelector('.theme-toggle-icon');
+                    if (icon) {
+                        icon.textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+                    }
+                });
+                return nextTheme;
+            };
+        })();
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="antialiased min-h-screen flex flex-col relative selection:bg-accent-neon selection:text-black">
+
+    <!-- Dynamic Announcement Banner -->
+    {% if active_announcements %}
+    <div class="w-full bg-gradient-to-r from-accent-purple to-accent-neon text-primary py-2 px-4 text-center text-sm font-semibold relative z-[60]">
+        {{ active_announcements.0.message }}
+        {% if active_announcements|length > 1 %}
+        <span class="ml-2 opacity-75 text-xs font-normal">(+{{ active_announcements|length|add:"-1" }} more announcements)</span>
+        {% endif %}
+    </div>
+    {% endif %}
+    <!-- Global Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-blob-1"></div>
+        <div class="aurora-blob aurora-blob-2"></div>
+    </div>
+
+    <!-- Premium Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="{% url 'core:home' %}" class="text-2xl font-bold font-sora tracking-tight text-white flex items-center gap-3 group">
+                        <div class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-white/10 bg-secondary/50 shadow-[0_0_15px_rgba(0,217,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,217,255,0.5)] transition-all duration-300">
+                            <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="tracking-widest">Tape<span class="text-accent-neon">flicker</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8 lg:gap-10">
+                    <a href="{% url 'core:home' %}" class="nav-link text-muted hover:text-white transition-colors text-sm font-medium tracking-wide {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-white after:w-full{% endif %}">Home</a>
+                    <a href="{% url 'courses:list' %}" class="nav-link text-muted hover:text-white transition-colors text-sm font-medium tracking-wide {% if 'courses' in request.resolver_match.app_name %}text-white after:w-full{% endif %}">Courses</a>
+                    <a href="{% url 'core:event_list' %}" class="nav-link text-muted hover:text-white transition-colors text-sm font-medium tracking-wide flex items-center gap-1.5 {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}text-white after:w-full{% endif %}">
+                        Events
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-neon opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-neon"></span>
+                        </span>
+                    </a>
+                    <a href="{% url 'core:about' %}" class="nav-link text-muted hover:text-white transition-colors text-sm font-medium tracking-wide {% if request.resolver_match.url_name == 'about' %}text-white after:w-full{% endif %}">About</a>
+                    <a href="{% url 'core:contact' %}" class="nav-link text-muted hover:text-white transition-colors text-sm font-medium tracking-wide {% if request.resolver_match.url_name == 'contact' %}text-white after:w-full{% endif %}">Contact</a>
+                </div>
+
+                <!-- Auth / Dashboard Links -->
+                <div class="hidden md:flex items-center gap-4 lg:gap-5">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'manager:dashboard' %}" class="btn-primary text-sm">Main Dashboard</a>
+                        {% endif %}
+                        {% if request.resolver_match.app_name != 'dashboard' %}
+                        <a href="{% url 'dashboard:home' %}" class="btn-outline text-sm">Profile</a>
+                        {% endif %}
+                        <a href="{% url 'accounts:logout' %}" class="text-muted hover:text-red-400 transition-colors text-sm font-medium tracking-wide">Sign Out</a>
+                    {% else %}
+                        <a href="{% url 'accounts:login' %}" class="text-muted hover:text-white transition-colors text-sm font-medium tracking-wide">Sign In</a>
+                        <a href="{% url 'accounts:signup' %}" class="btn-primary text-sm">Get Started</a>
+                    {% endif %}
+                    <button type="button" class="theme-toggle" data-theme-toggle onclick="window.toggleTheme && window.toggleTheme()" aria-label="Toggle light and dark mode">
+                        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="theme-toggle mr-3" data-theme-toggle onclick="window.toggleTheme && window.toggleTheme()" aria-label="Toggle light and dark mode">
+                        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+                    </button>
+                    <button class="text-muted hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Compact Premium Footer -->
+    <footer class="mt-16 border-t border-white/5 bg-secondary/50 backdrop-blur-xl relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-5">
+                    <a href="{% url 'core:home' %}" class="text-xl font-bold font-sora text-white flex items-center gap-2 mb-3">
+                        <div class="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center">
+                            <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="tracking-wide">Tapeflicker</span>
+                    </a>
+                    <p class="text-xs text-muted mb-4 max-w-sm leading-relaxed">
+                        Next-generation cybersecurity and tech learning ecosystem. Master the skills that define the future.
+                    </p>
+                    <div class="flex space-x-3">
+                        <!-- Social Icons Placeholders -->
+                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-accent-neon hover:border-accent-neon transition"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-accent-neon hover:border-accent-neon transition"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg></a>
+                    </div>
+                </div>
+                <div class="col-span-1 md:col-span-2 md:col-start-9">
+                    <h3 class="text-[10px] font-bold text-white uppercase tracking-wider mb-4">Platform</h3>
+                    <ul class="space-y-2.5 text-xs text-muted">
+                        <li><a href="{% url 'courses:list' %}" class="hover:text-accent-neon transition">Courses</a></li>
+                        <li><a href="{% url 'core:about' %}" class="hover:text-accent-neon transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-accent-neon transition">Instructors</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-[10px] font-bold text-white uppercase tracking-wider mb-4">Legal</h3>
+                    <ul class="space-y-2.5 text-xs text-muted">
+                        <li><a href="#" class="hover:text-accent-neon transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-accent-neon transition">Terms of Service</a></li>
+                        <li><a href="{% url 'core:contact' %}" class="hover:text-accent-neon transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-5 flex flex-col md:flex-row justify-between items-center text-muted text-[11px]">
+                <div>&copy; <script>document.write(new Date().getFullYear())</script> Tapeflicker Inc. All rights reserved.</div>
+                <div class="flex items-center gap-1.5 mt-3 md:mt-0">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></div> All systems operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Theme Toggle
+        const root = document.documentElement;
+        const themeToggles = document.querySelectorAll('[data-theme-toggle]');
+
+        function syncThemeIcons() {
+            const isDark = root.getAttribute('data-theme') !== 'light';
+            themeToggles.forEach((toggleBtn) => {
+                const themeIcon = toggleBtn.querySelector('.theme-toggle-icon');
+                if (themeIcon) {
+                    themeIcon.textContent = isDark ? '🌙' : '☀️';
+                }
+                toggleBtn.setAttribute('aria-pressed', isDark ? 'false' : 'true');
+            });
+        }
+
+        if (themeToggles.length) {
+            syncThemeIcons();
+        }
+
+        // Premium Navbar Blur on Scroll
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            requestAnimationFrame(() => {
+                navbar.classList.add('navbar-mounted');
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!navbar) return;
+            if (window.scrollY > 20) {
+                navbar.classList.add('glass-nav');
+                navbar.classList.add('navbar-scrolled');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('glass-nav');
+                navbar.classList.remove('navbar-scrolled');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // Advanced Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 50; // Trigger slightly earlier
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load with slight delay for initial layout calculation
+        setTimeout(reveal, 100);
+    </script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+# SQLite Database
+/*.sqlite3
+/db.sqlite3
+
+# Python virtual environment
+/venv/
+/.venv/
+venv/
+.venv/
+
+# Environment files
+.env
+/.env
+
+# Firebase credentials / Service account files
+/tapeflicker-*.json
+/firebase_key.json
+
+# IDEs and OS files
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Media files and user uploads
+/media/
+media/
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Static files output
+/staticfiles/
+staticfiles/

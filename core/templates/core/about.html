@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About | Tapeflicker{% endblock %}
+
+{% block content %}
+<div class="relative min-h-screen overflow-hidden bg-primary pt-32 pb-24">
+    <!-- Abstract premium atmospheric blobs and cyber grid -->
+    <div class="absolute top-[10%] left-[-10%] w-[600px] h-[600px] bg-accent-purple/5 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
+    <div class="absolute bottom-[20%] right-[-10%] w-[650px] h-[650px] bg-accent-cyan/5 rounded-full blur-[140px] mix-blend-screen pointer-events-none"></div>
+    <div class="cyber-grid opacity-35"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
+        
+        <!-- 1. EDITORIAL HEADER SECTION -->
+        <div class="mb-24 text-center max-w-4xl mx-auto reveal">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-secondary border border-white/5 text-muted font-mono text-[10px] tracking-widest uppercase mb-8 select-none">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-cyan"></span>
+                Est. 2023 &bull; Pune, Maharashtra
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold font-sora text-white mb-8 leading-[1.1] tracking-tight">
+                Democratizing <span class="text-gradient-accent">Technical Mastery</span>
+            </h1>
+            <p class="text-muted text-base md:text-xl leading-relaxed max-w-3xl mx-auto font-light">
+                We believe premium engineering education shouldn't be gated behind exorbitant price tags. Tapeflicker builds hands-on learning experiences for developers, ethical hackers, and AI architects.
+            </p>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-white/5 my-16">
+
+        <!-- 2. FOUNDER-DRIVEN NARRATIVE -->
+        <div class="max-w-4xl mx-auto mb-32 space-y-8 reveal">
+            <span class="text-[10px] font-mono tracking-widest text-accent-cyan uppercase block text-center">The Origin Story</span>
+            <h2 class="text-3xl md:text-4xl font-bold font-sora text-white leading-snug text-center">
+                Bridging the gap between theory and execution.
+            </h2>
+            <div class="text-muted text-sm md:text-base space-y-6 leading-relaxed font-light max-w-3xl mx-auto">
+                <p>
+                    In 2023, technology educator and builder <span class="text-white font-medium">Yash Bhosale</span> founded Tapeflicker in Pune, Maharashtra. The vision was straightforward: traditional tech education was broken. Aspiring professionals were forced to choose between expensive bootcamps or static video tutorials that lacked practical application.
+                </p>
+                <p>
+                    The name <span class="text-white font-mono text-xs bg-white/5 px-2 py-0.5 rounded border border-white/10">Tapeflicker</span> was inspired by the visual tracking instability of legacy VHS media. It serves as a reminder of how quickly tech systems evolve—and why learning methods must adapt. We transitioned from passive content consumption to active, sandbox-driven digital labs.
+                </p>
+                <p>
+                    Today, Tapeflicker is an integrated learning ecosystem. We combine active course curricula, real-time community chat hubs, live cyber workshops, and dynamic progress trackers to guide ambitious students from their first script to career placement.
+                </p>
+            </div>
+
+            <!-- Founder Quote Panel -->
+            <div class="p-6 rounded-2xl bg-secondary/80 border border-white/5 relative z-10 select-none max-w-3xl mx-auto">
+                <div class="absolute top-4 right-6 text-7xl font-serif text-white/5 pointer-events-none">“</div>
+                <p class="text-white font-sora italic text-sm mb-4 leading-relaxed">
+                    "Real competence isn't built by watching video players. It is built by breaking things, fixing sandbox configurations, and writing code in real-time."
+                </p>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-cyan flex items-center justify-center text-primary font-bold text-xs">YB</div>
+                    <div>
+                        <div class="text-white font-bold text-xs">Yash Bhosale</div>
+                        <div class="text-[9px] text-muted font-mono uppercase tracking-wider">Founder, Tapeflicker</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-white/5 my-16">
+
+        <!-- 3. WHY WE EXIST & WHAT MAKES US DIFFERENT (Bento Grid) -->
+        <div class="mb-32 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-[10px] font-mono tracking-widest text-accent-cyan uppercase block mb-4">Philosophy</span>
+                <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">Why Tapeflicker Exists</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Box 1 -->
+                <div class="p-8 rounded-2xl bg-secondary/30 border border-white/5 backdrop-blur-sm flex flex-col justify-between hover:border-white/10 transition-colors">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center text-accent-cyan mb-6">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold font-sora text-white mb-2">Adaptive Learning Methods</h3>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Instead of rigid tracks, our courses adjust. Build experience points (XP), complete daily streak targets, and unlock achievements as you build.
+                        </p>
+                    </div>
+                    <div class="mt-8 text-[10px] font-mono text-accent-cyan tracking-wider uppercase">01 / Dynamic Stats</div>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="p-8 rounded-2xl bg-secondary/30 border border-white/5 backdrop-blur-sm flex flex-col justify-between hover:border-white/10 transition-colors">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-accent-purple/10 border border-accent-purple/20 flex items-center justify-center text-accent-purple mb-6">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold font-sora text-white mb-2">Sandbox Lab Focus</h3>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Cybersecurity and dev models require execution. Our platform prioritizes active command line simulations over static slide presentations.
+                        </p>
+                    </div>
+                    <div class="mt-8 text-[10px] font-mono text-accent-purple tracking-wider uppercase">02 / Hands-on labs</div>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="p-8 rounded-2xl bg-secondary/30 border border-white/5 backdrop-blur-sm flex flex-col justify-between hover:border-white/10 transition-colors">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-accent-green/10 border border-accent-green/20 flex items-center justify-center text-accent-green mb-6">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold font-sora text-white mb-2">Community Engagement</h3>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Every course features dedicated WebSocket chat rooms. Learn alongside thousands of students globally and participate in live workshops.
+                        </p>
+                    </div>
+                    <div class="mt-8 text-[10px] font-mono text-accent-green tracking-wider uppercase">03 / Peer Connection</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-white/5 my-16">
+
+        <!-- 4. CREDIBILITY CARDS (Core Topics) -->
+        <div class="mb-32 reveal">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-[10px] font-mono tracking-widest text-accent-purple uppercase block mb-4">Focus Areas</span>
+                <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">World-Class Skill Framework</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-white/5 flex gap-6 items-start hover:border-accent-cyan/20 transition-all duration-300">
+                    <div class="text-2xl font-mono font-bold text-accent-cyan select-none">A</div>
+                    <div class="space-y-2">
+                        <h4 class="text-lg font-bold font-sora text-white">Cybersecurity & Ethical Hacking</h4>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Deep dive into penetration testing, network defense, threat modeling, and live capture-the-flag (CTF) challenges mapped to actual sandbox environments.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-white/5 flex gap-6 items-start hover:border-accent-purple/20 transition-all duration-300">
+                    <div class="text-2xl font-mono font-bold text-accent-purple select-none">B</div>
+                    <div class="space-y-2">
+                        <h4 class="text-lg font-bold font-sora text-white">Artificial Intelligence & Automation</h4>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Learn prompt engineering, generative AI model deployment, neural network configuration, and automate complex developer operations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-white/5 flex gap-6 items-start hover:border-accent-green/20 transition-all duration-300">
+                    <div class="text-2xl font-mono font-bold text-accent-green select-none">C</div>
+                    <div class="space-y-2">
+                        <h4 class="text-lg font-bold font-sora text-white">Modern Full-Stack Development</h4>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Master system architecture, responsive frontend applications, backend database structures, and asynchronous websocket protocols.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-white/5 flex gap-6 items-start hover:border-accent-cyan/20 transition-all duration-300">
+                    <div class="text-2xl font-mono font-bold text-accent-cyan select-none">D</div>
+                    <div class="space-y-2">
+                        <h4 class="text-lg font-bold font-sora text-white">Live Webinars & Event Sandbox</h4>
+                        <p class="text-muted text-xs leading-relaxed font-light">
+                            Interactive webinars, bootcamps, and live code reviews hosted by active industry professionals to evaluate student solutions in real-time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-white/5 my-16">
+
+        <!-- 5. COMPANY STATISTICS PRESENTATION -->
+        <div class="py-16 rounded-[2rem] bg-secondary/20 border border-white/5 backdrop-blur-md reveal text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto select-none">
+                <!-- Stat 1 -->
+                <div class="space-y-2">
+                    <div class="text-5xl md:text-6xl font-bold font-sora text-accent-cyan tracking-tight">10k+</div>
+                    <div class="text-[10px] font-mono text-muted uppercase tracking-wider">Active Students Enrolled</div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="space-y-2">
+                    <div class="text-5xl md:text-6xl font-bold font-sora text-accent-purple tracking-tight">240+</div>
+                    <div class="text-[10px] font-mono text-muted uppercase tracking-wider">Hours of Sandbox Labs</div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="space-y-2">
+                    <div class="text-5xl md:text-6xl font-bold font-sora text-accent-green tracking-tight">98%</div>
+                    <div class="text-[10px] font-mono text-muted uppercase tracking-wider">Curriculum Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

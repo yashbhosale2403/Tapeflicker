@@ -1,0 +1,45 @@
+{% extends 'manager/base.html' %}
+{% block header_title %}Chat Management{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="main-card p-5"><p class="text-xs text-mainmuted">Active Rooms</p><p class="text-3xl text-white font-sora font-bold">{{ active_rooms }}</p></div>
+    <div class="main-card p-5"><p class="text-xs text-mainmuted">Total Messages</p><p class="text-3xl text-white font-sora font-bold">{{ total_messages }}</p></div>
+    <div class="main-card p-5"><p class="text-xs text-mainmuted">Open Reports</p><p class="text-3xl text-white font-sora font-bold">{{ total_reports }}</p></div>
+</div>
+
+<div class="glass-panel rounded-xl overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-white/5">
+            <tr>
+                <th class="px-5 py-3 text-xs text-mainmuted uppercase">Course</th>
+                <th class="px-5 py-3 text-xs text-mainmuted uppercase">Messages</th>
+                <th class="px-5 py-3 text-xs text-mainmuted uppercase">States</th>
+                <th class="px-5 py-3 text-xs text-mainmuted uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-mainborder">
+            {% for room in rooms %}
+            <tr class="hover:bg-white/5">
+                <td class="px-5 py-4">
+                    <p class="text-sm text-white">{{ room.course.title }}</p>
+                    <p class="text-xs text-mainmuted">{% if room.is_archived %}Archived{% elif room.read_only %}Read-only{% elif room.is_locked %}Locked{% else %}Active{% endif %}</p>
+                </td>
+                <td class="px-5 py-4 text-sm text-maintext">{{ room.total_messages }}</td>
+                <td class="px-5 py-4 text-sm text-maintext">{{ room.participants.count }}</td>
+                <td class="px-5 py-4">
+                    <a href="{% url 'manager:chat_room_management' room.id %}" class="main-btn-primary text-xs py-1.5 px-3 inline-block">Moderate</a>
+                    <a href="{% url 'manager:chat_toggle_archive' room.id %}" class="main-btn-ghost text-xs py-1.5 px-3 inline-block">{% if room.is_archived %}Unarchive{% else %}Archive{% endif %}</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="px-5 py-10 text-center text-mainmuted">No chat rooms yet. Rooms are auto-created when users open course chat.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <a href="{% url 'manager:chat_reports' %}" class="text-sm text-mainaccent hover:underline">Go to Chat Reports →</a>
+</div>
+{% endblock %}
