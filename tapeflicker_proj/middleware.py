@@ -14,7 +14,7 @@ class ContentSecurityPolicyMiddleware:
         # WebSocket local/remote connections, inline scripts with unsafe-inline (required for specific layouts).
         csp_rules = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.gstatic.com https://apis.google.com https://www.google-analytics.com",
+            "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://www.youtube.com https://www.gstatic.com https://apis.google.com https://www.google-analytics.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
             "img-src 'self' data: https://*.googleusercontent.com https://images.unsplash.com https://www.gstatic.com",
             "font-src 'self' data: https://fonts.gstatic.com",
