@@ -1,88 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block body_class %}tf-home-page{% endblock %}
+
 {% block content %}
+<div class="tf-home-brand">
 <!-- 1. CINEMATIC HERO SECTION -->
-<section class="relative min-h-[100vh] flex items-center pt-32 pb-20 overflow-hidden">
+<section class="tf-hero relative min-h-[100vh] flex items-center pt-28 pb-16 overflow-hidden">
     <!-- Premium Ambient Background System -->
     <div class="ambient-bg-wrapper">
-        <!-- Layer 1: Blueprint Grid -->
-        <div class="blueprint-grid-layer"></div>
-        
-        <!-- Layer 2: Canvas Knowledge Graph -->
-        <canvas id="knowledge-graph-canvas" class="canvas-knowledge-layer"></canvas>
-        
-        <!-- Layer 3: Learning Path SVG -->
-        <svg class="svg-learning-path-layer" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.2" />
-                    <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.2" />
-                    <stop offset="100%" stop-color="#00D4FF" stop-opacity="0.2" />
-                </linearGradient>
-                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#00D4FF" stop-opacity="1" />
-                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="1" />
-                </linearGradient>
-            </defs>
-            
-            <!-- Learning Pathway -->
-            <path id="learningPath" d="M 100 200 C 400 150, 300 550, 700 450 C 1100 350, 1000 750, 1300 700" 
-                  fill="none" stroke="url(#pathGradient)" stroke-width="3" stroke-linecap="round" />
-            
-            <use href="#learningPath" class="glow-path-pulse" stroke="url(#glowGradient)" stroke-width="4.5" fill="none" />
-            
-            <!-- Nodes along the path -->
-            <g transform="translate(100, 200)">
-                <circle r="8" fill="#00D4FF" opacity="0.3" />
-                <circle r="4" fill="#00D4FF" />
-                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">LEARN</text>
-            </g>
-            <g transform="translate(362, 344)">
-                <circle r="8" fill="#8B5CF6" opacity="0.3" />
-                <circle r="4" fill="#8B5CF6" />
-                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">PRACTICE</text>
-            </g>
-            <g transform="translate(700, 450)">
-                <circle r="8" fill="#00D4FF" opacity="0.3" />
-                <circle r="4" fill="#00D4FF" />
-                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">BUILD</text>
-            </g>
-            <g transform="translate(1038, 556)">
-                <circle r="8" fill="#8B5CF6" opacity="0.3" />
-                <circle r="4" fill="#8B5CF6" />
-                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">CERTIFY</text>
-            </g>
-            <g transform="translate(1300, 700)">
-                <circle r="8" fill="#00D4FF" opacity="0.3" />
-                <circle r="4" fill="#00D4FF" />
-                <text y="24" font-family="Sora, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" fill-opacity="0.4" letter-spacing="1.5" text-anchor="middle">GROW</text>
-            </g>
-        </svg>
+        <div class="tf-ambient-gold tf-ambient-gold-1"></div>
+        <div class="tf-ambient-gold tf-ambient-gold-2"></div>
+        <div class="tf-noise-layer"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center gap-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] items-center gap-14 lg:gap-16">
         <!-- Left Content -->
-        <div class="lg:w-1/2 text-center lg:text-left">
-            <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-accent-neon/30 text-accent-cyan text-xs font-semibold uppercase tracking-widest mb-8 reveal shadow-[0_0_20px_rgba(0,217,255,0.15)]">
-                <span class="w-2.5 h-2.5 rounded-full bg-accent-neon animate-pulse shadow-[0_0_10px_#00D9FF]"></span>
+        <div class="text-center lg:text-left">
+            <div class="tf-eyebrow inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-accent-neon/30 text-accent-cyan text-xs font-semibold uppercase tracking-widest mb-8 reveal">
+                <span class="w-2.5 h-2.5 rounded-full bg-accent-neon"></span>
                 The Future of EdTech
             </div>
             
-            <h1 class="text-6xl md:text-7xl lg:text-8xl font-sora font-extrabold text-white leading-[1.05] mb-8 reveal tracking-tight" style="transition-delay: 100ms;">
+            <h1 class="tf-hero-title text-5xl md:text-6xl 2xl:text-7xl font-sora font-extrabold text-white leading-[1.05] mb-6 reveal tracking-tight" style="transition-delay: 100ms;">
                 Master The Skills That Build The <br class="hidden lg:block"/>
-                <span class="text-gradient-accent relative inline-block">
+                <span class="text-gradient-accent tf-highlight relative inline-block">
                     Future
-                    <span class="absolute -bottom-2 left-0 w-full h-1.5 bg-accent-neon/50 blur-[4px]"></span>
+                    <span class="absolute -bottom-2 left-0 w-full h-1.5 bg-accent-neon/50"></span>
                 </span>
             </h1>
             
-            <p class="text-lg md:text-xl text-muted mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed reveal font-light" style="transition-delay: 200ms;">
+            <p class="text-lg md:text-xl text-muted mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed reveal font-light" style="transition-delay: 200ms;">
                 Affordable premium tech education designed for future builders, ethical hackers, developers, and innovators. Join the revolution.
             </p>
             
             <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto reveal" style="transition-delay: 300ms;">
-                <a href="{% url 'courses:list' %}" class="btn-primary text-base px-8 py-4 flex justify-center items-center gap-3 shadow-[0_0_30px_rgba(0,217,255,0.3)]">
+                <a href="{% url 'courses:list' %}" class="btn-primary text-base px-8 py-4 flex justify-center items-center gap-3">
                     Start Learning
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
@@ -91,35 +44,67 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </a>
             </div>
+
+            <div class="tf-trust-row reveal" style="transition-delay: 380ms;">
+                <span>Project-led learning</span>
+                <span>Industry mentors</span>
+                <span>Career-grade certificates</span>
+            </div>
         </div>
 
-        <!-- Right Visual (Mockup) -->
-        <div class="lg:w-1/2 relative reveal" style="transition-delay: 400ms;">
-            <!-- Terminal Window Container -->
-            <div class="w-full bg-mainpanel border border-mainborder rounded-lg shadow-card overflow-hidden">
-                <!-- Window Titlebar -->
-                <div class="flex items-center justify-between px-4 py-3 bg-zinc-900/60 border-b border-mainborder select-none">
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-zinc-700/80 inline-block"></span>
-                        <span class="text-xs text-mainmuted font-mono ml-2">session: tapeflicker-cli</span>
+        <!-- Right Visual: Glitch Brand Logo Showcase -->
+        <div class="relative reveal" style="transition-delay: 400ms;">
+            <div class="tf-brand-showcase">
+                <!-- Glitch Container -->
+                <div class="tf-glitch-wrapper" aria-label="Tapeflicker Brand Logo">
+                    <!-- Main Logo Image -->
+                    <div class="tf-glitch-img tf-glitch-img--main">
+                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker Logo" class="tf-brand-hero-logo">
                     </div>
-                    <!-- Copy CLI Command Button -->
-                    <button id="cli-copy-btn" onclick="copyCliCommand()" class="text-[10px] font-mono text-mainmuted hover:text-white px-2 py-1 bg-zinc-800 border border-mainborder rounded transition-all flex items-center gap-1.5 focus:outline-none focus:border-mainaccent">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                        <span>pip install tapeflicker</span>
-                    </button>
+                    <!-- Glitch Layers -->
+                    <div class="tf-glitch-img tf-glitch-img--r" aria-hidden="true">
+                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
+                    </div>
+                    <div class="tf-glitch-img tf-glitch-img--g" aria-hidden="true">
+                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
+                    </div>
+                    <div class="tf-glitch-img tf-glitch-img--b" aria-hidden="true">
+                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
+                    </div>
                 </div>
 
-                <!-- Terminal Screen Body -->
-                <div class="p-6 font-mono text-xs md:text-sm text-maindim leading-relaxed h-[280px] overflow-y-auto bg-zinc-950/40" id="terminal-screen" aria-live="polite">
-                    <!-- Lines populated dynamically by script -->
-                    <div id="terminal-history" class="space-y-4"></div>
-                    <div class="flex items-center mt-4">
-                        <span class="text-mainaccent mr-2">$</span>
-                        <span id="terminal-current-input" class="text-white"></span>
-                        <span class="w-1.5 h-4 bg-mainaccent inline-block animate-pulse ml-0.5" id="terminal-cursor"></span>
+                <!-- Brand Text -->
+                <div class="tf-brand-text-group">
+                    <div class="tf-brand-name-large">
+                        <span class="tf-brand-tape">Tape</span><span class="tf-brand-flicker" data-text="flicker">flicker</span>
+                    </div>
+                    <div class="tf-brand-tagline">
+                        <span class="tf-tagline-line"></span>
+                        <span class="tf-tagline-text">BRAIN OF TECH</span>
+                        <span class="tf-tagline-line"></span>
+                    </div>
+                </div>
+
+                <!-- Feature Pills -->
+                <div class="tf-brand-features">
+                    <div class="tf-brand-feature">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        <span>Learn</span>
+                    </div>
+                    <div class="tf-brand-feature-sep">|</div>
+                    <div class="tf-brand-feature">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span>Innovate</span>
+                    </div>
+                    <div class="tf-brand-feature-sep">|</div>
+                    <div class="tf-brand-feature">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <span>Secure</span>
+                    </div>
+                    <div class="tf-brand-feature-sep">|</div>
+                    <div class="tf-brand-feature">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span>AI Powered</span>
                     </div>
                 </div>
             </div>
@@ -174,7 +159,7 @@
 </style>
 
 <!-- 2. TRENDING CATEGORIES SECTION -->
-<section class="py-12 md:py-16 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
+<section class="tf-trending-section py-12 md:py-16 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
         <!-- Subtitle/Label -->
         <h3 class="text-xs font-semibold tracking-[0.25em] text-muted uppercase mb-10 flex items-center gap-2">
@@ -241,80 +226,238 @@
 
 
 
-<!-- 3. FEATURED COURSES SECTION -->
-<section id="courses" class="py-16 md:py-20 relative z-20">
+<!-- 3. FEATURED COURSES & LIVE EVENTS SECTION (SIDE BY SIDE & MEDIUM CARDS) -->
+<section id="courses" class="tf-courses-events-section py-16 md:py-20 relative z-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
-            <div class="mb-6 md:mb-0">
-                <div class="text-accent-neon font-bold text-sm uppercase tracking-widest mb-3">Curriculum</div>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-sora font-bold text-white mb-6">Trending <span class="text-gradient">Courses</span></h2>
-            </div>
-            <a href="{% url 'courses:list' %}" class="btn-outline flex items-center gap-2">
-                Explore Catalog <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for course in featured_courses %}
-            <div class="gradient-border hover-lift reveal group" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                <div class="h-full bg-secondary rounded-[1.2rem] overflow-hidden flex flex-col relative z-10">
-                    <div class="relative overflow-hidden">
-                        {% if course.thumbnail %}
-                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-60 object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
-                        {% else %}
-                        <div class="w-full h-60 bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-b border-white/5 group-hover:scale-110 transition-transform duration-700">
-                            <span class="text-white/20 font-sora font-bold text-xl">PRO COURSE</span>
-                        </div>
-                        {% endif %}
-                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10">
-                            {{ course.difficulty }}
-                        </div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-[10px] font-bold px-2.5 py-1 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded shadow-[0_0_10px_rgba(0,217,255,0.2)] uppercase tracking-wider">{{ course.category.name }}</span>
-                        </div>
+        {% if upcoming_events %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            <!-- Left Column: Trending Courses -->
+            <div class="reveal">
+                <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+                    <div>
+                        <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
+                        <h2 class="text-3xl font-sora font-bold text-white">Trending <span class="text-gradient">Courses</span></h2>
                     </div>
-                    
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold font-sora text-white mb-3 line-clamp-2 leading-snug group-hover:text-accent-neon transition-colors"><a href="{% url 'courses:detail' course.id %}">{{ course.title }}</a></h3>
-                        <p class="text-muted text-sm mb-6 line-clamp-2 leading-relaxed font-light">{{ course.description }}</p>
-                        
-                        <div class="mt-auto pt-6 border-t border-white/5">
-                            <div class="flex justify-between items-end mb-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs shadow-lg">{{ course.instructor|make_list|first }}</div>
-                                    <div class="text-xs text-white font-medium">{{ course.instructor }}</div>
+                    <a href="{% url 'courses:list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
+                        Explore Catalog <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    {% for course in featured_courses %}
+                    <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                        <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                            <!-- Centered Landscape Thumbnail -->
+                            <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
+                                {% if course.thumbnail %}
+                                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                                {% else %}
+                                <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                                    <span class="text-xs text-white/30 font-sora font-bold">PRO COURSE</span>
                                 </div>
-                                <div class="flex items-center gap-1 text-xs text-white font-bold bg-white/5 px-2 py-1 rounded border border-white/10">
-                                    <svg class="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    4.9
+                                {% endif %}
+                                <div class="absolute top-2 left-2">
+                                    <span class="text-[9px] font-bold px-2 py-0.5 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded uppercase tracking-wider">{{ course.difficulty }}</span>
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center">
+
+                            <!-- Details -->
+                            <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
                                 <div>
-                                    {% if course.discount_price %}
-                                    <span class="text-3xl font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
-                                    <span class="text-sm text-muted line-through ml-2">${{ course.price }}</span>
-                                    {% else %}
-                                    <span class="text-3xl font-sora font-bold text-white">${{ course.price }}</span>
-                                    {% endif %}
+                                    <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                        <span class="text-[9px] font-bold px-2.5 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-neon">{{ course.category.name }}</span>
+                                    </div>
+                                    <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
+                                        <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
+                                    </h3>
+                                    <!-- Course Description -->
+                                    <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ course.description }}</p>
+                                </div>
+
+                                <div class="flex justify-between items-end mt-4 pt-3 border-t border-white/5">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-[10px]">{{ course.instructor|make_list|first }}</div>
+                                        <div class="text-[11px] text-white font-medium truncate max-w-[100px]">{{ course.instructor }}</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-0.5 text-[11px] text-yellow-500 font-bold">
+                                            <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                            4.9
+                                        </div>
+                                        <div class="text-right">
+                                            {% if course.discount_price %}
+                                            <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
+                                            <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
+                                            {% else %}
+                                            <span class="text-base font-sora font-bold text-white">${{ course.price }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Right Column: Live Sessions -->
+            <div class="reveal">
+                <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+                    <div>
+                        <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Broadcasting</div>
+                        <h2 class="text-3xl font-sora font-bold text-white">Live <span class="text-gradient">Sessions</span></h2>
+                    </div>
+                    <a href="{% url 'core:event_list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
+                        View Calendar <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    {% for event in upcoming_events %}
+                    <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                        <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                            <!-- Centered Landscape Banner/Date Area -->
+                            <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative flex items-center justify-center bg-secondary/40">
+                                {% if event.banner %}
+                                <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 absolute inset-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                {% endif %}
+
+                                <!-- Floating Date Badge -->
+                                <div class="relative z-10 tf-date-badge flex flex-col justify-center items-center rounded-xl bg-[#05011A]/80 border border-white/10 text-center w-16 h-16 backdrop-blur-md">
+                                    <span class="text-[10px] uppercase text-accent-neon font-bold font-sora tracking-wider leading-none">{{ event.date|date:"b" }}</span>
+                                    <span class="text-2xl font-bold font-sora text-white leading-none mt-1.5">{{ event.date|date:"d" }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Details -->
+                            <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                        <span class="text-[9px] font-bold px-2 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-cyan">{{ event.event_type }}</span>
+                                        <!-- Countdown inline -->
+                                        <div class="countdown-container text-[10px] text-accent-neon font-bold font-sora flex items-center gap-0.5 bg-accent-neon/5 px-2.5 py-0.5 border border-accent-neon/15 rounded" data-date="{{ event.date|date:'c' }}">
+                                            <span class="days">00</span>d : <span class="hours">00</span>h : <span class="minutes">00</span>m : <span class="seconds">00</span>s
+                                        </div>
+                                    </div>
+                                    <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
+                                        <a href="{% url 'core:event_detail' event.id %}" class="stretched-link">{{ event.title }}</a>
+                                    </h3>
+                                    <!-- Event Description -->
+                                    <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ event.description }}</p>
+                                </div>
+
+                                <div class="flex justify-between items-center mt-4 pt-3 border-t border-white/5">
+                                    <span class="text-xs text-muted truncate max-w-[180px]">{{ event.date|date:"M d, Y" }}</span>
+                                    <div class="flex-shrink-0 z-20">
+                                        <a href="{% url 'core:event_detail' event.id %}" class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/5 text-white hover:bg-accent-neon hover:text-[#020817] hover:border-accent-neon transition-all duration-300">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Fallback if no upcoming events: Full width Trending Courses -->
+        <div class="reveal">
+            <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+                <div>
+                    <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
+                    <h2 class="text-3xl font-sora font-bold text-white">Trending <span class="text-gradient">Courses</span></h2>
+                </div>
+                <a href="{% url 'courses:list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
+                    Explore Catalog <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {% for course in featured_courses %}
+                <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+                    <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                        <!-- Thumbnail -->
+                        <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
+                            {% if course.thumbnail %}
+                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            {% else %}
+                            <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                                <span class="text-xs text-white/30 font-sora font-bold">PRO COURSE</span>
+                            </div>
+                            {% endif %}
+                            <div class="absolute top-2 left-2">
+                                <span class="text-[9px] font-bold px-2 py-0.5 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded uppercase tracking-wider">{{ course.difficulty }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2 flex-wrap">
+                                    <span class="text-[9px] font-bold px-2.5 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-neon">{{ course.category.name }}</span>
+                                </div>
+                                <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
+                                    <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
+                                </h3>
+                                <!-- Course Description -->
+                                <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ course.description }}</p>
+                            </div>
+
+                            <div class="flex justify-between items-end mt-4 pt-3 border-t border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-[10px]">{{ course.instructor|make_list|first }}</div>
+                                    <div class="text-[11px] text-white font-medium truncate max-w-[100px]">{{ course.instructor }}</div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-0.5 text-[11px] text-yellow-500 font-bold">
+                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        4.9
+                                    </div>
+                                    <div class="text-right">
+                                        {% if course.discount_price %}
+                                        <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
+                                        <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
+                                        {% else %}
+                                        <span class="text-base font-sora font-bold text-white">${{ course.price }}</span>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+        {% endif %}
     </div>
 </section>
 
 <!-- 4. WHY TAPEFLICKER SECTION (Bento Grid) -->
-<section class="py-16 md:py-20 relative z-20 bg-secondary/20">
+<section class="tf-about-preview py-16 md:py-20 relative z-20 bg-secondary/20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-20 reveal">
             <h2 class="text-4xl md:text-5xl lg:text-6xl font-sora font-bold text-white mb-6">Why <span class="text-gradient">Tapeflicker?</span></h2>
             <p class="text-muted max-w-2xl mx-auto text-lg">We don't just teach theory. We build practitioners ready for the modern tech landscape.</p>
+        </div>
+
+        <div class="tf-brand-story reveal" style="transition-delay: 80ms;">
+            <div>
+                <span>Mission</span>
+                <p>Make premium technology education practical, affordable, and community-powered for ambitious builders.</p>
+            </div>
+            <div>
+                <span>Community</span>
+                <p>Students learn together through cohorts, guided projects, peer momentum, and mentor-led feedback loops.</p>
+            </div>
+            <div>
+                <span>Credibility</span>
+                <p>Curriculum is shaped around modern engineering workflows, security practice, and portfolio-ready outcomes.</p>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
@@ -355,29 +498,29 @@
 </section>
 
 <!-- 5. IMMERSIVE STATS -->
-<section class="py-14 md:py-18 border-y border-white/5 relative z-20">
+<section class="tf-stats-section py-14 md:py-18 border-y border-white/5 relative z-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center reveal">
-            <div>
-                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+        <div class="tf-stats-grid grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-6 text-center reveal">
+            <div class="tf-stat-card">
+                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
                     <span class="counter" data-target="10">0</span><span class="text-accent-neon">K+</span>
                 </div>
                 <div class="text-muted font-bold tracking-widest uppercase text-xs">Active Students</div>
             </div>
-            <div>
-                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+            <div class="tf-stat-card">
+                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
                     <span class="counter" data-target="150">0</span><span class="text-accent-purple">+</span>
                 </div>
                 <div class="text-muted font-bold tracking-widest uppercase text-xs">Masterclasses</div>
             </div>
-            <div>
-                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+            <div class="tf-stat-card">
+                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
                     <span class="counter" data-target="95">0</span><span class="text-accent-cyan">%</span>
                 </div>
                 <div class="text-muted font-bold tracking-widest uppercase text-xs">Success Rate</div>
             </div>
-            <div>
-                <div class="text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
+            <div class="tf-stat-card">
+                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
                     <span class="counter" data-target="24">0</span><span class="text-green-400">/7</span>
                 </div>
                 <div class="text-muted font-bold tracking-widest uppercase text-xs">Support Hub</div>
@@ -387,7 +530,7 @@
 </section>
 
 <!-- 7. TESTIMONIALS -->
-<section class="py-16 md:py-20 relative z-20 bg-mainbg border-t border-mainborder">
+<section class="tf-testimonials-section py-16 md:py-20 relative z-20 bg-mainbg border-t border-mainborder">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         
         <!-- Section Header -->
@@ -459,76 +602,9 @@
     </div>
 </section>
 
-<!-- 8. LIVE EVENTS SECTION -->
-{% if upcoming_events %}
-<section class="py-16 md:py-20 relative z-20 bg-secondary/20 border-y border-white/5">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-            <div class="mb-6 md:mb-0">
-                <div class="flex items-center gap-2 text-accent-neon font-bold text-sm uppercase tracking-widest mb-3">
-                    <span class="w-2 h-2 rounded-full bg-accent-neon animate-pulse"></span> Broadcasting
-                </div>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-sora text-white mb-6">Live <span class="text-gradient">Sessions</span></h2>
-            </div>
-            <a href="{% url 'core:event_list' %}" class="btn-outline">View Calendar</a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for event in upcoming_events %}
-            <div class="glass hover-lift rounded-[2rem] overflow-hidden reveal group flex flex-col h-full" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                {% if event.banner %}
-                <div class="h-48 overflow-hidden relative border-b border-white/5">
-                    <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/20 to-transparent"></div>
-                </div>
-                {% endif %}
-                <div class="p-8 flex-grow flex flex-col justify-between relative z-10">
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-accent-cyan font-bold text-xs uppercase tracking-wider backdrop-blur-md">{{ event.event_type }}</div>
-                            <div class="text-xs font-semibold text-muted bg-primary/50 px-2 py-1 rounded-md border border-white/5">{{ event.date|date:"M d, Y" }}</div>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold font-sora text-white mb-4 line-clamp-2"><a href="{% url 'core:event_detail' event.id %}">{{ event.title }}</a></h3>
-                        <p class="text-muted text-sm mb-6 line-clamp-2">{{ event.description }}</p>
-                        
-                        <!-- Countdown Timer -->
-                        <div class="bg-primary/40 border border-white/5 rounded-xl p-3 flex justify-between text-center countdown-container mb-6" data-date="{{ event.date|date:'c' }}">
-                            <div>
-                                <div class="text-base font-bold font-sora text-white days">00</div>
-                                <div class="text-[9px] uppercase text-muted tracking-widest">Days</div>
-                            </div>
-                            <div class="text-muted font-bold">:</div>
-                            <div>
-                                <div class="text-base font-bold font-sora text-white hours">00</div>
-                                <div class="text-[9px] uppercase text-muted tracking-widest">Hrs</div>
-                            </div>
-                            <div class="text-muted font-bold">:</div>
-                            <div>
-                                <div class="text-base font-bold font-sora text-white minutes">00</div>
-                                <div class="text-[9px] uppercase text-muted tracking-widest">Min</div>
-                            </div>
-                            <div class="text-muted font-bold">:</div>
-                            <div>
-                                <div class="text-base font-bold font-sora text-accent-neon seconds">00</div>
-                                <div class="text-[9px] uppercase text-accent-neon tracking-widest">Sec</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="pt-4 border-t border-white/5">
-                        <a href="{% url 'core:event_detail' event.id %}" class="inline-flex items-center gap-2 text-accent-neon text-sm font-semibold group-hover:gap-3 transition-all">
-                            Register Now <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
 
+
+</div>
 
 <!-- Scripts for Animations -->
 <script>
@@ -599,149 +675,114 @@
         });
     });
 
-    // ===== TERMINAL SHOWCASE TYPEWRITER SYSTEM =====
-    const terminalHistory = document.getElementById('terminal-history');
-    const terminalCurrentInput = document.getElementById('terminal-current-input');
-    const terminalScreen = document.getElementById('terminal-screen');
+    // ===== PERIODIC GLITCH TRIGGER FOR BRAND LOGO =====
+    (function() {
+        const glitchWrapper = document.querySelector('.tf-glitch-wrapper');
+        if (!glitchWrapper) return;
 
-    // Dynamic session configurations from server context
-    const isUserLoggedIn = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
-    const userEmail = "{{ request.user.email|default:request.user.username|escapejs }}";
-    
-    // Parse user enrollments
-    const userEnrollments = [
-        {% for enrollment in user_enrollments %}
-        {
-            title: "{{ enrollment.title|escapejs }}",
-            progress: {{ enrollment.progress|default:0 }}
-        },
-        {% endfor %}
-    ];
+        let audioCtx = null;
+        function playGlitchSound() {
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) return;
+                if (!audioCtx) {
+                    audioCtx = new AudioContextClass();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
 
-    // Build terminal command sequence based on user auth status
-    let sessionCommands = [];
+                const bufferSize = audioCtx.sampleRate * 0.25;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
 
-    if (isUserLoggedIn) {
-        sessionCommands.push({
-            input: 'tapeflicker login',
-            output: `<span class="text-mainemerald font-bold">✓</span> Welcome back, ${userEmail} (Session active)`
-        });
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
 
-        let progressOutput = '';
-        if (userEnrollments.length > 0) {
-            userEnrollments.forEach(e => {
-                let eqCount = Math.round(e.progress / 5);
-                let dotCount = Math.max(0, 20 - eqCount);
-                let bar = '='.repeat(eqCount) + '>' + '.'.repeat(dotCount);
-                progressOutput += `${e.title} <span class="text-mainaccent">[${bar}]</span> ${e.progress}%<br/>`;
-            });
-            progressOutput = progressOutput.slice(0, -5); // strip trailing <br/>
-        } else {
-            progressOutput = 'No courses enrolled yet. Try: <span class="text-mainaccent">tapeflicker enroll cybersecurity</span>';
-        }
-        
-        sessionCommands.push({
-            input: 'tapeflicker progress',
-            output: progressOutput
-        });
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(3500, audioCtx.currentTime + 0.08);
+                filter.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.2);
+                filter.Q.setValueAtTime(4, audioCtx.currentTime);
 
-        let completed = userEnrollments.find(e => e.progress === 100);
-        let certOutput = '';
-        if (completed) {
-            certOutput = `<span class="text-mainemerald font-bold">✓</span> Certificate unlocked: ${completed.title}<br/><span class="text-mainpurple font-bold">→</span> License TF-9821 exported successfully.`;
-        } else if (userEnrollments.length > 0) {
-            certOutput = `<span class="text-maindim">Progressing... Complete a course to 100% to export certificate credentials.</span>`;
-        } else {
-            certOutput = `<span class="text-maindim">Please enroll in a course to start tracking certificates.</span>`;
-        }
-        
-        sessionCommands.push({
-            input: 'tapeflicker certificate',
-            output: certOutput
-        });
-    } else {
-        sessionCommands = [
-            {
-                input: 'tapeflicker login',
-                output: '<span class="text-mainemerald font-bold">✓</span> Welcome back, guest (Session active)'
-            },
-            {
-                input: 'tapeflicker enroll cybersecurity',
-                output: '<span class="text-mainemerald font-bold">✓</span> Course enrolled: Certified Ethical Hacker (CEH) v12<br/><span class="text-mainmuted">Configuring labs sandbox environment... ready.</span>'
-            },
-            {
-                input: 'tapeflicker progress',
-                output: `Cybersecurity <span class="text-mainaccent">======================>......</span> 78%<br/>AI Fundamentals <span class="text-mainaccent">=============>..............</span> 43%<br/>Python Development <span class="text-mainaccent">===========================>..</span> 91%`
-            },
-            {
-                input: 'tapeflicker certificate',
-                output: '<span class="text-mainemerald font-bold">✓</span> Certificate unlocked: Advanced Security Analyst<br/><span class="text-mainpurple font-bold">→</span> License TF-9821-2026 exported successfully.'
-            }
-        ];
-    }
+                const gain = audioCtx.createGain();
+                gain.gain.setValueAtTime(0, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 0.02);
+                gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.06);
+                gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.09);
+                gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.13);
+                gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.16);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
 
-    let cmdIndex = 0;
-    let charIndex = 0;
-    let isTyping = true;
+                const osc = audioCtx.createOscillator();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(2200, audioCtx.currentTime + 0.05);
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.12);
 
-    function typeWriter() {
-        if (!terminalCurrentInput) return;
-        if (cmdIndex >= sessionCommands.length) {
-            setTimeout(() => {
-                terminalHistory.innerHTML = '';
-                cmdIndex = 0;
-                charIndex = 0;
-                isTyping = true;
-                typeWriter();
-            }, 4000);
-            return;
-        }
+                const oscGain = audioCtx.createGain();
+                oscGain.gain.setValueAtTime(0, audioCtx.currentTime);
+                oscGain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 0.01);
+                oscGain.gain.setValueAtTime(0, audioCtx.currentTime + 0.04);
+                oscGain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
 
-        const currentCommand = sessionCommands[cmdIndex];
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
 
-        if (isTyping) {
-            if (charIndex < currentCommand.input.length) {
-                terminalCurrentInput.textContent += currentCommand.input.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 25 + Math.random() * 20);
-            } else {
-                isTyping = false;
-                setTimeout(() => {
-                    const historyRow = document.createElement('div');
-                    historyRow.className = 'space-y-1';
-                    historyRow.innerHTML = `
-                        <div class="flex items-center text-white"><span class="text-mainaccent mr-2">$</span>${currentCommand.input}</div>
-                        <div class="pl-4 text-maindim mt-1">${currentCommand.output}</div>
-                    `;
-                    terminalHistory.appendChild(historyRow);
-                    
-                    terminalCurrentInput.textContent = '';
-                    charIndex = 0;
-                    cmdIndex++;
-                    isTyping = true;
-                    
-                    terminalScreen.scrollTop = terminalScreen.scrollHeight;
-                    
-                    setTimeout(typeWriter, 1200);
-                }, 300);
+                osc.connect(oscGain);
+                oscGain.connect(audioCtx.destination);
+
+                noise.start(audioCtx.currentTime);
+                noise.stop(audioCtx.currentTime + 0.25);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.2);
+            } catch (err) {
+                console.warn("AudioContext glitch play failed:", err);
             }
         }
-    }
 
-    if (terminalCurrentInput) {
-        setTimeout(typeWriter, 800);
-    }
+        // Play sound and visual glitch on hover trigger
+        let hoverThrottle = false;
+        glitchWrapper.addEventListener('mouseenter', () => {
+            if (!hoverThrottle) {
+                playGlitchSound();
+                triggerGlitch();
+                hoverThrottle = true;
+                setTimeout(() => { hoverThrottle = false; }, 800);
+            }
+        });
 
-    function copyCliCommand() {
-        navigator.clipboard.writeText('pip install tapeflicker');
-        const copyBtnText = document.querySelector('#cli-copy-btn span');
-        if (copyBtnText) {
-            copyBtnText.textContent = 'Copied!';
+        function triggerGlitch() {
+            glitchWrapper.classList.add('glitching');
             setTimeout(() => {
-                copyBtnText.textContent = 'pip install tapeflicker';
-            }, 2000);
+                glitchWrapper.classList.remove('glitching');
+            }, 300 + Math.random() * 200);
         }
-    }
+
+        // Trigger glitch periodically (every 4-6 seconds)
+        function scheduleGlitch() {
+            const delay = 4000 + Math.random() * 2000;
+            setTimeout(() => {
+                triggerGlitch();
+                if (glitchWrapper.matches(':hover')) {
+                    playGlitchSound();
+                }
+                scheduleGlitch();
+            }, delay);
+        }
+
+        // First glitch after 2 seconds
+        setTimeout(() => {
+            triggerGlitch();
+            scheduleGlitch();
+        }, 2000);
+    })();
 </script>
 
 <script>

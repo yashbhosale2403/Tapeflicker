@@ -47,7 +47,7 @@
         }
     </script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.3">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.8">
     <script>
         (function () {
             const root = document.documentElement;
@@ -83,7 +83,7 @@
     </script>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="antialiased min-h-screen flex flex-col relative selection:bg-accent-neon selection:text-black">
+<body class="{% block body_class %}{% endblock %} antialiased min-h-screen flex flex-col relative selection:bg-accent-neon selection:text-black">
 
     <!-- Dynamic Announcement Banner -->
     {% if active_announcements %}
@@ -106,11 +106,11 @@
             <div class="flex justify-between items-center h-24">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{% url 'core:home' %}" class="text-2xl font-bold font-sora tracking-tight text-white flex items-center gap-3 group">
-                        <div class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-white/10 bg-secondary/50 shadow-[0_0_15px_rgba(0,217,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,217,255,0.5)] transition-all duration-300">
-                            <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-cover">
+                    <a href="{% url 'core:home' %}" class="flex items-center gap-3 group">
+                        <div class="brand-logo-mark w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center border border-white/10 bg-secondary/50 shadow-[0_0_15px_rgba(0,217,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,217,255,0.5)] transition-all duration-300">
+                            <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-contain">
                         </div>
-                        <span class="tracking-widest">Tape<span class="text-accent-neon">flicker</span></span>
+                        <span class="font-sans italic font-black tracking-tight text-2xl text-white">Tape<span class="text-accent-neon">flicker</span></span>
                     </a>
                 </div>
                 
@@ -174,11 +174,11 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-6">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-5">
-                    <a href="{% url 'core:home' %}" class="text-xl font-bold font-sora text-white flex items-center gap-2 mb-3">
-                        <div class="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center">
+                    <a href="{% url 'core:home' %}" class="flex items-center gap-2 mb-3">
+                        <div class="brand-logo-mark w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center">
                             <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-contain">
                         </div>
-                        <span class="tracking-wide">Tapeflicker</span>
+                        <span class="font-sans italic font-black tracking-tight text-xl text-white">Tape<span class="text-accent-neon">flicker</span></span>
                     </a>
                     <p class="text-xs text-muted mb-4 max-w-sm leading-relaxed">
                         Next-generation cybersecurity and tech learning ecosystem. Master the skills that define the future.

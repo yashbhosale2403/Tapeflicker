@@ -13,21 +13,21 @@
             theme: {
                 extend: {
                     colors: {
-                        mainbg: '#09090b',         // Zinc-950 (Stripe/Linear style dark background)
-                        mainpanel: '#18181b',      // Zinc-900
-                        maincard: '#18181b',       // Zinc-900 (Solid, non-translucent card)
-                        mainborder: '#27272a',     // Zinc-800
-                        mainaccent: '#6366f1',     // Indigo-500 (Clean, professional startup brand accent)
+                        mainbg: '#FFF9ED',         // Light yellow/cream background
+                        mainpanel: '#FFFFFF',      // White panel
+                        maincard: '#FFFFFF',       // White card
+                        mainborder: '#F3E8C0',     // Light border
+                        mainaccent: '#FB923C',     // Orange accent
                         mainpurple: '#8b5cf6',     // Violet-500
                         mainblue: '#3b82f6',       // Blue-500
                         mainemerald: '#10b981',    // Emerald-500
-                        maintext: '#fafafa',       // Zinc-50 (High contrast readability text)
-                        mainmuted: '#71717a',      // Zinc-500
-                        maindim: '#a1a1aa',        // Zinc-400
+                        maintext: '#1F2937',       // Dark text
+                        mainmuted: '#8B8D97',      // Muted text
+                        maindim: '#6B7280',        // Dim text
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        sora: ['Inter', 'sans-serif'], // Map sora utility to Inter for typography consistency
+                        sora: ['Inter', 'sans-serif'],
                     },
                     boxShadow: {
                         'card': '0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1)',
@@ -42,21 +42,21 @@
     <style>
         * { box-sizing: border-box; }
         body {
-            background-color: #09090b;
-            color: #fafafa;
+            background-color: #FFF9ED;
+            color: #1F2937;
             font-family: 'Inter', sans-serif;
             overflow: hidden;
         }
         /* ===================== SCROLLBARS ===================== */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+        ::-webkit-scrollbar-thumb { background: #F3E8C0; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E5E7EB; }
 
         /* ===================== SIDEBAR ===================== */
         .sidebar {
-            background: #09090b;
-            border-right: 1px solid #27272a;
+            background: #FFF9ED;
+            border-right: 1px solid #F3E8C0;
             width: 240px;
             position: relative;
             flex-shrink: 0;
@@ -70,39 +70,39 @@
             margin: 1px 12px;
             font-size: 0.775rem;
             font-weight: 500;
-            color: #a1a1aa;
+            color: #6B7280;
             transition: all 0.1s ease;
             text-decoration: none;
         }
         .sidebar-link:hover {
-            background: #18181b;
-            color: #fafafa;
+            background: #FFF3D2;
+            color: #1F2937;
         }
         .sidebar-link.active {
-            background: #27272a;
-            color: #fafafa;
+            background: #FFF3D2;
+            color: #1F2937;
             font-weight: 600;
         }
-        .sidebar-link.active svg { color: #6366f1; }
+        .sidebar-link.active svg { color: #FB923C; }
         .sidebar-link .icon { width: 16px; height: 16px; flex-shrink: 0; }
-        .sidebar-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #52525b; padding: 16px 24px 6px; }
+        .sidebar-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #8B8D97; padding: 16px 24px 6px; }
 
         /* ===================== CARDS ===================== */
         .main-card {
-            background: #18181b;
-            border: 1px solid #27272a;
+            background: #FFFFFF;
+            border: 1px solid #F3E8C0;
             border-radius: 8px;
             transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
         .main-card:hover { 
-            border-color: #3f3f46;
+            border-color: #FB923C;
         }
         .main-card-glow-cyan, .main-card-glow-purple, .main-card-glow-emerald, .main-card-glow-blue {
             box-shadow: none !important;
         }
 
         /* ===================== STAT CARDS ===================== */
-        .stat-bar { height: 3px; border-radius: 99px; background: #27272a; overflow: hidden; }
+        .stat-bar { height: 3px; border-radius: 99px; background: #F3E8C0; overflow: hidden; }
         .stat-bar-fill { height: 100%; border-radius: 99px; }
 
         /* ===================== PULSE ===================== */
@@ -126,62 +126,72 @@
 
         /* ===================== TOPBAR ===================== */
         .topbar {
-            background: #09090b;
-            border-bottom: 1px solid #27272a;
+            background: #FFF9ED;
+            border-bottom: 1px solid #F3E8C0;
         }
 
         /* ===================== TEXT COLOR OVERRIDES ===================== */
         .text-gradient-cyan, .text-gradient-purple {
             background: none !important;
             -webkit-text-fill-color: initial !important;
-            color: #fafafa !important;
+            color: #1F2937 !important;
         }
 
         /* ===================== NAV INPUT ===================== */
         .nav-search {
-            background: #09090b;
-            border: 1px solid #27272a;
+            background: #FFFFFF;
+            border: 1px solid #F3E8C0;
             border-radius: 6px;
-            color: #fafafa;
+            color: #1F2937;
             outline: none;
             transition: border-color 0.15s;
         }
         .nav-search:focus {
-            border-color: #3f3f46;
+            border-color: #FB923C;
         }
-        .nav-search::placeholder { color: #52525b; }
+        .nav-search::placeholder { color: #8B8D97; }
 
         /* ===================== BTN ===================== */
         .main-btn-primary {
-            background: #fafafa;
-            color: #09090b;
+            background: #FB923C;
+            color: #FFFFFF;
             font-weight: 500;
             border-radius: 6px;
             padding: 8px 14px;
             font-size: 0.75rem;
             transition: background-color 0.15s;
-            border: 1px solid #fafafa;
+            border: 1px solid #FB923C;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
         }
-        .main-btn-primary:hover { background: #e4e4e7; border-color: #e4e4e7; box-shadow: none; transform: none; filter: none; }
+        .main-btn-primary:hover { background: #EA580C; border-color: #EA580C; box-shadow: none; transform: none; filter: none; }
         .main-btn-ghost {
             background: transparent;
-            color: #fafafa;
+            color: #1F2937;
             border-radius: 6px;
             padding: 8px 14px;
             font-size: 0.75rem;
             transition: all 0.15s;
-            border: 1px solid #27272a;
+            border: 1px solid #F3E8C0;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-        .main-btn-ghost:hover { background: #18181b; border-color: #3f3f46; color: #fafafa; }
+        }
+        .main-btn-ghost:hover { background: #FFF3D2; border-color: #FB923C; color: #1F2937; }
         .glass-panel {
-            background: #18181b;
-            border: 1px solid #27272a;
+            background: #FFFFFF;
+            border: 1px solid #F3E8C0;
             border-radius: 8px;
+        }
+
+        /* Force dark text on generic text-white elements inside manager */
+        .text-white {
+            color: #1F2937 !important;
+        }
+        /* Except for headers/nav icons inside primary buttons or badges */
+        .main-btn-primary .text-white, .main-btn-primary svg, .bg-mainaccent .text-white {
+            color: #FFFFFF !important;
         }
     </style>
     {% block extra_head %}{% endblock %}
@@ -200,8 +210,8 @@
                     <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
-                    <div class="text-sm font-bold text-white font-sora tracking-tight leading-none">Tapeflicker</div>
-                    <div class="text-[10px] text-mainaccent font-medium uppercase tracking-widest">Main Admin</div>
+                    <div class="text-sm font-sans italic font-black tracking-tight text-white leading-none">Tape<span class="text-mainaccent">flicker</span></div>
+                    <div class="text-[10px] text-mainaccent font-medium uppercase tracking-widest" style="margin-top: 2px;">Main Admin</div>
                 </div>
             </a>
         </div>
@@ -342,7 +352,7 @@
         </header>
 
         <!-- MAIN CONTENT AREA -->
-        <main class="flex-1 overflow-y-auto relative" style="background: linear-gradient(135deg, #050816 0%, #060a1a 100%);">
+        <main class="flex-1 overflow-y-auto relative" style="background: #FFF9ED;">
 
             <!-- Toast Notifications -->
             {% if messages %}

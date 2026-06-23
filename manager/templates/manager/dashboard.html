@@ -346,8 +346,8 @@
 // ===== REVENUE CHART =====
 const rCtx = document.getElementById('revenueChart').getContext('2d');
 const rGrad = rCtx.createLinearGradient(0, 0, 0, 220);
-rGrad.addColorStop(0, 'rgba(0,217,255,0.25)');
-rGrad.addColorStop(1, 'rgba(0,217,255,0)');
+rGrad.addColorStop(0, 'rgba(251, 146, 60, 0.25)');
+rGrad.addColorStop(1, 'rgba(251, 146, 60, 0)');
 
 new Chart(rCtx, {
     type: 'line',
@@ -355,11 +355,11 @@ new Chart(rCtx, {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [{
             data: [1200, 1900, 3000, 5000, 4200, 6000, 8500],
-            borderColor: '#00D9FF',
+            borderColor: '#FB923C',
             backgroundColor: rGrad,
             borderWidth: 2,
-            pointBackgroundColor: '#00D9FF',
-            pointBorderColor: '#050816',
+            pointBackgroundColor: '#FB923C',
+            pointBorderColor: '#FFFFFF',
             pointBorderWidth: 2,
             pointRadius: 4,
             pointHoverRadius: 7,
@@ -372,10 +372,10 @@ new Chart(rCtx, {
         plugins: {
             legend: { display: false },
             tooltip: {
-                backgroundColor: '#0B1120',
-                titleColor: '#94A3B8',
-                bodyColor: '#fff',
-                borderColor: 'rgba(255,255,255,0.08)',
+                backgroundColor: '#1F2937',
+                titleColor: '#9CA3AF',
+                bodyColor: '#FFF',
+                borderColor: 'rgba(0, 0, 0, 0.05)',
                 borderWidth: 1,
                 padding: 12,
                 displayColors: false,
@@ -383,7 +383,7 @@ new Chart(rCtx, {
             }
         },
         scales: {
-            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.04)', drawBorder: false }, ticks: { color: '#475569', font: { size: 10 }, callback: v => '$' + v } },
+            y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.05)', drawBorder: false }, ticks: { color: '#475569', font: { size: 10 }, callback: v => '$' + v } },
             x: { grid: { display: false, drawBorder: false }, ticks: { color: '#475569', font: { size: 10 } } }
         },
         interaction: { intersect: false, mode: 'index' },
@@ -398,8 +398,8 @@ new Chart(dCtx, {
     data: {
         datasets: [{
             data: [published || 1, {{ featured_courses }}, {{ locked_courses }}],
-            backgroundColor: ['rgba(0,217,255,0.7)', 'rgba(139,92,246,0.7)', 'rgba(245,158,11,0.7)'],
-            borderColor: '#050816',
+            backgroundColor: ['rgba(251, 146, 60, 0.85)', 'rgba(139, 92, 246, 0.85)', 'rgba(245, 158, 11, 0.85)'],
+            borderColor: '#FFFFFF',
             borderWidth: 3,
             hoverBorderWidth: 0,
         }]
