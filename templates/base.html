@@ -15,27 +15,27 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#05011A', // Background
-                        secondary: '#0E0924', // Surface
-                        elevated: '#111827', // Elevated Surface
+                        primary: 'var(--bg-primary)', // Dynamic
+                        secondary: 'var(--bg-secondary)', // Dynamic
+                        elevated: 'var(--card-bg)', // Dynamic
                         accent: {
-                            neon: '#F5C933', // Gold accent
-                            purple: '#E8B923', // Warm yellow
-                            cyan: '#F5C933', // Gold accent
-                            green: '#F5C933' // Gold accent
+                            neon: 'var(--accent-neon)', // Dynamic
+                            purple: 'var(--accent-purple)', // Dynamic
+                            cyan: 'var(--accent-cyan)', // Dynamic
+                            green: 'var(--accent-green)' // Dynamic
                         },
-                        muted: '#94A3B8', // Secondary Text
-                        'muted-text': '#64748B', // Muted Text
+                        muted: 'var(--text-muted)', // Dynamic
+                        'muted-text': 'var(--text-dim)', // Dynamic
                         // Map manager colors for unified fallback support
-                        mainbg: '#05011A',
-                        mainpanel: '#0E0924',
-                        mainborder: 'rgba(245, 201, 51, 0.15)',
-                        mainaccent: '#F5C933',
-                        mainpurple: '#E8B923',
-                        mainemerald: '#F5C933',
-                        maintext: '#FFF8E1',
-                        mainmuted: 'rgba(255, 248, 225, 0.68)',
-                        maindim: 'rgba(255, 248, 225, 0.52)'
+                        mainbg: 'var(--bg-primary)',
+                        mainpanel: 'var(--bg-secondary)',
+                        mainborder: 'var(--card-border)',
+                        mainaccent: 'var(--accent-neon)',
+                        mainpurple: 'var(--accent-purple)',
+                        mainemerald: 'var(--accent-green)',
+                        maintext: 'var(--text-main)',
+                        mainmuted: 'var(--text-muted)',
+                        maindim: 'var(--text-dim)'
                     },
                     borderRadius: {
                         'xl': '1rem',
