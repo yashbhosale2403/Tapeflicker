@@ -15,27 +15,27 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#020817', // Background
-                        secondary: '#0B1220', // Surface
+                        primary: '#05011A', // Background
+                        secondary: '#0E0924', // Surface
                         elevated: '#111827', // Elevated Surface
                         accent: {
-                            neon: '#00D4FF', // Accent Cyan
-                            purple: '#8B5CF6', // Accent Purple
-                            cyan: '#00D4FF', // Accent Cyan
-                            green: '#22C55E' // Accent Green
+                            neon: '#F5C933', // Gold accent
+                            purple: '#E8B923', // Warm yellow
+                            cyan: '#F5C933', // Gold accent
+                            green: '#F5C933' // Gold accent
                         },
                         muted: '#94A3B8', // Secondary Text
                         'muted-text': '#64748B', // Muted Text
                         // Map manager colors for unified fallback support
-                        mainbg: '#020817',
-                        mainpanel: '#0B1220',
-                        mainborder: '#1E293B',
-                        mainaccent: '#00D4FF',
-                        mainpurple: '#8B5CF6',
-                        mainemerald: '#22C55E',
-                        maintext: '#F8FAFC',
-                        mainmuted: '#64748B',
-                        maindim: '#94A3B8'
+                        mainbg: '#05011A',
+                        mainpanel: '#0E0924',
+                        mainborder: 'rgba(245, 201, 51, 0.15)',
+                        mainaccent: '#F5C933',
+                        mainpurple: '#E8B923',
+                        mainemerald: '#F5C933',
+                        maintext: '#FFF8E1',
+                        mainmuted: 'rgba(255, 248, 225, 0.68)',
+                        maindim: 'rgba(255, 248, 225, 0.52)'
                     },
                     borderRadius: {
                         'xl': '1rem',
@@ -83,7 +83,7 @@
     </script>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %} antialiased min-h-screen flex flex-col relative selection:bg-accent-neon selection:text-black">
+<body class="{% if request.resolver_match.app_name == 'dashboard' and request.resolver_match.url_name == 'home' %}dashboard-page {% endif %}{% block body_class %}{% endblock %} antialiased min-h-screen flex flex-col relative selection:bg-accent-neon selection:text-black">
 
     <!-- Dynamic Announcement Banner -->
     {% if active_announcements %}

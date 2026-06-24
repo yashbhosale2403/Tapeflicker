@@ -1,6 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
+    --bg-primary: #05011A;
+    --bg-secondary: #0E0924;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(245, 201, 51, 0.15);
+    --accent-neon: #F5C933;
+    --accent-purple: #E8B923;
+    --accent-cyan: #F5C933;
+    --accent-blue: #FFF8E1;
+    --accent-green: #F5C933;
+    --text-main: #FFF8E1;
+    --text-muted: rgba(255, 248, 225, 0.68);
+    --text-dim: rgba(255, 248, 225, 0.52);
+}
+
+[data-theme="light"] {
+    --bg-primary: #05011A;
+    --bg-secondary: #0E0924;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(245, 201, 51, 0.15);
+    --text-main: #FFF8E1;
+    --text-muted: rgba(255, 248, 225, 0.68);
+}
+
+.dashboard-page {
     --bg-primary: #020817;
     --bg-secondary: #0B1220;
     --card-bg: rgba(11, 18, 32, 0.8);
@@ -13,15 +37,40 @@
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
     --text-dim: #64748B;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
 }
 
-[data-theme="light"] {
-    --bg-primary: #F4F7FB;
-    --bg-secondary: #E9EFF8;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --card-border: rgba(15, 23, 42, 0.12);
-    --text-main: #0F172A;
-    --text-muted: #475569;
+.dashboard-page .brand-logo-mark {
+    background-image: none !important;
+    box-shadow: none !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dashboard-page .brand-logo-mark img {
+    opacity: 1 !important;
+}
+
+.dashboard-page .btn-primary {
+    color: #FFFFFF !important;
+    background: var(--accent-neon) !important;
+    border-color: transparent !important;
+}
+
+.dashboard-page .btn-primary:hover {
+    filter: brightness(0.92) !important;
+}
+
+.dashboard-page .btn-outline {
+    color: #F8FAFC !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
+}
+
+.dashboard-page .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: none !important;
 }
 
 html[data-theme="light"] body {
@@ -151,18 +200,18 @@ h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; letter-spa
 }
 .btn-primary:hover {
     transform: translateY(-1.5px);
-    background: #00bce2;
+    filter: brightness(0.92);
 }
 
 .btn-outline {
-    background: transparent; color: #F8FAFC; padding: 0.8rem 2.25rem;
+    background: transparent; color: var(--text-main); padding: 0.8rem 2.25rem;
     border-radius: 9999px; font-weight: 500; font-size: 0.875rem; transition: all 0.2s ease;
-    border: 1px solid rgba(248, 250, 252, 0.15); text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15); text-decoration: none;
     display: inline-flex; align-items: center; cursor: pointer;
 }
 .btn-outline:hover {
-    background: rgba(248, 250, 252, 0.05);
-    border-color: rgba(248, 250, 252, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="light"] .btn-outline {
@@ -622,29 +671,29 @@ body.tf-home-page .font-sora {
     letter-spacing: 0;
 }
 
-body.tf-home-page .aurora-bg {
+.aurora-bg {
     background:
         radial-gradient(circle at 20% 5%, rgba(245, 201, 51, 0.14), transparent 32%),
         radial-gradient(circle at 82% 18%, rgba(232, 185, 35, 0.09), transparent 28%),
         linear-gradient(180deg, #05011A 0%, #08031E 48%, #05011A 100%);
 }
 
-body.tf-home-page .aurora-blob {
-    display: none;
+.aurora-blob {
+    display: block;
 }
 
-body.tf-home-page .glass-nav {
+.glass-nav {
     background: rgba(5, 1, 26, 0.78);
     border-bottom-color: rgba(245, 201, 51, 0.14);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
 }
 
-body.tf-home-page nav a,
-body.tf-home-page footer a {
+nav a,
+footer a {
     text-decoration: none;
 }
 
-body.tf-home-page .brand-logo-mark {
+.brand-logo-mark {
     background-image: url('/static/images/tapeflicker_brand_logo.png') !important;
     background-position: center;
     background-size: cover;
@@ -652,68 +701,25 @@ body.tf-home-page .brand-logo-mark {
     box-shadow: 0 14px 36px rgba(245, 201, 51, 0.16) !important;
 }
 
-body.tf-home-page .brand-logo-mark img {
+.brand-logo-mark img {
     opacity: 0;
 }
 
-body.tf-home-page nav .text-accent-neon,
-body.tf-home-page .text-accent-neon,
-body.tf-home-page .text-accent-cyan,
-body.tf-home-page .text-accent-purple,
-body.tf-home-page .text-accent-blue,
-body.tf-home-page .text-green-400,
-body.tf-home-page .text-\[\#00D4FF\] {
-    color: #F5C933 !important;
-}
-
-body.tf-home-page .bg-accent-neon,
-body.tf-home-page .bg-mainaccent,
-body.tf-home-page .bg-green-500 {
-    background-color: #F5C933 !important;
-}
-
-body.tf-home-page .bg-secondary,
-body.tf-home-page .bg-mainpanel,
-body.tf-home-page .bg-primary,
-body.tf-home-page .bg-\[\#0B1220\] {
-    background-color: rgba(255, 255, 255, 0.03) !important;
-}
-
-body.tf-home-page .border-mainborder,
-body.tf-home-page .border-white\/5,
-body.tf-home-page .border-white\/10,
-body.tf-home-page .border-accent-neon\/20,
-body.tf-home-page .border-accent-neon\/30,
-body.tf-home-page .border-accent-purple\/20 {
-    border-color: rgba(245, 201, 51, 0.15) !important;
-}
-
-body.tf-home-page .text-muted,
-body.tf-home-page .text-mainmuted,
-body.tf-home-page .text-maindim {
-    color: rgba(255, 248, 225, 0.68) !important;
-}
-
-body.tf-home-page .nav-link::after {
-    background: #F5C933;
-    box-shadow: none;
-}
-
-body.tf-home-page .theme-toggle {
+.theme-toggle {
     background: rgba(255, 248, 225, 0.06);
     border-color: rgba(245, 201, 51, 0.22);
     color: #FFF8E1;
 }
 
-body.tf-home-page .theme-toggle:hover {
+.theme-toggle:hover {
     border-color: #F5C933;
     box-shadow: 0 12px 32px rgba(245, 201, 51, 0.12);
 }
 
-body.tf-home-page .text-gradient,
-body.tf-home-page .text-gradient-accent,
-html[data-theme="light"] body.tf-home-page .text-gradient,
-html[data-theme="light"] body.tf-home-page .text-gradient-accent {
+.text-gradient,
+.text-gradient-accent,
+html[data-theme="light"] .text-gradient,
+html[data-theme="light"] .text-gradient-accent {
     background: linear-gradient(135deg, #FFF8E1 0%, #F5C933 54%, #E8B923 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -721,26 +727,26 @@ html[data-theme="light"] body.tf-home-page .text-gradient-accent {
     color: transparent !important;
 }
 
-body.tf-home-page .btn-primary {
+.btn-primary {
     background: #F5C933;
     color: #141414;
     border: 1px solid rgba(245, 201, 51, 0.86);
     box-shadow: 0 18px 38px rgba(245, 201, 51, 0.16);
 }
 
-body.tf-home-page .btn-primary:hover {
+.btn-primary:hover {
     background: #E8B923;
     transform: translateY(-2px);
     box-shadow: 0 24px 48px rgba(245, 201, 51, 0.2);
 }
 
-body.tf-home-page .btn-outline {
+.btn-outline {
     color: #FFF8E1;
     border-color: rgba(245, 201, 51, 0.42);
     background: rgba(255, 255, 255, 0.02);
 }
 
-body.tf-home-page .btn-outline:hover {
+.btn-outline:hover {
     background: rgba(245, 201, 51, 0.08);
     border-color: #F5C933;
     transform: translateY(-2px);
@@ -1018,9 +1024,10 @@ body.tf-home-page .btn-outline:hover {
 }
 
 .tf-brand-name-large {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 900;
     font-size: 2.8rem;
-    font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
     margin-bottom: 0.6rem;

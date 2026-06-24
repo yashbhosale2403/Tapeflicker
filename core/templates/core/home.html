@@ -110,6 +110,16 @@
             </div>
         </div>
     </div>
+
+    <!-- Elegant Scroll Down Indicator -->
+    <div id="scroll-indicator" class="absolute bottom-6 right-6 lg:right-12 flex flex-col items-center gap-2 cursor-pointer z-30 group transition-all duration-300" onclick="document.getElementById('trending-topics')?.scrollIntoView({ behavior: 'smooth' })">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-muted group-hover:text-accent-neon transition-colors duration-300 font-bold font-sora">
+            Scroll to explore
+        </span>
+        <div class="w-5 h-9 rounded-full border border-white/20 flex justify-center pt-2 group-hover:border-accent-neon transition-colors duration-300">
+            <div class="w-1 h-2 bg-accent-neon rounded-full animate-scroll-wheel"></div>
+        </div>
+    </div>
 </section>
 
 <style>
@@ -156,10 +166,20 @@
             opacity: 0;
         }
     }
+
+    /* Scroll Wheel Animation */
+    @keyframes scrollWheel {
+        0% { transform: translateY(0); opacity: 1; }
+        50% { transform: translateY(6px); opacity: 0.3; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    .animate-scroll-wheel {
+        animation: scrollWheel 1.6s ease-in-out infinite;
+    }
 </style>
 
 <!-- 2. TRENDING CATEGORIES SECTION -->
-<section class="tf-trending-section py-12 md:py-16 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
+<section id="trending-topics" class="tf-trending-section py-6 md:py-8 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
         <!-- Subtitle/Label -->
         <h3 class="text-xs font-semibold tracking-[0.25em] text-muted uppercase mb-10 flex items-center gap-2">
@@ -227,12 +247,11 @@
 
 
 <!-- 3. FEATURED COURSES & LIVE EVENTS SECTION (SIDE BY SIDE & MEDIUM CARDS) -->
-<section id="courses" class="tf-courses-events-section py-16 md:py-20 relative z-20">
+<section id="courses" class="tf-courses-events-section py-8 md:py-10 relative z-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         {% if upcoming_events %}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <!-- Left Column: Trending Courses -->
-            <div class="reveal">
+            <div>
                 <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
                     <div>
                         <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
@@ -245,10 +264,10 @@
 
                 <div class="flex flex-col gap-5">
                     {% for course in featured_courses %}
-                    <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                        <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                    <div class="tf-medium-card hover-lift group relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
                             <!-- Centered Landscape Thumbnail -->
-                            <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
+                            <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
                                 {% if course.thumbnail %}
                                 <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                                 {% else %}
@@ -301,8 +320,7 @@
                 </div>
             </div>
 
-            <!-- Right Column: Live Sessions -->
-            <div class="reveal">
+            <div>
                 <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
                     <div>
                         <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Broadcasting</div>
@@ -315,10 +333,10 @@
 
                 <div class="flex flex-col gap-5">
                     {% for event in upcoming_events %}
-                    <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                        <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                    <div class="tf-medium-card hover-lift group relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
                             <!-- Centered Landscape Banner/Date Area -->
-                            <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative flex items-center justify-center bg-secondary/40">
+                            <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative flex items-center justify-center bg-secondary/40">
                                 {% if event.banner %}
                                 <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 absolute inset-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -364,8 +382,7 @@
             </div>
         </div>
         {% else %}
-        <!-- Fallback if no upcoming events: Full width Trending Courses -->
-        <div class="reveal">
+        <div>
             <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
                 <div>
                     <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
@@ -378,10 +395,10 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {% for course in featured_courses %}
-                <div class="tf-medium-card hover-lift group relative overflow-hidden" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                    <div class="flex flex-col sm:flex-row h-full items-center p-5 gap-5">
+                <div class="tf-medium-card hover-lift group relative overflow-hidden">
+                    <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
                         <!-- Thumbnail -->
-                        <div class="w-full sm:w-[220px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
+                        <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
                             {% if course.thumbnail %}
                             <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                             {% else %}
@@ -530,70 +547,48 @@
 </section>
 
 <!-- 7. TESTIMONIALS -->
-<section class="tf-testimonials-section py-16 md:py-20 relative z-20 bg-mainbg border-t border-mainborder">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section class="tf-testimonials-section py-10 md:py-14 relative z-20 bg-transparent">
+    <div class="max-w-6xl mx-auto px-6">
         
         <!-- Section Header -->
-        <div class="text-center mb-16">
-            <span class="text-xs font-bold text-mainpurple uppercase tracking-widest block mb-3 font-sans">Community</span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white font-sora">Loved by Engineers</h2>
+        <div class="text-center mb-10">
+            <span class="text-xs font-semibold text-accent-neon uppercase tracking-[0.25em] block mb-2 font-sora">Community</span>
+            <h2 class="text-3xl font-sora font-extrabold text-white">Loved by <span class="text-gradient">Engineers</span></h2>
         </div>
 
         <!-- Testimonial Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- Card 1: James Doe -->
-            <div class="main-card p-8 rounded-2xl border border-mainborder flex flex-col justify-between shadow-subtle bg-mainpanel">
-                <div>
-                    <!-- Stars -->
-                    <div class="flex gap-1 text-[#00D4FF] mb-6">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    </div>
-                    <!-- Testimonial content -->
-                    <p class="text-sm md:text-base text-maindim mb-8 leading-relaxed">
-                        "The UI/UX is world-class, but the content is even better. It genuinely feels like a premium Silicon Valley product. Got my first dev job after completing the React path!"
-                    </p>
-                </div>
-                <!-- Author Metadata -->
-                <div class="flex items-center gap-4 pt-6 border-t border-mainborder">
-                    <div class="w-12 h-12 rounded-full border border-mainborder flex items-center justify-center text-white font-bold text-sm bg-[#0B1220] select-none">
+            <div class="glass border border-white/5 rounded-2xl p-6 relative flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300">
+                <div class="absolute -top-3 -left-3 text-accent-neon/5 font-serif text-8xl pointer-events-none select-none">“</div>
+                <p class="text-sm text-muted leading-relaxed mb-6 italic relative z-10">
+                    "The UI/UX is world-class, but the content is even better. It genuinely feels like a premium Silicon Valley product. Got my first dev job after completing the React path!"
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs select-none">
                         JD
                     </div>
-                    <div class="text-left">
-                        <div class="font-bold text-white text-sm">James Doe</div>
-                        <div class="text-xs text-[#00D4FF] font-medium">Frontend Engineer @ Stripe</div>
+                    <div>
+                        <div class="font-bold text-white text-xs">James Doe</div>
+                        <div class="text-[10px] text-accent-neon font-medium">Frontend Engineer @ Stripe</div>
                     </div>
                 </div>
             </div>
 
             <!-- Card 2: Sarah Wong -->
-            <div class="main-card p-8 rounded-2xl border border-mainborder flex flex-col justify-between shadow-subtle bg-mainpanel">
-                <div>
-                    <!-- Stars -->
-                    <div class="flex gap-1 text-[#00D4FF] mb-6">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    </div>
-                    <!-- Testimonial content -->
-                    <p class="text-sm md:text-base text-maindim mb-8 leading-relaxed">
-                        "Tapeflicker's cybersecurity track goes deeper than any university course I've taken. The labs and premium interface keep me engaged for hours."
-                    </p>
-                </div>
-                <!-- Author Metadata -->
-                <div class="flex items-center gap-4 pt-6 border-t border-mainborder">
-                    <div class="w-12 h-12 rounded-full border border-mainborder flex items-center justify-center text-white font-bold text-sm bg-[#0B1220] select-none">
+            <div class="glass border border-white/5 rounded-2xl p-6 relative flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300">
+                <div class="absolute -top-3 -left-3 text-accent-neon/5 font-serif text-8xl pointer-events-none select-none">“</div>
+                <p class="text-sm text-muted leading-relaxed mb-6 italic relative z-10">
+                    "Tapeflicker's cybersecurity track goes deeper than any university course I've taken. The labs and premium interface keep me engaged for hours."
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs select-none">
                         SW
                     </div>
-                    <div class="text-left">
-                        <div class="font-bold text-white text-sm">Sarah Wong</div>
-                        <div class="text-xs text-[#00D4FF] font-medium">Security Analyst</div>
+                    <div>
+                        <div class="font-bold text-white text-xs">Sarah Wong</div>
+                        <div class="text-[10px] text-accent-neon font-medium">Security Analyst</div>
                     </div>
                 </div>
             </div>
@@ -636,6 +631,16 @@
                 animated = true;
             }
         }
+
+        // Hide scroll indicator on scroll
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        if (scrollIndicator) {
+            if (window.scrollY > 50) {
+                scrollIndicator.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                scrollIndicator.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
     });
 
     // Live Countdown System
@@ -675,32 +680,54 @@
         });
     });
 
-    // ===== PERIODIC GLITCH TRIGGER FOR BRAND LOGO =====
+    // ===== GLITCH EFFECT ON HOVER ONLY =====
     (function() {
         const glitchWrapper = document.querySelector('.tf-glitch-wrapper');
         if (!glitchWrapper) return;
 
         let audioCtx = null;
-        function playGlitchSound() {
+        let noiseBuffer = null;
+
+        // Pre-initialize AudioContext and noise buffer once to eliminate sound latency
+        function initAudio() {
+            if (audioCtx) return;
             try {
                 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
                 if (!AudioContextClass) return;
-                if (!audioCtx) {
-                    audioCtx = new AudioContextClass();
+                audioCtx = new AudioContextClass();
+                
+                // Pre-generate noise buffer to avoid real-time calculation latency
+                const bufferSize = audioCtx.sampleRate * 0.25;
+                noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
                 }
+            } catch (err) {
+                console.warn("AudioContext initialization failed:", err);
+            }
+        }
+
+        // Listen for early user gestures to pre-initialize the audio before hover occurs
+        const gestures = ['mouseover', 'click', 'keydown', 'touchstart'];
+        gestures.forEach(gesture => {
+            window.addEventListener(gesture, initAudio, { once: true, passive: true });
+        });
+
+        function playGlitchSound() {
+            if (!audioCtx) {
+                initAudio();
+            }
+            if (!audioCtx) return;
+
+            try {
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
 
-                const bufferSize = audioCtx.sampleRate * 0.25;
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1;
-                }
-
+                // Play pre-generated noise
                 const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
+                noise.buffer = noiseBuffer;
 
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'bandpass';
@@ -747,41 +774,15 @@
             }
         }
 
-        // Play sound and visual glitch on hover trigger
+        // Play sound on hover trigger
         let hoverThrottle = false;
         glitchWrapper.addEventListener('mouseenter', () => {
             if (!hoverThrottle) {
                 playGlitchSound();
-                triggerGlitch();
                 hoverThrottle = true;
                 setTimeout(() => { hoverThrottle = false; }, 800);
             }
         });
-
-        function triggerGlitch() {
-            glitchWrapper.classList.add('glitching');
-            setTimeout(() => {
-                glitchWrapper.classList.remove('glitching');
-            }, 300 + Math.random() * 200);
-        }
-
-        // Trigger glitch periodically (every 4-6 seconds)
-        function scheduleGlitch() {
-            const delay = 4000 + Math.random() * 2000;
-            setTimeout(() => {
-                triggerGlitch();
-                if (glitchWrapper.matches(':hover')) {
-                    playGlitchSound();
-                }
-                scheduleGlitch();
-            }, delay);
-        }
-
-        // First glitch after 2 seconds
-        setTimeout(() => {
-            triggerGlitch();
-            scheduleGlitch();
-        }, 2000);
     })();
 </script>
 
