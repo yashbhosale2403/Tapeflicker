@@ -514,37 +514,73 @@
     </div>
 </section>
 
-<!-- 5. IMMERSIVE STATS -->
-<section class="tf-stats-section py-14 md:py-18 border-y border-white/5 relative z-20">
+<!-- 4.5 OFFICIAL MERCH SECTION -->
+<section class="tf-merch-section py-16 md:py-20 relative z-20 border-b border-white/5 bg-transparent">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="tf-stats-grid grid grid-cols-2 md:grid-cols-4 gap-5 lg:gap-6 text-center reveal">
-            <div class="tf-stat-card">
-                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
-                    <span class="counter" data-target="10">0</span><span class="text-accent-neon">K+</span>
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <span class="text-[10px] font-mono tracking-widest text-accent-cyan uppercase block mb-4">Official Merch</span>
+            <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">Tapeflicker Gear</h2>
+            <p class="text-muted text-sm mt-3 font-light">Premium limited-edition goods for developers and innovators.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Goodie 1 -->
+            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal">
+                <div>
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
+                        <img src="{% static 'images/tapeflicker_tshirt.png' %}" alt="Tapeflicker Cyber Tee" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Cyber Tee</h3>
+                    <p class="text-muted text-xs leading-relaxed font-light">
+                        Premium heavyweight cotton crewneck featuring our custom slanted brand typography printed in clean white and gold.
+                    </p>
                 </div>
-                <div class="text-muted font-bold tracking-widest uppercase text-xs">Active Students</div>
+                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                    <span class="text-base font-bold font-sora text-white">₹2,499</span>
+                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
+                </div>
             </div>
-            <div class="tf-stat-card">
-                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
-                    <span class="counter" data-target="150">0</span><span class="text-accent-purple">+</span>
+
+            <!-- Goodie 2 -->
+            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal" style="transition-delay: 100ms;">
+                <div>
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
+                        <img src="{% static 'images/tapeflicker_bag.png' %}" alt="Tapeflicker Commuter Bag" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Commuter Bag</h3>
+                    <p class="text-muted text-xs leading-relaxed font-light">
+                        A sleek, premium matte black water-resistant commuter laptop backpack featuring custom Tapeflicker embroidery.
+                    </p>
                 </div>
-                <div class="text-muted font-bold tracking-widest uppercase text-xs">Masterclasses</div>
+                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                    <span class="text-base font-bold font-sora text-white">₹3,999</span>
+                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
+                </div>
             </div>
-            <div class="tf-stat-card">
-                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
-                    <span class="counter" data-target="95">0</span><span class="text-accent-cyan">%</span>
+
+            <!-- Goodie 3 -->
+            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal" style="transition-delay: 200ms;">
+                <div>
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
+                        <img src="{% static 'images/tapeflicker_stickers.png' %}" alt="Tapeflicker Sticker Pack" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Sticker Pack</h3>
+                    <p class="text-muted text-xs leading-relaxed font-light">
+                        A high-quality pack of die-cut weather-resistant vinyl stickers featuring official Tapeflicker logos, cybersecurity icons, and developer graphics.
+                    </p>
                 </div>
-                <div class="text-muted font-bold tracking-widest uppercase text-xs">Success Rate</div>
-            </div>
-            <div class="tf-stat-card">
-                <div class="tf-stat-number text-5xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 font-sora mb-2 tracking-tighter">
-                    <span class="counter" data-target="24">0</span><span class="text-green-400">/7</span>
+                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                    <span class="text-base font-bold font-sora text-white">₹699</span>
+                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
                 </div>
-                <div class="text-muted font-bold tracking-widest uppercase text-xs">Support Hub</div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- 7. TESTIMONIALS -->
 <section class="tf-testimonials-section py-10 md:py-14 relative z-20 bg-transparent">
@@ -603,35 +639,7 @@
 
 <!-- Scripts for Animations -->
 <script>
-    // Counter Animation
-    const counters = document.querySelectorAll('.counter');
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / 50;
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCount();
-        });
-    };
-    
-    let animated = false;
     window.addEventListener('scroll', () => {
-        if (!animated) {
-            const section = document.querySelector('.counter');
-            if (section && window.scrollY + window.innerHeight > section.offsetTop) {
-                animateCounters();
-                animated = true;
-            }
-        }
-
         // Hide scroll indicator on scroll
         const scrollIndicator = document.getElementById('scroll-indicator');
         if (scrollIndicator) {

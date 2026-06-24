@@ -11,9 +11,9 @@
       <div class="w-9 h-9 rounded bg-mainborder flex items-center justify-center">
         <svg class="w-4 h-4 text-mainaccent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
       </div>
-      <span class="text-[10px] font-bold text-mainemerald bg-mainemerald/10 border border-mainemerald/15 px-2 py-0.5 rounded">↑ 12%</span>
+      <span class="text-[10px] font-bold {{ rev_growth_class }} px-2 py-0.5 rounded">{{ rev_growth_str }}</span>
     </div>
-    <div class="text-xl font-bold text-white mb-1 font-sans">${{ revenue|default:"12,450" }}</div>
+    <div class="text-xl font-bold text-white mb-1 font-sans">${{ revenue|floatformat:2 }}</div>
     <div class="text-xs text-mainmuted font-medium">Total Revenue</div>
   </div>
 
@@ -23,7 +23,7 @@
       <div class="w-9 h-9 rounded bg-mainborder flex items-center justify-center">
         <svg class="w-4 h-4 text-mainpurple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
       </div>
-      <span class="text-[10px] font-bold text-mainemerald bg-mainemerald/10 border border-mainemerald/15 px-2 py-0.5 rounded">↑ 8%</span>
+      <span class="text-[10px] font-bold {{ studs_growth_class }} px-2 py-0.5 rounded">{{ studs_growth_str }}</span>
     </div>
     <div class="text-xl font-bold text-white mb-1 font-sans">{{ total_students }}</div>
     <div class="text-xs text-mainmuted font-medium">Active Students</div>
@@ -99,7 +99,7 @@
     <div class="mt-5 space-y-2">
       <div class="flex items-center justify-between text-xs">
         <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-mainaccent"></span><span class="text-maindim">Published</span></div>
-        <span class="text-white font-semibold">{{ total_courses|add:locked_courses|add:"-1"|default:0 }}</span>
+        <span class="text-white font-semibold">{{ published_courses }}</span>
       </div>
       <div class="flex items-center justify-between text-xs">
         <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-mainpurple"></span><span class="text-maindim">Featured</span></div>
@@ -352,9 +352,9 @@ rGrad.addColorStop(1, 'rgba(251, 146, 60, 0)');
 new Chart(rCtx, {
     type: 'line',
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        labels: {{ chart_labels|safe }},
         datasets: [{
-            data: [1200, 1900, 3000, 5000, 4200, 6000, 8500],
+            data: {{ chart_revenue_data|safe }},
             borderColor: '#FB923C',
             backgroundColor: rGrad,
             borderWidth: 2,
@@ -392,7 +392,7 @@ new Chart(rCtx, {
 
 // ===== COURSE DONUT =====
 const dCtx = document.getElementById('courseDonut').getContext('2d');
-const published = Math.max(0, {{ total_courses }} - {{ locked_courses }});
+const published = {{ published_courses }};
 new Chart(dCtx, {
     type: 'doughnut',
     data: {

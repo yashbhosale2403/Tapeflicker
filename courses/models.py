@@ -119,6 +119,10 @@ class Course(models.Model):
         val = round(total_mins / 60.0, 1)
         return val if val > 0 else 0.0
 
+    @property
+    def total_resources(self):
+        return LessonResource.objects.filter(lesson__module__course=self).count()
+
 
 class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')

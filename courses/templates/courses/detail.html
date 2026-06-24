@@ -43,22 +43,7 @@
                             <div class="font-bold text-white">{{ course.instructor }}</div>
                         </div>
                     </div>
-                    
-                    <div class="hidden sm:block w-px h-10 bg-white/10"></div>
-                    
-                    <div>
-                        <div class="text-xs text-muted uppercase tracking-wide font-semibold mb-0.5">Rating</div>
-                        <div class="font-bold text-white flex items-center gap-1">
-                            4.9 <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
-                    </div>
 
-                    <div class="hidden sm:block w-px h-10 bg-white/10"></div>
-                    
-                    <div>
-                        <div class="text-xs text-muted uppercase tracking-wide font-semibold mb-0.5">Students</div>
-                        <div class="font-bold text-white">12,450+</div>
-                    </div>
                 </div>
             </div>
 
@@ -84,25 +69,6 @@
                 <h2 class="text-3xl font-bold mb-6">About this course</h2>
                 <p class="whitespace-pre-line leading-relaxed">{{ course.description }}</p>
                 
-                <h3 class="text-2xl font-bold mt-12 mb-6">What you'll learn</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-accent-neon flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span class="text-gray-300 text-base">Industry-standard best practices</span>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-accent-neon flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span class="text-gray-300 text-base">Real-world project building</span>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-accent-neon flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span class="text-gray-300 text-base">Advanced deployment strategies</span>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-accent-neon flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span class="text-gray-300 text-base">Interview preparation tips</span>
-                    </div>
-                </div>
 
                 <h3 class="text-2xl font-bold mt-12 mb-6">Curriculum</h3>
                 <div class="space-y-4">
@@ -185,14 +151,28 @@
                             <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-accent-neon">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </div>
-                            <span>30+ hours on-demand video</span>
+                            <span>{{ course.total_duration_hours }} hours on-demand video</span>
                         </div>
                         
                         <div class="flex items-center gap-4 text-sm text-gray-300">
                             <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-accent-neon">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
-                            <span>70 downloadable resources</span>
+                            <span>{{ course.total_resources }} downloadable resources</span>
+                        </div>
+
+                        <div class="flex items-center gap-4 text-sm text-gray-300">
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-accent-neon">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                            </div>
+                            <span>{{ modules.count }} curriculum modules</span>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-300">
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-accent-neon">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <span>{{ course.total_lessons }} interactive lessons</span>
                         </div>
                         
                         <div class="flex items-center gap-4 text-sm text-gray-300">

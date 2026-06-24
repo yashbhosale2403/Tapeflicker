@@ -18,6 +18,8 @@ from .models import AuditLog, AffiliateRecord, SupportTicket
 
 @staff_member_required
 def dashboard(request):
+    import datetime
+    
     total_courses = Course.objects.count()
     total_students = User.objects.filter(is_staff=False, is_superuser=False).count()
     total_enrollments = Enrollment.objects.count()
@@ -26,6 +28,7 @@ def dashboard(request):
     upcoming_events = Event.objects.filter(is_active=True).order_by('date')[:4]
     featured_courses = Course.objects.filter(is_featured=True).count()
     locked_courses = Course.objects.filter(is_locked=True).count()
+    published_courses = max(0, total_courses - locked_courses)
 
     # Calculate actual revenue from active enrollments
     enrollments = Enrollment.objects.all().select_related('course')
@@ -34,6 +37,66 @@ def dashboard(request):
     # Fetch recent logs and tickets
     recent_logs = AuditLog.objects.all().select_related('actor').order_by('-timestamp')[:5]
     recent_tickets = SupportTicket.objects.all().select_related('user').order_by('-created_at')[:5]
+
+    # Calculate monthly statistics for the last 7 months
+    def get_month_range(year, month):
+        start = datetime.datetime(year, month, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
+        if month == 12:
+            end = datetime.datetime(year + 1, 1, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
+        else:
+            end = datetime.datetime(year, month + 1, 1, 0, 0, 0, tzinfo=datetime.timezone.utc)
+        return start, end
+
+    now = timezone.now()
+    current_year = now.year
+    current_month = now.month
+
+    months_list = []
+    for i in range(7):
+        m = current_month - i
+        y = current_year
+        while m <= 0:
+            m += 12
+            y -= 1
+        months_list.append((y, m))
+
+    months_list.reverse()
+
+    chart_labels = []
+    chart_revenue_data = []
+    chart_students_data = []
+
+    for y, m in months_list:
+        start, end = get_month_range(y, m)
+        active_enrolls = Enrollment.objects.filter(is_active=True, enrolled_at__gte=start, enrolled_at__lt=end)
+        monthly_rev = sum(e.course.price for e in active_enrolls)
+        monthly_studs = User.objects.filter(is_staff=False, is_superuser=False, date_joined__gte=start, date_joined__lt=end).count()
+        
+        chart_labels.append(start.strftime("%b"))
+        chart_revenue_data.append(float(monthly_rev))
+        chart_students_data.append(monthly_studs)
+
+    # Calculate growth rates (this month vs last month)
+    this_month_rev = chart_revenue_data[-1]
+    last_month_rev = chart_revenue_data[-2]
+    if last_month_rev == 0:
+        rev_growth = 100.0 if this_month_rev > 0 else 0.0
+    else:
+        rev_growth = ((this_month_rev - last_month_rev) / last_month_rev) * 100.0
+
+    this_month_studs = chart_students_data[-1]
+    last_month_studs = chart_students_data[-2]
+    if last_month_studs == 0:
+        studs_growth = 100.0 if this_month_studs > 0 else 0.0
+    else:
+        studs_growth = ((this_month_studs - last_month_studs) / last_month_studs) * 100.0
+
+    # Format growth indicators
+    rev_growth_str = f"↑ {rev_growth:.0f}%" if rev_growth >= 0 else f"↓ {abs(rev_growth):.0f}%"
+    rev_growth_class = "text-mainemerald bg-mainemerald/10 border border-mainemerald/15" if rev_growth >= 0 else "text-red-400 bg-red-500/10 border border-red-500/20"
+    
+    studs_growth_str = f"↑ {studs_growth:.0f}%" if studs_growth >= 0 else f"↓ {abs(studs_growth):.0f}%"
+    studs_growth_class = "text-mainemerald bg-mainemerald/10 border border-mainemerald/15" if studs_growth >= 0 else "text-red-400 bg-red-500/10 border border-red-500/20"
 
     context = {
         'total_courses': total_courses,
@@ -45,8 +108,15 @@ def dashboard(request):
         'upcoming_events': upcoming_events,
         'featured_courses': featured_courses,
         'locked_courses': locked_courses,
+        'published_courses': published_courses,
         'recent_logs': recent_logs,
         'recent_tickets': recent_tickets,
+        'chart_labels': chart_labels,
+        'chart_revenue_data': chart_revenue_data,
+        'rev_growth_str': rev_growth_str,
+        'rev_growth_class': rev_growth_class,
+        'studs_growth_str': studs_growth_str,
+        'studs_growth_class': studs_growth_class,
     }
     return render(request, 'manager/dashboard.html', context)
 
