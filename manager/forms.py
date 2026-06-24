@@ -5,7 +5,7 @@ from core.models import Event
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'slug', 'instructor', 'price', 'discount_price', 'difficulty', 'description', 'learning_outcomes', 'prerequisites', 'thumbnail', 'banner', 'is_featured', 'is_locked']
+        fields = ['title', 'slug', 'instructor', 'price', 'discount_price', 'difficulty', 'description', 'learning_outcomes', 'prerequisites', 'thumbnail', 'banner', 'is_featured', 'is_locked', 'is_free']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition', 'placeholder': 'Course Title'}),
             'slug': forms.TextInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition', 'placeholder': 'course-slug'}),
@@ -18,6 +18,7 @@ class CourseForm(forms.ModelForm):
             'prerequisites': forms.Textarea(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition', 'rows': 2}),
             'is_featured': forms.CheckboxInput(attrs={'class': 'w-4 h-4 text-mainaccent bg-mainpanel border-mainborder rounded focus:ring-mainaccent'}),
             'is_locked': forms.CheckboxInput(attrs={'class': 'w-4 h-4 text-mainaccent bg-mainpanel border-mainborder rounded focus:ring-mainaccent'}),
+            'is_free': forms.CheckboxInput(attrs={'class': 'w-4 h-4 text-mainaccent bg-mainpanel border-mainborder rounded focus:ring-mainaccent'}),
             'thumbnail': forms.FileInput(attrs={'class': 'w-full text-sm text-mainmuted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-mainaccent file:text-black hover:file:bg-cyan-400'}),
             'banner': forms.FileInput(attrs={'class': 'w-full text-sm text-mainmuted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-mainaccent file:text-black hover:file:bg-cyan-400'})
         }
