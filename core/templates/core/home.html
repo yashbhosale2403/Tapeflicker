@@ -283,9 +283,6 @@
                             <!-- Details -->
                             <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
                                 <div>
-                                    <div class="flex items-center gap-2 mb-2 flex-wrap">
-                                        <span class="text-[9px] font-bold px-2.5 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-neon">{{ course.category.name }}</span>
-                                    </div>
                                     <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
                                         <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
                                     </h3>
@@ -414,9 +411,6 @@
                         <!-- Details -->
                         <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
                             <div>
-                                <div class="flex items-center gap-2 mb-2 flex-wrap">
-                                    <span class="text-[9px] font-bold px-2.5 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-neon">{{ course.category.name }}</span>
-                                </div>
                                 <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
                                     <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
                                 </h3>
