@@ -8,4 +8,5 @@ urlpatterns = [
     path('settings/', views.settings_view, name='settings'),
     path('certificates/', views.empty_state_view, {'title': 'Certificates'}, name='certificates'),
     path('analytics/', views.empty_state_view, {'title': 'Analytics'}, name='analytics'),
+    path('unenroll/<int:enrollment_id>/', views.delete_enrollment, name='delete_enrollment'),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from courses.models import Enrollment, UserLessonProgress
 
@@ -47,3 +47,11 @@ def settings_view(request):
 @login_required(login_url='accounts:login')
 def empty_state_view(request, title):
     return render(request, 'dashboard/empty_state.html', {'title': title})
+
+@login_required(login_url='accounts:login')
+def delete_enrollment(request, enrollment_id):
+    if request.method == 'POST':
+        enrollment = get_object_or_404(Enrollment, id=enrollment_id, user=request.user)
+        UserLessonProgress.objects.filter(user=request.user, lesson__module__course=enrollment.course).delete()
+        enrollment.delete()
+    return redirect('dashboard:home')
