@@ -9,13 +9,11 @@ def initialize_firebase():
         try:
             # 1. Primary path: Load certificate JSON from environment variable
             firebase_key_json = os.environ.get('FIREBASE_SERVICE_ACCOUNT_JSON')
-            bucket_name = os.environ.get('FIREBASE_STORAGE_BUCKET', 'tapeflicker-10701.firebasestorage.app')
-            options = {'storageBucket': bucket_name}
             if firebase_key_json:
                 try:
                     cred_info = json.loads(firebase_key_json)
                     cred = credentials.Certificate(cred_info)
-                    firebase_admin.initialize_app(cred, options)
+                    firebase_admin.initialize_app(cred)
                     print("Firebase Admin SDK initialized dynamically from environment credentials.")
                     return
                 except Exception as json_err:
@@ -27,7 +25,7 @@ def initialize_firebase():
             
             if os.path.exists(key_path):
                 cred = credentials.Certificate(key_path)
-                firebase_admin.initialize_app(cred, options)
+                firebase_admin.initialize_app(cred)
                 print("Firebase Admin SDK initialized from root key file.")
             else:
                 print("WARNING: Firebase credentials environment variable or local key file not found. Firebase features will fail.")
