@@ -16,7 +16,7 @@ class ContentSecurityPolicyMiddleware:
             "default-src 'self'",
             "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://www.youtube.com https://www.gstatic.com https://apis.google.com https://www.google-analytics.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
-            "img-src 'self' data: https://*.googleusercontent.com https://images.unsplash.com https://www.gstatic.com",
+            "img-src 'self' data: https://*.googleusercontent.com https://images.unsplash.com https://www.gstatic.com https://res.cloudinary.com",
             "font-src 'self' data: https://fonts.gstatic.com",
             "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
             "connect-src 'self' ws: wss: https://identitytoolkit.googleapis.com https://securetoken.googleapis.com",
