@@ -301,7 +301,10 @@
                                             4.9
                                         </div>
                                         <div class="text-right">
-                                            {% if course.discount_price %}
+                                            {% if course.is_free %}
+                                            <span class="text-base font-sora font-bold text-accent-neon">FREE</span>
+                                            <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
+                                            {% elif course.discount_price %}
                                             <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
                                             <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
                                             {% else %}
@@ -429,7 +432,10 @@
                                         4.9
                                     </div>
                                     <div class="text-right">
-                                        {% if course.discount_price %}
+                                        {% if course.is_free %}
+                                        <span class="text-base font-sora font-bold text-accent-neon">FREE</span>
+                                        <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
+                                        {% elif course.discount_price %}
                                         <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
                                         <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
                                         {% else %}
