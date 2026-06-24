@@ -5,11 +5,10 @@ from core.models import Event
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'slug', 'category', 'instructor', 'price', 'discount_price', 'difficulty', 'description', 'learning_outcomes', 'prerequisites', 'thumbnail', 'banner', 'is_featured', 'is_locked']
+        fields = ['title', 'slug', 'instructor', 'price', 'discount_price', 'difficulty', 'description', 'learning_outcomes', 'prerequisites', 'thumbnail', 'banner', 'is_featured', 'is_locked']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition', 'placeholder': 'Course Title'}),
             'slug': forms.TextInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition', 'placeholder': 'course-slug'}),
-            'category': forms.Select(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition'}),
             'instructor': forms.TextInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition'}),
             'price': forms.NumberInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition'}),
             'discount_price': forms.NumberInput(attrs={'class': 'w-full px-4 py-2 bg-mainpanel border border-mainborder rounded-lg text-white focus:outline-none focus:border-mainaccent transition'}),

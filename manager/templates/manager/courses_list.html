@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </td>
-                <td class="py-4 px-6 text-sm text-maintext">{{ course.category.name }}</td>
+                <td class="py-4 px-6 text-sm text-maintext">{{ course.category.name|default:"Uncategorized" }}</td>
                 <td class="py-4 px-6 text-sm text-maintext font-medium">${{ course.price }}</td>
                 <td class="py-4 px-6">
                     {% if not course.is_locked %}

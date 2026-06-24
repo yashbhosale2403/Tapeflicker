@@ -251,7 +251,9 @@
                 
                 <div class="flex-grow w-full">
                     <div class="flex items-center gap-2 mb-2">
+                        {% if continue_learning.course.category %}
                         <span class="text-xs font-bold px-2 py-0.5 bg-accent-neon/10 text-accent-neon rounded border border-accent-neon/20">{{ continue_learning.course.category.name }}</span>
+                        {% endif %}
                     </div>
                     <h3 class="text-2xl font-bold font-sora text-white mb-2">{{ continue_learning.course.title }}</h3>
                     <p class="text-sm text-muted mb-6">{% if continue_learning.last_accessed_lesson %}Last module: {{ continue_learning.last_accessed_lesson.title }}{% else %}Ready to begin{% endif %}</p>

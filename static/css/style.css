@@ -25,18 +25,18 @@
 }
 
 .dashboard-page {
-    --bg-primary: #020817;
-    --bg-secondary: #0B1220;
-    --card-bg: rgba(11, 18, 32, 0.8);
-    --card-border: rgba(255, 255, 255, 0.06);
-    --accent-neon: #00D4FF;
-    --accent-purple: #8B5CF6;
-    --accent-cyan: #00D4FF;
-    --accent-blue: #38BDF8;
-    --accent-green: #22C55E;
-    --text-main: #F8FAFC;
-    --text-muted: #94A3B8;
-    --text-dim: #64748B;
+    --bg-primary: #05011A;
+    --bg-secondary: #0E0924;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(245, 201, 51, 0.15);
+    --accent-neon: #F5C933;
+    --accent-purple: #E8B923;
+    --accent-cyan: #F5C933;
+    --accent-blue: #FFF8E1;
+    --accent-green: #F5C933;
+    --text-main: #FFF8E1;
+    --text-muted: rgba(255, 248, 225, 0.68);
+    --text-dim: rgba(255, 248, 225, 0.52);
     background-color: var(--bg-primary);
     color: var(--text-main);
 }
@@ -52,25 +52,27 @@
 }
 
 .dashboard-page .btn-primary {
-    color: #FFFFFF !important;
+    color: #141414 !important;
     background: var(--accent-neon) !important;
     border-color: transparent !important;
 }
 
 .dashboard-page .btn-primary:hover {
-    filter: brightness(0.92) !important;
+    background: #E8B923 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 24px 48px rgba(245, 201, 51, 0.2) !important;
 }
 
 .dashboard-page .btn-outline {
-    color: #F8FAFC !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    background: transparent !important;
+    color: #FFF8E1 !important;
+    border-color: rgba(245, 201, 51, 0.42) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
 }
 
 .dashboard-page .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    transform: none !important;
+    background: rgba(245, 201, 51, 0.08) !important;
+    border-color: #F5C933 !important;
+    transform: translateY(-2px) !important;
 }
 
 html[data-theme="light"] body {

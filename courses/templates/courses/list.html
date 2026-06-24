@@ -82,7 +82,11 @@
                     
                     <div class="p-6 flex-grow flex flex-col">
                         <div class="flex justify-between items-center mb-4">
+                            {% if course.category %}
                             <span class="text-[9px] font-mono font-bold px-2.5 py-1 bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20 rounded uppercase tracking-wider">{{ course.category.name }}</span>
+                            {% else %}
+                            <span></span>
+                            {% endif %}
                             {% if course.is_free %}
                             <span class="text-[9px] font-mono font-bold px-2.5 py-1 bg-accent-green/10 text-accent-green border border-accent-green/20 rounded uppercase tracking-wider">FREE PATH</span>
                             {% endif %}

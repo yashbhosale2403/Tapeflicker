@@ -64,7 +64,7 @@
                 <td class="py-4 px-6 text-sm text-white student-name">@{{ enrollment.user.username }}</td>
                 <td class="py-4 px-6">
                     <div class="text-sm font-medium text-white course-name">{{ enrollment.course.title }}</div>
-                    <div class="text-[10px] text-mainmuted">{{ enrollment.course.category.name }}</div>
+                    <div class="text-[10px] text-mainmuted">{{ enrollment.course.category.name|default:"Uncategorized" }}</div>
                 </td>
                 <td class="py-4 px-6 text-sm text-mainaccent font-bold">${{ enrollment.course.price }}</td>
                 <td class="py-4 px-6 text-sm text-maintext">{{ enrollment.enrolled_at|date:"M d, Y" }}</td>

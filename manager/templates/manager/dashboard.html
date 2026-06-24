@@ -130,7 +130,7 @@
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-xs font-semibold text-white truncate">{{ course.title }}</p>
-          <p class="text-[10px] text-mainmuted">{{ course.category.name }} • ${{ course.price }}</p>
+          <p class="text-[10px] text-mainmuted">{% if course.category %}{{ course.category.name }} • {% endif %}${{ course.price }}</p>
         </div>
         {% if course.is_featured %}
         <span class="text-[9px] font-bold text-mainaccent bg-mainaccent/10 px-1.5 py-0.5 rounded-md border border-mainaccent/20 flex-shrink-0">FEATURED</span>

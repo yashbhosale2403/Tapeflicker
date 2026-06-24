@@ -71,7 +71,7 @@
                         </td>
                         <td class="py-4 px-6">
                             <div class="font-medium text-white text-sm course-cell">{{ enrollment.course.title }}</div>
-                            <div class="text-xs text-mainmuted">{{ enrollment.course.category.name }}</div>
+                            <div class="text-xs text-mainmuted">{{ enrollment.course.category.name|default:"Uncategorized" }}</div>
                         </td>
                         <td class="py-4 px-6">
                             <div class="flex items-center gap-3">

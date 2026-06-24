@@ -65,7 +65,7 @@ class Course(models.Model):
 
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='courses')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='courses')
     instructor = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     discount_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)

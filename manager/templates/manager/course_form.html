@@ -36,17 +36,10 @@
                     <p class="text-xs text-mainmuted mt-1">Example: my-course-name (No spaces or special characters)</p>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-mainmuted mb-2">Category</label>
-                        {{ form.category }}
-                        {% if form.category.errors %}<p class="text-red-500 text-xs mt-1">{{ form.category.errors.0 }}</p>{% endif %}
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-mainmuted mb-2">Difficulty</label>
-                        {{ form.difficulty }}
-                        {% if form.difficulty.errors %}<p class="text-red-500 text-xs mt-1">{{ form.difficulty.errors.0 }}</p>{% endif %}
-                    </div>
+                <div>
+                    <label class="block text-sm font-medium text-mainmuted mb-2">Difficulty</label>
+                    {{ form.difficulty }}
+                    {% if form.difficulty.errors %}<p class="text-red-500 text-xs mt-1">{{ form.difficulty.errors.0 }}</p>{% endif %}
                 </div>
                 
                 <div>
