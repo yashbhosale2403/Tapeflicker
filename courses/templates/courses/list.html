@@ -24,16 +24,7 @@
 
         <!-- Search and Filters Panel -->
         <div class="max-w-4xl mx-auto mb-16 reveal" style="transition-delay: 100ms;">
-            <!-- Premium Search Bar -->
-            <div class="relative flex items-center bg-[#0B1220]/80 rounded-[2rem] p-1.5 border border-white/10 group focus-within:border-accent-cyan/50 focus-within:shadow-[0_0_25px_rgba(0,217,255,0.12)] transition-all duration-300 backdrop-blur-md mb-8">
-                <span class="pl-5 text-muted group-focus-within:text-accent-cyan transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </span>
-                <input type="text" id="course-search" placeholder="Type here to search courses, modules, or instructor..." class="flex-grow bg-transparent px-4 py-3 text-white placeholder-slate-500 focus:outline-none text-sm font-medium">
-                <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-muted font-mono text-[10px] mr-3 select-none">
-                    Press <kbd class="font-sans font-bold text-white text-xs">/</kbd> to focus
-                </span>
-            </div>
+
 
             <!-- Redesigned Capsule Filters -->
             <div class="flex flex-wrap gap-3 justify-center">
@@ -171,81 +162,9 @@
             {% endfor %}
         </div>
 
-        <!-- Real-time Filter Search Empty State -->
-        <div id="search-empty-state" class="hidden py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full">
-            <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
-                <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold font-sora text-white mb-2">No matches found</h3>
-            <p class="text-muted text-sm max-w-xs mx-auto mb-6">We couldn't find any courses matching your search query. Try searching for a different keyword.</p>
-            <button onclick="clearSearch()" class="btn-outline px-6 py-2 text-[10px] tracking-wider uppercase font-bold rounded-[2rem]">Clear Search</button>
-        </div>
+
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('course-search');
-        const cards = document.querySelectorAll('.course-card-wrapper');
-        const emptyState = document.getElementById('search-empty-state');
-        const grid = document.getElementById('courses-grid');
 
-        if (searchInput) {
-            // Keyboard shortcut focus
-            window.addEventListener('keydown', (e) => {
-                if (e.key === '/' && document.activeElement !== searchInput) {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
-            });
-
-            // Instant client-side search filtering
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.toLowerCase().trim();
-                let visibleCount = 0;
-
-                cards.forEach(card => {
-                    const title = card.getAttribute('data-title') || '';
-                    const desc = card.getAttribute('data-desc') || '';
-                    const category = card.getAttribute('data-category') || '';
-                    const instructor = card.getAttribute('data-instructor') || '';
-                    const difficulty = card.getAttribute('data-difficulty') || '';
-
-                    if (
-                        title.includes(query) || 
-                        desc.includes(query) || 
-                        category.includes(query) || 
-                        instructor.includes(query) || 
-                        difficulty.includes(query)
-                    ) {
-                        card.style.display = 'block';
-                        card.classList.remove('opacity-0', 'pointer-events-none');
-                        card.classList.add('opacity-100');
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                        card.classList.remove('opacity-100');
-                        card.classList.add('opacity-0', 'pointer-events-none');
-                    }
-                });
-
-                if (visibleCount === 0 && cards.length > 0) {
-                    grid.classList.add('hidden');
-                    emptyState.classList.remove('hidden');
-                } else {
-                    grid.classList.remove('hidden');
-                    emptyState.classList.add('hidden');
-                }
-            });
-        }
-
-        window.clearSearch = function() {
-            if (searchInput) {
-                searchInput.value = '';
-                searchInput.dispatchEvent(new Event('input'));
-                searchInput.focus();
-            }
-        };
-    });
-</script>
 {% endblock %}

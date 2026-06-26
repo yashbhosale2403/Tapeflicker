@@ -574,10 +574,10 @@ h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; letter-spa
 }
 
 /* Search input values override */
-[data-theme="light"] #course-search {
+[data-theme="light"] #event-search {
     color: var(--text-main) !important;
 }
-[data-theme="light"] #course-search::placeholder {
+[data-theme="light"] #event-search::placeholder {
     color: var(--text-dim) !important;
 }
 

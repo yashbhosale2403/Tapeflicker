@@ -30,8 +30,19 @@
 </section>
 
 <!-- Filter/Categories Section -->
-<section class="py-6 border-y border-white/5 bg-secondary/30 backdrop-blur-md relative z-20">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section class="py-12 border-y border-white/5 bg-secondary/30 backdrop-blur-md relative z-20">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <!-- Premium Search Bar -->
+        <div class="relative flex items-center bg-[#0B1220]/80 rounded-[2rem] p-1.5 border border-white/10 group focus-within:border-accent-cyan/50 focus-within:shadow-[0_0_25px_rgba(0,217,255,0.12)] transition-all duration-300 backdrop-blur-md mb-8">
+            <span class="pl-5 text-muted group-focus-within:text-accent-cyan transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </span>
+            <input type="text" id="event-search" placeholder="Type here to search events, bootcamps, or webinars..." class="flex-grow bg-transparent px-4 py-3 text-white placeholder-slate-500 focus:outline-none text-sm font-medium">
+            <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-muted font-mono text-[10px] mr-3 select-none">
+                Press <kbd class="font-sans font-bold text-white text-xs">/</kbd> to focus
+            </span>
+        </div>
+
         <div class="flex flex-wrap justify-center gap-3">
             <a href="?type=all" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if not request.GET.type or request.GET.type == 'all' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">All Events</a>
             <a href="?type=Webinar" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if request.GET.type == 'Webinar' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">Webinars</a>
@@ -45,9 +56,9 @@
 <!-- Events Grid -->
 <section class="py-24 relative z-20 bg-primary min-h-[50vh]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for event in events %}
-            <div class="gradient-border hover-lift reveal group" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
+            <div class="gradient-border hover-lift reveal group event-card-wrapper" data-title="{{ event.title|lower }}" data-desc="{{ event.description|lower }}" data-type="{{ event.event_type|lower }}" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
                 <div class="h-full bg-secondary rounded-[1.2rem] overflow-hidden flex flex-col relative z-10">
                     <div class="relative overflow-hidden">
                         {% if event.banner %}
@@ -123,6 +134,16 @@
             </div>
             {% endfor %}
         </div>
+
+        <!-- Real-time Filter Search Empty State -->
+        <div id="search-empty-state" class="hidden py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full relative z-20">
+            <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
+                <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold font-sora text-white mb-2">No matches found</h3>
+            <p class="text-muted text-sm max-w-xs mx-auto mb-6">We couldn't find any events matching your search query. Try searching for a different keyword.</p>
+            <button onclick="clearSearch()" class="btn-outline px-6 py-2 text-[10px] tracking-wider uppercase font-bold rounded-[2rem]">Clear Search</button>
+        </div>
     </div>
 </section>
 
@@ -165,6 +186,63 @@
             updateTimer();
             setInterval(updateTimer, 1000);
         });
+
+        // Client-side events search
+        const searchInput = document.getElementById('event-search');
+        const cards = document.querySelectorAll('.event-card-wrapper');
+        const emptyState = document.getElementById('search-empty-state');
+        const grid = document.getElementById('events-grid');
+
+        if (searchInput) {
+            window.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-title') || '';
+                    const desc = card.getAttribute('data-desc') || '';
+                    const type = card.getAttribute('data-type') || '';
+
+                    if (
+                        title.includes(query) || 
+                        desc.includes(query) || 
+                        type.includes(query)
+                    ) {
+                        card.style.display = 'block';
+                        card.classList.remove('opacity-0', 'pointer-events-none');
+                        card.classList.add('opacity-100');
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('opacity-100');
+                        card.classList.add('opacity-0', 'pointer-events-none');
+                    }
+                });
+
+                if (visibleCount === 0 && cards.length > 0) {
+                    grid.classList.add('hidden');
+                    emptyState.classList.remove('hidden');
+                } else {
+                    grid.classList.remove('hidden');
+                    emptyState.classList.add('hidden');
+                }
+            });
+        }
+
+        window.clearSearch = function() {
+            if (searchInput) {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+                searchInput.focus();
+            }
+        };
     });
 </script>
 {% endblock %}
