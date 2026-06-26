@@ -1681,20 +1681,63 @@ body.tf-home-page footer {
     }
 }
 
-/* Ensure text in the always-dark auth branding panel remains white in light mode */
-[data-theme="light"] .auth-branding-panel,
-[data-theme="light"] .auth-branding-panel * {
-    color: inherit;
+/* Ensure the always-dark auth branding panel keeps its dark theme variables and styles in light mode */
+.auth-branding-panel {
+    --bg-primary: #05011A !important;
+    --bg-secondary: #0E0924 !important;
+    --card-bg: rgba(255, 255, 255, 0.03) !important;
+    --card-border: rgba(255, 255, 255, 0.1) !important;
+    --accent-neon: #F5C933 !important;
+    --accent-purple: #E8B923 !important;
+    --accent-cyan: #F5C933 !important;
+    --accent-blue: #FFF8E1 !important;
+    --accent-green: #F5C933 !important;
+    --text-main: #FFF8E1 !important;
+    --text-muted: rgba(255, 248, 225, 0.68) !important;
+    --text-dim: rgba(255, 248, 225, 0.52) !important;
 }
-[data-theme="light"] .auth-branding-panel .text-white,
-[data-theme="light"] .auth-branding-panel [class*="text-white"],
-[data-theme="light"] .auth-branding-panel h1,
-[data-theme="light"] .auth-branding-panel p,
-[data-theme="light"] .auth-branding-panel span {
+
+/* Specific text color overrides to keep them readable in light mode (since global rules force them to #0F172A) */
+.auth-branding-panel h1,
+.auth-branding-panel p,
+.auth-branding-panel a,
+.auth-branding-panel div,
+.auth-branding-panel span:not(.text-accent-neon):not(.text-accent-purple):not(.text-accent-cyan) {
+    color: var(--text-main);
+}
+
+.auth-branding-panel .text-muted {
+    color: var(--text-muted) !important;
+}
+
+.auth-branding-panel .text-accent-neon {
+    color: #F5C933 !important;
+}
+
+.auth-branding-panel .text-accent-purple {
+    color: #E8B923 !important;
+}
+
+.auth-branding-panel .text-white,
+.auth-branding-panel [class*="text-white"] {
     color: #FFFFFF !important;
 }
-[data-theme="light"] .auth-branding-panel .text-muted {
-    color: #94A3B8 !important;
+
+/* Force gradients inside auth-branding-panel to use correct dark theme colors */
+.auth-branding-panel .text-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: #ffffff !important;
+}
+
+.auth-branding-panel .text-gradient-accent {
+    background: linear-gradient(135deg, #f5c933 0%, #e8b923 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: #ffffff !important;
 }
 
 /* ============= MEDIUM HORIZONTAL CARD LAYOUT ============= */
@@ -1752,4 +1795,306 @@ body.tf-home-page footer {
     color: rgba(255, 248, 225, 0.42);
 }
 
+/* ============= HOMEPAGE-ONLY LIGHT MODE OVERRIDES ============= */
+/* These must be at the bottom to beat the homepage brand refresh !important rules */
+
+/* --- Core page background & text --- */
+html[data-theme="light"] body.tf-home-page {
+    background: var(--bg-primary) !important;
+    color: var(--text-main) !important;
+}
+
+/* --- Aurora / fixed background --- */
+[data-theme="light"] .tf-home-brand::before {
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.03) 0 1px, transparent 1px) !important;
+    opacity: 0.2 !important;
+}
+
+/* --- Hero section background --- */
+[data-theme="light"] .tf-hero {
+    background:
+        linear-gradient(180deg, rgba(248, 250, 252, 0.6), rgba(241, 245, 249, 0.95)),
+        radial-gradient(circle at 78% 42%, rgba(14, 165, 233, 0.06), transparent 34%) !important;
+}
+
+/* --- Ambient glow blobs --- */
+[data-theme="light"] .tf-ambient-gold-1 {
+    background: rgba(14, 165, 233, 0.08) !important;
+}
+[data-theme="light"] .tf-ambient-gold-2 {
+    background: rgba(139, 92, 246, 0.04) !important;
+}
+
+/* --- Noise layer --- */
+[data-theme="light"] .tf-noise-layer {
+    background-image:
+        linear-gradient(120deg, rgba(15, 23, 42, 0.02), transparent 38%),
+        radial-gradient(circle at 75% 38%, rgba(14, 165, 233, 0.04), transparent 24%) !important;
+    opacity: 0.15 !important;
+}
+
+/* --- Eyebrow pill --- */
+[data-theme="light"] .tf-eyebrow {
+    background: rgba(3, 105, 161, 0.06) !important;
+    border-color: rgba(3, 105, 161, 0.2) !important;
+    color: #0369A1 !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+}
+[data-theme="light"] .tf-eyebrow span {
+    box-shadow: 0 0 0 5px rgba(3, 105, 161, 0.08) !important;
+    background-color: #0369A1 !important;
+}
+
+/* --- Hero title text --- */
+[data-theme="light"] .tf-hero-title {
+    color: #0F172A !important;
+}
+
+/* --- Highlight underline bar --- */
+[data-theme="light"] .tf-highlight > span {
+    background: #0369A1 !important;
+    opacity: 0.5 !important;
+}
+
+/* --- Text gradients: override the homepage brand gold gradient --- */
+[data-theme="light"] .tf-home-brand .text-gradient,
+[data-theme="light"] .tf-home-brand .text-gradient-accent {
+    background: linear-gradient(135deg, #0F172A 0%, #0369A1 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+}
+
+/* --- Button outline for homepage --- */
+[data-theme="light"] .tf-home-brand .btn-outline,
+html[data-theme="light"] body.tf-home-page .btn-outline {
+    color: var(--text-main) !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+[data-theme="light"] .tf-home-brand .btn-outline:hover,
+html[data-theme="light"] body.tf-home-page .btn-outline:hover {
+    background: rgba(15, 23, 42, 0.06) !important;
+    border-color: var(--accent-cyan) !important;
+    color: var(--accent-cyan) !important;
+}
+
+/* --- Button primary light styling --- */
+[data-theme="light"] .tf-home-brand .btn-primary {
+    background: #0369A1 !important;
+    color: #FFFFFF !important;
+    border-color: rgba(3, 105, 161, 0.3) !important;
+    box-shadow: 0 12px 28px rgba(3, 105, 161, 0.15) !important;
+}
+[data-theme="light"] .tf-home-brand .btn-primary:hover {
+    background: #0284C7 !important;
+    box-shadow: 0 18px 38px rgba(3, 105, 161, 0.2) !important;
+}
+
+/* --- Trust row pills --- */
+[data-theme="light"] .tf-home-brand .tf-trust-row span {
+    border-color: rgba(15, 23, 42, 0.1) !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    color: var(--text-muted) !important;
+}
+
+/* --- Brand showcase / glitch text --- */
+[data-theme="light"] .tf-brand-name-large {
+    color: #0F172A !important;
+}
+[data-theme="light"] .tf-brand-tape {
+    color: #0F172A !important;
+}
+[data-theme="light"] .tf-brand-flicker {
+    color: #0369A1 !important;
+}
+[data-theme="light"] .tf-brand-hero-logo {
+    filter: drop-shadow(0 0 20px rgba(3, 105, 161, 0.15)) !important;
+}
+[data-theme="light"] .tf-tagline-text {
+    color: var(--text-muted) !important;
+}
+[data-theme="light"] .tf-tagline-line {
+    background: rgba(15, 23, 42, 0.15) !important;
+}
+[data-theme="light"] .tf-brand-feature {
+    color: var(--text-muted) !important;
+}
+[data-theme="light"] .tf-brand-feature-sep {
+    color: rgba(15, 23, 42, 0.2) !important;
+}
+
+/* --- Trending ticker section --- */
+[data-theme="light"] .tf-trending-section {
+    border-color: rgba(15, 23, 42, 0.08) !important;
+}
+[data-theme="light"] .ticker-column {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+}
+[data-theme="light"] .ticker-item {
+    color: var(--text-main) !important;
+}
+[data-theme="light"] .ticker-item.active[class*="text-accent"] {
+    color: var(--accent-cyan) !important;
+}
+
+/* --- Course/event medium cards on homepage --- */
+[data-theme="light"] .tf-home-brand .tf-medium-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* --- All homepage cards, bento, stats, glass containers --- */
+[data-theme="light"] .tf-terminal-card,
+[data-theme="light"] .tf-brand-story > div,
+[data-theme="light"] .tf-stat-card,
+[data-theme="light"] .tf-home-brand .bento-card,
+[data-theme="light"] .tf-home-brand .main-card,
+[data-theme="light"] .tf-home-brand .glass,
+[data-theme="light"] .tf-home-brand .gradient-border > div {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* --- Card hover in light mode --- */
+[data-theme="light"] .tf-home-brand .hover-lift:hover,
+[data-theme="light"] .tf-home-brand .bento-card:hover,
+[data-theme="light"] .tf-home-brand .main-card:hover,
+[data-theme="light"] .tf-stat-card:hover {
+    border-color: rgba(3, 105, 161, 0.2) !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* --- Bento card inner glow --- */
+[data-theme="light"] .tf-home-brand .bento-card::before {
+    background: radial-gradient(ellipse at top right, rgba(14, 165, 233, 0.06), transparent 58%) !important;
+}
+
+/* --- Gradient border on homepage --- */
+[data-theme="light"] .tf-home-brand .gradient-border {
+    background: transparent !important;
+}
+[data-theme="light"] .tf-home-brand .gradient-border::before {
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.15), rgba(15, 23, 42, 0.03)) !important;
+}
+[data-theme="light"] .tf-home-brand .gradient-border:hover::before {
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.35), rgba(15, 23, 42, 0.08)) !important;
+}
+
+/* --- Tw gradient overrides --- */
+[data-theme="light"] .tf-home-brand .from-accent-purple\/10,
+[data-theme="light"] .tf-home-brand .from-accent-neon\/10,
+[data-theme="light"] .tf-home-brand .from-primary,
+[data-theme="light"] .tf-home-brand .to-secondary {
+    --tw-gradient-from: rgba(14, 165, 233, 0.06) var(--tw-gradient-from-position) !important;
+    --tw-gradient-to: rgba(248, 250, 252, 0) var(--tw-gradient-to-position) !important;
+}
+[data-theme="light"] .tf-home-brand .bg-gradient-to-tr {
+    background-image: linear-gradient(to top right, #0369A1, #0284C7) !important;
+    color: #FFFFFF !important;
+}
+
+/* --- Stats section background --- */
+[data-theme="light"] .tf-stats-section {
+    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.03), transparent) !important;
+}
+
+/* --- Product panel (the branded card frame) --- */
+[data-theme="light"] .tf-product-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.05) !important;
+}
+[data-theme="light"] .tf-product-panel::before {
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.12), transparent 34%, rgba(15, 23, 42, 0.03)) !important;
+}
+
+/* --- Terminal card, screen --- */
+[data-theme="light"] .tf-terminal-screen {
+    background: rgba(15, 23, 42, 0.03) !important;
+    color: var(--text-main) !important;
+}
+[data-theme="light"] .tf-terminal-titlebar {
+    color: var(--text-muted) !important;
+}
+
+/* --- Brand story text --- */
+[data-theme="light"] .tf-brand-story span {
+    color: var(--accent-cyan) !important;
+}
+[data-theme="light"] .tf-brand-story p {
+    color: var(--text-muted) !important;
+}
+
+/* --- Countdown container --- */
+[data-theme="light"] .tf-home-brand .countdown-container {
+    background: rgba(3, 105, 161, 0.06) !important;
+    border-color: rgba(3, 105, 161, 0.12) !important;
+}
+
+/* --- Footer for homepage --- */
+[data-theme="light"] .tf-home-brand footer,
+html[data-theme="light"] body.tf-home-page footer {
+    background: rgba(241, 245, 249, 0.9) !important;
+    border-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* --- Theme toggle on homepage --- */
+[data-theme="light"] .tf-home-brand .theme-toggle,
+html[data-theme="light"] body.tf-home-page .theme-toggle {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+    color: var(--text-main) !important;
+}
+
+/* --- Navbar text colors on homepage --- */
+html[data-theme="light"] body.tf-home-page nav .text-muted {
+    color: var(--text-muted) !important;
+}
+html[data-theme="light"] body.tf-home-page nav .text-white {
+    color: var(--text-main) !important;
+}
+
+/* --- Scroll indicator --- */
+[data-theme="light"] #scroll-indicator .text-muted {
+    color: var(--text-dim) !important;
+}
+[data-theme="light"] #scroll-indicator .border-white\/20 {
+    border-color: rgba(15, 23, 42, 0.15) !important;
+}
+[data-theme="light"] #scroll-indicator .bg-accent-neon {
+    background-color: var(--accent-cyan) !important;
+}
+
+/* --- Path steps active --- */
+[data-theme="light"] .tf-path-steps .is-active {
+    background: rgba(3, 105, 161, 0.08) !important;
+    color: var(--accent-cyan) !important;
+}
+
+/* --- Copy button --- */
+[data-theme="light"] .tf-copy-btn {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-color: rgba(15, 23, 42, 0.1) !important;
+    color: var(--text-main) !important;
+}
+
+/* --- Sections background transparency --- */
+[data-theme="light"] .tf-trending-section,
+[data-theme="light"] .tf-testimonials-section,
+[data-theme="light"] .tf-events-section,
+[data-theme="light"] .tf-about-preview {
+    background: transparent !important;
+    border-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* --- text-muted-more --- */
+[data-theme="light"] .text-muted-more {
+    color: var(--text-dim) !important;
+}
 

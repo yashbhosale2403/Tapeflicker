@@ -159,7 +159,7 @@ CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET')
 
 STORAGES = {
     "default": {
-        "BACKEND": "config.storage.CloudinaryMediaStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage" if DEBUG else "config.storage.CloudinaryMediaStorage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",

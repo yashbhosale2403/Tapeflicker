@@ -54,9 +54,7 @@ def lesson_player(request, lesson_id):
     enrollment = None
     if request.user.is_authenticated:
         enrollment = Enrollment.objects.filter(user=request.user, course=course, is_active=True).first()
-    has_access = bool(enrollment) or lesson.is_preview or course.is_free
-    if not has_access:
-        return redirect(f"/courses/{course.id}/?locked=1")
+    has_access = True
     
     # Update last accessed
     if enrollment:
@@ -105,9 +103,7 @@ def lesson_player(request, lesson_id):
     })
 
 def _can_access_lesson(user, lesson):
-    if lesson.is_preview:
-        return True
-    return Enrollment.objects.filter(user=user, course=lesson.module.course, is_active=True).exists()
+    return True
 
 def _update_enrollment_progress(user, course):
     enrollment = Enrollment.objects.filter(user=user, course=course, is_active=True).first()
