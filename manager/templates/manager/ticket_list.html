@@ -54,7 +54,8 @@
         </div>
 
         <div class="glass-panel rounded-xl overflow-hidden">
-            <table class="w-full text-left border-collapse" id="tickets-table">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left border-collapse" id="tickets-table">
                 <thead>
                     <tr class="bg-white/5 border-b border-mainborder">
                         <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider w-24">Ticket ID</th>
@@ -114,6 +115,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </div>

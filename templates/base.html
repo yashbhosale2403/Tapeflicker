@@ -164,7 +164,7 @@
                     <button type="button" class="theme-toggle mr-3" data-theme-toggle onclick="window.toggleTheme && window.toggleTheme()" aria-label="Toggle light and dark mode">
                         <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
                     </button>
-                    <button class="text-muted hover:text-white focus:outline-none">
+                    <button id="mobile-menu-toggle" class="text-muted hover:text-white focus:outline-none" aria-label="Toggle navigation menu">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -173,6 +173,40 @@
             </div>
         </div>
     </nav>
+
+    <!-- Premium Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-x-0 top-24 z-40 bg-[#05011A]/95 backdrop-blur-2xl border-b border-white/5 p-6 md:hidden transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none">
+        <div class="flex flex-col gap-6">
+            <a href="{% url 'core:home' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-white font-semibold{% endif %}">Home</a>
+            <a href="{% url 'courses:list' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if 'courses' in request.resolver_match.app_name %}text-white font-semibold{% endif %}">Courses</a>
+            <a href="{% url 'core:event_list' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 flex items-center justify-between {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}text-white font-semibold{% endif %}">
+                <span>Events</span>
+                <span class="flex h-2 w-2 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-neon opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-neon"></span>
+                </span>
+            </a>
+            <a href="{% url 'core:about' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.url_name == 'about' %}text-white font-semibold{% endif %}">About</a>
+            <a href="{% url 'core:contact' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.url_name == 'contact' %}text-white font-semibold{% endif %}">Contact</a>
+            
+            <hr class="border-white/5 my-2">
+            
+            <div class="flex flex-col gap-4">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'manager:dashboard' %}" class="btn-primary text-center py-3 text-sm">Main Dashboard</a>
+                    {% endif %}
+                    {% if request.resolver_match.app_name != 'dashboard' %}
+                    <a href="{% url 'dashboard:home' %}" class="btn-outline text-center py-3 text-sm">Profile</a>
+                    {% endif %}
+                    <a href="{% url 'accounts:logout' %}" class="text-center text-muted hover:text-red-400 py-2 transition-colors text-sm font-medium tracking-wide">Sign Out</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="text-center text-muted hover:text-white py-2 transition-colors text-sm font-medium tracking-wide">Sign In</a>
+                    <a href="{% url 'accounts:signup' %}" class="btn-primary text-center py-3 text-sm">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="flex-grow">
@@ -283,6 +317,33 @@
         window.addEventListener("scroll", reveal);
         // Trigger once on load with slight delay for initial layout calculation
         setTimeout(reveal, 100);
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('opacity-100');
+                if (isOpen) {
+                    mobileMenu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    mobileMenu.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+                    mobileMenuToggle.innerHTML = `
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    `;
+                } else {
+                    mobileMenu.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    mobileMenuToggle.innerHTML = `
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    `;
+                }
+            });
+        }
     </script>
     
     {% block extra_scripts %}{% endblock %}

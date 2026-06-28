@@ -13,9 +13,9 @@
     </div>
 </div>
 
-<!-- Log Table -->
 <div class="glass-panel rounded-xl overflow-hidden">
-    <table class="w-full text-left border-collapse" id="logs-table">
+    <div class="overflow-x-auto w-full">
+        <table class="w-full text-left border-collapse" id="logs-table">
         <thead>
             <tr class="bg-white/5 border-b border-mainborder">
                 <th class="py-4 px-6 text-xs font-semibold text-mainmuted uppercase tracking-wider w-48">Timestamp</th>
@@ -56,6 +56,7 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
 </div>
 
 <script>

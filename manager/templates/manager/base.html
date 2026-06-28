@@ -200,8 +200,11 @@
 
     <!-- Main Workspace -->
 
+    <!-- Sidebar backdrop overlay on mobile -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 z-10 hidden lg:hidden transition-opacity duration-300 opacity-0"></div>
+
     <!-- ===================== SIDEBAR ===================== -->
-    <aside class="sidebar flex flex-col z-20" id="sidebar">
+    <aside class="sidebar flex flex-col z-20 transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:relative inset-y-0 left-0 lg:flex" id="sidebar">
 
         <!-- Logo -->
         <div class="px-5 py-5 border-b border-white/5 flex-shrink-0">
@@ -304,6 +307,11 @@
 
         <!-- TOP BAR -->
         <header class="topbar flex items-center h-14 px-6 flex-shrink-0 gap-4">
+            <!-- Mobile Toggle -->
+            <button id="admin-sidebar-toggle" class="lg:hidden text-maindim hover:text-mainaccent p-1.5 rounded-lg border border-mainborder flex items-center justify-center flex-shrink-0" aria-label="Toggle admin navigation menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+
             <!-- Page Title -->
             <div class="flex items-center gap-3 min-w-0">
                 <h1 class="text-sm font-semibold text-white truncate">{% block header_title %}Dashboard{% endblock %}</h1>
@@ -390,6 +398,38 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarToggle = document.getElementById('admin-sidebar-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            
+            if (sidebarToggle && sidebar && backdrop) {
+                function toggleSidebar() {
+                    const isOpen = sidebar.classList.contains('translate-x-0');
+                    if (isOpen) {
+                        sidebar.classList.remove('translate-x-0');
+                        sidebar.classList.add('-translate-x-full');
+                        backdrop.classList.add('hidden');
+                        backdrop.classList.remove('opacity-100');
+                        backdrop.classList.add('opacity-0');
+                    } else {
+                        sidebar.classList.remove('-translate-x-full');
+                        sidebar.classList.add('translate-x-0');
+                        backdrop.classList.remove('hidden');
+                        // Trigger reflow for transition
+                        backdrop.offsetHeight;
+                        backdrop.classList.remove('opacity-0');
+                        backdrop.classList.add('opacity-100');
+                    }
+                }
+                
+                sidebarToggle.addEventListener('click', toggleSidebar);
+                backdrop.addEventListener('click', toggleSidebar);
+            }
+        });
+    </script>
 
     {% block extra_scripts %}{% endblock %}
 </body>

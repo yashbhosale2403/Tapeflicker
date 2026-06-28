@@ -5,8 +5,21 @@
 {% block content %}
 <div class="pt-24 pb-10 min-h-screen relative z-20">
     <div class="max-w-[1700px] mx-auto px-4 lg:px-8">
+        <!-- Responsive Mobile Tab Navigation -->
+        <div class="xl:hidden flex border-b border-white/10 mb-4 text-xs font-mono font-bold tracking-wider uppercase justify-around select-none">
+            <button id="tab-btn-channels" class="py-3 px-4 border-b-2 border-transparent text-muted flex items-center gap-1.5 focus:outline-none">
+                <span>Channels</span>
+            </button>
+            <button id="tab-btn-chat" class="py-3 px-4 border-b-2 border-accent-neon text-white flex items-center gap-1.5 focus:outline-none">
+                <span>Chat</span>
+            </button>
+            <button id="tab-btn-info" class="py-3 px-4 border-b-2 border-transparent text-muted flex items-center gap-1.5 focus:outline-none">
+                <span>Info</span>
+            </button>
+        </div>
+
         <div class="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)_320px] gap-5">
-            <aside class="glass rounded-3xl border border-white/10 p-4 h-[calc(100vh-8rem)] overflow-y-auto">
+            <aside id="chat-channels-sidebar" class="glass rounded-3xl border border-white/10 p-4 h-[calc(100vh-8rem)] overflow-y-auto hidden xl:block">
                 <p class="text-xs uppercase tracking-widest text-accent-neon mb-3">Channels</p>
                 <a href="{% url 'chat:hub' %}" class="text-xs text-muted hover:text-white block mb-4">Back to all rooms</a>
                 <div class="rounded-2xl bg-white/5 border border-white/10 p-4 mb-4">
@@ -28,15 +41,15 @@
                 </div>
             </aside>
 
-            <section class="glass rounded-3xl border border-white/10 h-[calc(100vh-8rem)] flex flex-col overflow-hidden">
-                <div class="px-5 py-4 border-b border-white/10 flex items-center gap-4">
-                    <div>
-                        <h1 class="text-white font-sora font-bold text-lg"># {{ room.title|default:course.title }}</h1>
+            <section id="chat-feed-pane" class="glass rounded-3xl border border-white/10 h-[calc(100vh-8rem)] flex flex-col overflow-hidden">
+                <div class="px-5 py-4 border-b border-white/10 flex flex-col sm:flex-row sm:items-center gap-4">
+                    <div class="min-w-0">
+                        <h1 class="text-white font-sora font-bold text-lg truncate"># {{ room.title|default:course.title }}</h1>
                         <p class="text-xs text-muted">Real-time course community</p>
                     </div>
-                    <div class="ml-auto flex items-center gap-2">
-                        <input id="message-search" type="text" placeholder="Search messages..." class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white w-44">
-                        <button id="sound-toggle" class="text-xs btn-outline py-2 px-3">{% if state.sound_enabled %}Sound On{% else %}Sound Off{% endif %}</button>
+                    <div class="sm:ml-auto flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                        <input id="message-search" type="text" placeholder="Search..." class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white flex-1 sm:w-44">
+                        <button id="sound-toggle" class="text-xs btn-outline py-2 px-3 flex-shrink-0">{% if state.sound_enabled %}Sound On{% else %}Sound Off{% endif %}</button>
                     </div>
                 </div>
 
@@ -111,7 +124,7 @@
                 </div>
             </section>
 
-            <aside class="glass rounded-3xl border border-white/10 p-4 h-[calc(100vh-8rem)] overflow-y-auto">
+            <aside id="chat-info-sidebar" class="glass rounded-3xl border border-white/10 p-4 h-[calc(100vh-8rem)] overflow-y-auto hidden xl:block">
                 <h3 class="text-white font-sora font-semibold mb-3">Course Info</h3>
                 <p class="text-sm text-muted mb-5">{{ course.description|truncatechars:180 }}</p>
 
@@ -353,5 +366,47 @@
     if (Notification && Notification.permission === 'default') {
         Notification.requestPermission();
     }
+
+    // Mobile Chat Tab Swapping
+    const btnChannels = document.getElementById('tab-btn-channels');
+    const btnChat = document.getElementById('tab-btn-chat');
+    const btnInfo = document.getElementById('tab-btn-info');
+    
+    const paneChannels = document.getElementById('chat-channels-sidebar');
+    const paneChat = document.getElementById('chat-feed-pane');
+    const paneInfo = document.getElementById('chat-info-sidebar');
+    
+    function switchChatTab(tabName) {
+        if (!paneChannels || !paneChat || !paneInfo) return;
+        
+        [btnChannels, btnChat, btnInfo].forEach(btn => {
+            if (btn) {
+                btn.classList.remove('border-accent-neon', 'text-white');
+                btn.classList.add('border-transparent', 'text-muted');
+            }
+        });
+        
+        paneChannels.classList.add('hidden');
+        paneChat.classList.add('hidden');
+        paneInfo.classList.add('hidden');
+        
+        if (tabName === 'channels') {
+            btnChannels.classList.add('border-accent-neon', 'text-white');
+            btnChannels.classList.remove('border-transparent', 'text-muted');
+            paneChannels.classList.remove('hidden');
+        } else if (tabName === 'chat') {
+            btnChat.classList.add('border-accent-neon', 'text-white');
+            btnChat.classList.remove('border-transparent', 'text-muted');
+            paneChat.classList.remove('hidden');
+        } else if (tabName === 'info') {
+            btnInfo.classList.add('border-accent-neon', 'text-white');
+            btnInfo.classList.remove('border-transparent', 'text-muted');
+            paneInfo.classList.remove('hidden');
+        }
+    }
+    
+    if (btnChannels) btnChannels.addEventListener('click', () => switchChatTab('channels'));
+    if (btnChat) btnChat.addEventListener('click', () => switchChatTab('chat'));
+    if (btnInfo) btnInfo.addEventListener('click', () => switchChatTab('info'));
 </script>
 {% endblock %}
