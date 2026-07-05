@@ -19,14 +19,14 @@
     --bg-primary: #F8FAFC;
     --bg-secondary: #F1F5F9;
     --card-bg: rgba(255, 255, 255, 0.9);
-    --card-border: rgba(15, 23, 42, 0.08);
+    --card-border: rgba(217, 163, 4, 0.15); /* Classic yellow-gold theme border */
     --text-main: #0F172A;
     --text-muted: #475569;
     --text-dim: #64748B;
-    --accent-neon: #B45309;
-    --accent-purple: #78350F;
-    --accent-cyan: #0369A1;
-    --accent-green: #15803D;
+    --accent-neon: #D97706; /* Classic yellow-gold accents */
+    --accent-purple: #B45309;
+    --accent-cyan: #CA8A04;
+    --accent-green: #854D0E;
 }
 
 .dashboard-page {
@@ -1798,22 +1798,8 @@ body.tf-home-page footer {
 /* ============= HOMEPAGE-ONLY LIGHT MODE OVERRIDES ============= */
 /* These must be at the bottom to beat the homepage brand refresh !important rules */
 
-/* --- Core page background & text --- */
-html[data-theme="light"] body.tf-home-page {
-    --bg-primary: #F8FAFC; /* Clean slate-white background as before */
-    --bg-secondary: #F1F5F9; /* Slate-grey secondary background as before */
-    --card-bg: rgba(255, 255, 255, 0.9); /* clean white cards */
-    --card-border: rgba(217, 163, 4, 0.15); /* warm gold border for that yellow theme vibe */
-    --text-main: #0F172A; /* original slate dark text */
-    --text-muted: #475569; /* original slate muted text */
-    --text-dim: #64748B; /* original slate dim text */
-    --accent-neon: #D97706; /* vibrant classic yellow-gold/amber for primary call-outs */
-    --accent-purple: #B45309; /* deep golden-amber */
-    --accent-cyan: #CA8A04; /* rich readable gold */
-    --accent-green: #854D0E; /* dark warm green-gold */
-    background: var(--bg-primary) !important;
-    color: var(--text-main) !important;
-}
+/* ============= GLOBAL LIGHT MODE COMPONENT OVERRIDES ============= */
+/* These overrides apply classic yellow theme accents to components on all pages in light mode */
 
 /* --- Aurora / fixed background --- */
 [data-theme="light"] .tf-home-brand::before {
@@ -1868,9 +1854,9 @@ html[data-theme="light"] body.tf-home-page {
     opacity: 0.5 !important;
 }
 
-/* --- Text gradients: override the homepage brand gold gradient --- */
-[data-theme="light"] .tf-home-brand .text-gradient,
-[data-theme="light"] .tf-home-brand .text-gradient-accent {
+/* --- Text gradients: override the brand gold gradient globally --- */
+[data-theme="light"] .text-gradient,
+[data-theme="light"] .text-gradient-accent {
     background: linear-gradient(135deg, #0F172A 0%, #B45309 60%, #D97706 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -1878,34 +1864,35 @@ html[data-theme="light"] body.tf-home-page {
     color: transparent !important;
 }
 
-/* --- Button outline for homepage --- */
-[data-theme="light"] .tf-home-brand .btn-outline,
-html[data-theme="light"] body.tf-home-page .btn-outline {
+/* --- Button outline globally --- */
+[data-theme="light"] .btn-outline,
+html[data-theme="light"] body .btn-outline {
     color: var(--text-main) !important;
     border-color: rgba(217, 163, 4, 0.28) !important;
     background: rgba(255, 255, 255, 0.6) !important;
 }
-[data-theme="light"] .tf-home-brand .btn-outline:hover,
-html[data-theme="light"] body.tf-home-page .btn-outline:hover {
+[data-theme="light"] .btn-outline:hover,
+html[data-theme="light"] body .btn-outline:hover {
     background: rgba(245, 201, 51, 0.08) !important;
     border-color: var(--accent-neon) !important;
     color: var(--accent-neon) !important;
 }
 
-/* --- Button primary light styling --- */
-[data-theme="light"] .tf-home-brand .btn-primary {
+/* --- Button primary light styling globally --- */
+[data-theme="light"] .btn-primary {
     background: #F5C933 !important;
     color: #141414 !important;
     border-color: rgba(245, 201, 51, 0.86) !important;
     box-shadow: 0 12px 28px rgba(245, 201, 51, 0.22) !important;
 }
-[data-theme="light"] .tf-home-brand .btn-primary:hover {
+[data-theme="light"] .btn-primary:hover {
     background: #E8B923 !important;
+    color: #141414 !important;
     box-shadow: 0 18px 38px rgba(245, 201, 51, 0.3) !important;
 }
 
 /* --- Trust row pills --- */
-[data-theme="light"] .tf-home-brand .tf-trust-row span {
+[data-theme="light"] .tf-trust-row span {
     border-color: rgba(217, 163, 4, 0.18) !important;
     background: rgba(255, 255, 255, 0.8) !important;
     color: var(--text-muted) !important;
@@ -1952,65 +1939,65 @@ html[data-theme="light"] body.tf-home-page .btn-outline:hover {
     color: var(--accent-cyan) !important;
 }
 
-/* --- Course/event medium cards on homepage --- */
-[data-theme="light"] .tf-home-brand .tf-medium-card {
+/* --- Course/event medium cards globally --- */
+[data-theme="light"] .tf-medium-card {
     background: rgba(255, 255, 255, 0.88) !important;
     border-color: rgba(217, 163, 4, 0.15) !important;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04) !important;
 }
 
-/* --- All homepage cards, bento, stats, glass containers --- */
+/* --- All cards, bento, stats, glass containers globally --- */
 [data-theme="light"] .tf-terminal-card,
 [data-theme="light"] .tf-brand-story > div,
 [data-theme="light"] .tf-stat-card,
-[data-theme="light"] .tf-home-brand .bento-card,
-[data-theme="light"] .tf-home-brand .main-card,
-[data-theme="light"] .tf-home-brand .glass,
-[data-theme="light"] .tf-home-brand .gradient-border > div {
+[data-theme="light"] .bento-card,
+[data-theme="light"] .main-card,
+[data-theme="light"] .glass,
+[data-theme="light"] .gradient-border > div {
     background: rgba(255, 255, 255, 0.88) !important;
     border: 1px solid rgba(217, 163, 4, 0.15) !important;
     box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
 }
 
-/* --- Card hover in light mode --- */
-[data-theme="light"] .tf-home-brand .hover-lift:hover,
-[data-theme="light"] .tf-home-brand .bento-card:hover,
-[data-theme="light"] .tf-home-brand .main-card:hover,
+/* --- Card hover in light mode globally --- */
+[data-theme="light"] .hover-lift:hover,
+[data-theme="light"] .bento-card:hover,
+[data-theme="light"] .main-card:hover,
 [data-theme="light"] .tf-stat-card:hover {
     border-color: rgba(217, 163, 4, 0.35) !important;
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08), 0 0 15px rgba(245, 201, 51, 0.08) !important;
 }
 
-/* --- Bento card inner glow --- */
-[data-theme="light"] .tf-home-brand .bento-card::before {
+/* --- Bento card inner glow globally --- */
+[data-theme="light"] .bento-card::before {
     background: radial-gradient(ellipse at top right, rgba(245, 201, 51, 0.1), transparent 58%) !important;
 }
 
-/* --- Gradient border on homepage --- */
-[data-theme="light"] .tf-home-brand .gradient-border {
+/* --- Gradient border globally --- */
+[data-theme="light"] .gradient-border {
     background: transparent !important;
 }
-[data-theme="light"] .tf-home-brand .gradient-border::before {
+[data-theme="light"] .gradient-border::before {
     background: linear-gradient(135deg, rgba(245, 201, 51, 0.25), rgba(15, 23, 42, 0.03)) !important;
 }
-[data-theme="light"] .tf-home-brand .gradient-border:hover::before {
+[data-theme="light"] .gradient-border:hover::before {
     background: linear-gradient(135deg, rgba(245, 201, 51, 0.65), rgba(245, 201, 51, 0.15)) !important;
 }
 
-/* --- Tw gradient overrides --- */
-[data-theme="light"] .tf-home-brand .from-accent-purple\/10,
-[data-theme="light"] .tf-home-brand .from-accent-neon\/10,
-[data-theme="light"] .tf-home-brand .from-primary,
-[data-theme="light"] .tf-home-brand .to-secondary {
+/* --- Tw gradient overrides globally --- */
+[data-theme="light"] .from-accent-purple\/10,
+[data-theme="light"] .from-accent-neon\/10,
+[data-theme="light"] .from-primary,
+[data-theme="light"] .to-secondary {
     --tw-gradient-from: rgba(245, 201, 51, 0.1) var(--tw-gradient-from-position) !important;
     --tw-gradient-to: rgba(248, 250, 252, 0) var(--tw-gradient-to-position) !important;
 }
-[data-theme="light"] .tf-home-brand .bg-gradient-to-tr {
+[data-theme="light"] .bg-gradient-to-tr {
     background-image: linear-gradient(to top right, #E8B923, #F5C933) !important;
     color: #141414 !important;
 }
 
-/* --- Stats section background --- */
+/* --- Stats section background globally --- */
 [data-theme="light"] .tf-stats-section {
     background: linear-gradient(90deg, transparent, rgba(245, 201, 51, 0.06), transparent) !important;
 }
@@ -2025,7 +2012,7 @@ html[data-theme="light"] body.tf-home-page .btn-outline:hover {
     background: linear-gradient(135deg, rgba(245, 201, 51, 0.35), transparent 34%, rgba(15, 23, 42, 0.03)) !important;
 }
 
-/* --- Terminal card, screen --- */
+/* --- Terminal card, screen globally --- */
 [data-theme="light"] .tf-terminal-screen {
     background: rgba(15, 23, 42, 0.03) !important;
     color: var(--text-main) !important;
@@ -2034,7 +2021,7 @@ html[data-theme="light"] body.tf-home-page .btn-outline:hover {
     color: var(--text-muted) !important;
 }
 
-/* --- Brand story text --- */
+/* --- Brand story text globally --- */
 [data-theme="light"] .tf-brand-story span {
     color: var(--accent-cyan) !important;
 }
@@ -2042,36 +2029,36 @@ html[data-theme="light"] body.tf-home-page .btn-outline:hover {
     color: var(--text-muted) !important;
 }
 
-/* --- Countdown container --- */
-[data-theme="light"] .tf-home-brand .countdown-container {
+/* --- Countdown container globally --- */
+[data-theme="light"] .countdown-container {
     background: rgba(245, 201, 51, 0.08) !important;
     border-color: rgba(217, 163, 4, 0.18) !important;
 }
 
-/* --- Footer for homepage --- */
-[data-theme="light"] .tf-home-brand footer,
-html[data-theme="light"] body.tf-home-page footer {
+/* --- Footer globally --- */
+[data-theme="light"] footer,
+html[data-theme="light"] body footer {
     background: rgba(241, 245, 249, 0.9) !important;
     border-color: rgba(15, 23, 42, 0.06) !important;
 }
 
-/* --- Theme toggle on homepage --- */
-[data-theme="light"] .tf-home-brand .theme-toggle,
-html[data-theme="light"] body.tf-home-page .theme-toggle {
+/* --- Theme toggle globally --- */
+[data-theme="light"] .theme-toggle,
+html[data-theme="light"] body .theme-toggle {
     background: rgba(255, 255, 255, 0.8) !important;
     border-color: rgba(217, 163, 4, 0.28) !important;
     color: var(--text-main) !important;
 }
 
-/* --- Navbar text colors on homepage --- */
-html[data-theme="light"] body.tf-home-page nav .text-muted {
+/* --- Navbar text colors globally --- */
+html[data-theme="light"] body nav .text-muted {
     color: var(--text-muted) !important;
 }
-html[data-theme="light"] body.tf-home-page nav .text-white {
+html[data-theme="light"] body nav .text-white {
     color: var(--text-main) !important;
 }
 
-/* --- Scroll indicator --- */
+/* --- Scroll indicator globally --- */
 [data-theme="light"] #scroll-indicator .text-muted {
     color: var(--text-dim) !important;
 }
@@ -2082,20 +2069,20 @@ html[data-theme="light"] body.tf-home-page nav .text-white {
     background-color: var(--accent-neon) !important;
 }
 
-/* --- Path steps active --- */
+/* --- Path steps active globally --- */
 [data-theme="light"] .tf-path-steps .is-active {
     background: rgba(245, 201, 51, 0.14) !important;
     color: var(--accent-cyan) !important;
 }
 
-/* --- Copy button --- */
+/* --- Copy button globally --- */
 [data-theme="light"] .tf-copy-btn {
     background: rgba(255, 255, 255, 0.8) !important;
     border-color: rgba(217, 163, 4, 0.18) !important;
     color: var(--text-main) !important;
 }
 
-/* --- Sections background transparency --- */
+/* --- Sections background transparency globally --- */
 [data-theme="light"] .tf-trending-section,
 [data-theme="light"] .tf-testimonials-section,
 [data-theme="light"] .tf-events-section,
@@ -2104,7 +2091,7 @@ html[data-theme="light"] body.tf-home-page nav .text-white {
     border-color: rgba(217, 163, 4, 0.12) !important;
 }
 
-/* --- text-muted-more --- */
+/* --- text-muted-more globally --- */
 [data-theme="light"] .text-muted-more {
     color: var(--text-dim) !important;
 }
