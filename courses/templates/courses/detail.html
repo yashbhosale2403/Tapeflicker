@@ -36,9 +36,11 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0B1220]/80 via-transparent to-transparent opacity-80"></div>
                 
                 <!-- Play Button Overlay -->
-                <a href="{% if first_published_lesson %}{% url 'courses:lesson_player' first_published_lesson.id %}{% else %}#{% endif %}" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all duration-300 group z-30">
+                {% if is_enrolled or first_preview_lesson %}
+                <a href="{% if is_enrolled %}{% if first_published_lesson %}{% url 'courses:lesson_player' first_published_lesson.id %}{% else %}#{% endif %}{% else %}{% url 'courses:lesson_player' first_preview_lesson.id %}{% endif %}" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all duration-300 group z-30">
                     <svg class="w-8 h-8 text-white ml-1 group-hover:text-accent-neon transition-colors" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
                 </a>
+                {% endif %}
             </div>
         </div>
 
@@ -160,10 +162,23 @@
                                     <p class="text-xs text-muted font-mono mt-1">Approx. {{ lesson.duration }}</p>
                                 </div>
                             </div>
-                            <!-- Watch button available for everyone without enrollment -->
+                            <!-- Watch button available for enrolled users or preview lessons -->
+                            {% if is_enrolled or lesson.is_preview %}
                             <a href="{% url 'courses:lesson_player' lesson.id %}" class="px-4 py-1.5 rounded-full bg-accent-neon/15 hover:bg-accent-neon text-accent-neon hover:text-primary border border-accent-neon/30 text-[11px] font-bold font-mono tracking-wider uppercase transition-all duration-300">
+                                {% if lesson.is_preview and not is_enrolled %}
+                                Preview
+                                {% else %}
                                 Watch
+                                {% endif %}
                             </a>
+                            {% else %}
+                            <span class="px-4 py-1.5 rounded-full bg-white/5 text-muted/60 border border-white/5 text-[11px] font-bold font-mono tracking-wider uppercase flex items-center gap-1.5 select-none">
+                                <svg class="w-3.5 h-3.5 text-muted/40" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Locked
+                            </span>
+                            {% endif %}
                         </div>
                         {% empty %}
                         <p class="text-sm text-muted px-2 py-3">No lessons in this module yet.</p>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -29,6 +30,7 @@ def course_detail(request, course_id):
         is_enrolled = Enrollment.objects.filter(user=request.user, course=course).exists()
         
     first_published_lesson = Lesson.objects.filter(module__course=course, is_published=True).order_by('module__order', 'order', 'id').first()
+    first_preview_lesson = Lesson.objects.filter(module__course=course, is_published=True, is_preview=True).order_by('module__order', 'order', 'id').first()
 
     return render(request, 'courses/detail.html', {
         'course': course,
@@ -36,6 +38,7 @@ def course_detail(request, course_id):
         'is_enrolled': is_enrolled,
         'locked_attempt': request.GET.get('locked') == '1',
         'first_published_lesson': first_published_lesson,
+        'first_preview_lesson': first_preview_lesson,
     })
 
 @login_required(login_url='accounts:login')
@@ -54,7 +57,10 @@ def lesson_player(request, lesson_id):
     enrollment = None
     if request.user.is_authenticated:
         enrollment = Enrollment.objects.filter(user=request.user, course=course, is_active=True).first()
-    has_access = True
+    
+    # Verify access permission: enrolled OR lesson is a preview
+    if not (lesson.is_preview or enrollment):
+        return redirect(f"{reverse('courses:detail', args=[course.id])}?locked=1")
     
     # Update last accessed
     if enrollment:
@@ -103,7 +109,11 @@ def lesson_player(request, lesson_id):
     })
 
 def _can_access_lesson(user, lesson):
-    return True
+    if lesson.is_preview:
+        return True
+    if not user.is_authenticated:
+        return False
+    return Enrollment.objects.filter(user=user, course=lesson.module.course, is_active=True).exists()
 
 def _update_enrollment_progress(user, course):
     enrollment = Enrollment.objects.filter(user=user, course=course, is_active=True).first()

@@ -150,6 +150,7 @@
                             </summary>
                             <div class="px-2 pb-2 space-y-1">
                                 {% for item in module.lessons.all %}
+                                {% if enrollment or item.is_preview %}
                                 <a href="{% url 'courses:lesson_player' item.id %}" class="flex items-center gap-3 px-3 py-2 rounded-xl transition {% if item.id == lesson.id %}bg-accent-neon/15 border border-accent-neon/30{% else %}hover:bg-white/10 border border-transparent{% endif %}">
                                     <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] {% if item.id in completed_lesson_ids %}bg-green-500/25 text-green-300{% elif item.is_preview %}bg-accent-neon/20 text-accent-neon{% else %}bg-white/15 text-muted{% endif %}">
                                         {% if item.id in completed_lesson_ids %}✓{% else %}▶{% endif %}
@@ -159,6 +160,14 @@
                                     <span class="ml-auto text-[10px] text-accent-cyan">Preview</span>
                                     {% endif %}
                                 </a>
+                                {% else %}
+                                <div class="flex items-center gap-3 px-3 py-2 rounded-xl border border-transparent opacity-50 select-none">
+                                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-white/5 text-muted">
+                                        🔒
+                                    </span>
+                                    <span class="text-xs text-muted truncate">{{ item.title }}</span>
+                                </div>
+                                {% endif %}
                                 {% empty %}
                                 <p class="text-xs text-muted px-3 py-2">No lessons yet.</p>
                                 {% endfor %}
