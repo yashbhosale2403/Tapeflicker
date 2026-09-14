@@ -593,7 +593,7 @@ def chat_toggle_pin_message(request, message_id):
     _broadcast_room_event(msg.room.course_id, {"type": "message.updated", "message": {
         "id": msg.id, "content": msg.content, "is_pinned": msg.is_pinned, "is_announcement": msg.is_announcement,
         "is_edited": msg.is_edited, "is_deleted": msg.is_deleted, "reply_to": msg.reply_to_id,
-        "user_id": msg.user_id, "username": msg.user.username, "avatar": getattr(getattr(msg.user, "profile", None), "avatar_url", ""),
+        "user_id": msg.user_id, "username": msg.user.username, "avatar": msg.user.profile.get_avatar_url() if hasattr(msg.user, "profile") else "",
         "created_at": msg.created_at.isoformat(), "updated_at": msg.updated_at.isoformat()
     }})
     return redirect('manager:chat_room_management', room_id=msg.room_id)
@@ -607,7 +607,7 @@ def chat_toggle_announcement(request, message_id):
     _broadcast_room_event(msg.room.course_id, {"type": "message.updated", "message": {
         "id": msg.id, "content": msg.content, "is_pinned": msg.is_pinned, "is_announcement": msg.is_announcement,
         "is_edited": msg.is_edited, "is_deleted": msg.is_deleted, "reply_to": msg.reply_to_id,
-        "user_id": msg.user_id, "username": msg.user.username, "avatar": getattr(getattr(msg.user, "profile", None), "avatar_url", ""),
+        "user_id": msg.user_id, "username": msg.user.username, "avatar": msg.user.profile.get_avatar_url() if hasattr(msg.user, "profile") else "",
         "created_at": msg.created_at.isoformat(), "updated_at": msg.updated_at.isoformat()
     }})
     return redirect('manager:chat_room_management', room_id=msg.room_id)

@@ -179,34 +179,34 @@
     </header>
 
     <!-- Premium Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-x-0 top-24 z-40 bg-[#05011A]/95 backdrop-blur-2xl border-b border-white/5 p-6 md:hidden transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none">
-        <div class="flex flex-col gap-6">
-            <a href="{% url 'core:home' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-white font-semibold{% endif %}">Home</a>
-            <a href="{% url 'courses:list' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if 'courses' in request.resolver_match.app_name %}text-white font-semibold{% endif %}">Courses</a>
-            <a href="{% url 'core:event_list' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 flex items-center justify-between {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}text-white font-semibold{% endif %}">
+    <div id="mobile-menu" class="fixed inset-x-0 top-16 z-40 bg-white/95 backdrop-blur-2xl border-b border-black/5 p-6 md:hidden transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none shadow-lg">
+        <div class="flex flex-col gap-5">
+            <a href="{% url 'core:home' %}" class="text-base font-medium text-[#424245] hover:text-[#1D1D1F] transition-colors py-1.5 {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-[#1D1D1F] font-semibold{% endif %}">Home</a>
+            <a href="{% url 'courses:list' %}" class="text-base font-medium text-[#424245] hover:text-[#1D1D1F] transition-colors py-1.5 {% if 'courses' in request.resolver_match.app_name %}text-[#1D1D1F] font-semibold{% endif %}">Courses</a>
+            <a href="{% url 'core:event_list' %}" class="text-base font-medium text-[#424245] hover:text-[#1D1D1F] transition-colors py-1.5 flex items-center justify-between {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}text-[#1D1D1F] font-semibold{% endif %}">
                 <span>Events</span>
                 <span class="flex h-2 w-2 relative">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-neon opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-neon"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0071E3] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-[#0071E3]"></span>
                 </span>
             </a>
-            <a href="{% url 'core:about' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.url_name == 'about' %}text-white font-semibold{% endif %}">About</a>
-            <a href="{% url 'core:contact' %}" class="text-lg font-medium text-muted hover:text-white transition-colors py-2 {% if request.resolver_match.url_name == 'contact' %}text-white font-semibold{% endif %}">Contact</a>
+            <a href="{% url 'core:about' %}" class="text-base font-medium text-[#424245] hover:text-[#1D1D1F] transition-colors py-1.5 {% if request.resolver_match.url_name == 'about' %}text-[#1D1D1F] font-semibold{% endif %}">About</a>
+            <a href="{% url 'core:contact' %}" class="text-base font-medium text-[#424245] hover:text-[#1D1D1F] transition-colors py-1.5 {% if request.resolver_match.url_name == 'contact' %}text-[#1D1D1F] font-semibold{% endif %}">Contact</a>
             
-            <hr class="border-white/5 my-2">
+            <hr class="border-black/5 my-1">
             
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-3">
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_staff %}
-                        <a href="{% url 'manager:dashboard' %}" class="btn-primary text-center py-3 text-sm">Main Dashboard</a>
+                        <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn text-center py-2.5 text-xs">Main Dashboard</a>
                     {% endif %}
                     {% if request.resolver_match.app_name != 'dashboard' %}
-                    <a href="{% url 'dashboard:home' %}" class="btn-outline text-center py-3 text-sm">Profile</a>
+                    <a href="{% url 'dashboard:home' %}" class="tf-hdr-link text-center py-2 text-sm font-medium">Profile</a>
                     {% endif %}
-                    <a href="{% url 'accounts:logout' %}" class="text-center text-muted hover:text-red-400 py-2 transition-colors text-sm font-medium tracking-wide">Sign Out</a>
+                    <a href="{% url 'accounts:logout' %}" class="text-center text-[#6E6E73] hover:text-[#FF3B30] py-1.5 transition-colors text-xs font-medium">Sign Out</a>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}" class="text-center text-muted hover:text-white py-2 transition-colors text-sm font-medium tracking-wide">Sign In</a>
-                    <a href="{% url 'accounts:signup' %}" class="btn-primary text-center py-3 text-sm">Get Started</a>
+                    <a href="{% url 'accounts:login' %}" class="tf-hdr-link text-center py-2 text-sm font-medium">Sign In</a>
+                    <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn text-center py-2.5 text-xs">Get Started</a>
                 {% endif %}
             </div>
         </div>

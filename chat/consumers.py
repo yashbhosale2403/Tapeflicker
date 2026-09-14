@@ -200,7 +200,7 @@ class CourseChatConsumer(AsyncWebsocketConsumer):
             "id": msg.id,
             "user_id": msg.user_id,
             "username": msg.user.get_full_name() or msg.user.username,
-            "avatar": getattr(getattr(msg.user, "profile", None), "avatar_url", ""),
+            "avatar": msg.user.profile.get_avatar_url() if hasattr(msg.user, "profile") else "",
             "content": msg.content,
             "created_at": msg.created_at.isoformat(),
             "updated_at": msg.updated_at.isoformat(),

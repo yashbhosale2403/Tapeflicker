@@ -57,15 +57,16 @@
 }
 
 .dashboard-page .btn-outline {
-    color: var(--text-main) !important;
-    border-color: rgba(0, 113, 227, 0.42) !important;
-    background: rgba(255, 255, 255, 0.05) !important;
+    color: #1D1D1F !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    background: #FFFFFF !important;
+    border-radius: 9999px !important;
 }
 
 .dashboard-page .btn-outline:hover {
-    background: rgba(0, 113, 227, 0.12) !important;
-    border-color: #0071E3 !important;
-    transform: translateY(-2px) !important;
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.25) !important;
+    transform: translateY(-1.5px) !important;
 }
 
 html[data-theme="light"] body {

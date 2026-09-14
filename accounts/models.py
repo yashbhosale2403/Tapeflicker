@@ -63,6 +63,20 @@ class UserProfile(models.Model):
             })
         return badges
 
+    def save(self, *args, **kwargs):
+        if not self.avatar_url:
+            import random
+            self.avatar_url = f"/static/images/avatars/avatar_{random.randint(1, 15)}.png"
+        super().save(*args, **kwargs)
+
+    def get_avatar_url(self):
+        if not self.avatar_url:
+            import random
+            self.avatar_url = f"/static/images/avatars/avatar_{random.randint(1, 15)}.png"
+            if self.pk:
+                UserProfile.objects.filter(pk=self.pk).update(avatar_url=self.avatar_url)
+        return self.avatar_url
+
     def get_initials(self):
         if self.user.first_name and self.user.last_name:
             return f"{self.user.first_name[0]}{self.user.last_name[0]}".upper()
@@ -74,3 +88,4 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"
+

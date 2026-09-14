@@ -8,20 +8,25 @@ def dashboard_home(request):
     
     # Compute Stats
     completed_courses = enrollments.filter(progress=100).count()
+    in_progress_courses = enrollments.filter(progress__lt=100)
     
-    # Compute Hours Learned
-    progresses = UserLessonProgress.objects.filter(user=request.user, is_completed=True).select_related('lesson')
-    total_minutes = sum(p.lesson.get_duration_in_minutes() for p in progresses)
-    hours_learned = int(total_minutes // 60)
-    
-    # Continue Learning
+    # Continue Learning (Last accessed active course)
     continue_learning = enrollments.order_by('-last_accessed_at').first()
     
     return render(request, 'dashboard/index.html', {
         'enrollments': enrollments,
+        'in_progress_courses': in_progress_courses,
+        'completed_courses_list': enrollments.filter(progress=100),
         'completed_courses': completed_courses,
-        'hours_learned': hours_learned,
         'continue_learning': continue_learning,
+    })
+
+@login_required(login_url='accounts:login')
+def certificates_view(request):
+    completed_enrollments = Enrollment.objects.filter(user=request.user, is_active=True, progress=100).select_related('course')
+    return render(request, 'dashboard/certificates.html', {
+        'completed_enrollments': completed_enrollments,
+        'title': 'Certificates'
     })
 
 @login_required(login_url='accounts:login')
@@ -43,7 +48,7 @@ def settings_view(request):
         return redirect('dashboard:settings')
         
     return render(request, 'dashboard/settings.html')
-    
+
 @login_required(login_url='accounts:login')
 def empty_state_view(request, title):
     return render(request, 'dashboard/empty_state.html', {'title': title})

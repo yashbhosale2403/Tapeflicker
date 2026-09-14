@@ -57,11 +57,7 @@
                     {% for msg in messages %}
                     <article class="chat-message rounded-2xl p-3 border border-white/10 bg-white/5" data-message-id="{{ msg.id }}" data-message-content="{{ msg.content|lower }}">
                         <div class="flex items-start gap-3">
-                            {% if msg.user.profile.avatar_url %}
-                            <img src="{{ msg.user.profile.avatar_url }}" class="w-9 h-9 rounded-full object-cover">
-                            {% else %}
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-accent-neon to-accent-purple flex items-center justify-center text-primary text-xs font-bold">{{ msg.user.username|first|upper }}</div>
-                            {% endif %}
+                            <img src="{{ msg.user.profile.get_avatar_url }}" class="w-9 h-9 rounded-full object-cover">
                             <div class="min-w-0 flex-1">
                                 <div class="flex items-center gap-2 flex-wrap">
                                     <p class="text-sm text-white font-semibold">{{ msg.user.get_full_name|default:msg.user.username }}</p>

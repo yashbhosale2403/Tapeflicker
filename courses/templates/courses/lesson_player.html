@@ -4,44 +4,101 @@
 {% block title %}{{ lesson.title }} - {{ course.title }} | Tapeflicker{% endblock %}
 
 {% block content %}
-<div class="min-h-screen pt-24 pb-10 relative z-20">
-    <div class="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8">
-        <div class="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-6">
-            <section class="reveal">
-                <div class="glass rounded-3xl border border-white/10 overflow-hidden">
-                    <div class="relative w-full aspect-video bg-black">
-                        <div id="video-loading" class="{% if not lesson.embed_url %}hidden{% endif %} absolute inset-0 z-10 bg-gradient-to-br from-primary to-secondary p-6 md:p-10 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="w-14 h-14 mx-auto rounded-full border-2 border-white/20 border-t-accent-neon animate-spin mb-4"></div>
-                                <p class="text-white text-sm font-medium">Loading lesson video...</p>
+<style>
+  .lp-card {
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,.03);
+  }
+  .lp-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: #0071E3;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color .15s ease;
+  }
+  .lp-btn-primary:hover {
+    background-color: #0058B0;
+    color: #ffffff;
+  }
+  .lp-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1D1D1F;
+    border: 1px solid rgba(0,0,0,.15);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .lp-btn-outline:hover {
+    background: rgba(0,0,0,.04);
+    border-color: rgba(0,0,0,.25);
+  }
+</style>
+
+<div style="background: #FBFBFD; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; color: #1D1D1F; -webkit-font-smoothing: antialiased; padding-top: 30px; padding-bottom: 60px;">
+    <div style="max-width: 1560px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 32px);">
+        <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;">
+            
+            <style>
+              .lp-main-col { grid-column: span 12 / span 12; }
+              .lp-aside-col { grid-column: span 12 / span 12; }
+              @media (min-width: 1200px) {
+                .lp-main-col { grid-column: span 8 / span 8 !important; }
+                .lp-aside-col { grid-column: span 4 / span 4 !important; }
+              }
+            </style>
+
+            <section class="lp-main-col">
+                <div class="lp-card" style="overflow: hidden;">
+                    <!-- Video Container -->
+                    <div style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000000;">
+                        <div id="video-loading" class="{% if not lesson.embed_url %}hidden{% endif %}" style="position: absolute; inset: 0; z-index: 10; background: linear-gradient(135deg, #1c2738 0%, #0d1522 100%); padding: 24px; display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2); border-top-color: #0071E3; animation: spin 1s linear infinite;"></div>
+                                <p style="color: #ffffff; font-size: 14px; font-weight: 500; margin: 0;">Loading lesson video...</p>
                             </div>
                         </div>
 
-                        <div id="video-fallback" class="{% if lesson.embed_url %}hidden{% endif %} absolute inset-0 z-20 bg-gradient-to-br from-primary/95 to-secondary/95 p-6 md:p-10 flex items-center justify-center">
-                            <div class="text-center max-w-2xl">
-                                <h3 class="text-white font-sora font-bold text-2xl mb-3">Unable to play this video inside the lesson</h3>
-                                <p class="text-muted mb-5">This can happen when YouTube blocks embedding for this video.</p>
-                                <div class="text-left text-sm text-muted bg-white/5 border border-white/10 rounded-2xl p-4 mb-6 space-y-1">
-                                    <p>Possible reasons:</p>
-                                    <p>- Embedding disabled by uploader</p>
-                                    <p>- Restricted or private video</p>
-                                    <p>- Age-restricted content</p>
-                                    <p>- Some Shorts or music content not embeddable</p>
+                        <div id="video-fallback" class="{% if lesson.embed_url %}hidden{% endif %}" style="position: absolute; inset: 0; z-index: 20; background: rgba(15, 23, 42, 0.96); padding: 32px; display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center; max-width: 560px;">
+                                <h3 style="color: #ffffff; font-size: 20px; font-weight: 600; margin: 0 0 12px;">Unable to play this video inside the lesson</h3>
+                                <p style="color: rgba(255,255,255,0.7); font-size: 13.5px; margin: 0 0 20px;">This can happen when YouTube blocks embedding for this video.</p>
+                                <div style="text-align: left; font-size: 12.5px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                                    <p style="margin: 0 0 4px; font-weight: 600; color: #fff;">Possible reasons:</p>
+                                    <p style="margin: 2px 0;">- Embedding disabled by uploader</p>
+                                    <p style="margin: 2px 0;">- Restricted or private video</p>
+                                    <p style="margin: 2px 0;">- Age-restricted content</p>
                                 </div>
-                                <div class="flex flex-wrap justify-center gap-3">
-                                    <button id="retry-video-btn" type="button" class="btn-outline">Retry</button>
-                                {% if lesson.youtube_watch_url %}
-                                <a href="{{ lesson.youtube_watch_url }}" target="_blank" rel="noopener" class="btn-primary inline-flex">
-                                    Watch on YouTube
-                                </a>
-                                {% endif %}
+                                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+                                    <button id="retry-video-btn" type="button" class="lp-btn-outline" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">Retry</button>
+                                    {% if lesson.youtube_watch_url %}
+                                    <a href="{{ lesson.youtube_watch_url }}" target="_blank" rel="noopener" class="lp-btn-primary">
+                                        Watch on YouTube
+                                    </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                         {% if lesson.embed_url %}
                         <iframe
                             id="lesson-player"
-                            class="absolute inset-0 w-full h-full"
+                            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
                             src="{{ lesson.embed_url }}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1&origin={{ request.scheme }}://{{ request.get_host }}"
                             title="{{ lesson.title }}"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -50,83 +107,89 @@
                         ></iframe>
                         {% endif %}
                     </div>
-                    <div class="p-6 md:p-8">
-                        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+
+                    <!-- Lesson Information Body -->
+                    <div style="padding: 28px;">
+                        <div style="display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 20px;">
                             <div>
-                                <p class="text-xs uppercase tracking-[0.2em] text-accent-neon mb-2">{{ lesson.module.title }}</p>
-                                <h1 class="text-2xl md:text-3xl font-sora font-bold text-white">{{ lesson.title }}</h1>
+                                <p style="font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: #0071E3; font-weight: 600; margin: 0 0 6px; font-family: ui-monospace, monospace;">{{ lesson.module.title }}</p>
+                                <h1 style="font-size: clamp(22px, 3vw, 30px); font-weight: 600; color: #1D1D1F; margin: 0;">{{ lesson.title }}</h1>
                             </div>
-                            <button id="mark-complete-btn" class="btn-outline {% if lesson.id in completed_lesson_ids %}!border-green-500/60 !text-green-400 !bg-green-500/10{% endif %}" data-id="{{ lesson.id }}">
-                                {% if lesson.id in completed_lesson_ids %}Completed{% else %}Mark Complete{% endif %}
+                            <button id="mark-complete-btn" class="lp-btn-outline {% if lesson.id in completed_lesson_ids %}!border-green-500 !text-green-600 !bg-green-50{% endif %}" data-id="{{ lesson.id }}">
+                                {% if lesson.id in completed_lesson_ids %}Completed ✓{% else %}Mark Complete{% endif %}
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-7">
-                            <div class="glass rounded-2xl p-4 border border-white/10">
-                                <p class="text-xs text-muted uppercase tracking-widest mb-2">Progress</p>
-                                <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-2">
-                                    <div id="learning-progress-bar" class="h-full bg-gradient-to-r from-accent-neon to-accent-purple transition-all duration-500" style="width: {{ progress_percent }}%;"></div>
+                        <!-- Progress & Duration Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; margin-bottom: 24px;">
+                            <div style="background: #F9F9FB; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 16px;">
+                                <p style="font-size: 11px; color: #86868B; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin: 0 0 8px; font-family: ui-monospace, monospace;">Progress</p>
+                                <div style="width: 100%; height: 6px; background: rgba(0,0,0,.08); border-radius: 999px; overflow: hidden; margin-bottom: 8px;">
+                                    <div id="learning-progress-bar" style="height: 100%; background: #0071E3; border-radius: 999px; transition: width .5s ease; width: {{ progress_percent }}%;"></div>
                                 </div>
-                                <p class="text-sm text-white"><span id="learning-progress-percent">{{ progress_percent }}</span>% complete ({{ completed_count }}/{{ total_lessons }} lessons)</p>
+                                <p style="font-size: 13px; color: #1D1D1F; font-weight: 500; margin: 0;"><span id="learning-progress-percent">{{ progress_percent }}</span>% complete ({{ completed_count }}/{{ total_lessons }} lessons)</p>
                             </div>
-                            <div class="glass rounded-2xl p-4 border border-white/10">
-                                <p class="text-xs text-muted uppercase tracking-widest mb-2">Duration</p>
-                                <p class="text-sm text-white">{{ lesson.duration }} | {% if lesson.is_preview %}Preview Lesson{% else %}Enrolled Access{% endif %}</p>
+                            <div style="background: #F9F9FB; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 16px;">
+                                <p style="font-size: 11px; color: #86868B; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin: 0 0 8px; font-family: ui-monospace, monospace;">Duration</p>
+                                <p style="font-size: 13.5px; color: #1D1D1F; font-weight: 500; margin: 0;">{{ lesson.duration }} | {% if lesson.is_preview %}Preview Lesson{% else %}Enrolled Access{% endif %}</p>
                                 {% if user_progress and user_progress.watched_seconds %}
-                                <p class="text-xs text-muted mt-2">Saved watch time: {{ user_progress.watched_seconds }}s</p>
+                                <p style="font-size: 12px; color: #86868B; margin: 4px 0 0;">Saved watch time: {{ user_progress.watched_seconds }}s</p>
                                 {% endif %}
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <div class="glass rounded-2xl p-5 border border-white/10">
-                                <h2 class="text-white font-sora font-bold text-lg mb-3">Lesson Description</h2>
-                                <p class="text-muted text-sm leading-relaxed whitespace-pre-line">{{ lesson.description|default:course.description }}</p>
+                        <!-- Description & Resources -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px;">
+                            <div style="background: #F9F9FB; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 20px;">
+                                <h2 style="font-size: 16px; font-weight: 600; color: #1D1D1F; margin: 0 0 10px;">Lesson Description</h2>
+                                <p style="font-size: 14px; color: #6E6E73; line-height: 1.55; white-space: pre-line; margin: 0;">{{ lesson.description|default:course.description }}</p>
                             </div>
-                            <div class="glass rounded-2xl p-5 border border-white/10">
-                                <h2 class="text-white font-sora font-bold text-lg mb-3">Resources</h2>
-                                <div class="space-y-3">
+                            <div style="background: #F9F9FB; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 20px;">
+                                <h2 style="font-size: 16px; font-weight: 600; color: #1D1D1F; margin: 0 0 10px;">Resources</h2>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
                                     {% if lesson.resource_file %}
-                                    <a href="{{ lesson.resource_file.url }}" class="flex items-center justify-between text-sm px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition">
-                                        <span class="text-white truncate">Primary Resource</span>
-                                        <span class="text-accent-neon">Download</span>
+                                    <a href="{{ lesson.resource_file.url }}" style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; padding: 10px 14px; border-radius: 10px; background: #ffffff; border: 1px solid rgba(0,0,0,.08); text-decoration: none; color: #1D1D1F;">
+                                        <span style="font-weight: 500;">Primary Resource</span>
+                                        <span style="color: #0071E3; font-weight: 600;">Download</span>
                                     </a>
                                     {% endif %}
                                     {% for resource in lesson.resources.all %}
-                                    <div class="flex items-center justify-between text-sm px-3 py-2 rounded-xl bg-white/5">
-                                        <span class="text-white truncate">{{ resource.title }}</span>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; padding: 10px 14px; border-radius: 10px; background: #ffffff; border: 1px solid rgba(0,0,0,.08); color: #1D1D1F;">
+                                        <span style="font-weight: 500;">{{ resource.title }}</span>
                                         {% if resource.file %}
-                                        <a href="{{ resource.file.url }}" class="text-accent-neon hover:underline">Download</a>
+                                        <a href="{{ resource.file.url }}" style="color: #0071E3; font-weight: 600; text-decoration: none;">Download</a>
                                         {% elif resource.external_url %}
-                                        <a href="{{ resource.external_url }}" target="_blank" rel="noopener" class="text-accent-neon hover:underline">Open</a>
+                                        <a href="{{ resource.external_url }}" target="_blank" rel="noopener" style="color: #0071E3; font-weight: 600; text-decoration: none;">Open</a>
                                         {% endif %}
                                     </div>
                                     {% empty %}
                                     {% if not lesson.resource_file %}
-                                    <p class="text-sm text-muted">No resources for this lesson yet.</p>
+                                    <p style="font-size: 13.5px; color: #86868B; margin: 0;">No resources for this lesson yet.</p>
                                     {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="glass rounded-2xl p-5 border border-white/10 mt-6">
-                            <h2 class="text-white font-sora font-bold text-lg mb-3">Notes</h2>
-                            <p class="text-sm text-muted leading-relaxed whitespace-pre-line">{{ lesson.notes|default:"No notes for this lesson yet." }}</p>
+                        <!-- Notes Section -->
+                        <div style="background: #F9F9FB; border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 20px; margin-top: 20px;">
+                            <h2 style="font-size: 16px; font-weight: 600; color: #1D1D1F; margin: 0 0 10px;">Notes</h2>
+                            <p style="font-size: 14px; color: #6E6E73; line-height: 1.55; white-space: pre-line; margin: 0;">{{ lesson.notes|default:"No notes for this lesson yet." }}</p>
                         </div>
 
-                        <div class="flex items-center justify-between gap-4 mt-8">
+                        <!-- Bottom Navigation Buttons -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px;">
                             {% if prev_lesson %}
-                            <a href="{% url 'courses:lesson_player' prev_lesson.id %}" class="btn-outline">Previous Lesson</a>
+                            <a href="{% url 'courses:lesson_player' prev_lesson.id %}" class="lp-btn-outline">← Previous Lesson</a>
                             {% else %}
                             <span></span>
                             {% endif %}
-                            <div class="flex items-center gap-3">
-                                <a href="{% url 'chat:course_room' course.id %}" class="btn-outline">Open Chat</a>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <a href="{% url 'chat:course_room' course.id %}" class="lp-btn-outline">Course Chat</a>
                                 {% if next_lesson %}
-                                <a id="next-lesson-btn" href="{% url 'courses:lesson_player' next_lesson.id %}" class="btn-primary">Next Lesson</a>
+                                <a id="next-lesson-btn" href="{% url 'courses:lesson_player' next_lesson.id %}" class="lp-btn-primary">Next Lesson →</a>
                                 {% else %}
-                                <a href="{% url 'dashboard:home' %}" class="btn-primary">Back to Profile</a>
+                                <a href="{% url 'dashboard:home' %}" class="lp-btn-primary">Back to Profile</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -134,49 +197,50 @@
                 </div>
             </section>
 
-            <aside class="reveal" style="transition-delay: 120ms;">
-                <div class="glass rounded-3xl border border-white/10 overflow-hidden sticky top-28 max-h-[calc(100vh-8rem)] flex flex-col">
-                    <div class="p-5 border-b border-white/10">
-                        <a href="{% url 'courses:detail' course.id %}" class="text-xs uppercase tracking-widest text-accent-neon hover:text-white transition">Back to Course</a>
-                        <h2 class="text-white font-sora font-bold text-lg mt-2">{{ course.title }}</h2>
-                        <p class="text-xs text-muted mt-1">Course Content</p>
+            <!-- Aside Sidebar (Curriculum Modules Accordion) -->
+            <aside class="lp-aside-col">
+                <div class="lp-card" style="position: sticky; top: 80px; max-height: calc(100vh - 100px); display: flex; flex-direction: column; overflow: hidden;">
+                    <div style="padding: 20px; border-bottom: 1px solid rgba(0,0,0,.08);">
+                        <a href="{% url 'courses:detail' course.id %}" style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #0071E3; font-weight: 600; text-decoration: none; font-family: ui-monospace, monospace;">← Back to Course</a>
+                        <h2 style="font-size: 16px; font-weight: 600; color: #1D1D1F; margin: 8px 0 0;">{{ course.title }}</h2>
+                        <p style="font-size: 12px; color: #86868B; margin: 3px 0 0;">Course Syllabus</p>
                     </div>
-                    <div class="overflow-y-auto p-4 space-y-3">
+                    <div style="overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
                         {% for module in modules %}
-                        <details class="group rounded-2xl border border-white/10 bg-white/5" {% if lesson.module.id == module.id %}open{% endif %}>
-                            <summary class="cursor-pointer list-none px-4 py-3 flex items-center justify-between">
-                                <span class="text-sm text-white font-semibold">{{ module.title }}</span>
-                                <span class="text-xs text-muted">{{ module.lessons.count }} lessons</span>
+                        <details style="border-radius: 12px; border: 1px solid rgba(0,0,0,.08); background: #F9F9FB; overflow: hidden;" {% if lesson.module.id == module.id %}open{% endif %}>
+                            <summary style="cursor: pointer; list-style: none; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; font-weight: 600; color: #1D1D1F;">
+                                <span>{{ module.title }}</span>
+                                <span style="font-size: 11px; color: #86868B; font-weight: 400;">{{ module.lessons.count }} lessons</span>
                             </summary>
-                            <div class="px-2 pb-2 space-y-1">
+                            <div style="padding: 8px; border-top: 1px solid rgba(0,0,0,.06); background: #ffffff; display: flex; flex-direction: column; gap: 4px;">
                                 {% for item in module.lessons.all %}
                                 {% if enrollment or item.is_preview %}
-                                <a href="{% url 'courses:lesson_player' item.id %}" class="flex items-center gap-3 px-3 py-2 rounded-xl transition {% if item.id == lesson.id %}bg-accent-neon/15 border border-accent-neon/30{% else %}hover:bg-white/10 border border-transparent{% endif %}">
-                                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] {% if item.id in completed_lesson_ids %}bg-green-500/25 text-green-300{% elif item.is_preview %}bg-accent-neon/20 text-accent-neon{% else %}bg-white/15 text-muted{% endif %}">
+                                <a href="{% url 'courses:lesson_player' item.id %}" style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; text-decoration: none; transition: background .15s ease; background: {% if item.id == lesson.id %}rgba(0,113,227,0.08){% else %}transparent{% endif %}; border: 1px solid {% if item.id == lesson.id %}rgba(0,113,227,0.2){% else %}transparent{% endif %};">
+                                    <span style="width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; background: {% if item.id in completed_lesson_ids %}#34C759{% elif item.id == lesson.id %}#0071E3{% else %}rgba(0,0,0,0.08){% endif %}; color: #ffffff;">
                                         {% if item.id in completed_lesson_ids %}✓{% else %}▶{% endif %}
                                     </span>
-                                    <span class="text-xs {% if item.id == lesson.id %}text-accent-neon{% else %}text-white{% endif %} truncate">{{ item.title }}</span>
+                                    <span style="font-size: 12.5px; font-weight: {% if item.id == lesson.id %}600{% else %}400{% endif %}; color: {% if item.id == lesson.id %}#0071E3{% else %}#1D1D1F{% endif %}; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ item.title }}</span>
                                     {% if item.is_preview %}
-                                    <span class="ml-auto text-[10px] text-accent-cyan">Preview</span>
+                                    <span style="font-size: 10px; color: #0071E3; font-weight: 600;">Preview</span>
                                     {% endif %}
                                 </a>
                                 {% else %}
-                                <div class="flex items-center gap-3 px-3 py-2 rounded-xl border border-transparent opacity-50 select-none">
-                                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] bg-white/5 text-muted">
+                                <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; opacity: 0.6; select-none;">
+                                    <span style="width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; background: rgba(0,0,0,0.06); color: #86868B;">
                                         🔒
                                     </span>
-                                    <span class="text-xs text-muted truncate">{{ item.title }}</span>
+                                    <span style="font-size: 12.5px; color: #86868B; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ item.title }}</span>
                                 </div>
                                 {% endif %}
                                 {% empty %}
-                                <p class="text-xs text-muted px-3 py-2">No lessons yet.</p>
+                                <p style="font-size: 12px; color: #86868B; padding: 8px; margin: 0;">No lessons yet.</p>
                                 {% endfor %}
                             </div>
                         </details>
                         {% empty %}
-                        <div class="text-center py-10">
-                            <p class="text-sm text-muted">No modules published yet.</p>
-                            <a href="{% url 'courses:detail' course.id %}" class="btn-outline mt-4 inline-flex">Browse Courses</a>
+                        <div style="text-align: center; padding: 24px;">
+                            <p style="font-size: 13px; color: #86868B; margin: 0 0 12px;">No modules published yet.</p>
+                            <a href="{% url 'courses:detail' course.id %}" class="lp-btn-outline">Browse Courses</a>
                         </div>
                         {% endfor %}
                     </div>
@@ -185,8 +249,9 @@
         </div>
     </div>
 </div>
-<a href="{% url 'chat:course_room' course.id %}" class="fixed bottom-6 right-6 z-40 btn-primary shadow-[0_0_30px_rgba(0,217,255,0.35)]">
-    Discussion
+
+<a href="{% url 'chat:course_room' course.id %}" style="position: fixed; bottom: 24px; right: 24px; z-index: 40;" class="lp-btn-primary">
+    Discussion Chat
 </a>
 {% endblock %}
 
@@ -229,7 +294,6 @@
         playerEl.classList.remove('opacity-20');
         if (loadingTimeout) clearTimeout(loadingTimeout);
         loadingTimeout = setTimeout(() => {
-            // If YouTube never becomes playable, fail gracefully.
             showVideoFallback();
         }, 25000);
     }
@@ -293,7 +357,6 @@
     }
 
     function onPlayerError(event) {
-        // Covers errors like 2, 5, 100, 101, 150, 153.
         console.error('YouTube Player Error:', event?.data);
         showVideoFallback();
     }
@@ -309,8 +372,8 @@
                         event.target.seekTo(initialWatched, true);
                     }
                 },
-                onStateChange: onPlayerStateChange
-                ,onError: onPlayerError
+                onStateChange: onPlayerStateChange,
+                onError: onPlayerError
             }
         });
     }
@@ -346,8 +409,8 @@
         btn.disabled = false;
         if (!response.ok) return;
         const data = await response.json();
-        btn.classList.add('!border-green-500/60', '!text-green-400', '!bg-green-500/10');
-        btn.textContent = 'Completed';
+        btn.classList.add('!border-green-500', '!text-green-600', '!bg-green-50');
+        btn.textContent = 'Completed ✓';
         updateProgressUI(data.progress || 0);
     });
 </script>
