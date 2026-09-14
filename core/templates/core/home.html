@@ -35,16 +35,17 @@
 
   <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06);">
     <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
-      <a href="#top" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F;" style-hover="color: #1D1D1F;">
+      <a href="/" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F;" style-hover="color: #1D1D1F;">
         <img src="/static/images/tapeflicker_brand_logo_transparent.png" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
         <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
       </a>
       <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
-        <a href="#courses" style="color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Courses</a>
-        <a href="#labs" style="color: #424245;" style-hover="color: #1D1D1F;">Labs</a>
-        <a href="#events" style="color: #424245;" style-hover="color: #1D1D1F;">Events</a>
-        <a href="#gear" style="color: #424245;" style-hover="color: #1D1D1F;">Gear</a>
-        <a href="#about" style="color: #424245;" style-hover="color: #1D1D1F;">About</a>
+        <a href="/courses/" style="color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Courses</a>
+        <a href="/courses/" style="color: #424245;" style-hover="color: #1D1D1F;">Labs</a>
+        <a href="/events/" style="color: #424245;" style-hover="color: #1D1D1F;">Events</a>
+        <a href="/about/" style="color: #424245;" style-hover="color: #1D1D1F;">Gear</a>
+        <a href="/about/" style="color: #424245;" style-hover="color: #1D1D1F;">About</a>
+        <a href="/contact/" style="color: #424245;" style-hover="color: #1D1D1F;">Contact</a>
       </nav>
       <a href="/accounts/login/" style="font-size: 12.5px; color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Sign in</a>
       <a href="/accounts/signup/" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #1D1D1F; color: #fff; white-space: nowrap; flex: 0 0 auto; text-decoration: none;" style-hover="background: #000;">Get started</a>
@@ -64,7 +65,7 @@
         Affordable premium tech education for builders, ethical hackers, developers and innovators — project-led, mentor-guided, career-grade.
       </p>
       <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;">
-        <a href="#courses" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; background: #0071E3; color: #fff;" style-hover="background: #0058B0; color: #fff;">Start learning</a>
+        <a href="/courses/" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; background: #0071E3; color: #fff;" style-hover="background: #0058B0; color: #fff;">Start learning</a>
         <button onClick="{{ openDemo }}" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(0,0,0,.14); background: #fff; color: #1D1D1F; cursor: pointer;" style-hover="background: #F0F0F3;">Watch demo</button>
       </div>
       <div style="display: flex; gap: 28px; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,.08); flex-wrap: wrap;">
@@ -234,7 +235,7 @@
         <p style="margin: 12px 0 0; max-width: 48ch; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.6);">Start free with the foundations track. Upgrade when you want the cyber labs, mentor reviews and career-grade certificate.</p>
         <div style="display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap;">
           <a href="/accounts/signup/" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; border: 0; cursor: pointer; background: #fff; color: #111; text-decoration: none;" style-hover="background: #E6E6EA;">Get started</a>
-          <a href="#courses" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); color: #fff; text-decoration: none;" style-hover="background: rgba(255,255,255,.1); color: #fff;">Explore catalog</a>
+          <a href="/courses/" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); color: #fff; text-decoration: none;" style-hover="background: rgba(255,255,255,.1); color: #fff;">Explore catalog</a>
         </div>
       </div>
       <div style="display: flex; flex-direction: column; gap: 9px;">
@@ -254,9 +255,9 @@
       <span>© 2026 Tapeflicker Inc.</span>
       <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>All systems operational</span>
       <div style="flex: 1;"></div>
-      <a href="#courses" style="color: #86868B;" style-hover="color: #1D1D1F;">Courses</a>
-      <a href="#about" style="color: #86868B;" style-hover="color: #1D1D1F;">About</a>
-      <a href="#top" style="color: #86868B;" style-hover="color: #1D1D1F;">Privacy</a>
+      <a href="/courses/" style="color: #86868B;" style-hover="color: #1D1D1F;">Courses</a>
+      <a href="/about/" style="color: #86868B;" style-hover="color: #1D1D1F;">About</a>
+      <a href="/about/" style="color: #86868B;" style-hover="color: #1D1D1F;">Privacy</a>
       <a href="/contact/" style="color: #86868B;" style-hover="color: #1D1D1F;">Contact</a>
     </div>
   </footer>
