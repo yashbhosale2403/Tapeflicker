@@ -391,38 +391,13 @@ class Component extends DCLogic {
       mouse.y = -1000;
     };
 
+    const logoImg = new Image();
+    logoImg.src = '/static/images/tapeflicker_brand_logo_transparent.png';
+
     const tempCanvas = document.createElement("canvas");
     const tempCtx = tempCanvas.getContext("2d");
     tempCanvas.width = width;
     tempCanvas.height = height;
-
-    let fontSize = Math.min(width * 0.16, height * 0.35);
-    tempCtx.font = `900 ${fontSize}px "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    tempCtx.textAlign = "center";
-    tempCtx.textBaseline = "middle";
-    
-    let textMetrics = tempCtx.measureText("TAPEFLICKER");
-    if (textMetrics.width > width * 0.90) {
-      fontSize = Math.floor(fontSize * ((width * 0.90) / textMetrics.width));
-      tempCtx.font = `900 ${fontSize}px "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-    }
-
-    tempCtx.fillStyle = "#000";
-    tempCtx.fillText("TAPEFLICKER", width / 2, height / 2);
-
-    const imageData = tempCtx.getImageData(0, 0, width, height);
-    const targets = [];
-    const step = 2;
-
-    for (let y = 0; y < height; y += step) {
-      for (let x = 0; x < width; x += step) {
-        const index = (y * width + x) * 4;
-        const alpha = imageData.data[index + 3];
-        if (alpha > 100) {
-          targets.push({ x: x, y: y });
-        }
-      }
-    }
 
     const colors = [
       "rgba(0, 113, 227, 0.96)",   // Bright Apple Blue
@@ -433,40 +408,86 @@ class Component extends DCLogic {
     ];
 
     const particles = [];
-    const particleCount = Math.min(targets.length, 3400);
+    const particleCount = 2800;
 
     for (let i = 0; i < particleCount; i++) {
-      const targetIndex = Math.floor((i / particleCount) * targets.length);
-      const target = targets[targetIndex] || { x: width / 2, y: height / 2 };
       particles.push({
         x: width / 2 + (Math.random() - 0.5) * width,
         y: height / 2 + (Math.random() - 0.5) * height,
         vx: 0,
         vy: 0,
-        targetX: target.x,
-        targetY: target.y,
-        size: Math.random() * 1.4 + 1.5,
+        targetX: width / 2,
+        targetY: height / 2,
+        size: Math.random() * 1.4 + 1.4,
         color: colors[i % colors.length]
       });
+    }
+
+    let logoDrawRect = { x: 0, y: 0, w: 0, h: 0, loaded: false };
+
+    const updateLogoTargets = () => {
+      if (!logoImg.complete || logoImg.naturalWidth === 0) return;
+      tempCtx.clearRect(0, 0, width, height);
+
+      const maxW = width * 0.82;
+      const maxH = height * 0.52;
+      const scale = Math.min(maxW / logoImg.naturalWidth, maxH / logoImg.naturalHeight);
+      const drawW = logoImg.naturalWidth * scale;
+      const drawH = logoImg.naturalHeight * scale;
+      const drawX = (width - drawW) / 2;
+      const drawY = (height - drawH) / 2;
+
+      logoDrawRect = { x: drawX, y: drawY, w: drawW, h: drawH, loaded: true };
+
+      tempCtx.drawImage(logoImg, drawX, drawY, drawW, drawH);
+
+      const imageData = tempCtx.getImageData(0, 0, width, height);
+      const targets = [];
+      const step = 2;
+
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          const index = (y * width + x) * 4;
+          const alpha = imageData.data[index + 3];
+          if (alpha > 70) {
+            targets.push({ x: x, y: y });
+          }
+        }
+      }
+
+      if (targets.length > 0) {
+        for (let i = 0; i < particles.length; i++) {
+          const targetIndex = Math.floor((i / particles.length) * targets.length);
+          const target = targets[targetIndex] || { x: width / 2, y: height / 2 };
+          particles[i].targetX = target.x;
+          particles[i].targetY = target.y;
+        }
+      }
+    };
+
+    if (logoImg.complete && logoImg.naturalWidth > 0) {
+      updateLogoTargets();
+    } else {
+      logoImg.onload = updateLogoTargets;
     }
 
     const animate = () => {
       if (this.pcv !== cv || !cv.isConnected) return;
       ctx.clearRect(0, 0, width, height);
 
-      // Soft ambient clarity backdrop
-      ctx.fillStyle = "rgba(0, 113, 227, 0.04)";
-      ctx.font = tempCtx.font;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("TAPEFLICKER", width / 2, height / 2);
+      if (logoDrawRect.loaded) {
+        ctx.save();
+        ctx.globalAlpha = 0.08;
+        ctx.drawImage(logoImg, logoDrawRect.x, logoDrawRect.y, logoDrawRect.w, logoDrawRect.h);
+        ctx.restore();
+      }
 
       particles.forEach((p) => {
         const dx = p.targetX - p.x;
         const dy = p.targetY - p.y;
 
-        p.vx += dx * 0.032;
-        p.vy += dy * 0.032;
+        p.vx += dx * 0.035;
+        p.vy += dy * 0.035;
 
         const mouseDX = p.x - mouse.x;
         const mouseDY = p.y - mouse.y;
@@ -475,8 +496,8 @@ class Component extends DCLogic {
 
         if (distance < interactionRadius) {
           const force = (interactionRadius - distance) / interactionRadius;
-          p.vx += (mouseDX / (distance || 1)) * force * 5.0;
-          p.vy += (mouseDY / (distance || 1)) * force * 5.0;
+          p.vx += (mouseDX / (distance || 1)) * force * 5.5;
+          p.vy += (mouseDY / (distance || 1)) * force * 5.5;
         }
 
         p.vx *= 0.82;
