@@ -1,32 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-primary: #0b0b0e;
-    --bg-secondary: #141419;
-    --card-bg: rgba(255, 255, 255, 0.04);
-    --card-border: rgba(0, 180, 255, 0.18);
+    --bg-primary: #F5F5F7;
+    --bg-secondary: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --card-border: rgba(0, 0, 0, 0.08);
     --accent-neon: #0071E3;
     --accent-purple: #6366F1;
     --accent-cyan: #00B4FF;
     --accent-blue: #0284C7;
     --accent-green: #34C759;
-    --text-main: #FFFFFF;
-    --text-muted: rgba(255, 255, 255, 0.72);
-    --text-dim: rgba(255, 255, 255, 0.48);
-}
-
-[data-theme="light"] {
-    --bg-primary: #F5F5F7;
-    --bg-secondary: #FFFFFF;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(0, 0, 0, 0.08);
     --text-main: #1D1D1F;
     --text-muted: #6E6E73;
     --text-dim: #86868B;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0b0b0e;
+    --bg-secondary: #141419;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(0, 180, 255, 0.18);
+    --text-main: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.72);
+    --text-dim: rgba(255, 255, 255, 0.48);
     --accent-neon: #0071E3;
-    --accent-purple: #4F46E5;
-    --accent-cyan: #00A3FF;
-    --accent-green: #28A745;
+    --accent-purple: #6366F1;
+    --accent-cyan: #00B4FF;
+    --accent-green: #34C759;
 }
 
 .dashboard-page {

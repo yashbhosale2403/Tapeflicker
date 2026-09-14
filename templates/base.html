@@ -58,8 +58,7 @@
             } catch (e) {
                 savedTheme = null;
             }
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            const theme = savedTheme || 'light';
             root.setAttribute('data-theme', theme);
             if (theme === 'dark') {
                 root.classList.add('dark');
