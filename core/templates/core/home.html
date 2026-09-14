@@ -41,9 +41,7 @@
       </a>
       <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
         <a href="/courses/" style="color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Courses</a>
-        <a href="/courses/" style="color: #424245;" style-hover="color: #1D1D1F;">Labs</a>
         <a href="/events/" style="color: #424245;" style-hover="color: #1D1D1F;">Events</a>
-        <a href="/about/" style="color: #424245;" style-hover="color: #1D1D1F;">Gear</a>
         <a href="/about/" style="color: #424245;" style-hover="color: #1D1D1F;">About</a>
         <a href="/contact/" style="color: #424245;" style-hover="color: #1D1D1F;">Contact</a>
       </nav>
@@ -136,27 +134,6 @@
     </svg>
   </div>
 
-  <section id="labs" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(20px, 3vw, 46px); align-items: start;">
-    <div style="position: sticky; top: 80px; align-self: start;">
-      <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Why Tapeflicker</div>
-      <h2 style="margin: 10px 0 0; font-size: clamp(25px, 2.8vw, 36px); line-height: 1.08; letter-spacing: -.035em; font-weight: 600;">We don't teach theory. We build practitioners.</h2>
-      <p style="margin: 12px 0 0; max-width: 36ch; font-size: 15px; line-height: 1.5; color: #6E6E73;">Pick a pillar to see what it means in practice.</p>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
-        <div onClick="{{ p.go }}" style="{{ p.style }}" style-hover="border-color: rgba(0,0,0,.18);">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="{{ p.numStyle }}">{{ p.num }}</span>
-            <span style="font-size: 17px; font-weight: 600; letter-spacing: -.022em;">{{ p.title }}</span>
-            <span style="flex: 1;"></span>
-            <span style="font-size: 15px; color: #86868B;">{{ p.caret }}</span>
-          </div>
-          <div style="{{ p.bodyStyle }}">{{ p.body }}</div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
   <section id="events" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
       <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
@@ -170,35 +147,6 @@
           <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
             <button onClick="{{ e.toggle }}" style="{{ e.btnStyle }}">{{ e.btnLabel }}</button>
             <span style="font-size: 11.5px; color: #86868B;">{{ e.seats }}</span>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
-  <section id="gear" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
-    <div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 16px;">
-      <div>
-        <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Official merch</div>
-        <h2 style="margin: 8px 0 0; font-size: clamp(23px, 2.5vw, 32px); letter-spacing: -.035em; font-weight: 600;">Tapeflicker gear</h2>
-      </div>
-      <div style="flex: 1;"></div>
-      <span style="font-size: 12.5px; color: #86868B;">Limited edition · restocking soon</span>
-    </div>
-    <div style="display: flex; align-items: center; justify-content: center; min-height: clamp(300px, 34vw, 420px); perspective: 1400px; width: 100%; padding: 0 2%;">
-      <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
-        <div onMouseEnter="{{ g.focus }}" style="{{ g.cardStyle }}">
-          <div style="{{ g.thumbStyle }}">
-            <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #9A9AA0;">{{ g.shot }}</span>
-            <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: rgba(0,0,0,.06); color: #6E6E73;">Out of stock</span>
-          </div>
-          <div style="padding: 13px 15px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-            <div style="min-width: 0;">
-              <div style="font-size: 14.5px; font-weight: 600; letter-spacing: -.02em;">{{ g.name }}</div>
-              <div style="font-size: 12.5px; color: #86868B; margin-top: 2px; white-space: nowrap;">{{ g.price }}</div>
-            </div>
-            <span style="flex: 1;"></span>
-            <button onClick="{{ g.notify }}" style="{{ g.btnStyle }}">{{ g.btnLabel }}</button>
           </div>
         </div>
       </sc-for>
