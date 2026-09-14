@@ -227,8 +227,7 @@
       <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
         <div onMouseEnter="{{ g.focus }}" style="{{ g.cardStyle }}">
           <div style="{{ g.thumbStyle }}">
-            <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #9A9AA0;">{{ g.shot }}</span>
-            <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: rgba(0,0,0,.06); color: #6E6E73;">Out of stock</span>
+            <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; backdrop-filter: blur(8px);">Out of stock</span>
           </div>
           <div style="padding: 13px 15px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
             <div style="min-width: 0;">
@@ -346,11 +345,11 @@ const EVENTS = [
   { tag: "AMA", tagColor: "#34C759", date: "Date to be announced", title: "Career AMA with Security Analysts", desc: "Portfolios, interviews and the first 90 days on the job.", seats: "Registration open" },
 ];
 const GEAR = [
-  { name: "Cyber Tee", price: "₹2,499", shot: "t-shirt shot" },
-  { name: "Commuter Bag", price: "₹3,999", shot: "backpack shot" },
-  { name: "Sticker Pack", price: "₹699", shot: "stickers shot" },
-  { name: "Terminal Hoodie", price: "₹4,499", shot: "hoodie shot" },
-  { name: "Lab Notebook", price: "₹899", shot: "notebook shot" },
+  { name: "Cyber Tee", price: "₹2,499", shot: "Cyber Tee", image: "/static/images/tapeflicker_tshirt.png" },
+  { name: "Commuter Bag", price: "₹3,999", shot: "Commuter Bag", image: "/static/images/tapeflicker_bag.png" },
+  { name: "Sticker Pack", price: "₹699", shot: "Sticker Pack", image: "/static/images/tapeflicker_stickers.png" },
+  { name: "Terminal Hoodie", price: "₹4,499", shot: "Terminal Hoodie", image: "/static/images/tapeflicker_hoodie.png" },
+  { name: "Lab Notebook", price: "₹899", shot: "Lab Notebook", image: "/static/images/tapeflicker_notebook.png" },
 ];
 const QUOTES = [
   { text: "“It genuinely feels like a premium product. The content is even better than the interface — I got my first dev job after finishing the React path.”", name: "James Doe", role: "Frontend Engineer @ Stripe", initials: "JD" },
@@ -634,7 +633,7 @@ class Component extends DCLogic {
           ...g,
           focus: () => this.setState({ gearFocus: i }),
           cardStyle: `position:relative;flex:0 0 auto;width:26%;min-width:0;margin:0 -4.5%;border-radius:16px;background:#fff;border:1px solid rgba(0,0,0,.07);overflow:hidden;cursor:pointer;transform-style:preserve-3d;will-change:transform;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease,box-shadow .45s ease;z-index:${10 - abs};opacity:${Math.max(1 - abs * 0.22, 0.3)};box-shadow:${act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)"};transform:translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
-          thumbStyle: "position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#F2F2F5,#E6E6EB)",
+          thumbStyle: `position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#F2F2F5 url('${g.image}') center/cover no-repeat;`,
           btnLabel: on ? "✓ We'll ping you" : "Notify me",
           btnStyle: `font:inherit;font-size:12px;font-weight:500;padding:7px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;border:1px solid ${on ? "transparent" : "rgba(0,0,0,.14)"};background:${on ? "#1D1D1F" : "#fff"};color:${on ? "#fff" : "#1D1D1F"}`,
           notify: () => this.setState(s => ({ notified: s.notified.includes(i) ? s.notified : s.notified.concat(i) })),
