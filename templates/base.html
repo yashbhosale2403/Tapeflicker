@@ -110,59 +110,33 @@
         <div class="aurora-blob aurora-blob-2"></div>
     </div>
 
-    <!-- Premium Shared Navbar -->
-    <nav class="sticky top-0 z-50 w-full transition-all duration-300 bg-[#FBFBFD]/80 dark:bg-[#0B0B0E]/80 backdrop-blur-xl border-b border-black/5 dark:border-white/10" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 min-h-[54px] flex items-center justify-between gap-6 py-2">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center">
-                <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 text-[#1D1D1F] dark:text-white group">
-                    <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" class="h-6 w-auto block opacity-90 group-hover:opacity-100 transition-opacity" />
-                    <span class="font-sans font-semibold tracking-tight text-[15px]">Tapeflicker</span>
-                </a>
-            </div>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-6 text-[12.5px]">
-                <a href="{% url 'courses:list' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white {% if 'courses' in request.resolver_match.app_name %}text-[#0071E3] font-semibold{% else %}text-[#424245] dark:text-white/70{% endif %}">Courses</a>
-                <a href="{% url 'courses:list' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white text-[#424245] dark:text-white/70">Labs</a>
-                <a href="{% url 'core:event_list' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white flex items-center gap-1.5 {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}text-[#0071E3] font-semibold{% else %}text-[#424245] dark:text-white/70{% endif %}">
-                    Events
-                    <span class="relative flex h-1.5 w-1.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00B4FF] opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#0071E3]"></span>
-                    </span>
-                </a>
-                <a href="{% url 'core:about' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white text-[#424245] dark:text-white/70">Gear</a>
-                <a href="{% url 'core:about' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white {% if request.resolver_match.url_name == 'about' %}text-[#0071E3] font-semibold{% else %}text-[#424245] dark:text-white/70{% endif %}">About</a>
-                <a href="{% url 'core:contact' %}" class="transition-colors hover:text-[#1D1D1F] dark:hover:text-white {% if request.resolver_match.url_name == 'contact' %}text-[#0071E3] font-semibold{% else %}text-[#424245] dark:text-white/70{% endif %}">Contact</a>
-            </div>
-
-            <!-- Auth / Dashboard Links -->
-            <div class="hidden md:flex items-center gap-4 text-[12.5px]">
-                {% if request.user.is_authenticated %}
-                    {% if request.user.is_staff %}
-                        <a href="{% url 'manager:dashboard' %}" class="px-4 py-1.5 rounded-full bg-[#0071E3] text-white font-medium hover:bg-[#0058B0] transition-colors">Main Dashboard</a>
-                    {% endif %}
-                    {% if request.resolver_match.app_name != 'dashboard' %}
-                    <a href="{% url 'dashboard:home' %}" class="px-4 py-1.5 rounded-full border border-black/15 dark:border-white/20 text-[#1D1D1F] dark:text-white font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Profile</a>
-                    {% endif %}
-                    <a href="{% url 'accounts:logout' %}" class="text-[#424245] dark:text-white/70 hover:text-red-500 transition-colors">Sign out</a>
-                {% else %}
-                    <a href="{% url 'accounts:login' %}" class="text-[#424245] dark:text-white/70 hover:text-[#1D1D1F] dark:hover:text-white transition-colors">Sign in</a>
-                    <a href="{% url 'accounts:signup' %}" class="px-4 py-1.5 rounded-full bg-[#1D1D1F] dark:bg-white text-white dark:text-[#1D1D1F] font-medium hover:bg-black dark:hover:bg-white/90 transition-colors">Get started</a>
-                {% endif %}
-            </div>
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-toggle" class="text-[#424245] dark:text-white hover:text-[#1D1D1F] focus:outline-none" aria-label="Toggle navigation menu">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <!-- Exact Shared Header Navbar -->
+    <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
+        <a href="{% url 'core:home' %}" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F; text-decoration: none;">
+          <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
+          <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
+        </a>
+        <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
+          <a href="{% url 'courses:list' %}" style="color: {% if 'courses' in request.resolver_match.app_name %}#0071E3{% else %}#424245{% endif %}; white-space: nowrap; text-decoration: none;">Courses</a>
+          <a href="{% url 'courses:list' %}" style="color: #424245; text-decoration: none;">Labs</a>
+          <a href="{% url 'core:event_list' %}" style="color: {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">Events</a>
+          <a href="{% url 'core:about' %}" style="color: #424245; text-decoration: none;">Gear</a>
+          <a href="{% url 'core:about' %}" style="color: {% if request.resolver_match.url_name == 'about' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">About</a>
+          <a href="{% url 'core:contact' %}" style="color: {% if request.resolver_match.url_name == 'contact' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">Contact</a>
+        </nav>
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+            <a href="{% url 'manager:dashboard' %}" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #0071E3; color: #fff; white-space: nowrap; text-decoration: none;">Main Dashboard</a>
+            {% endif %}
+            <a href="{% url 'dashboard:home' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Profile</a>
+            <a href="{% url 'accounts:logout' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Sign out</a>
+        {% else %}
+            <a href="{% url 'accounts:login' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Sign in</a>
+            <a href="{% url 'accounts:signup' %}" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #1D1D1F; color: #fff; white-space: nowrap; flex: 0 0 auto; text-decoration: none;">Get started</a>
+        {% endif %}
+      </div>
+    </header>
 
     <!-- Premium Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-x-0 top-24 z-40 bg-[#05011A]/95 backdrop-blur-2xl border-b border-white/5 p-6 md:hidden transition-all duration-300 transform -translate-y-full opacity-0 pointer-events-none">
