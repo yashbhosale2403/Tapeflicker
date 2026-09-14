@@ -173,6 +173,31 @@
     background-color: #0B0B0E !important;
     border-top-color: rgba(255, 255, 255, 0.1) !important;
   }
+  /* 01 — Text replacement motion for navbar links on hover */
+  .tf-nav-roll {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    height: 1.25em;
+    line-height: 1.25em;
+    vertical-align: middle;
+  }
+  .tf-nav-roll-inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .tf-hdr-link:hover .tf-nav-roll-inner,
+  .tf-nav-roll:hover .tf-nav-roll-inner {
+    transform: translateY(-50%);
+  }
+  .tf-nav-roll-item {
+    display: block;
+    height: 1.25em;
+    line-height: 1.25em;
+    white-space: nowrap;
+  }
 </style>
 
 
@@ -185,12 +210,20 @@
       <span>Tapeflicker</span>
     </a>
 
-    <!-- Navigation Links -->
+    <!-- Navigation Links with Text Replacement Motion on Hover -->
     <nav class="tf-hdr-nav">
-      <a href="{% url 'courses:list' %}" class="tf-hdr-link {% if 'courses' in request.path %}active{% endif %}">Courses</a>
-      <a href="{% url 'core:event_list' %}" class="tf-hdr-link {% if 'events' in request.path %}active{% endif %}">Events</a>
-      <a href="{% url 'core:about' %}" class="tf-hdr-link {% if 'about' in request.path %}active{% endif %}">About</a>
-      <a href="{% url 'core:contact' %}" class="tf-hdr-link {% if 'contact' in request.path %}active{% endif %}">Contact</a>
+      <a href="{% url 'courses:list' %}" class="tf-hdr-link {% if 'courses' in request.path %}active{% endif %}">
+        <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Courses</span><span class="tf-nav-roll-item">Courses</span></span></span>
+      </a>
+      <a href="{% url 'core:event_list' %}" class="tf-hdr-link {% if 'events' in request.path %}active{% endif %}">
+        <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Events</span><span class="tf-nav-roll-item">Events</span></span></span>
+      </a>
+      <a href="{% url 'core:about' %}" class="tf-hdr-link {% if 'about' in request.path %}active{% endif %}">
+        <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">About</span><span class="tf-nav-roll-item">About</span></span></span>
+      </a>
+      <a href="{% url 'core:contact' %}" class="tf-hdr-link {% if 'contact' in request.path %}active{% endif %}">
+        <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Contact</span><span class="tf-nav-roll-item">Contact</span></span></span>
+      </a>
     </nav>
 
     <!-- User Action Links -->
@@ -203,13 +236,20 @@
           {% if request.user.is_staff %}
           <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
           {% endif %}
-          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link">Profile</a>
-          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link">Sign out</a>
+          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link">
+            <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Profile</span><span class="tf-nav-roll-item">Profile</span></span></span>
+          </a>
+          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link">
+            <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Sign out</span><span class="tf-nav-roll-item">Sign out</span></span></span>
+          </a>
       {% else %}
-          <a href="{% url 'accounts:login' %}" class="tf-hdr-link">Sign in</a>
+          <a href="{% url 'accounts:login' %}" class="tf-hdr-link">
+            <span class="tf-nav-roll"><span class="tf-nav-roll-inner"><span class="tf-nav-roll-item">Sign in</span><span class="tf-nav-roll-item">Sign in</span></span></span>
+          </a>
           <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
       {% endif %}
     </div>
+
 
 
     <!-- Mobile Menu Toggle Button -->
