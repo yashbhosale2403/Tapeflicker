@@ -161,7 +161,9 @@
         </a>
         <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
           <a href="{% url 'courses:list' %}" class="tf-hdr-link" style="white-space: nowrap;">Courses</a>
+          <a href="{% url 'core:home' %}#labs" class="tf-hdr-link">Labs</a>
           <a href="{% url 'core:event_list' %}" class="tf-hdr-link">Events</a>
+          <a href="{% url 'core:home' %}#gear" class="tf-hdr-link">Gear</a>
           <a href="{% url 'core:about' %}" class="tf-hdr-link">About</a>
           <a href="{% url 'core:contact' %}" class="tf-hdr-link">Contact</a>
         </nav>
