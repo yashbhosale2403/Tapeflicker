@@ -2104,3 +2104,103 @@ html[data-theme="light"] body nav .text-white {
     color: var(--text-dim) !important;
 }
 
+/* ==========================================================================
+   COMPREHENSIVE DARK MODE OVERRIDES (Strictly scoped to [data-theme="dark"])
+   White Mode CSS is 100% untouched and unchanged.
+   ========================================================================== */
+html[data-theme="dark"] {
+    --bg-primary: #0B0B0E;
+    --bg-secondary: #14141A;
+    --card-bg: #16161C;
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-main: #FFFFFF;
+    --text-muted: #A1A1A6;
+    --text-dim: #86868B;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] div[style*="background: #FBFBFD"],
+html[data-theme="dark"] div[style*="background: #fbfbfd"],
+html[data-theme="dark"] section[style*="background: #FBFBFD"],
+html[data-theme="dark"] section[style*="background: #fbfbfd"] {
+    background-color: #0B0B0E !important;
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .tf-navbar-root,
+html[data-theme="dark"] header {
+    background: #111116 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .tf-hdr-logo,
+html[data-theme="dark"] .tf-hdr-logo span,
+html[data-theme="dark"] .tf-hdr-link {
+    color: #E4E4E6 !important;
+}
+
+html[data-theme="dark"] .tf-hdr-link:hover,
+html[data-theme="dark"] .tf-hdr-link.active {
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .tf-hdr-btn {
+    background: #FFFFFF !important;
+    color: #111116 !important;
+}
+
+html[data-theme="dark"] .tf-hdr-btn:hover {
+    background: #E5E5EA !important;
+    color: #000000 !important;
+}
+
+html[data-theme="dark"] [data-theme-toggle] {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .db-card,
+html[data-theme="dark"] .course-card-apple,
+html[data-theme="dark"] .about-card-apple,
+html[data-theme="dark"] div[style*="background: #fff"],
+html[data-theme="dark"] div[style*="background: #ffffff"],
+html[data-theme="dark"] div[style*="background:#fff"],
+html[data-theme="dark"] div[style*="background:#ffffff"] {
+    background: #16161C !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .db-subcard,
+html[data-theme="dark"] div[style*="background: #F9F9FB"] {
+    background: #1C1C24 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4 {
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] p {
+    color: #A1A1A6 !important;
+}
+
+html[data-theme="dark"] .db-input,
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] input[type="url"] {
+    background: #1C1C24 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] footer {
+    background: #0B0B0E !important;
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+    color: #86868B !important;
+}
+

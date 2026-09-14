@@ -117,6 +117,10 @@
 
     <!-- User Action Links -->
     <div class="tf-hdr-actions">
+      <button type="button" data-theme-toggle onclick="window.toggleTheme()" style="background: transparent; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease;" title="Toggle Dark/Light Mode">
+        <span class="theme-toggle-icon" style="font-size: 14px;">🌙</span>
+      </button>
+
       {% if request.user.is_authenticated %}
           {% if request.user.is_staff %}
           <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
@@ -128,6 +132,7 @@
           <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
       {% endif %}
     </div>
+
 
     <!-- Mobile Menu Toggle Button -->
     <button type="button" id="tf-nav-mobile-btn" class="tf-mobile-btn" aria-label="Toggle Navigation Menu">
