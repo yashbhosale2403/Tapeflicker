@@ -3,168 +3,175 @@
 {% block title %}Courses | Tapeflicker{% endblock %}
 
 {% block content %}
-<div class="relative min-h-[90vh] overflow-hidden bg-primary pt-32 pb-24">
-    <!-- Abstract premium atmospheric blobs and cyber grid -->
-    <div class="absolute top-[-5%] left-[20%] w-[600px] h-[600px] bg-accent-purple/10 rounded-full blur-[150px] mix-blend-screen animate-pulse pointer-events-none"></div>
-    <div class="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-accent-neon/10 rounded-full blur-[130px] mix-blend-screen animate-pulse pointer-events-none" style="animation-delay: 3s;"></div>
-    <div class="cyber-grid opacity-30"></div>
+<style>
+  .tf-curtain {
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  .tf-curtain.tf-in {
+    animation: tf-grow 1.15s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes tf-grow {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+  .course-card-apple {
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .2s cubic-bezier(.22,1,.36,1), transform .2s cubic-bezier(.22,1,.36,1);
+  }
+  .course-card-apple:hover {
+    box-shadow: 0 14px 30px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+  }
+</style>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-20">
-        <!-- Editorial Header -->
-        <div class="mb-20 text-center max-w-3xl mx-auto reveal">
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-secondary/80 border border-white/5 text-accent-cyan text-xs font-mono font-bold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,217,255,0.1)]">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse"></span>
-                Interactive Sandbox Curricula
-            </div>
-            <h1 class="text-5xl md:text-7xl font-bold font-sora text-main mb-6 leading-tight tracking-tight">Explore the <span class="text-gradient-accent">Catalog</span></h1>
-            <p class="text-muted text-base md:text-lg leading-relaxed font-normal max-w-2xl mx-auto">
-                Accelerate your technical mastery with hands-on, premium courses in cybersecurity, artificial intelligence, and developer operations.
-            </p>
+<div style="background: #FBFBFD; min-h-screen; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; color: #1D1D1F; -webkit-font-smoothing: antialiased;">
+    
+    <!-- Hero Header -->
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 68px) clamp(18px, 4vw, 44px) clamp(16px, 2vw, 28px); text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px 5px 9px; border-radius: 999px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-size: 12px; color: #424245; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.02);">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>
+            Curriculum · Interactive Sandbox Curricula
         </div>
+        <h1 style="margin: 0 0 16px; font-size: clamp(34px, 5.2vw, 62px); line-height: 1.02; letter-spacing: -.04em; font-weight: 600; color: #1D1D1F; text-wrap: balance;">
+            Explore the Catalog
+        </h1>
+        <p style="margin: 0 auto; max-width: 580px; font-size: clamp(15px, 1.3vw, 17.5px); line-height: 1.5; color: #6E6E73; text-wrap: pretty;">
+            Accelerate your technical mastery with hands-on, premium courses in cybersecurity, artificial intelligence, and developer operations.
+        </p>
 
-        <!-- Search and Filters Panel -->
-        <div class="max-w-4xl mx-auto mb-16 reveal" style="transition-delay: 100ms;">
-
-
-            <!-- Redesigned Capsule Filters -->
-            <div class="flex flex-wrap gap-3 justify-center">
-                <a href="?" class="px-5 py-2.5 rounded-full border transition-all duration-300 font-bold font-mono text-[10px] tracking-wider uppercase {% if not current_category %}bg-accent-cyan/10 border-accent-cyan/40 text-accent-cyan shadow-[0_0_15px_rgba(0,217,255,0.15)]{% else %}bg-secondary/50 border-white/10 text-muted hover:border-white/30 hover:text-white{% endif %}">
-                    All Courses
-                </a>
-                {% for cat in categories %}
-                <a href="?category={{ cat.slug }}" class="px-5 py-2.5 rounded-full border transition-all duration-300 font-bold font-mono text-[10px] tracking-wider uppercase {% if current_category == cat.slug %}bg-accent-cyan/10 border-accent-cyan/40 text-accent-cyan shadow-[0_0_15px_rgba(0,217,255,0.15)]{% else %}bg-secondary/50 border-white/10 text-muted hover:border-white/30 hover:text-white{% endif %}">
-                    {{ cat.name }}
-                </a>
-                {% empty %}
-                <span class="text-muted text-sm">No categories available.</span>
-                {% endfor %}
-            </div>
+        <!-- Category Capsule Filters -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 32px;">
+            <a href="?" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if not current_category %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if not current_category %}#1D1D1F{% else %}#fff{% endif %}; color: {% if not current_category %}#fff{% else %}#424245{% endif %}; text-decoration: none;">
+                All Courses
+            </a>
+            {% for cat in categories %}
+            <a href="?category={{ cat.slug }}" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if current_category == cat.slug %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if current_category == cat.slug %}#1D1D1F{% else %}#fff{% endif %}; color: {% if current_category == cat.slug %}#fff{% else %}#424245{% endif %}; text-decoration: none;">
+                {{ cat.name }}
+            </a>
+            {% empty %}
+            <span style="font-size: 12.5px; color: #86868B;">No categories available.</span>
+            {% endfor %}
         </div>
+    </section>
 
-        <!-- Course Grid -->
-        <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Course Grid Section -->
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(20px, 3vw, 36px) clamp(18px, 4vw, 44px) clamp(50px, 7vw, 90px);">
+        <div id="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
             {% for course in courses %}
-            <div class="course-card-wrapper gradient-border hover-lift reveal transition-all duration-500" data-title="{{ course.title|lower }}" data-desc="{{ course.description|lower }}" data-category="{{ course.category.name|lower }}" data-instructor="{{ course.instructor|lower }}" data-difficulty="{{ course.difficulty|lower }}" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                <div class="h-full bg-secondary rounded-[1.2rem] overflow-hidden flex flex-col relative z-10 group border border-white/5 hover:border-accent-neon/30 transition-all duration-300">
-                    <div class="relative overflow-hidden aspect-[16/10] bg-slate-950">
-                        {% if course.thumbnail %}
-                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        {% else %}
-                        <div class="w-full h-full bg-gradient-to-br from-[#0B1220] to-[#111827] flex items-center justify-center border-b border-white/5 relative">
-                            <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
-                            <span class="text-white/10 font-sora font-extrabold text-xs tracking-[0.2em] uppercase select-none">PRO CURRICULUM</span>
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Premium gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-90"></div>
-                        
-                        <!-- Category Pill Badge -->
-                        {% if course.category %}
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-[9px] font-mono tracking-widest uppercase font-bold px-3 py-1.5 rounded-full border border-white/15 shadow-lg select-none text-white z-10">
-                            {{ course.category.name }}
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Difficulty Badge with themed colors -->
-                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[9px] font-mono tracking-widest uppercase font-bold px-3 py-1.5 rounded-full border border-white/15 shadow-lg select-none z-10">
-                            {% if course.difficulty == 'Beginner' %}
-                            <span class="text-accent-green">Beginner</span>
-                            {% elif course.difficulty == 'Intermediate' %}
-                            <span class="text-accent-purple">Intermediate</span>
-                            {% else %}
-                            <span class="text-accent-cyan">Advanced</span>
-                            {% endif %}
-                        </div>
+            <div class="tf-curtain course-card-apple" data-title="{{ course.title|lower }}" data-category="{{ course.category.name|lower }}" data-difficulty="{{ course.difficulty|lower }}">
+                
+                <!-- Thumbnail Art & Badges -->
+                <div style="position: relative; aspect-ratio: 16/10; width: 100%; overflow: hidden; background: #1a2332;">
+                    {% if course.thumbnail %}
+                    <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" style="width: 100%; height: 100%; object-fit: cover;" />
+                    {% else %}
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1c2738 0%, #0d1522 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                        <span style="font-family: ui-monospace, monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); font-weight: 600;">
+                            {{ course.category.name|default:"PRO CURRICULUM" }}
+                        </span>
                     </div>
+                    {% endif %}
                     
-                    <div class="p-6 flex-grow flex flex-col relative z-20">
-                        <!-- Rating Stars and Price Row -->
-                        <div class="flex justify-between items-center mb-4 select-none">
-                            <div class="flex items-center">
-                                <div class="flex text-accent-neon gap-0.5">
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                </div>
-                                <span class="text-[10px] text-muted font-medium ml-2 font-mono uppercase tracking-wider">Rated 5 Stars</span>
-                            </div>
-                            <div>
-                                {% if course.is_free %}
-                                <span class="text-[10px] font-mono font-bold px-2 py-0.5 bg-accent-green/10 text-accent-green border border-accent-green/20 rounded uppercase tracking-wider">FREE</span>
+                    <!-- Top Category Badge -->
+                    {% if course.category %}
+                    <span style="position: absolute; left: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); color: #fff;">
+                        {{ course.category.name }}
+                    </span>
+                    {% endif %}
+
+                    <!-- Top Difficulty Badge -->
+                    <span style="position: absolute; right: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); color: #fff;">
+                        {{ course.difficulty }}
+                    </span>
+                </div>
+
+                <!-- Card Body -->
+                <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                    <!-- Meta Subtitle -->
+                    <div style="font-size: 11px; color: #86868B; letter-spacing: .04em; text-transform: uppercase; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                        <span>{{ course.instructor }}</span>
+                        <span>·</span>
+                        <span>{{ course.total_duration_hours }}h</span>
+                        <span>·</span>
+                        <span>{{ course.total_lessons }} lessons</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h3 style="margin: 2px 0 0; font-size: 16.5px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; color: #1D1D1F;">
+                        <a href="{% url 'courses:detail' course.id %}" style="color: #1D1D1F; text-decoration: none;">
+                            {{ course.title }}
+                        </a>
+                    </h3>
+
+                    <!-- Description -->
+                    <p style="margin: 0; font-size: 12.5px; color: #6E6E73; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ course.description }}
+                    </p>
+
+                    <!-- Footer Row (Price & Action Link) -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,.06);">
+                        <div>
+                            {% if course.is_free %}
+                            <span style="font-size: 11px; font-weight: 700; color: #34C759; padding: 3px 8px; border-radius: 6px; background: rgba(52,199,89,.12); letter-spacing: .04em; text-transform: uppercase;">FREE</span>
+                            {% else %}
+                            <div style="display: flex; align-items: baseline; gap: 6px;">
+                                {% if course.discount_price %}
+                                <span style="font-size: 15px; font-weight: 600; color: #1D1D1F;">${{ course.discount_price }}</span>
+                                <span style="font-size: 11.5px; color: #86868B; text-decoration: line-through;">${{ course.price }}</span>
                                 {% else %}
-                                <div class="flex items-center gap-1.5">
-                                    {% if course.discount_price %}
-                                    <span class="text-sm font-bold text-maintext font-sora">${{ course.discount_price }}</span>
-                                    <span class="text-[10px] text-muted/50 line-through font-mono">${{ course.price }}</span>
-                                    {% else %}
-                                    <span class="text-sm font-bold text-maintext font-sora">${{ course.price }}</span>
-                                    {% endif %}
-                                </div>
+                                <span style="font-size: 15px; font-weight: 600; color: #1D1D1F;">${{ course.price }}</span>
                                 {% endif %}
                             </div>
-                        </div>
-                        
-                        <!-- Course Title -->
-                        <h3 class="text-xl font-bold font-sora text-maintext mb-2 line-clamp-2 leading-snug group-hover:text-accent-neon transition-colors">
-                            <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
-                        </h3>
-                        
-                        <!-- Instructor / Creator -->
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="w-6 h-6 rounded-full bg-accent-neon/10 flex items-center justify-center border border-accent-neon/20">
-                                <svg class="w-3.5 h-3.5 text-accent-neon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
-                            </div>
-                            <span class="text-xs text-muted font-medium font-mono">{{ course.instructor }}</span>
-                        </div>
-                        
-                        <!-- Description -->
-                        <p class="text-muted text-xs mb-6 line-clamp-3 leading-relaxed font-light">{{ course.description }}</p>
-                        
-                        <!-- Duration / Lesson Stats Row -->
-                        <div class="flex items-center gap-6 text-xs text-muted font-mono mb-6 select-none">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-accent-neon" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                <span>Approx. {{ course.total_duration_hours }}h</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-accent-purple" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                <span>{{ course.total_lessons }} lessons</span>
-                            </div>
+                            {% endif %}
                         </div>
 
-                        <!-- Full-width View Course button -->
-                        <div class="mt-auto pt-4 border-t border-white/5 relative z-20">
-                            <a href="{% url 'courses:detail' course.id %}" class="w-full py-3 px-5 text-xs font-bold tracking-wider uppercase bg-accent-neon text-primary hover:bg-accent-purple transition-all duration-300 rounded-full flex items-center justify-center gap-2 select-none group/btn shadow-[0_4px_12px_rgba(245,201,51,0.15)] group-hover:bg-accent-purple cursor-pointer">
-                                <span>View Course</span>
-                                <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </a>
-                        </div>
+                        <a href="{% url 'courses:detail' course.id %}" style="font-size: 12.5px; font-weight: 500; color: #0071E3; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                            View path →
+                        </a>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <div class="col-span-full py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full">
-                <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
-                    <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background: #fff; border-radius: 20px; border: 1px solid rgba(0,0,0,.07); max-width: 520px; margin: 30px auto;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #F2F2F5; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <svg style="width: 24px; height: 24px; color: #86868B;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
                 </div>
-                <h3 class="text-xl font-bold font-sora text-white mb-2">No paths available</h3>
-                <p class="text-muted text-sm max-w-xs mx-auto mb-6">We're currently preparing new premium courses. Stay tuned for catalog updates.</p>
+                <h3 style="margin: 0 0 6px; font-size: 18px; font-weight: 600; color: #1D1D1F;">No courses in this track</h3>
+                <p style="margin: 0 0 20px; font-size: 13.5px; color: #6E6E73;">We're continuously dropping new learning paths. Explore all courses or check back soon.</p>
+                <a href="?" style="display: inline-block; font-size: 13px; font-weight: 500; padding: 9px 22px; border-radius: 999px; background: #1D1D1F; color: #fff; text-decoration: none;">
+                    View all courses
+                </a>
             </div>
             {% endfor %}
         </div>
-
-
-    </div>
+    </section>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("tf-in");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: "0px 0px -10% 0px" });
 
+        document.querySelectorAll(".tf-curtain").forEach((el, index) => {
+            el.style.animationDelay = (index % 4) * 150 + "ms";
+            observer.observe(el);
+        });
+    });
+</script>
 {% endblock %}
+
