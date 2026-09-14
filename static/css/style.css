@@ -1,32 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-primary: #05011A;
-    --bg-secondary: #0E0924;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(245, 201, 51, 0.15);
-    --accent-neon: #F5C933;
-    --accent-purple: #E8B923;
-    --accent-cyan: #F5C933;
-    --accent-blue: #FFF8E1;
-    --accent-green: #F5C933;
-    --text-main: #FFF8E1;
-    --text-muted: rgba(255, 248, 225, 0.68);
-    --text-dim: rgba(255, 248, 225, 0.52);
+    --bg-primary: #0b0b0e;
+    --bg-secondary: #141419;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(0, 180, 255, 0.18);
+    --accent-neon: #0071E3;
+    --accent-purple: #6366F1;
+    --accent-cyan: #00B4FF;
+    --accent-blue: #0284C7;
+    --accent-green: #34C759;
+    --text-main: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.72);
+    --text-dim: rgba(255, 255, 255, 0.48);
 }
 
 [data-theme="light"] {
-    --bg-primary: #F8FAFC;
-    --bg-secondary: #F1F5F9;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --card-border: rgba(217, 163, 4, 0.15); /* Classic yellow-gold theme border */
-    --text-main: #0F172A;
-    --text-muted: #475569;
-    --text-dim: #64748B;
-    --accent-neon: #D97706; /* Classic yellow-gold accents */
-    --accent-purple: #B45309;
-    --accent-cyan: #CA8A04;
-    --accent-green: #854D0E;
+    --bg-primary: #F5F5F7;
+    --bg-secondary: #FFFFFF;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --text-main: #1D1D1F;
+    --text-muted: #6E6E73;
+    --text-dim: #86868B;
+    --accent-neon: #0071E3;
+    --accent-purple: #4F46E5;
+    --accent-cyan: #00A3FF;
+    --accent-green: #28A745;
 }
 
 .dashboard-page {
@@ -45,26 +45,26 @@
 }
 
 .dashboard-page .btn-primary {
-    color: #141414 !important;
-    background: var(--accent-neon) !important;
+    color: #FFFFFF !important;
+    background: #0071E3 !important;
     border-color: transparent !important;
 }
 
 .dashboard-page .btn-primary:hover {
-    background: #E8B923 !important;
+    background: #0058B0 !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 24px 48px rgba(245, 201, 51, 0.2) !important;
+    box-shadow: 0 12px 28px rgba(0, 113, 227, 0.3) !important;
 }
 
 .dashboard-page .btn-outline {
-    color: #FFF8E1 !important;
-    border-color: rgba(245, 201, 51, 0.42) !important;
-    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--text-main) !important;
+    border-color: rgba(0, 113, 227, 0.42) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .dashboard-page .btn-outline:hover {
-    background: rgba(245, 201, 51, 0.08) !important;
-    border-color: #F5C933 !important;
+    background: rgba(0, 113, 227, 0.12) !important;
+    border-color: #0071E3 !important;
     transform: translateY(-2px) !important;
 }
 
@@ -167,7 +167,7 @@ h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; letter-spa
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .text-gradient-accent {
-    background: linear-gradient(135deg, var(--accent-neon), var(--accent-purple));
+    background: linear-gradient(135deg, #0071E3 0%, #00B4FF 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
@@ -188,14 +188,16 @@ h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; letter-spa
 
 /* ============= BUTTONS ============= */
 .btn-primary {
-    background: var(--accent-neon);
-    color: #020817; padding: 0.8rem 2.25rem; border-radius: 9999px;
+    background: #0071E3 !important;
+    color: #FFFFFF !important; padding: 0.8rem 2.25rem; border-radius: 9999px;
     font-weight: 600; font-size: 0.875rem; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+    border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
 }
 .btn-primary:hover {
+    background: #0058B0 !important;
+    color: #FFFFFF !important;
     transform: translateY(-1.5px);
-    filter: brightness(0.92);
+    box-shadow: 0 10px 24px rgba(0, 113, 227, 0.3);
 }
 
 .btn-outline {
