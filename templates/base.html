@@ -178,50 +178,18 @@
         {% endblock %}
     </main>
 
-    <!-- Compact Premium Footer -->
-    <footer class="mt-16 border-t border-white/5 bg-secondary/50 backdrop-blur-xl relative z-10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-6">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
-                <div class="col-span-1 md:col-span-5">
-                    <a href="{% url 'core:home' %}" class="flex items-center gap-2 mb-3">
-                        <div class="brand-logo-mark w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center">
-                            <img src="{% static 'images/logo_icon.png' %}" alt="Tapeflicker Logo" class="w-full h-full object-contain">
-                        </div>
-                        <span class="font-sans font-bold tracking-tight text-xl text-main">Tape<span class="text-[#0071E3]">flicker</span></span>
-                    </a>
-                    <p class="text-xs text-muted mb-4 max-w-sm leading-relaxed">
-                        Next-generation cybersecurity and tech learning ecosystem. Master the skills that define the future.
-                    </p>
-                    <div class="flex space-x-3">
-                        <!-- Social Icons Placeholders -->
-                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-[#0071E3] hover:border-[#0071E3] transition"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
-                        <a href="#" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-[#0071E3] hover:border-[#0071E3] transition"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg></a>
-                    </div>
-                </div>
-                <div class="col-span-1 md:col-span-2 md:col-start-9">
-                    <h3 class="text-[10px] font-bold text-main uppercase tracking-wider mb-4">Platform</h3>
-                    <ul class="space-y-2.5 text-xs text-muted">
-                        <li><a href="{% url 'courses:list' %}" class="hover:text-[#0071E3] transition">Courses</a></li>
-                        <li><a href="{% url 'core:about' %}" class="hover:text-[#0071E3] transition">About Us</a></li>
-                        <li><a href="#" class="hover:text-[#0071E3] transition">Instructors</a></li>
-                    </ul>
-                </div>
-                <div class="col-span-1 md:col-span-2">
-                    <h3 class="text-[10px] font-bold text-main uppercase tracking-wider mb-4">Legal</h3>
-                    <ul class="space-y-2.5 text-xs text-muted">
-                        <li><a href="#" class="hover:text-[#0071E3] transition">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-[#0071E3] transition">Terms of Service</a></li>
-                        <li><a href="{% url 'core:contact' %}" class="hover:text-[#0071E3] transition">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-5 flex flex-col md:flex-row justify-between items-center text-muted text-[11px]">
-                <div>&copy; <script>document.write(new Date().getFullYear())</script> Tapeflicker Inc. All rights reserved.</div>
-                <div class="flex items-center gap-1.5 mt-3 md:mt-0">
-                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></div> All systems operational
-                </div>
-            </div>
-        </div>
+    <!-- Exact 1:1 Light Theme Shared Footer -->
+    <footer style="border-top: 1px solid rgba(0,0,0,.07); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; background: #FBFBFD;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 22px clamp(18px, 4vw, 44px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: #86868B;">
+        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 20px; width: auto; display: block; opacity: .8;" />
+        <span>© 2026 Tapeflicker Inc.</span>
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>All systems operational</span>
+        <div style="flex: 1;"></div>
+        <a href="{% url 'courses:list' %}" style="color: #86868B; text-decoration: none;">Courses</a>
+        <a href="{% url 'core:about' %}" style="color: #86868B; text-decoration: none;">About</a>
+        <a href="{% url 'core:about' %}" style="color: #86868B; text-decoration: none;">Privacy</a>
+        <a href="{% url 'core:contact' %}" style="color: #86868B; text-decoration: none;">Contact</a>
+      </div>
     </footer>
 
     <!-- Scripts -->
