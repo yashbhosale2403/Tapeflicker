@@ -1,991 +1,606 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block body_class %}tf-home-page{% endblock %}
-
-{% block content %}
-<div class="tf-home-brand">
-<!-- 1. CINEMATIC HERO SECTION -->
-<section class="tf-hero relative min-h-[100vh] flex items-center pt-28 pb-16 overflow-hidden">
-    <!-- Premium Ambient Background System -->
-    <div class="ambient-bg-wrapper">
-        <div class="tf-ambient-gold tf-ambient-gold-1"></div>
-        <div class="tf-ambient-gold tf-ambient-gold-2"></div>
-        <div class="tf-noise-layer"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] items-center gap-14 lg:gap-16">
-        <!-- Left Content -->
-        <div class="text-center lg:text-left">
-            <div class="tf-eyebrow inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-accent-neon/30 text-accent-cyan text-xs font-semibold uppercase tracking-widest mb-8 reveal">
-                <span class="w-2.5 h-2.5 rounded-full bg-accent-neon"></span>
-                The Future of EdTech
-            </div>
-            
-            <h1 class="tf-hero-title text-5xl md:text-6xl 2xl:text-7xl font-sora font-extrabold text-white leading-[1.05] mb-6 reveal tracking-tight" style="transition-delay: 100ms;">
-                Master The Skills That Build The <br class="hidden lg:block"/>
-                <span class="text-gradient-accent tf-highlight relative inline-block">
-                    Future
-                    <span class="absolute -bottom-2 left-0 w-full h-1.5 bg-accent-neon/50"></span>
-                </span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-muted mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed reveal font-light" style="transition-delay: 200ms;">
-                Affordable premium tech education designed for future builders, ethical hackers, developers, and innovators. Join the revolution.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start w-full sm:w-auto reveal" style="transition-delay: 300ms;">
-                <a href="{% url 'courses:list' %}" class="btn-primary text-base px-8 py-4 flex justify-center items-center gap-3">
-                    Start Learning
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </a>
-                <a href="#demo" class="btn-outline text-base px-8 py-4 flex justify-center items-center gap-3">
-                    Watch Demo
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </a>
-            </div>
-
-            <div class="tf-trust-row reveal" style="transition-delay: 380ms;">
-                <span>Project-led learning</span>
-                <span>Industry mentors</span>
-                <span>Career-grade certificates</span>
-            </div>
-        </div>
-
-        <!-- Right Visual: Glitch Brand Logo Showcase -->
-        <div class="relative reveal" style="transition-delay: 400ms;">
-            <div class="tf-brand-showcase">
-                <!-- Glitch Container -->
-                <div class="tf-glitch-wrapper" aria-label="Tapeflicker Brand Logo">
-                    <!-- Main Logo Image -->
-                    <div class="tf-glitch-img tf-glitch-img--main">
-                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker Logo" class="tf-brand-hero-logo">
-                    </div>
-                    <!-- Glitch Layers -->
-                    <div class="tf-glitch-img tf-glitch-img--r" aria-hidden="true">
-                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
-                    </div>
-                    <div class="tf-glitch-img tf-glitch-img--g" aria-hidden="true">
-                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
-                    </div>
-                    <div class="tf-glitch-img tf-glitch-img--b" aria-hidden="true">
-                        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="" class="tf-brand-hero-logo">
-                    </div>
-                </div>
-
-                <!-- Brand Text -->
-                <div class="tf-brand-text-group">
-                    <div class="tf-brand-name-large">
-                        <span class="tf-brand-tape">Tape</span><span class="tf-brand-flicker" data-text="flicker">flicker</span>
-                    </div>
-                    <div class="tf-brand-tagline">
-                        <span class="tf-tagline-line"></span>
-                        <span class="tf-tagline-text">BRAIN OF TECH</span>
-                        <span class="tf-tagline-line"></span>
-                    </div>
-                </div>
-
-                <!-- Feature Pills -->
-                <div class="tf-brand-features">
-                    <div class="tf-brand-feature">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                        <span>Learn</span>
-                    </div>
-                    <div class="tf-brand-feature-sep">|</div>
-                    <div class="tf-brand-feature">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                        <span>Innovate</span>
-                    </div>
-                    <div class="tf-brand-feature-sep">|</div>
-                    <div class="tf-brand-feature">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                        <span>Secure</span>
-                    </div>
-                    <div class="tf-brand-feature-sep">|</div>
-                    <div class="tf-brand-feature">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        <span>AI Powered</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Elegant Scroll Down Indicator -->
-    <div id="scroll-indicator" class="absolute bottom-6 right-6 lg:right-12 flex flex-col items-center gap-2 cursor-pointer z-30 group transition-all duration-300" onclick="document.getElementById('trending-topics')?.scrollIntoView({ behavior: 'smooth' })">
-        <span class="text-[10px] uppercase tracking-[0.25em] text-muted group-hover:text-accent-neon transition-colors duration-300 font-bold font-sora">
-            Scroll to explore
-        </span>
-        <div class="w-5 h-9 rounded-full border border-white/20 flex justify-center pt-2 group-hover:border-accent-neon transition-colors duration-300">
-            <div class="w-1 h-2 bg-accent-neon rounded-full animate-scroll-wheel"></div>
-        </div>
-    </div>
-</section>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapeflicker | Master the skills that build the future</title>
+<link rel="icon" type="image/png" href="{% static 'images/logo_icon.png' %}">
+<script src="{% static 'js/react.production.min.js' %}"></script>
+<script src="{% static 'js/react-dom.production.min.js' %}"></script>
+<script src="{% static 'js/support.js' %}"></script>
+</head>
+<body>
+{% verbatim %}
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-    /* Inline styles to bypass style.css caching */
-    .ticker-container {
-        position: relative;
-        overflow: hidden;
-    }
-    .ticker-item {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transform: translateY(50%);
-        filter: blur(3px);
-        transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
-                    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
-                    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        pointer-events: none;
-    }
-    .ticker-item.active {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-        pointer-events: auto;
-    }
-    .ticker-item.exit {
-        opacity: 0;
-        transform: translateY(-50%);
-        filter: blur(3px);
-        pointer-events: none;
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .ticker-item {
-            transition: opacity 0.3s ease;
-            transform: none !important;
-            filter: none !important;
-        }
-        .ticker-item.exit {
-            transform: none !important;
-            filter: none !important;
-            opacity: 0;
-        }
-    }
-
-    /* Scroll Wheel Animation */
-    @keyframes scrollWheel {
-        0% { transform: translateY(0); opacity: 1; }
-        50% { transform: translateY(6px); opacity: 0.3; }
-        100% { transform: translateY(0); opacity: 1; }
-    }
-    .animate-scroll-wheel {
-        animation: scrollWheel 1.6s ease-in-out infinite;
-    }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #FBFBFD; color: #1D1D1F; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #0071E3; text-decoration: none; }
+  a:hover { color: #0058B0; }
+  ::selection { background: #1D1D1F; color: #fff; }
+  @keyframes tf-blink { 0%,45% { opacity: 1; } 55%,100% { opacity: .25; } }
+  .tf-curtain { transform-origin: top center; transform: scaleY(0); opacity: 0; }
+  .tf-curtain.tf-in { animation: tf-grow 1.15s cubic-bezier(.22,1,.36,1) forwards; }
+  @keyframes tf-grow { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+  @keyframes tf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 </style>
+</helmet>
 
-<!-- 2. TRENDING CATEGORIES SECTION -->
-<section id="trending-topics" class="tf-trending-section py-6 md:py-8 border-y border-white/5 bg-transparent relative z-20" role="region" aria-label="Trending Topics">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-        <!-- Subtitle/Label -->
-        <h3 class="text-xs font-semibold tracking-[0.25em] text-muted uppercase mb-10 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent-neon animate-pulse shadow-[0_0_8px_#00D4FF]"></span>
-            Trending Topics
-        </h3>
-        
-        <!-- 5 Tickers in a single row -->
-        <div class="flex flex-row flex-wrap lg:flex-nowrap items-center justify-center gap-3 sm:gap-6 lg:gap-8 w-full">
-            
-            <!-- Ticker 1 -->
-            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
-                <div class="ticker-container w-full h-full relative" id="ticker-1" aria-live="polite">
-                    <div class="ticker-item active text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">AI Automation</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Python Dev</div>
-                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Machine Learning</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Deep Learning</div>
-                </div>
-            </div>
-            
-            <!-- Ticker 2 -->
-            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
-                <div class="ticker-container w-full h-full relative" id="ticker-2" aria-live="polite">
-                    <div class="ticker-item active text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Web Development</div>
-                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Frontend Dev</div>
-                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Backend Dev</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">API Design</div>
-                </div>
-            </div>
-            
-            <!-- Ticker 3 -->
-            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
-                <div class="ticker-container w-full h-full relative" id="ticker-3" aria-live="polite">
-                    <div class="ticker-item active text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Ethical Hacking</div>
-                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Cybersecurity</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Pentesting</div>
-                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">DevSecOps</div>
-                </div>
-            </div>
-            
-            <!-- Ticker 4 -->
-            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
-                <div class="ticker-container w-full h-full relative" id="ticker-4" aria-live="polite">
-                    <div class="ticker-item active text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Cloud Computing</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">DevOps</div>
-                    <div class="ticker-item text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">Linux Admin</div>
-                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Database Admin</div>
-                </div>
-            </div>
-            
-            <!-- Ticker 5 -->
-            <div class="ticker-column min-w-[140px] sm:min-w-[160px] md:min-w-[190px] h-10 sm:h-12 relative overflow-hidden flex items-center justify-center border border-white/5 bg-secondary/20 rounded-lg px-2 sm:px-4 py-1.5 backdrop-blur-sm">
-                <div class="ticker-container w-full h-full relative" id="ticker-5" aria-live="polite">
-                    <div class="ticker-item active text-accent-purple font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="0" aria-hidden="false">Game Dev</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="1" aria-hidden="true">Mobile Apps</div>
-                    <div class="ticker-item text-accent-cyan font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="2" aria-hidden="true">UI/UX Design</div>
-                    <div class="ticker-item text-[#F8FAFC] font-bold text-xs sm:text-sm md:text-base uppercase tracking-tight" data-index="3" aria-hidden="true">Data Science</div>
-                </div>
-            </div>
-            
-        </div>
+<div style="overflow-x: hidden;">
+
+  <div data-tf-cursor="1" style="position: fixed; top: 0; left: 0; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #0071E3; background: rgba(0,113,227,.16); pointer-events: none; z-index: 200; will-change: transform;"></div>
+
+  <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
+      <a href="#top" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F;" style-hover="color: #1D1D1F;">
+        <img src="/static/images/tapeflicker_brand_logo_transparent.png" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
+        <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
+      </a>
+      <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
+        <a href="#courses" style="color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Courses</a>
+        <a href="#labs" style="color: #424245;" style-hover="color: #1D1D1F;">Labs</a>
+        <a href="#events" style="color: #424245;" style-hover="color: #1D1D1F;">Events</a>
+        <a href="#gear" style="color: #424245;" style-hover="color: #1D1D1F;">Gear</a>
+        <a href="#about" style="color: #424245;" style-hover="color: #1D1D1F;">About</a>
+      </nav>
+      <a href="/accounts/login/" style="font-size: 12.5px; color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Sign in</a>
+      <a href="/accounts/signup/" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #1D1D1F; color: #fff; white-space: nowrap; flex: 0 0 auto; text-decoration: none;" style-hover="background: #000;">Get started</a>
     </div>
-</section>
+  </header>
 
-
-
-<!-- 3. FEATURED COURSES & LIVE EVENTS SECTION (SIDE BY SIDE & MEDIUM CARDS) -->
-<section id="courses" class="tf-courses-events-section py-8 md:py-10 relative z-20">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        {% if upcoming_events %}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-                <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-                    <div>
-                        <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
-                        <h2 class="text-3xl font-sora font-bold text-white">Trending <span class="text-gradient">Courses</span></h2>
-                    </div>
-                    <a href="{% url 'courses:list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
-                        Explore Catalog <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </a>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                    {% for course in featured_courses %}
-                    <div class="tf-medium-card hover-lift group relative overflow-hidden">
-                        <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
-                            <!-- Centered Landscape Thumbnail -->
-                            <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
-                                {% if course.thumbnail %}
-                                <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                                {% else %}
-                                <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                                    <span class="text-xs text-white/30 font-sora font-bold">PRO COURSE</span>
-                                </div>
-                                {% endif %}
-                                <div class="absolute top-2 left-2">
-                                    <span class="text-[9px] font-bold px-2 py-0.5 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded uppercase tracking-wider">{{ course.difficulty }}</span>
-                                </div>
-                            </div>
-
-                            <!-- Details -->
-                            <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
-                                <div>
-                                    <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
-                                        <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
-                                    </h3>
-                                    <!-- Course Description -->
-                                    <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ course.description }}</p>
-                                </div>
-
-                                <div class="flex justify-between items-end mt-4 pt-3 border-t border-white/5">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-[10px]">{{ course.instructor|make_list|first }}</div>
-                                        <div class="text-[11px] text-white font-medium truncate max-w-[100px]">{{ course.instructor }}</div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <div class="flex items-center gap-0.5 text-[11px] text-yellow-500 font-bold">
-                                            <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                            4.9
-                                        </div>
-                                        <div class="text-right">
-                                            {% if course.is_free %}
-                                            <span class="text-base font-sora font-bold text-accent-neon">FREE</span>
-                                            <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
-                                            {% elif course.discount_price %}
-                                            <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
-                                            <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
-                                            {% else %}
-                                            <span class="text-base font-sora font-bold text-white">${{ course.price }}</span>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div>
-                <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-                    <div>
-                        <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Broadcasting</div>
-                        <h2 class="text-3xl font-sora font-bold text-white">Live <span class="text-gradient">Sessions</span></h2>
-                    </div>
-                    <a href="{% url 'core:event_list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
-                        View Calendar <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </a>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                    {% for event in upcoming_events %}
-                    <div class="tf-medium-card hover-lift group relative overflow-hidden">
-                        <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
-                            <!-- Centered Landscape Banner/Date Area -->
-                            <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative flex items-center justify-center bg-secondary/40">
-                                {% if event.banner %}
-                                <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 absolute inset-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                {% endif %}
-
-                                <!-- Floating Date Badge -->
-                                <div class="relative z-10 tf-date-badge flex flex-col justify-center items-center rounded-xl bg-[#05011A]/80 border border-white/10 text-center w-16 h-16 backdrop-blur-md">
-                                    <span class="text-[10px] uppercase text-accent-neon font-bold font-sora tracking-wider leading-none">{{ event.date|date:"b" }}</span>
-                                    <span class="text-2xl font-bold font-sora text-white leading-none mt-1.5">{{ event.date|date:"d" }}</span>
-                                </div>
-                            </div>
-
-                            <!-- Details -->
-                            <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-2 flex-wrap">
-                                        <span class="text-[9px] font-bold px-2 py-0.5 bg-white/5 border border-white/10 rounded uppercase tracking-wider text-accent-cyan">{{ event.event_type }}</span>
-                                        <!-- Countdown inline -->
-                                        <div class="countdown-container text-[10px] text-accent-neon font-bold font-sora flex items-center gap-0.5 bg-accent-neon/5 px-2.5 py-0.5 border border-accent-neon/15 rounded" data-date="{{ event.date|date:'c' }}">
-                                            <span class="days">00</span>d : <span class="hours">00</span>h : <span class="minutes">00</span>m : <span class="seconds">00</span>s
-                                        </div>
-                                    </div>
-                                    <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
-                                        <a href="{% url 'core:event_detail' event.id %}" class="stretched-link">{{ event.title }}</a>
-                                    </h3>
-                                    <!-- Event Description -->
-                                    <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ event.description }}</p>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4 pt-3 border-t border-white/5">
-                                    <span class="text-xs text-muted truncate max-w-[180px]">{{ event.date|date:"M d, Y" }}</span>
-                                    <div class="flex-shrink-0 z-20">
-                                        <a href="{% url 'core:event_detail' event.id %}" class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/5 text-white hover:bg-accent-neon hover:text-[#020817] hover:border-accent-neon transition-all duration-300">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% else %}
-        <div>
-            <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-                <div>
-                    <div class="text-accent-neon font-bold text-xs uppercase tracking-widest mb-1">Curriculum</div>
-                    <h2 class="text-3xl font-sora font-bold text-white">Trending <span class="text-gradient">Courses</span></h2>
-                </div>
-                <a href="{% url 'courses:list' %}" class="btn-outline text-xs px-4 py-2 flex items-center gap-1.5 h-fit">
-                    Explore Catalog <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {% for course in featured_courses %}
-                <div class="tf-medium-card hover-lift group relative overflow-hidden">
-                    <div class="flex flex-col sm:flex-row h-full items-center p-3 gap-4">
-                        <!-- Thumbnail -->
-                        <div class="w-full sm:w-[260px] aspect-[16/9] overflow-hidden flex-shrink-0 border border-white/10 rounded-xl relative">
-                            {% if course.thumbnail %}
-                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                            {% else %}
-                            <div class="w-full h-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                                <span class="text-xs text-white/30 font-sora font-bold">PRO COURSE</span>
-                            </div>
-                            {% endif %}
-                            <div class="absolute top-2 left-2">
-                                <span class="text-[9px] font-bold px-2 py-0.5 bg-accent-neon/20 text-accent-neon border border-accent-neon/30 rounded uppercase tracking-wider">{{ course.difficulty }}</span>
-                            </div>
-                        </div>
-
-                        <!-- Details -->
-                        <div class="flex-grow flex flex-col justify-between h-full min-w-0 py-1">
-                            <div>
-                                <h3 class="text-base font-bold font-sora text-white line-clamp-1 leading-snug group-hover:text-accent-neon transition-colors mb-1.5">
-                                    <a href="{% url 'courses:detail' course.id %}" class="stretched-link">{{ course.title }}</a>
-                                </h3>
-                                <!-- Course Description -->
-                                <p class="text-[11px] text-muted line-clamp-2 leading-relaxed mb-0 font-light">{{ course.description }}</p>
-                            </div>
-
-                            <div class="flex justify-between items-end mt-4 pt-3 border-t border-white/5">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-[10px]">{{ course.instructor|make_list|first }}</div>
-                                    <div class="text-[11px] text-white font-medium truncate max-w-[100px]">{{ course.instructor }}</div>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex items-center gap-0.5 text-[11px] text-yellow-500 font-bold">
-                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        4.9
-                                    </div>
-                                    <div class="text-right">
-                                        {% if course.is_free %}
-                                        <span class="text-base font-sora font-bold text-accent-neon">FREE</span>
-                                        <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
-                                        {% elif course.discount_price %}
-                                        <span class="text-base font-sora font-bold text-accent-neon">${{ course.discount_price }}</span>
-                                        <span class="text-[10px] text-muted line-through ml-1">${{ course.price }}</span>
-                                        {% else %}
-                                        <span class="text-base font-sora font-bold text-white">${{ course.price }}</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
+  <section id="top" style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 78px) clamp(18px, 4vw, 44px) clamp(26px, 3vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(24px, 4vw, 60px); align-items: center;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px 5px 8px; border-radius: 999px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-size: 12px; color: #424245;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>
+        The future of EdTech · All systems operational
+      </div>
+      <h1 style="margin: 18px 0 0; font-size: clamp(38px, 5.4vw, 68px); line-height: 1.01; letter-spacing: -.042em; font-weight: 600; text-wrap: balance;">
+        Master the skills that build the future.
+      </h1>
+      <p style="margin: 16px 0 0; max-width: 46ch; font-size: clamp(15px, 1.3vw, 17.5px); line-height: 1.5; color: #6E6E73; text-wrap: pretty;">
+        Affordable premium tech education for builders, ethical hackers, developers and innovators — project-led, mentor-guided, career-grade.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;">
+        <a href="#courses" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; background: #0071E3; color: #fff;" style-hover="background: #0058B0; color: #fff;">Start learning</a>
+        <button onClick="{{ openDemo }}" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(0,0,0,.14); background: #fff; color: #1D1D1F; cursor: pointer;" style-hover="background: #F0F0F3;">Watch demo</button>
+      </div>
+      <div style="display: flex; gap: 28px; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,.08); flex-wrap: wrap;">
+        <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
+          <div>
+            <div style="font-size: 19px; font-weight: 600; letter-spacing: -.03em;">{{ s.value }}</div>
+            <div style="font-size: 11.5px; color: #86868B; margin-top: 2px;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
     </div>
-</section>
 
-<!-- 4. WHY TAPEFLICKER SECTION (Bento Grid) -->
-<section class="tf-about-preview py-16 md:py-20 relative z-20 bg-secondary/20">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-20 reveal">
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-sora font-bold text-white mb-6">Why <span class="text-gradient">Tapeflicker?</span></h2>
-            <p class="text-muted max-w-2xl mx-auto text-lg">We don't just teach theory. We build practitioners ready for the modern tech landscape.</p>
-        </div>
-
-        <div class="tf-brand-story reveal" style="transition-delay: 80ms;">
-            <div>
-                <span>Mission</span>
-                <p>Make premium technology education practical, affordable, and community-powered for ambitious builders.</p>
-            </div>
-            <div>
-                <span>Community</span>
-                <p>Students learn together through cohorts, guided projects, peer momentum, and mentor-led feedback loops.</p>
-            </div>
-            <div>
-                <span>Credibility</span>
-                <p>Curriculum is shaped around modern engineering workflows, security practice, and portfolio-ready outcomes.</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[250px]">
-            <!-- Bento 1 -->
-            <div class="bento-card md:col-span-2 reveal">
-                <div class="w-12 h-12 rounded-xl bg-accent-neon/10 border border-accent-neon/20 flex items-center justify-center text-accent-neon mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold font-sora text-white mb-3">Real-World Projects</h3>
-                <p class="text-muted leading-relaxed">Stop watching. Start building. Every course includes hands-on labs and projects that mimic actual enterprise environments.</p>
-            </div>
-            <!-- Bento 2 -->
-            <div class="bento-card bg-gradient-to-br from-accent-purple/10 to-transparent reveal" style="transition-delay: 100ms;">
-                <div class="w-12 h-12 rounded-xl bg-accent-purple/10 border border-accent-purple/20 flex items-center justify-center text-accent-purple mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold font-sora text-white mb-3">Cyber Labs</h3>
-                <p class="text-muted leading-relaxed text-sm">Access to premium virtual environments.</p>
-            </div>
-            <!-- Bento 3 -->
-            <div class="bento-card reveal" style="transition-delay: 200ms;">
-                <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold font-sora text-white mb-3">Budget-Friendly</h3>
-                <p class="text-muted leading-relaxed text-sm">Silicon Valley curriculum at a fraction of the cost.</p>
-            </div>
-            <!-- Bento 4 -->
-            <div class="bento-card md:col-span-2 bg-gradient-to-tl from-accent-neon/10 to-transparent reveal" style="transition-delay: 300ms;">
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold font-sora text-white mb-3">Industry Elite Instructors</h3>
-                <p class="text-muted leading-relaxed">Learn directly from security analysts, senior developers, and AI researchers actively working in top tech companies.</p>
-            </div>
-        </div>
+    <div style="position: relative; height: clamp(320px, 30vw, 420px); width: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(0, 113, 227, 0.08) 0%, rgba(0, 178, 255, 0.04) 50%, transparent 75%); border-radius: 24px;">
+      <canvas ref="{{ canvasRef }}" style="display: block; width: 100%; height: 100%;"></canvas>
     </div>
-</section>
+  </section>
 
-<!-- 4.5 OFFICIAL MERCH SECTION -->
-<section class="tf-merch-section py-16 md:py-20 relative z-20 border-b border-white/5 bg-transparent">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-            <span class="text-[10px] font-mono tracking-widest text-accent-cyan uppercase block mb-4">Official Merch</span>
-            <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">Tapeflicker Gear</h2>
-            <p class="text-muted text-sm mt-3 font-light">Premium limited-edition goods for developers and innovators.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Goodie 1 -->
-            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal">
-                <div>
-                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
-                        <img src="{% static 'images/tapeflicker_tshirt.png' %}" alt="Tapeflicker Cyber Tee" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
-                    </div>
-                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Cyber Tee</h3>
-                    <p class="text-muted text-xs leading-relaxed font-light">
-                        Premium heavyweight cotton crewneck featuring our custom slanted brand typography printed in clean white and gold.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                    <span class="text-base font-bold font-sora text-white">₹2,499</span>
-                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
-                </div>
-            </div>
-
-            <!-- Goodie 2 -->
-            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal" style="transition-delay: 100ms;">
-                <div>
-                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
-                        <img src="{% static 'images/tapeflicker_bag.png' %}" alt="Tapeflicker Commuter Bag" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
-                    </div>
-                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Commuter Bag</h3>
-                    <p class="text-muted text-xs leading-relaxed font-light">
-                        A sleek, premium matte black water-resistant commuter laptop backpack featuring custom Tapeflicker embroidery.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                    <span class="text-base font-bold font-sora text-white">₹3,999</span>
-                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
-                </div>
-            </div>
-
-            <!-- Goodie 3 -->
-            <div class="p-6 rounded-2xl bg-secondary/30 border border-white/5 flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300 group reveal" style="transition-delay: 200ms;">
-                <div>
-                    <div class="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 mb-6 relative">
-                        <img src="{% static 'images/tapeflicker_stickers.png' %}" alt="Tapeflicker Sticker Pack" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded uppercase tracking-wider">Out of Stock</span>
-                    </div>
-                    <h3 class="text-lg font-bold font-sora text-white mb-2 group-hover:text-accent-neon transition-colors">Tapeflicker Sticker Pack</h3>
-                    <p class="text-muted text-xs leading-relaxed font-light">
-                        A high-quality pack of die-cut weather-resistant vinyl stickers featuring official Tapeflicker logos, cybersecurity icons, and developer graphics.
-                    </p>
-                </div>
-                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                    <span class="text-base font-bold font-sora text-white">₹699</span>
-                    <button disabled class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-muted text-[10px] uppercase font-bold tracking-wider cursor-not-allowed">Not Available</button>
-                </div>
-            </div>
-        </div>
+  <div style="border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06); background: #fff; overflow: hidden; padding: 11px 0;">
+    <div style="display: flex; gap: 10px; width: max-content; animation: tf-marquee 46s linear infinite;">
+      <sc-for list="{{ ticker }}" as="tk" hint-placeholder-count="12">
+        <span style="font-size: 12.5px; color: #424245; padding: 5px 13px; border-radius: 999px; border: 1px solid rgba(0,0,0,.08); white-space: nowrap;">{{ tk }}</span>
+      </sc-for>
     </div>
-</section>
+  </div>
 
-
-<!-- 7. TESTIMONIALS -->
-<section class="tf-testimonials-section py-10 md:py-14 relative z-20 bg-transparent">
-    <div class="max-w-6xl mx-auto px-6">
-        
-        <!-- Section Header -->
-        <div class="text-center mb-10">
-            <span class="text-xs font-semibold text-accent-neon uppercase tracking-[0.25em] block mb-2 font-sora">Community</span>
-            <h2 class="text-3xl font-sora font-extrabold text-white">Loved by <span class="text-gradient">Engineers</span></h2>
-        </div>
-
-        <!-- Testimonial Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Card 1: James Doe -->
-            <div class="glass border border-white/5 rounded-2xl p-6 relative flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300">
-                <div class="absolute -top-3 -left-3 text-accent-neon/5 font-serif text-8xl pointer-events-none select-none">“</div>
-                <p class="text-sm text-muted leading-relaxed mb-6 italic relative z-10">
-                    "The UI/UX is world-class, but the content is even better. It genuinely feels like a premium Silicon Valley product. Got my first dev job after completing the React path!"
-                </p>
-                <div class="flex items-center gap-3 pt-4 border-t border-white/5">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs select-none">
-                        JD
-                    </div>
-                    <div>
-                        <div class="font-bold text-white text-xs">James Doe</div>
-                        <div class="text-[10px] text-accent-neon font-medium">Frontend Engineer @ Stripe</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Sarah Wong -->
-            <div class="glass border border-white/5 rounded-2xl p-6 relative flex flex-col justify-between hover:border-accent-neon/20 transition-all duration-300">
-                <div class="absolute -top-3 -left-3 text-accent-neon/5 font-serif text-8xl pointer-events-none select-none">“</div>
-                <p class="text-sm text-muted leading-relaxed mb-6 italic relative z-10">
-                    "Tapeflicker's cybersecurity track goes deeper than any university course I've taken. The labs and premium interface keep me engaged for hours."
-                </p>
-                <div class="flex items-center gap-3 pt-4 border-t border-white/5">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-purple to-accent-neon flex items-center justify-center text-primary font-bold text-xs select-none">
-                        SW
-                    </div>
-                    <div>
-                        <div class="font-bold text-white text-xs">Sarah Wong</div>
-                        <div class="text-[10px] text-accent-neon font-medium">Security Analyst</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+  <section id="courses" style="max-width: 1280px; margin: 0 auto; padding: clamp(34px, 4.5vw, 62px) clamp(18px, 4vw, 44px) clamp(20px, 3vw, 34px);">
+    <div style="display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 18px;">
+      <div>
+        <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Curriculum</div>
+        <h2 style="margin: 8px 0 0; font-size: clamp(25px, 2.8vw, 36px); letter-spacing: -.035em; font-weight: 600;">Trending courses</h2>
+      </div>
+      <div style="flex: 1;"></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.go }}" style="{{ f.style }}" style-hover="border-color: rgba(0,0,0,.24);">{{ f.label }}</button>
+        </sc-for>
+      </div>
     </div>
-</section>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 12px;">
+      <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
+        <div class="tf-curtain" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s;" style-hover="box-shadow: 0 14px 30px rgba(0,0,0,.1); transform: translateY(-2px);" style-hover="transform: translateY(-2px);">
+          <div style="{{ c.thumbStyle }}">
+            <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);">course art</span>
+            <span style="position: absolute; right: 10px; top: 10px; font-family: ui-monospace, monospace; font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff;">{{ c.hours }}</span>
+          </div>
+          <div style="padding: 13px 14px 15px; display: flex; flex-direction: column; gap: 7px; flex: 1;">
+            <div style="font-size: 10.5px; color: #86868B; letter-spacing: .05em; text-transform: uppercase; font-weight: 600;">{{ c.track }} · {{ c.level }}</div>
+            <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25;">{{ c.title }}</div>
+            <div style="font-size: 12.5px; color: #6E6E73; line-height: 1.45;">{{ c.blurb }}</div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px;">
+              <span style="font-size: 12px; color: #6E6E73; padding: 4px 9px; border-radius: 999px; background: #F2F2F5;">{{ c.format }}</span>
+              <span style="flex: 1;"></span>
+              <a href="/courses/" style="font-size: 12.5px; font-weight: 500; color: #0071E3; text-decoration: none;">View path →</a>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 34px; text-align: left; color: #86868B; font-size: 14px;">No courses in this track yet — new paths drop every month.</div>
+    </sc-if>
+  </section>
 
+  <div ref="{{ scrubRef }}" style="max-width: 1280px; margin: clamp(14px, 2vw, 26px) auto; padding: 0 clamp(18px, 4vw, 44px);">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" style="display: block; width: 100%; height: 34px; overflow: visible;">
+      <path d="M0,30 C100,30 130,8 200,8 C270,8 300,52 400,52 C500,52 530,8 600,8 C670,8 700,52 800,52 C900,52 930,8 1000,8 C1070,8 1100,30 1200,30" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="2" stroke-linecap="round"></path>
+      <path d="M0,30 C100,30 130,8 200,8 C270,8 300,52 400,52 C500,52 530,8 600,8 C670,8 700,52 800,52 C900,52 930,8 1000,8 C1070,8 1100,30 1200,30" fill="none" stroke="{{ scrubColor }}" stroke-width="2" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ scrubOffset }}" style="{{ scrubDrawStyle }}"></path>
+    </svg>
+  </div>
 
+  <section id="labs" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(20px, 3vw, 46px); align-items: start;">
+    <div style="position: sticky; top: 80px; align-self: start;">
+      <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Why Tapeflicker</div>
+      <h2 style="margin: 10px 0 0; font-size: clamp(25px, 2.8vw, 36px); line-height: 1.08; letter-spacing: -.035em; font-weight: 600;">We don't teach theory. We build practitioners.</h2>
+      <p style="margin: 12px 0 0; max-width: 36ch; font-size: 15px; line-height: 1.5; color: #6E6E73;">Pick a pillar to see what it means in practice.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
+        <div onClick="{{ p.go }}" style="{{ p.style }}" style-hover="border-color: rgba(0,0,0,.18);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="{{ p.numStyle }}">{{ p.num }}</span>
+            <span style="font-size: 17px; font-weight: 600; letter-spacing: -.022em;">{{ p.title }}</span>
+            <span style="flex: 1;"></span>
+            <span style="font-size: 15px; color: #86868B;">{{ p.caret }}</span>
+          </div>
+          <div style="{{ p.bodyStyle }}">{{ p.body }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
 
+  <section id="events" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
+        <div style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s;" style-hover="box-shadow: 0 12px 26px rgba(0,0,0,.08);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="{{ e.tagStyle }}">{{ e.tag }}</span>
+            <span style="font-size: 11.5px; color: #86868B;">{{ e.date }}</span>
+          </div>
+          <div style="font-size: 16px; font-weight: 600; letter-spacing: -.022em;">{{ e.title }}</div>
+          <div style="font-size: 13px; color: #6E6E73; line-height: 1.45;">{{ e.desc }}</div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+            <button onClick="{{ e.toggle }}" style="{{ e.btnStyle }}">{{ e.btnLabel }}</button>
+            <span style="font-size: 11.5px; color: #86868B;">{{ e.seats }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="gear" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
+    <div style="display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 16px;">
+      <div>
+        <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Official merch</div>
+        <h2 style="margin: 8px 0 0; font-size: clamp(23px, 2.5vw, 32px); letter-spacing: -.035em; font-weight: 600;">Tapeflicker gear</h2>
+      </div>
+      <div style="flex: 1;"></div>
+      <span style="font-size: 12.5px; color: #86868B;">Limited edition · restocking soon</span>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; min-height: clamp(300px, 34vw, 420px); perspective: 1400px; width: 100%; padding: 0 2%;">
+      <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
+        <div onMouseEnter="{{ g.focus }}" style="{{ g.cardStyle }}">
+          <div style="{{ g.thumbStyle }}">
+            <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #9A9AA0;">{{ g.shot }}</span>
+            <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: rgba(0,0,0,.06); color: #6E6E73;">Out of stock</span>
+          </div>
+          <div style="padding: 13px 15px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <div style="min-width: 0;">
+              <div style="font-size: 14.5px; font-weight: 600; letter-spacing: -.02em;">{{ g.name }}</div>
+              <div style="font-size: 12.5px; color: #86868B; margin-top: 2px; white-space: nowrap;">{{ g.price }}</div>
+            </div>
+            <span style="flex: 1;"></span>
+            <button onClick="{{ g.notify }}" style="{{ g.btnStyle }}">{{ g.btnLabel }}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="about" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(20px, 3vw, 46px); align-items: center;">
+      <div>
+        <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Community</div>
+        <h2 style="margin: 10px 0 0; font-size: clamp(25px, 2.8vw, 36px); line-height: 1.08; letter-spacing: -.035em; font-weight: 600;">Loved by engineers</h2>
+        <div style="display: flex; gap: 8px; margin-top: 18px;">
+          <button onClick="{{ prevQuote }}" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;" style-hover="background: #F0F0F3;">←</button>
+          <button onClick="{{ nextQuote }}" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;" style-hover="background: #F0F0F3;">→</button>
+        </div>
+      </div>
+      <div style="padding: clamp(22px, 3vw, 34px); border-radius: 18px; background: #fff; border: 1px solid rgba(0,0,0,.07);">
+        <p style="margin: 0; font-size: clamp(16px, 1.7vw, 21px); line-height: 1.45; letter-spacing: -.02em; text-wrap: pretty;">{{ quoteText }}</p>
+        <div style="display: flex; align-items: center; gap: 11px; margin-top: 20px;">
+          <div style="{{ quoteAvatarStyle }}">{{ quoteInitials }}</div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 600;">{{ quoteName }}</div>
+            <div style="font-size: 12px; color: #86868B;">{{ quoteRole }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px) clamp(40px, 5vw, 70px);">
+    <div style="border-radius: 22px; background: #111114; color: #fff; padding: clamp(26px, 3.4vw, 46px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(22px, 3vw, 48px); align-items: center;">
+      <div>
+        <h2 style="margin: 0; font-size: clamp(25px, 3.1vw, 40px); line-height: 1.05; letter-spacing: -.035em; font-weight: 600; text-wrap: balance;">Silicon Valley curriculum. Fraction of the cost.</h2>
+        <p style="margin: 12px 0 0; max-width: 48ch; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,.6);">Start free with the foundations track. Upgrade when you want the cyber labs, mentor reviews and career-grade certificate.</p>
+        <div style="display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap;">
+          <a href="/accounts/signup/" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; border: 0; cursor: pointer; background: #fff; color: #111; text-decoration: none;" style-hover="background: #E6E6EA;">Get started</a>
+          <a href="#courses" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); color: #fff; text-decoration: none;" style-hover="background: rgba(255,255,255,.1); color: #fff;">Explore catalog</a>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <sc-for list="{{ perks }}" as="p" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; gap: 11px; padding: 11px 15px; border-radius: 12px; background: rgba(255,255,255,.06); font-size: 13.5px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #C8F250;"></span>
+            {{ p }}
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(0,0,0,.07);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 22px clamp(18px, 4vw, 44px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: #86868B;">
+      <img src="/static/images/tapeflicker_brand_logo_transparent.png" alt="Tapeflicker" style="height: 20px; width: auto; display: block; opacity: .8;" />
+      <span>© 2026 Tapeflicker Inc.</span>
+      <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>All systems operational</span>
+      <div style="flex: 1;"></div>
+      <a href="#courses" style="color: #86868B;" style-hover="color: #1D1D1F;">Courses</a>
+      <a href="#about" style="color: #86868B;" style-hover="color: #1D1D1F;">About</a>
+      <a href="#top" style="color: #86868B;" style-hover="color: #1D1D1F;">Privacy</a>
+      <a href="/contact/" style="color: #86868B;" style-hover="color: #1D1D1F;">Contact</a>
+    </div>
+  </footer>
+
+  <sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px;">
+      <div style="width: min(760px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; box-shadow: 0 30px 70px rgba(0,0,0,.4);">
+        <div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 12px);">
+          <span style="font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">platform demo video</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 13px 16px; color: rgba(255,255,255,.7); font-size: 12.5px;">
+          <span>2 min tour · labs, cohorts, certificates</span>
+          <span style="flex: 1;"></span>
+          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; font: inherit; font-size: 12px; padding: 6px 13px; border-radius: 999px;">Close</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0071E3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#0071E3&quot;,&quot;#C8F250&quot;,&quot;#1D1D1F&quot;,&quot;#FF3B30&quot;]}}">
+const COURSES = [
+  { track: "Cybersecurity", level: "Advanced", title: "Ethical Hacking & Pentesting", blurb: "Recon to report writing inside isolated cyber labs.", hours: "24h", format: "Cohort + labs", tint: "#2A2F44" },
+  { track: "Cybersecurity", level: "Intermediate", title: "DevSecOps Pipelines", blurb: "Shift-left scanning, secrets hygiene, hardened CI/CD.", hours: "16h", format: "Self-paced", tint: "#26372F" },
+  { track: "AI & Data", level: "Beginner", title: "Python for AI Automation", blurb: "Scripts, agents and pipelines that do real work.", hours: "18h", format: "Self-paced", tint: "#3A3524" },
+  { track: "AI & Data", level: "Advanced", title: "Deep Learning in Production", blurb: "Train, evaluate and ship models that survive traffic.", hours: "22h", format: "Cohort + labs", tint: "#3A2C36" },
+  { track: "Development", level: "Intermediate", title: "Full-Stack Web Engineering", blurb: "Frontend, APIs and data modelling as one system.", hours: "30h", format: "Project track", tint: "#243544" },
+  { track: "Development", level: "Beginner", title: "API Design & Backend Craft", blurb: "Contracts, auth, versioning and painless scaling.", hours: "14h", format: "Self-paced", tint: "#33303F" },
+  { track: "Cloud & DevOps", level: "Intermediate", title: "Cloud, Linux & DevOps", blurb: "Provision, observe and recover production systems.", hours: "26h", format: "Project track", tint: "#2C3A3F" },
+  { track: "Design", level: "Beginner", title: "UI/UX for Engineers", blurb: "Interfaces that ship: hierarchy, states, handoff.", hours: "12h", format: "Self-paced", tint: "#3B2F3B" },
+];
+const FILTERS = ["All", "Cybersecurity", "AI & Data", "Development", "Cloud & DevOps", "Design"];
+const TICKER = ["AI Automation", "Python Dev", "Machine Learning", "Deep Learning", "Web Development", "Frontend Dev", "Backend Dev", "API Design", "Ethical Hacking", "Cybersecurity", "Pentesting", "DevSecOps", "Cloud Computing", "DevOps", "Linux Admin", "Database Admin", "Game Dev", "Mobile Apps", "UI/UX Design", "Data Science"];
+const PILLARS = [
+  { title: "Real-world projects", body: "Stop watching, start building. Every course ships hands-on labs and projects that mimic actual enterprise environments." },
+  { title: "Cyber labs", body: "Premium isolated virtual environments — attack, defend and break things without touching production." },
+  { title: "Industry-elite instructors", body: "Security analysts, senior developers and AI researchers who are actively working in top tech companies." },
+  { title: "Budget-friendly", body: "Silicon Valley curriculum at a fraction of the cost, with cohort pricing for students." },
+];
+const LABS = {
+  Recon: ["$ tapeflicker lab start recon-01", "› spawning isolated container…  ok", "$ nmap -sV 10.10.4.0/24", "  22/tcp  open  ssh      OpenSSH 9.6", "  443/tcp open  https    nginx 1.25", "› 2 hosts mapped · findings auto-saved"],
+  Exploit: ["$ tapeflicker lab start web-exploit", "› target: shop.lab.internal", "$ sqlmap -u '/product?id=1' --batch", "  [*] parameter 'id' is injectable", "› mentor review requested  ✓ queued", "› write-up template opened"],
+  Deploy: ["$ tapeflicker lab start devsecops", "$ trivy image api:2.3.1", "  HIGH 2 · MEDIUM 7 · LOW 14", "$ git push origin hardened-pipeline", "› pipeline green · gate passed", "› certificate progress  78%"],
+};
+const EVENTS = [
+  { tag: "Live", tagColor: "#FF3B30", date: "Date to be announced", title: "Capture the Flag: Night Shift", desc: "Six-hour team CTF across web, crypto and forensics tracks.", seats: "Registration open" },
+  { tag: "Workshop", tagColor: "#0071E3", date: "Date to be announced", title: "Build an AI Agent in 90 Minutes", desc: "From blank file to a running automation agent, live.", seats: "Registration open" },
+  { tag: "AMA", tagColor: "#34C759", date: "Date to be announced", title: "Career AMA with Security Analysts", desc: "Portfolios, interviews and the first 90 days on the job.", seats: "Registration open" },
+];
+const GEAR = [
+  { name: "Cyber Tee", price: "₹2,499", shot: "t-shirt shot" },
+  { name: "Commuter Bag", price: "₹3,999", shot: "backpack shot" },
+  { name: "Sticker Pack", price: "₹699", shot: "stickers shot" },
+  { name: "Terminal Hoodie", price: "₹4,499", shot: "hoodie shot" },
+  { name: "Lab Notebook", price: "₹899", shot: "notebook shot" },
+];
+const QUOTES = [
+  { text: "“It genuinely feels like a premium product. The content is even better than the interface — I got my first dev job after finishing the React path.”", name: "James Doe", role: "Frontend Engineer @ Stripe", initials: "JD" },
+  { text: "“The cybersecurity track goes deeper than any university course I've taken. The labs keep me engaged for hours.”", name: "Sarah Wong", role: "Security Analyst", initials: "SW" },
+];
 
-<!-- Scripts for Animations -->
-<script>
-    window.addEventListener('scroll', () => {
-        // Hide scroll indicator on scroll
-        const scrollIndicator = document.getElementById('scroll-indicator');
-        if (scrollIndicator) {
-            if (window.scrollY > 50) {
-                scrollIndicator.classList.add('opacity-0', 'pointer-events-none');
-            } else {
-                scrollIndicator.classList.remove('opacity-0', 'pointer-events-none');
-            }
+class Component extends DCLogic {
+  state = { filter: "All", pillar: 0, lab: "Particles", quote: 0, demo: false, notified: [], rsvp: [], scrub: 0, drawn: false, gearFocus: 2 };
+  scrubRef = React.createRef();
+  cursorRef = React.createRef();
+  canvasRef = React.createRef();
+
+  startParticles() {
+    const cv = this.canvasRef.current;
+    if (!cv) { this.praf = requestAnimationFrame(() => this.startParticles()); return; }
+    if (this.pcv === cv) return;
+    this.pcv = cv;
+    const ctx = cv.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let width = cv.clientWidth, height = cv.clientHeight;
+    cv.width = width * dpr; cv.height = height * dpr; ctx.scale(dpr, dpr);
+
+    const mouse = { x: -1000, y: -1000 };
+    cv.onmousemove = event => {
+      const r = cv.getBoundingClientRect();
+      mouse.x = event.clientX - r.left;
+      mouse.y = event.clientY - r.top;
+    };
+    cv.onmouseleave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+
+    const fontSize = Math.min(width * 0.155, 64);
+    tempCtx.font = `900 ${fontSize}px "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    tempCtx.textAlign = "center";
+    tempCtx.textBaseline = "middle";
+    tempCtx.fillStyle = "#000";
+    tempCtx.fillText("TAPEFLICKER", width / 2, height / 2);
+
+    const imageData = tempCtx.getImageData(0, 0, width, height);
+    const targets = [];
+    const step = 3;
+
+    for (let y = 0; y < height; y += step) {
+      for (let x = 0; x < width; x += step) {
+        const index = (y * width + x) * 4;
+        const alpha = imageData.data[index + 3];
+        if (alpha > 140) {
+          targets.push({ x: x, y: y });
         }
+      }
+    }
+
+    const colors = [
+      "rgba(0, 113, 227, 0.92)",   // Premium Apple Blue
+      "rgba(0, 178, 255, 0.88)",  // Vibrant Electric Cyan
+      "rgba(88, 86, 214, 0.88)",  // Deep Indigo Accent
+      "rgba(29, 29, 31, 0.88)",   // Sleek Dark Charcoal
+    ];
+
+    const particles = [];
+    const particleCount = Math.min(targets.length, 950);
+
+    for (let i = 0; i < particleCount; i++) {
+      const targetIndex = Math.floor((i / particleCount) * targets.length);
+      const target = targets[targetIndex] || { x: width / 2, y: height / 2 };
+      particles.push({
+        x: width / 2 + (Math.random() - 0.5) * width,
+        y: height / 2 + (Math.random() - 0.5) * height,
+        vx: 0,
+        vy: 0,
+        targetX: target.x,
+        targetY: target.y,
+        size: Math.random() * 2 + 1.1,
+        color: colors[i % colors.length]
+      });
+    }
+
+    const animate = () => {
+      if (this.pcv !== cv || !cv.isConnected) return;
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        const dx = p.targetX - p.x;
+        const dy = p.targetY - p.y;
+
+        p.vx += dx * 0.024;
+        p.vy += dy * 0.024;
+
+        const mouseDX = p.x - mouse.x;
+        const mouseDY = p.y - mouse.y;
+        const distance = Math.sqrt(mouseDX * mouseDX + mouseDY * mouseDY);
+        const interactionRadius = 135;
+
+        if (distance < interactionRadius) {
+          const force = (interactionRadius - distance) / interactionRadius;
+          p.vx += (mouseDX / (distance || 1)) * force * 5.2;
+          p.vy += (mouseDY / (distance || 1)) * force * 5.2;
+        }
+
+        p.vx *= 0.84;
+        p.vy *= 0.84;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      });
+
+      this.praf = requestAnimationFrame(animate);
+    };
+
+    animate();
+  }
+
+  initCursor() {
+    const el = document.querySelector("[data-tf-cursor]");
+    if (!el) { setTimeout(() => this.initCursor(), 150); return; }
+    let tx = 0, ty = 0, x = 0, y = 0, px = 0, py = 0, first = true;
+    this.onMove = e => {
+      tx = e.clientX; ty = e.clientY;
+      if (first) { x = tx; y = ty; px = tx; py = ty; first = false; }
+    };
+    window.addEventListener("mousemove", this.onMove);
+    document.addEventListener("mousemove", this.onMove);
+    const tick = () => {
+      x += (tx - x) * 0.22; y += (ty - y) * 0.22;
+      const dx = x - px, dy = y - py;
+      px = x; py = y;
+      const v = Math.min(Math.hypot(dx, dy) / 22, 0.7);
+      const ang = (Math.atan2(dy, dx) * 180) / Math.PI;
+      el.style.transform = `translate(${x - 11}px, ${y - 11}px) rotate(${ang}deg) scale(${1 + v}, ${1 - v * 0.62})`;
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+
+  componentDidMount() {
+    this.startParticles();
+    this.onScroll = () => {
+      const doc = document.scrollingElement || document.documentElement;
+      let top = doc.scrollTop, max = doc.scrollHeight - doc.clientHeight;
+      if (max <= 4) {
+        let el = this.scrubRef.current;
+        while (el && el !== document.body) {
+          if (el.scrollHeight - el.clientHeight > 4) { top = el.scrollTop; max = el.scrollHeight - el.clientHeight; break; }
+          el = el.parentElement;
+        }
+      }
+      const p = max > 0 ? Math.min(1, Math.max(0, top / max)) : 0;
+      if (Math.abs(p - this.state.scrub) > 0.002) this.setState({ scrub: p });
+    };
+    window.addEventListener("scroll", this.onScroll, true);
+    window.addEventListener("resize", this.onScroll);
+    this.onScroll();
+    this.initCursor();
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.style.setProperty("animation-delay", ""); e.target.classList.add("tf-in"); this.io.unobserve(e.target); }
+    }), { threshold: 0.05, rootMargin: "0px 0px -12% 0px" });
+    this.scanCurtains();
+    const line = this.scrubRef.current;
+    if (line) {
+      this.lio = new IntersectionObserver(es => es.forEach(e => {
+        this.setState({ drawn: e.isIntersecting });
+      }), { threshold: 0.4 });
+      this.lio.observe(line);
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, true);
+    window.removeEventListener("resize", this.onScroll);
+    if (this.onMove) window.removeEventListener("mousemove", this.onMove);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.io) this.io.disconnect();
+    if (this.lio) this.lio.disconnect();
+    this.pcv = null;
+    if (this.praf) cancelAnimationFrame(this.praf);
+  }
+
+  scanCurtains() {
+    if (!this.io) return;
+    document.querySelectorAll(".tf-curtain:not(.tf-in)").forEach((el, i) => {
+      if (el.dataset.tfObs) return;
+      el.dataset.tfObs = "1";
+      el.style.animationDelay = (i % 4) * 170 + "ms";
+      this.io.observe(el);
     });
+  }
+  componentDidUpdate() {
+    this.scanCurtains();
+    this.startParticles();
+  }
 
-    // Live Countdown System
-    document.addEventListener('DOMContentLoaded', () => {
-        const countdowns = document.querySelectorAll('.countdown-container');
-        
-        countdowns.forEach(container => {
-            const targetDate = new Date(container.getAttribute('data-date')).getTime();
-            
-            const daysEl = container.querySelector('.days');
-            const hoursEl = container.querySelector('.hours');
-            const minsEl = container.querySelector('.minutes');
-            const secsEl = container.querySelector('.seconds');
-            
-            const updateTimer = () => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-                
-                if (distance < 0) {
-                    container.innerHTML = '<div class="w-full text-center text-accent-neon font-bold text-sm tracking-widest uppercase py-2">Event is Live</div>';
-                    return;
-                }
-                
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                daysEl.innerText = days.toString().padStart(2, '0');
-                hoursEl.innerText = hours.toString().padStart(2, '0');
-                minsEl.innerText = minutes.toString().padStart(2, '0');
-                secsEl.innerText = seconds.toString().padStart(2, '0');
-            };
-            
-            updateTimer();
-            setInterval(updateTimer, 1000);
-        });
-    });
+  renderVals() {
+    const acc = this.props.accent ?? "#0071E3";
+    const { filter, pillar, lab, quote, demo, notified, rsvp, gearFocus } = this.state;
+    const list = COURSES.filter(c => filter === "All" || c.track === filter);
+    const q = QUOTES[quote];
 
-    // ===== GLITCH EFFECT ON HOVER ONLY =====
-    (function() {
-        const glitchWrapper = document.querySelector('.tf-glitch-wrapper');
-        if (!glitchWrapper) return;
-
-        let audioCtx = null;
-        let noiseBuffer = null;
-
-        // Pre-initialize AudioContext and noise buffer once to eliminate sound latency
-        function initAudio() {
-            if (audioCtx) return;
-            try {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContextClass) return;
-                audioCtx = new AudioContextClass();
-                
-                // Pre-generate noise buffer to avoid real-time calculation latency
-                const bufferSize = audioCtx.sampleRate * 0.25;
-                noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = noiseBuffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1;
-                }
-            } catch (err) {
-                console.warn("AudioContext initialization failed:", err);
-            }
-        }
-
-        // Listen for early user gestures to pre-initialize the audio before hover occurs
-        const gestures = ['mouseover', 'click', 'keydown', 'touchstart'];
-        gestures.forEach(gesture => {
-            window.addEventListener(gesture, initAudio, { once: true, passive: true });
-        });
-
-        function playGlitchSound() {
-            if (!audioCtx) {
-                initAudio();
-            }
-            if (!audioCtx) return;
-
-            try {
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-
-                // Play pre-generated noise
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = noiseBuffer;
-
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.setValueAtTime(1200, audioCtx.currentTime);
-                filter.frequency.exponentialRampToValueAtTime(3500, audioCtx.currentTime + 0.08);
-                filter.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.2);
-                filter.Q.setValueAtTime(4, audioCtx.currentTime);
-
-                const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 0.02);
-                gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.06);
-                gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.09);
-                gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.13);
-                gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.16);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-
-                const osc = audioCtx.createOscillator();
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-                osc.frequency.setValueAtTime(2200, audioCtx.currentTime + 0.05);
-                osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.12);
-
-                const oscGain = audioCtx.createGain();
-                oscGain.gain.setValueAtTime(0, audioCtx.currentTime);
-                oscGain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 0.01);
-                oscGain.gain.setValueAtTime(0, audioCtx.currentTime + 0.04);
-                oscGain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-                oscGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
-
-                noise.connect(filter);
-                filter.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.connect(oscGain);
-                oscGain.connect(audioCtx.destination);
-
-                noise.start(audioCtx.currentTime);
-                noise.stop(audioCtx.currentTime + 0.25);
-                osc.start(audioCtx.currentTime);
-                osc.stop(audioCtx.currentTime + 0.2);
-            } catch (err) {
-                console.warn("AudioContext glitch play failed:", err);
-            }
-        }
-
-        // Play sound on hover trigger
-        let hoverThrottle = false;
-        glitchWrapper.addEventListener('mouseenter', () => {
-            if (!hoverThrottle) {
-                playGlitchSound();
-                hoverThrottle = true;
-                setTimeout(() => { hoverThrottle = false; }, 800);
-            }
-        });
-    })();
+    return {
+      heroStats: [
+        { value: "Project-led", label: "Hands-on labs in every course" },
+        { value: "Mentor-guided", label: "Taught by working engineers" },
+        { value: "Certified", label: "Career-grade certificates" },
+      ],
+      ticker: TICKER.concat(TICKER),
+      scrubRef: this.scrubRef,
+      scrubColor: acc,
+      scrubOffset: this.state.drawn ? 0 : 1,
+      scrubDrawStyle: "transition: stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)",
+      labName: lab.toLowerCase() + "-lab",
+      labTabs: Object.keys(LABS).concat("Particles").map(k => ({
+        label: k,
+        go: () => this.setState({ lab: k }),
+        style: `flex:1;padding:10px 12px;border:0;border-right:1px solid rgba(255,255,255,.07);cursor:pointer;font:inherit;font-size:12px;color:${lab === k ? "#fff" : "rgba(255,255,255,.5)"};background:${lab === k ? "rgba(255,255,255,.1)" : "transparent"}`,
+      })),
+      showTerm: lab !== "Particles",
+      showParticles: lab === "Particles",
+      canvasRef: this.canvasRef,
+      termLines: (LABS[lab] || []).map(text => ({
+        text,
+        style: text.startsWith("$") ? "color:#C8F250" : text.startsWith("›") ? "color:rgba(255,255,255,.55)" : "color:rgba(255,255,255,.85)",
+      })),
+      filters: FILTERS.map(f => ({
+        label: f,
+        go: () => this.setState({ filter: f }),
+        style: `font:inherit;font-size:12.5px;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .15s;border:1px solid ${filter === f ? "transparent" : "rgba(0,0,0,.12)"};background:${filter === f ? "#1D1D1F" : "#fff"};color:${filter === f ? "#fff" : "#424245"}`,
+      })),
+      courses: list.map(c => ({
+        ...c,
+        thumbStyle: `position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:${c.tint};background-image:repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 12px)`,
+      })),
+      noResults: list.length === 0,
+      pillars: PILLARS.map((p, i) => ({
+        num: String(i + 1).padStart(2, "0"),
+        title: p.title,
+        body: p.body,
+        caret: pillar === i ? "−" : "+",
+        go: () => this.setState({ pillar: i }),
+        style: `cursor:pointer;padding:16px 18px;border-radius:16px;background:#fff;border:1px solid ${pillar === i ? "rgba(0,0,0,.2)" : "rgba(0,0,0,.07)"};transition:border-color .15s`,
+        numStyle: `font-family:ui-monospace,monospace;font-size:11px;padding:3px 8px;border-radius:6px;background:${pillar === i ? acc : "#F0F0F3"};color:${pillar === i ? "#fff" : "#86868B"}`,
+        bodyStyle: `overflow:hidden;font-size:14.5px;line-height:1.5;color:#6E6E73;max-height:${pillar === i ? "90px" : "0px"};opacity:${pillar === i ? 1 : 0};margin-top:${pillar === i ? "10px" : "0px"};padding-left:42px;transition:all .25s ease`,
+      })),
+      events: EVENTS.map((e, i) => {
+        const on = rsvp.includes(i);
+        return {
+          ...e,
+          tagStyle: `font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px;color:#fff;background:${e.tagColor}`,
+          btnLabel: on ? "✓ Reserved" : "Reserve seat",
+          btnStyle: `font:inherit;font-size:12.5px;font-weight:500;padding:8px 15px;border-radius:999px;cursor:pointer;border:1px solid ${on ? "transparent" : "rgba(0,0,0,.14)"};background:${on ? "#1D1D1F" : "#fff"};color:${on ? "#fff" : "#1D1D1F"}`,
+          toggle: () => this.setState(s => ({ rsvp: s.rsvp.includes(i) ? s.rsvp.filter(x => x !== i) : s.rsvp.concat(i) })),
+        };
+      }),
+      gear: GEAR.map((g, i) => {
+        const on = notified.includes(i);
+        const off = i - gearFocus, abs = Math.abs(off), act = off === 0;
+        return {
+          ...g,
+          focus: () => this.setState({ gearFocus: i }),
+          cardStyle: `position:relative;flex:0 0 auto;width:26%;min-width:0;margin:0 -4.5%;border-radius:16px;background:#fff;border:1px solid rgba(0,0,0,.07);overflow:hidden;cursor:pointer;transform-style:preserve-3d;will-change:transform;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease,box-shadow .45s ease;z-index:${10 - abs};opacity:${Math.max(1 - abs * 0.22, 0.3)};box-shadow:${act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)"};transform:translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
+          thumbStyle: "position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#F2F2F5,#E6E6EB)",
+          btnLabel: on ? "✓ We'll ping you" : "Notify me",
+          btnStyle: `font:inherit;font-size:12px;font-weight:500;padding:7px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;border:1px solid ${on ? "transparent" : "rgba(0,0,0,.14)"};background:${on ? "#1D1D1F" : "#fff"};color:${on ? "#fff" : "#1D1D1F"}`,
+          notify: () => this.setState(s => ({ notified: s.notified.includes(i) ? s.notified : s.notified.concat(i) })),
+        };
+      }),
+      quoteText: q.text,
+      quoteName: q.name,
+      quoteRole: q.role,
+      quoteInitials: q.initials,
+      quoteAvatarStyle: "width:38px;height:38px;border-radius:50%;background:#1D1D1F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:600;letter-spacing:.02em",
+      prevQuote: () => this.setState(s => ({ quote: (s.quote + QUOTES.length - 1) % QUOTES.length })),
+      nextQuote: () => this.setState(s => ({ quote: (s.quote + 1) % QUOTES.length })),
+      perks: ["Project-led learning", "Industry mentors", "Career-grade certificates", "Premium cyber lab access"],
+      demoOpen: demo,
+      openDemo: () => this.setState({ demo: true }),
+      closeDemo: () => this.setState({ demo: false }),
+    };
+  }
+}
 </script>
-
-<script>
-    // Premium Vertical Tickers Animation
-    function initTicker(tickerId, delay) {
-        const ticker = document.getElementById(tickerId);
-        if (!ticker) return;
-
-        const items = ticker.querySelectorAll('.ticker-item');
-        if (items.length === 0) return;
-
-        let currentIndex = 0;
-        const totalItems = items.length;
-        const cycleInterval = 3500; // 3.5 seconds per item for readable rotation
-
-        function cycle() {
-            const currentItem = items[currentIndex];
-            const nextIndex = (currentIndex + 1) % totalItems;
-            const nextItem = items[nextIndex];
-
-            // Animate current out
-            currentItem.classList.remove('active');
-            currentItem.classList.add('exit');
-            currentItem.setAttribute('aria-hidden', 'true');
-
-            // Animate next in
-            nextItem.classList.remove('exit');
-            nextItem.classList.add('active');
-            nextItem.setAttribute('aria-hidden', 'false');
-
-            // Update index
-            currentIndex = nextIndex;
-
-            // Cleanup other items to prevent backwards sliding when reset
-            items.forEach((item, index) => {
-                if (index !== currentIndex && index !== (currentIndex - 1 + totalItems) % totalItems) {
-                    item.classList.remove('exit');
-                }
-            });
-        }
-
-        // Stagger initial cycle and consecutive interval runs
-        setTimeout(() => {
-            cycle();
-            setInterval(cycle, cycleInterval);
-        }, delay);
-    }
-
-    function initAllTickers() {
-        initTicker('ticker-1', 0);
-        initTicker('ticker-2', 300);
-        initTicker('ticker-3', 600);
-        initTicker('ticker-4', 900);
-        initTicker('ticker-5', 1200);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAllTickers);
-    } else {
-        initAllTickers();
-    }
-
-    // ===== PREMIUM BACKGROUND CANVAS SYSTEM =====
-    (function() {
-        const canvas = document.getElementById('knowledge-graph-canvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let animationFrameId = null;
-        let isVisible = true;
-        let nodes = [];
-        let numNodes = 45;
-        let connectionDist = 120;
-        let dpr = window.devicePixelRatio || 1;
-
-        // Resize handler
-        function resize() {
-            const width = canvas.offsetWidth;
-            const height = canvas.offsetHeight;
-            if (width === 0 || height === 0) {
-                setTimeout(resize, 100);
-                return;
-            }
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.scale(dpr, dpr);
-            
-            // Adjust densities based on device width
-            if (window.innerWidth < 768) {
-                numNodes = 12;
-                connectionDist = 80;
-            } else {
-                numNodes = 45;
-                connectionDist = 130;
-            }
-            initNodes(width, height);
-        }
-
-        // Initialize nodes
-        function initNodes(width, height) {
-            nodes = [];
-            for (let i = 0; i < numNodes; i++) {
-                nodes.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.15,
-                    vy: (Math.random() - 0.5) * 0.15,
-                    radius: Math.random() * 2 + 1,
-                    color: i % 2 === 0 ? 'rgba(0, 212, 255, 0.6)' : 'rgba(139, 92, 246, 0.6)'
-                });
-            }
-        }
-
-        // Update loop
-        function update() {
-            if (!isVisible) return;
-            const width = canvas.width / dpr;
-            const height = canvas.height / dpr;
-            if (width === 0 || height === 0) {
-                animationFrameId = requestAnimationFrame(update);
-                return;
-            }
-            
-            ctx.clearRect(0, 0, width, height);
-
-            // Draw connections
-            ctx.lineWidth = 0.5;
-            for (let i = 0; i < nodes.length; i++) {
-                const n1 = nodes[i];
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const n2 = nodes[j];
-                    const dx = n1.x - n2.x;
-                    const dy = n1.y - n2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (dist < connectionDist) {
-                        const alpha = (1 - (dist / connectionDist)) * 0.05;
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-                        ctx.beginPath();
-                        ctx.moveTo(n1.x, n1.y);
-                        ctx.lineTo(n2.x, n2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Draw & move nodes
-            for (let i = 0; i < nodes.length; i++) {
-                const node = nodes[i];
-                
-                node.x += node.vx;
-                node.y += node.vy;
-
-                if (node.x < 0 || node.x > width) node.vx *= -1;
-                if (node.y < 0 || node.y > height) node.vy *= -1;
-
-                node.x = Math.max(0, Math.min(width, node.x));
-                node.y = Math.max(0, Math.min(height, node.y));
-
-                ctx.fillStyle = node.color;
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            animationFrameId = requestAnimationFrame(update);
-        }
-
-        // Initialize
-        resize();
-        window.addEventListener('resize', resize);
-        window.addEventListener('load', resize);
-
-        // Visibility / Viewport optimization
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    isVisible = entry.isIntersecting;
-                    if (isVisible) {
-                        cancelAnimationFrame(animationFrameId);
-                        update();
-                    } else {
-                        cancelAnimationFrame(animationFrameId);
-                    }
-                });
-            }, { threshold: 0.05 });
-            observer.observe(canvas);
-        } else {
-            window.addEventListener('scroll', () => {
-                const rect = canvas.getBoundingClientRect();
-                isVisible = (rect.bottom > 0 && rect.top < window.innerHeight);
-            });
-        }
-        
-        update();
-    })();
-</script>
-{% endblock %}
+{% endverbatim %}
+</body>
+</html>
