@@ -169,7 +169,7 @@
         </nav>
         {% if request.user.is_authenticated %}
             {% if request.user.is_staff %}
-            <a href="{% url 'manager:dashboard' %}" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #0071E3; color: #fff; white-space: nowrap; text-decoration: none;">Main Dashboard</a>
+            <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
             {% endif %}
             <a href="{% url 'dashboard:home' %}" class="tf-hdr-link" style="white-space: nowrap;">Profile</a>
             <a href="{% url 'accounts:logout' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign out</a>

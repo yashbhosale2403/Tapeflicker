@@ -85,8 +85,18 @@
         <a href="/about/" class="tf-hdr-link">About</a>
         <a href="/contact/" class="tf-hdr-link">Contact</a>
       </nav>
-      <a href="/accounts/login/" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
-      <a href="/accounts/signup/" class="tf-hdr-btn">Get started</a>
+      {% endverbatim %}
+      {% if request.user.is_authenticated %}
+          {% if request.user.is_staff %}
+          <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
+          {% endif %}
+          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link" style="white-space: nowrap;">Profile</a>
+          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign out</a>
+      {% else %}
+          <a href="{% url 'accounts:login' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
+          <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
+      {% endif %}
+      {% verbatim %}
     </div>
   </header>
 

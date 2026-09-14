@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-primary: #F5F5F7;
+    --bg-primary: #FBFBFD;
     --bg-secondary: #FFFFFF;
     --card-bg: #FFFFFF;
     --card-border: rgba(0, 0, 0, 0.08);
@@ -121,6 +121,10 @@ h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; letter-spa
     width: 100vw; height: 100vh;
     z-index: -1; overflow: hidden;
     background: var(--bg-primary);
+}
+
+[data-theme="light"] .aurora-bg {
+    display: none !important;
 }
 
 .aurora-blob {
