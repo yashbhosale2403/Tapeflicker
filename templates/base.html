@@ -111,27 +111,66 @@
     </div>
 
     <!-- Exact Shared Header Navbar -->
+    <style>
+      .tf-hdr-link {
+        color: #424245 !important;
+        text-decoration: none !important;
+        transition: color 0.15s ease !important;
+      }
+      .tf-hdr-link:hover {
+        color: #1D1D1F !important;
+      }
+      .tf-hdr-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1D1D1F !important;
+        text-decoration: none !important;
+        transition: opacity 0.15s ease !important;
+      }
+      .tf-hdr-logo:hover {
+        opacity: 0.85 !important;
+      }
+      .tf-hdr-btn {
+        font-size: 12.5px !important;
+        font-weight: 500 !important;
+        padding: 7px 15px !important;
+        border-radius: 999px !important;
+        border: 0 !important;
+        cursor: pointer !important;
+        background: #1D1D1F !important;
+        color: #fff !important;
+        white-space: nowrap !important;
+        flex: 0 0 auto !important;
+        text-decoration: none !important;
+        transition: background-color 0.15s ease !important;
+      }
+      .tf-hdr-btn:hover {
+        background-color: #000000 !important;
+        color: #fff !important;
+      }
+    </style>
     <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif;">
       <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
-        <a href="{% url 'core:home' %}" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F; text-decoration: none;">
+        <a href="{% url 'core:home' %}" class="tf-hdr-logo">
           <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
           <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
         </a>
         <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
-          <a href="{% url 'courses:list' %}" style="color: #424245; white-space: nowrap; text-decoration: none;">Courses</a>
-          <a href="{% url 'core:event_list' %}" style="color: #424245; text-decoration: none;">Events</a>
-          <a href="{% url 'core:about' %}" style="color: #424245; text-decoration: none;">About</a>
-          <a href="{% url 'core:contact' %}" style="color: #424245; text-decoration: none;">Contact</a>
+          <a href="{% url 'courses:list' %}" class="tf-hdr-link" style="white-space: nowrap;">Courses</a>
+          <a href="{% url 'core:event_list' %}" class="tf-hdr-link">Events</a>
+          <a href="{% url 'core:about' %}" class="tf-hdr-link">About</a>
+          <a href="{% url 'core:contact' %}" class="tf-hdr-link">Contact</a>
         </nav>
         {% if request.user.is_authenticated %}
             {% if request.user.is_staff %}
             <a href="{% url 'manager:dashboard' %}" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #0071E3; color: #fff; white-space: nowrap; text-decoration: none;">Main Dashboard</a>
             {% endif %}
-            <a href="{% url 'dashboard:home' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Profile</a>
-            <a href="{% url 'accounts:logout' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Sign out</a>
+            <a href="{% url 'dashboard:home' %}" class="tf-hdr-link" style="white-space: nowrap;">Profile</a>
+            <a href="{% url 'accounts:logout' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign out</a>
         {% else %}
-            <a href="{% url 'accounts:login' %}" style="font-size: 12.5px; color: #424245; white-space: nowrap; text-decoration: none;">Sign in</a>
-            <a href="{% url 'accounts:signup' %}" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #1D1D1F; color: #fff; white-space: nowrap; flex: 0 0 auto; text-decoration: none;">Get started</a>
+            <a href="{% url 'accounts:login' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
+            <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
         {% endif %}
       </div>
     </header>
