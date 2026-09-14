@@ -111,19 +111,19 @@
     </div>
 
     <!-- Exact Shared Header Navbar -->
-    <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06);">
+    <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif;">
       <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
         <a href="{% url 'core:home' %}" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F; text-decoration: none;">
           <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
           <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
         </a>
         <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
-          <a href="{% url 'courses:list' %}" style="color: {% if 'courses' in request.resolver_match.app_name %}#0071E3{% else %}#424245{% endif %}; white-space: nowrap; text-decoration: none;">Courses</a>
+          <a href="{% url 'courses:list' %}" style="color: #424245; white-space: nowrap; text-decoration: none;">Courses</a>
           <a href="{% url 'courses:list' %}" style="color: #424245; text-decoration: none;">Labs</a>
-          <a href="{% url 'core:event_list' %}" style="color: {% if request.resolver_match.url_name == 'event_list' or request.resolver_match.url_name == 'event_detail' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">Events</a>
+          <a href="{% url 'core:event_list' %}" style="color: #424245; text-decoration: none;">Events</a>
           <a href="{% url 'core:about' %}" style="color: #424245; text-decoration: none;">Gear</a>
-          <a href="{% url 'core:about' %}" style="color: {% if request.resolver_match.url_name == 'about' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">About</a>
-          <a href="{% url 'core:contact' %}" style="color: {% if request.resolver_match.url_name == 'contact' %}#0071E3{% else %}#424245{% endif %}; text-decoration: none;">Contact</a>
+          <a href="{% url 'core:about' %}" style="color: #424245; text-decoration: none;">About</a>
+          <a href="{% url 'core:contact' %}" style="color: #424245; text-decoration: none;">Contact</a>
         </nav>
         {% if request.user.is_authenticated %}
             {% if request.user.is_staff %}
