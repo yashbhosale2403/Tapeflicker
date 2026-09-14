@@ -1,13 +1,24 @@
 {% load static %}
 <style>
-  .tf-hdr-link {
-    color: #424245 !important;
-    text-decoration: none !important;
-    transition: color 0.15s ease !important;
+  .tf-navbar-root {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    width: 100%;
   }
-  .tf-hdr-link:hover, .tf-hdr-link.active {
-    color: #1D1D1F !important;
-    font-weight: 600 !important;
+  .tf-navbar-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(18px, 4vw, 44px);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-sizing: border-box;
   }
   .tf-hdr-logo {
     display: flex;
@@ -15,30 +26,59 @@
     gap: 8px;
     color: #1D1D1F !important;
     text-decoration: none !important;
-    transition: opacity 0.15s ease !important;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    flex-shrink: 0;
   }
   .tf-hdr-logo:hover {
-    opacity: 0.85 !important;
+    opacity: 0.85;
+  }
+  .tf-hdr-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 24px);
+    font-size: 13px;
+    color: #424245;
+    flex: 1;
+    margin-left: 12px;
+  }
+  .tf-hdr-link {
+    color: #424245 !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    white-space: nowrap !important;
+    transition: color 0.15s ease !important;
+  }
+  .tf-hdr-link:hover, .tf-hdr-link.active {
+    color: #1D1D1F !important;
+    font-weight: 600 !important;
+  }
+  .tf-hdr-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
   }
   .tf-hdr-btn {
     font-size: 12.5px !important;
     font-weight: 500 !important;
-    padding: 7px 15px !important;
+    padding: 7px 16px !important;
     border-radius: 999px !important;
     border: 0 !important;
     cursor: pointer !important;
     background: #1D1D1F !important;
-    color: #fff !important;
+    color: #ffffff !important;
     white-space: nowrap !important;
-    flex: 0 0 auto !important;
     text-decoration: none !important;
     transition: background-color 0.15s ease !important;
   }
   .tf-hdr-btn:hover {
     background-color: #000000 !important;
-    color: #fff !important;
+    color: #ffffff !important;
   }
-  .tf-mobile-toggle {
+  .tf-mobile-btn {
     display: none;
     background: transparent;
     border: none;
@@ -47,47 +87,50 @@
     color: #1D1D1F;
   }
   @media (max-width: 768px) {
-    .tf-mobile-toggle {
-      display: flex;
+    .tf-hdr-nav, .tf-hdr-actions {
+      display: none !important;
+    }
+    .tf-mobile-btn {
+      display: flex !important;
       align-items: center;
       justify-content: center;
     }
   }
 </style>
 
-<header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif;">
-  <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: nowrap; row-gap: 0; justify-content: space-between;">
+<header class="tf-navbar-root">
+  <div class="tf-navbar-container">
     
-    <!-- Logo -->
+    <!-- Brand Logo -->
     <a href="{% url 'core:home' %}" class="tf-hdr-logo">
       <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
-      <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
+      <span>Tapeflicker</span>
     </a>
 
-    <!-- Desktop Navigation Links -->
-    <nav class="hidden md:flex" style="display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); font-size: 13px; color: #424245; flex: 1 1 auto; min-width: 0; padding: 6px 0; margin-left: 12px;">
-      <a href="{% url 'courses:list' %}" class="tf-hdr-link {% if 'courses' in request.path %}active{% endif %}" style="white-space: nowrap;">Courses</a>
-      <a href="{% url 'core:event_list' %}" class="tf-hdr-link {% if 'events' in request.path %}active{% endif %}" style="white-space: nowrap;">Events</a>
-      <a href="{% url 'core:about' %}" class="tf-hdr-link {% if 'about' in request.path %}active{% endif %}" style="white-space: nowrap;">About</a>
-      <a href="{% url 'core:contact' %}" class="tf-hdr-link {% if 'contact' in request.path %}active{% endif %}" style="white-space: nowrap;">Contact</a>
+    <!-- Navigation Links -->
+    <nav class="tf-hdr-nav">
+      <a href="{% url 'courses:list' %}" class="tf-hdr-link {% if 'courses' in request.path %}active{% endif %}">Courses</a>
+      <a href="{% url 'core:event_list' %}" class="tf-hdr-link {% if 'events' in request.path %}active{% endif %}">Events</a>
+      <a href="{% url 'core:about' %}" class="tf-hdr-link {% if 'about' in request.path %}active{% endif %}">About</a>
+      <a href="{% url 'core:contact' %}" class="tf-hdr-link {% if 'contact' in request.path %}active{% endif %}">Contact</a>
     </nav>
 
-    <!-- Desktop User Actions -->
-    <div class="hidden md:flex" style="display: flex; align-items: center; gap: 14px; flex-shrink: 0;">
+    <!-- User Action Links -->
+    <div class="tf-hdr-actions">
       {% if request.user.is_authenticated %}
           {% if request.user.is_staff %}
           <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
           {% endif %}
-          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link" style="white-space: nowrap;">Profile</a>
-          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign out</a>
+          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link">Profile</a>
+          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link">Sign out</a>
       {% else %}
-          <a href="{% url 'accounts:login' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
+          <a href="{% url 'accounts:login' %}" class="tf-hdr-link">Sign in</a>
           <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
       {% endif %}
     </div>
 
-    <!-- Mobile Hamburger Toggle -->
-    <button type="button" id="tf-nav-mobile-btn" class="tf-mobile-toggle" aria-label="Toggle Navigation Menu">
+    <!-- Mobile Menu Toggle Button -->
+    <button type="button" id="tf-nav-mobile-btn" class="tf-mobile-btn" aria-label="Toggle Navigation Menu">
       <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -96,7 +139,7 @@
 </header>
 
 <!-- Mobile Navigation Drawer -->
-<div id="tf-mobile-drawer" style="display: none; position: fixed; top: 55px; left: 0; right: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); z-index: 59; padding: 20px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;">
+<div id="tf-mobile-drawer" style="display: none; position: fixed; top: 56px; left: 0; right: 0; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 998; padding: 20px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;">
   <div style="display: flex; flex-direction: column; gap: 14px;">
     <a href="{% url 'courses:list' %}" style="font-size: 15px; font-weight: 500; color: #1D1D1F; text-decoration: none; padding: 6px 0;">Courses</a>
     <a href="{% url 'core:event_list' %}" style="font-size: 15px; font-weight: 500; color: #1D1D1F; text-decoration: none; padding: 6px 0;">Events</a>
