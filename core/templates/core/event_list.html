@@ -4,160 +4,198 @@
 {% block title %}Events & Workshops | Tapeflicker{% endblock %}
 
 {% block content %}
-<!-- Events Hero Section -->
-<section class="relative pt-32 pb-20 overflow-hidden min-h-[60vh] flex items-center">
-    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-accent-purple/20 rounded-full blur-[120px] mix-blend-screen animate-pulse pointer-events-none"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent-neon/20 rounded-full blur-[120px] mix-blend-screen animate-pulse pointer-events-none" style="animation-delay: 2s;"></div>
-    <div class="cyber-grid opacity-60"></div>
+<style>
+  .tf-curtain {
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  .tf-curtain.tf-in {
+    animation: tf-grow 1.15s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  @keyframes tf-grow {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+  .event-card-apple {
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .2s cubic-bezier(.22,1,.36,1), transform .2s cubic-bezier(.22,1,.36,1);
+  }
+  .event-card-apple:hover {
+    box-shadow: 0 14px 30px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+  }
+</style>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full text-center">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-accent-neon/30 text-accent-cyan text-sm font-semibold mb-6 shadow-[0_0_15px_rgba(0,217,255,0.2)] uppercase tracking-wider reveal">
-                <span class="w-2 h-2 rounded-full bg-accent-neon animate-ping"></span>
-                Live Broadcasts
+<div style="background: #FBFBFD; min-height: 90vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; color: #1D1D1F; -webkit-font-smoothing: antialiased;">
+    
+    <!-- Hero Header -->
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 68px) clamp(18px, 4vw, 44px) clamp(16px, 2vw, 28px); text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px 5px 9px; border-radius: 999px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-size: 12px; color: #424245; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.02);">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #FF3B30;"></span>
+            Live Broadcasts · Events & Workshops
+        </div>
+        <h1 style="margin: 0 0 16px; font-size: clamp(32px, 5vw, 58px); line-height: 1.02; letter-spacing: -.04em; font-weight: 600; color: #1D1D1F; text-wrap: balance;">
+            Join Live Tech Events & Cyber Workshops
+        </h1>
+        <p style="margin: 0 auto; max-width: 580px; font-size: clamp(15px, 1.3vw, 17.5px); line-height: 1.5; color: #6E6E73; text-wrap: pretty;">
+            Participate in webinars, bootcamps, and live learning sessions designed for future innovators. Build your skills alongside the best.
+        </p>
+
+        <!-- Search Bar & Filters -->
+        <div style="max-width: 640px; margin: 32px auto 0;">
+            <!-- Search Bar -->
+            <div style="position: relative; display: flex; align-items: center; background: #fff; border-radius: 999px; padding: 4px 6px 4px 18px; border: 1px solid rgba(0,0,0,.12); box-shadow: 0 4px 16px rgba(0,0,0,.03); margin-bottom: 20px;">
+                <svg style="width: 18px; height: 18px; color: #86868B; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" id="event-search" placeholder="Search events, bootcamps, or webinars..." style="flex: 1; background: transparent; border: 0; padding: 10px 12px; font-size: 13.5px; color: #1D1D1F; outline: none; font-family: inherit;">
+                <span style="font-size: 11px; color: #86868B; background: #F2F2F5; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(0,0,0,.06); font-family: ui-monospace, monospace; flex-shrink: 0;">Press /</span>
             </div>
-            
-            <h1 class="text-5xl md:text-7xl font-bold font-sora text-white leading-tight mb-6 reveal tracking-tight" style="transition-delay: 100ms;">
-                Join Live Tech Events <br/>
-                <span class="text-gradient-accent">&amp; Cyber Workshops</span>
-            </h1>
-            
-            <p class="text-lg text-muted mb-10 max-w-2xl mx-auto leading-relaxed reveal font-light" style="transition-delay: 200ms;">
-                Participate in webinars, bootcamps, and live learning sessions designed for future innovators. Build your skills alongside the best.
-            </p>
-        </div>
-    </div>
-</section>
 
-<!-- Filter/Categories Section -->
-<section class="py-12 border-y border-white/5 bg-secondary/30 backdrop-blur-md relative z-20">
-    <div class="max-w-4xl mx-auto px-6 lg:px-8">
-        <!-- Premium Search Bar -->
-        <div class="relative flex items-center bg-[#0B1220]/80 rounded-[2rem] p-1.5 border border-white/10 group focus-within:border-accent-cyan/50 focus-within:shadow-[0_0_25px_rgba(0,217,255,0.12)] transition-all duration-300 backdrop-blur-md mb-8">
-            <span class="pl-5 text-muted group-focus-within:text-accent-cyan transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </span>
-            <input type="text" id="event-search" placeholder="Type here to search events, bootcamps, or webinars..." class="flex-grow bg-transparent px-4 py-3 text-white placeholder-slate-500 focus:outline-none text-sm font-medium">
-            <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-muted font-mono text-[10px] mr-3 select-none">
-                Press <kbd class="font-sans font-bold text-white text-xs">/</kbd> to focus
-            </span>
+            <!-- Filter Pills -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+                <a href="?type=all" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if not request.GET.type or request.GET.type == 'all' %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if not request.GET.type or request.GET.type == 'all' %}#1D1D1F{% else %}#fff{% endif %}; color: {% if not request.GET.type or request.GET.type == 'all' %}#fff{% else %}#424245{% endif %}; text-decoration: none;">All Events</a>
+                <a href="?type=Webinar" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if request.GET.type == 'Webinar' %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if request.GET.type == 'Webinar' %}#1D1D1F{% else %}#fff{% endif %}; color: {% if request.GET.type == 'Webinar' %}#fff{% else %}#424245{% endif %}; text-decoration: none;">Webinars</a>
+                <a href="?type=Workshop" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if request.GET.type == 'Workshop' %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if request.GET.type == 'Workshop' %}#1D1D1F{% else %}#fff{% endif %}; color: {% if request.GET.type == 'Workshop' %}#fff{% else %}#424245{% endif %}; text-decoration: none;">Workshops</a>
+                <a href="?type=Bootcamp" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if request.GET.type == 'Bootcamp' %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if request.GET.type == 'Bootcamp' %}#1D1D1F{% else %}#fff{% endif %}; color: {% if request.GET.type == 'Bootcamp' %}#fff{% else %}#424245{% endif %}; text-decoration: none;">Bootcamps</a>
+                <a href="?type=Hackathon" style="font-size: 12.5px; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: all .15s ease; border: 1px solid {% if request.GET.type == 'Hackathon' %}#1D1D1F{% else %}rgba(0,0,0,.12){% endif %}; background: {% if request.GET.type == 'Hackathon' %}#1D1D1F{% else %}#fff{% endif %}; color: {% if request.GET.type == 'Hackathon' %}#fff{% else %}#424245{% endif %}; text-decoration: none;">Hackathons</a>
+            </div>
         </div>
+    </section>
 
-        <div class="flex flex-wrap justify-center gap-3">
-            <a href="?type=all" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if not request.GET.type or request.GET.type == 'all' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">All Events</a>
-            <a href="?type=Webinar" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if request.GET.type == 'Webinar' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">Webinars</a>
-            <a href="?type=Workshop" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if request.GET.type == 'Workshop' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">Workshops</a>
-            <a href="?type=Bootcamp" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if request.GET.type == 'Bootcamp' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">Bootcamps</a>
-            <a href="?type=Hackathon" class="px-5 py-2 rounded-full border border-white/10 text-sm font-medium hover:bg-white/5 hover:border-accent-neon transition-all {% if request.GET.type == 'Hackathon' %}bg-white/10 text-white border-accent-neon/50{% else %}text-muted{% endif %}">Hackathons</a>
-        </div>
-    </div>
-</section>
-
-<!-- Events Grid -->
-<section class="py-24 relative z-20 bg-primary min-h-[50vh]">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Events Grid Section -->
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(20px, 3vw, 36px) clamp(18px, 4vw, 44px) clamp(50px, 7vw, 90px);">
+        <div id="events-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
             {% for event in events %}
-            <div class="gradient-border hover-lift reveal group event-card-wrapper" data-title="{{ event.title|lower }}" data-desc="{{ event.description|lower }}" data-type="{{ event.event_type|lower }}" style="transition-delay: {{ forloop.counter0|add:1 }}00ms;">
-                <div class="h-full bg-secondary rounded-[1.2rem] overflow-hidden flex flex-col relative z-10">
-                    <div class="relative overflow-hidden">
-                        {% if event.banner %}
-                        <img src="{{ event.banner.url }}" alt="{{ event.title }}" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-700">
-                        {% else %}
-                        <div class="w-full h-56 bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-b border-white/5">
-                            <svg class="w-12 h-12 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-                        {% endif %}
-                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-90"></div>
-                        <div class="absolute top-4 left-4 bg-accent-neon/20 backdrop-blur-md text-accent-neon border border-accent-neon/30 text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,217,255,0.3)]">
-                            {{ event.event_type }}
-                        </div>
-                        <!-- Live Indicator -->
-                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                            LIVE
-                        </div>
+            <div class="tf-curtain event-card-apple event-card-wrapper" data-title="{{ event.title|lower }}" data-desc="{{ event.description|lower }}" data-type="{{ event.event_type|lower }}">
+                
+                <!-- Banner / Header -->
+                <div style="position: relative; aspect-ratio: 16/9; width: 100%; overflow: hidden; background: #111114;">
+                    {% if event.banner %}
+                    <img src="{{ event.banner.url }}" alt="{{ event.title }}" style="width: 100%; height: 100%; object-fit: cover;" />
+                    {% else %}
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1d2836 0%, #0e1724 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                        <svg style="width: 36px; height: 36px; color: rgba(255,255,255,.2);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
-                    
-                    <div class="p-8 flex-grow flex flex-col">
-                        <div class="flex items-center gap-3 mb-4 text-xs font-medium text-muted">
-                            <span class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                {{ event.date|date:"F d, Y" }}
-                            </span>
-                            <span>&bull;</span>
-                            <span class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                {{ event.date|time:"h:i A" }}
-                            </span>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold font-sora text-white mb-3 line-clamp-2 leading-snug group-hover:text-accent-neon transition-colors"><a href="{% url 'core:event_detail' event.id %}">{{ event.title }}</a></h3>
-                        <p class="text-muted text-sm mb-6 line-clamp-2 leading-relaxed font-light">{{ event.description }}</p>
-                        
-                        <div class="mt-auto pt-6 border-t border-white/5 flex flex-col gap-4">
-                            <!-- Countdown Timer -->
-                            <div class="bg-primary/50 border border-white/5 rounded-xl p-3 flex justify-between text-center countdown-container" data-date="{{ event.date|date:'c' }}">
-                                <div>
-                                    <div class="text-lg font-bold font-sora text-white days">00</div>
-                                    <div class="text-[10px] uppercase text-muted tracking-widest">Days</div>
-                                </div>
-                                <div class="text-muted font-bold">:</div>
-                                <div>
-                                    <div class="text-lg font-bold font-sora text-white hours">00</div>
-                                    <div class="text-[10px] uppercase text-muted tracking-widest">Hours</div>
-                                </div>
-                                <div class="text-muted font-bold">:</div>
-                                <div>
-                                    <div class="text-lg font-bold font-sora text-white minutes">00</div>
-                                    <div class="text-[10px] uppercase text-muted tracking-widest">Mins</div>
-                                </div>
-                                <div class="text-muted font-bold">:</div>
-                                <div>
-                                    <div class="text-lg font-bold font-sora text-accent-neon seconds">00</div>
-                                    <div class="text-[10px] uppercase text-accent-neon tracking-widest">Secs</div>
-                                </div>
-                            </div>
+                    {% endif %}
 
-                            <a href="{% url 'core:event_detail' event.id %}" class="btn-outline w-full justify-center text-sm py-3">View Details</a>
+                    <!-- Event Type Tag Badge -->
+                    <span style="position: absolute; left: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.65); backdrop-filter: blur(8px); color: #fff;">
+                        {{ event.event_type }}
+                    </span>
+
+                    <!-- Live Indicator -->
+                    <span style="position: absolute; right: 12px; top: 12px; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: rgba(255,59,48,.9); color: #fff; display: flex; align-items: center; gap: 4px;">
+                        <span style="width: 5px; height: 5px; border-radius: 50%; background: #fff;"></span>
+                        LIVE
+                    </span>
+                </div>
+
+                <!-- Card Body -->
+                <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                    <!-- Date & Time Subtitle -->
+                    <div style="font-size: 11px; color: #86868B; letter-spacing: .04em; text-transform: uppercase; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                        <span>{{ event.date|date:"F d, Y" }}</span>
+                        <span>·</span>
+                        <span>{{ event.date|time:"h:i A" }}</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h3 style="margin: 2px 0 0; font-size: 16.5px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; color: #1D1D1F;">
+                        <a href="{% url 'core:event_detail' event.id %}" style="color: #1D1D1F; text-decoration: none;">
+                            {{ event.title }}
+                        </a>
+                    </h3>
+
+                    <!-- Description -->
+                    <p style="margin: 0; font-size: 12.5px; color: #6E6E73; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ event.description }}
+                    </p>
+
+                    <!-- Countdown & Details CTA Footer -->
+                    <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(0,0,0,.06); display: flex; flex-direction: column; gap: 10px;">
+                        <div class="countdown-container" data-date="{{ event.date|date:'c' }}" style="background: #F2F2F5; border-radius: 10px; padding: 8px 12px; display: flex; justify-content: space-between; text-align: center;">
+                            <div>
+                                <div class="days" style="font-size: 15px; font-weight: 700; color: #1D1D1F;">00</div>
+                                <div style="font-size: 9px; text-transform: uppercase; color: #86868B; font-weight: 600;">Days</div>
+                            </div>
+                            <div style="color: #86868B; font-weight: 700; font-size: 14px;">:</div>
+                            <div>
+                                <div class="hours" style="font-size: 15px; font-weight: 700; color: #1D1D1F;">00</div>
+                                <div style="font-size: 9px; text-transform: uppercase; color: #86868B; font-weight: 600;">Hours</div>
+                            </div>
+                            <div style="color: #86868B; font-weight: 700; font-size: 14px;">:</div>
+                            <div>
+                                <div class="minutes" style="font-size: 15px; font-weight: 700; color: #1D1D1F;">00</div>
+                                <div style="font-size: 9px; text-transform: uppercase; color: #86868B; font-weight: 600;">Mins</div>
+                            </div>
+                            <div style="color: #86868B; font-weight: 700; font-size: 14px;">:</div>
+                            <div>
+                                <div class="seconds" style="font-size: 15px; font-weight: 700; color: #0071E3;">00</div>
+                                <div style="font-size: 9px; text-transform: uppercase; color: #0071E3; font-weight: 600;">Secs</div>
+                            </div>
                         </div>
+
+                        <a href="{% url 'core:event_detail' event.id %}" style="font-size: 12.5px; font-weight: 500; color: #0071E3; text-decoration: none; display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
+                            View Details →
+                        </a>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <div class="col-span-full text-center py-20">
-                <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background: #fff; border-radius: 20px; border: 1px solid rgba(0,0,0,.07); max-width: 520px; margin: 30px auto;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #F2F2F5; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <svg style="width: 24px; height: 24px; color: #86868B;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white font-sora mb-2">No upcoming events</h3>
-                <p class="text-muted">Check back later for new workshops and bootcamps.</p>
+                <h3 style="margin: 0 0 6px; font-size: 18px; font-weight: 600; color: #1D1D1F;">No upcoming events</h3>
+                <p style="margin: 0 0 20px; font-size: 13.5px; color: #6E6E73;">Check back soon for new live workshops and bootcamps.</p>
             </div>
             {% endfor %}
         </div>
 
-        <!-- Real-time Filter Search Empty State -->
-        <div id="search-empty-state" class="hidden py-24 text-center glass rounded-[2rem] border border-white/5 max-w-xl mx-auto w-full relative z-20">
-            <div class="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6 border border-white/5">
-                <svg class="w-8 h-8 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <h3 class="text-xl font-bold font-sora text-white mb-2">No matches found</h3>
-            <p class="text-muted text-sm max-w-xs mx-auto mb-6">We couldn't find any events matching your search query. Try searching for a different keyword.</p>
-            <button onclick="clearSearch()" class="btn-outline px-6 py-2 text-[10px] tracking-wider uppercase font-bold rounded-[2rem]">Clear Search</button>
+        <!-- Search Empty State -->
+        <div id="search-empty-state" style="display: none; padding: 60px 20px; text-align: center; background: #fff; border-radius: 20px; border: 1px solid rgba(0,0,0,.07); max-width: 520px; margin: 30px auto;">
+            <h3 style="margin: 0 0 6px; font-size: 18px; font-weight: 600; color: #1D1D1F;">No matches found</h3>
+            <p style="margin: 0 0 20px; font-size: 13.5px; color: #6E6E73;">We couldn't find any events matching your search query. Try another keyword.</p>
+            <button onclick="clearSearch()" style="font-size: 12.5px; font-weight: 500; padding: 8px 20px; border-radius: 999px; background: #1D1D1F; color: #fff; border: 0; cursor: pointer;">Clear Search</button>
         </div>
     </div>
 </section>
-
+</div>
 {% endblock %}
 
 {% block extra_scripts %}
 <script>
-    // Live Countdown System
     document.addEventListener('DOMContentLoaded', () => {
+        // Scroll Curtain Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("tf-in");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: "0px 0px -10% 0px" });
+
+        document.querySelectorAll(".tf-curtain").forEach((el, index) => {
+            el.style.animationDelay = (index % 4) * 150 + "ms";
+            observer.observe(el);
+        });
+
+        // Live Countdown System
         const countdowns = document.querySelectorAll('.countdown-container');
-        
         countdowns.forEach(container => {
             const targetDate = new Date(container.getAttribute('data-date')).getTime();
-            
             const daysEl = container.querySelector('.days');
             const hoursEl = container.querySelector('.hours');
             const minsEl = container.querySelector('.minutes');
@@ -168,7 +206,7 @@
                 const distance = targetDate - now;
                 
                 if (distance < 0) {
-                    container.innerHTML = '<div class="w-full text-center text-accent-neon font-bold text-sm tracking-widest uppercase">Event is Live</div>';
+                    container.innerHTML = '<div style="width:100%; text-align:center; color:#FF3B30; font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase;">Event is Live</div>';
                     return;
                 }
                 
@@ -177,17 +215,17 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
-                daysEl.innerText = days.toString().padStart(2, '0');
-                hoursEl.innerText = hours.toString().padStart(2, '0');
-                minsEl.innerText = minutes.toString().padStart(2, '0');
-                secsEl.innerText = seconds.toString().padStart(2, '0');
+                if (daysEl) daysEl.innerText = days.toString().padStart(2, '0');
+                if (hoursEl) hoursEl.innerText = hours.toString().padStart(2, '0');
+                if (minsEl) minsEl.innerText = minutes.toString().padStart(2, '0');
+                if (secsEl) secsEl.innerText = seconds.toString().padStart(2, '0');
             };
             
             updateTimer();
             setInterval(updateTimer, 1000);
         });
 
-        // Client-side events search
+        // Client-side Search
         const searchInput = document.getElementById('event-search');
         const cards = document.querySelectorAll('.event-card-wrapper');
         const emptyState = document.getElementById('search-empty-state');
@@ -210,28 +248,20 @@
                     const desc = card.getAttribute('data-desc') || '';
                     const type = card.getAttribute('data-type') || '';
 
-                    if (
-                        title.includes(query) || 
-                        desc.includes(query) || 
-                        type.includes(query)
-                    ) {
-                        card.style.display = 'block';
-                        card.classList.remove('opacity-0', 'pointer-events-none');
-                        card.classList.add('opacity-100');
+                    if (title.includes(query) || desc.includes(query) || type.includes(query)) {
+                        card.style.display = 'flex';
                         visibleCount++;
                     } else {
                         card.style.display = 'none';
-                        card.classList.remove('opacity-100');
-                        card.classList.add('opacity-0', 'pointer-events-none');
                     }
                 });
 
                 if (visibleCount === 0 && cards.length > 0) {
-                    grid.classList.add('hidden');
-                    emptyState.classList.remove('hidden');
+                    grid.style.display = 'none';
+                    emptyState.style.display = 'block';
                 } else {
-                    grid.classList.remove('hidden');
-                    emptyState.classList.add('hidden');
+                    grid.style.display = 'grid';
+                    emptyState.style.display = 'none';
                 }
             });
         }
@@ -246,3 +276,4 @@
     });
 </script>
 {% endblock %}
+
