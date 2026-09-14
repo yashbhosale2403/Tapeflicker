@@ -165,17 +165,72 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var mobileBtn = document.getElementById('tf-nav-mobile-btn');
-    var mobileDrawer = document.getElementById('tf-mobile-drawer');
-    if (mobileBtn && mobileDrawer) {
-      mobileBtn.addEventListener('click', function() {
-        if (mobileDrawer.style.display === 'none' || !mobileDrawer.style.display) {
-          mobileDrawer.style.display = 'block';
-        } else {
-          mobileDrawer.style.display = 'none';
-        }
+  (function() {
+    const root = document.documentElement;
+    
+    // Apply saved theme immediately
+    let savedTheme = 'light';
+    try {
+      savedTheme = localStorage.getItem('theme') || 'light';
+    } catch(e) {}
+    
+    root.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+
+    window.toggleTheme = function() {
+      const currentTheme = root.getAttribute('data-theme') || 'light';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      root.setAttribute('data-theme', nextTheme);
+      if (nextTheme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      try {
+        localStorage.setItem('theme', nextTheme);
+      } catch (e) {}
+
+      const icons = document.querySelectorAll('.theme-toggle-icon');
+      icons.forEach(function(icon) {
+        icon.textContent = nextTheme === 'dark' ? '☀️' : '🌙';
+      });
+
+      return nextTheme;
+    };
+
+    function updateIcons() {
+      const currentTheme = root.getAttribute('data-theme') || 'light';
+      const icons = document.querySelectorAll('.theme-toggle-icon');
+      icons.forEach(function(icon) {
+        icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
       });
     }
-  });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateIcons);
+    } else {
+      updateIcons();
+    }
+
+    // Mobile menu drawer handling
+    document.addEventListener('DOMContentLoaded', function() {
+      var mobileBtn = document.getElementById('tf-nav-mobile-btn');
+      var mobileDrawer = document.getElementById('tf-mobile-drawer');
+      if (mobileBtn && mobileDrawer) {
+        mobileBtn.addEventListener('click', function() {
+          if (mobileDrawer.style.display === 'none' || !mobileDrawer.style.display) {
+            mobileDrawer.style.display = 'block';
+          } else {
+            mobileDrawer.style.display = 'none';
+          }
+        });
+      }
+    });
+  })();
 </script>
+
