@@ -71,32 +71,10 @@
 
   <div data-tf-cursor="1" style="position: fixed; top: 0; left: 0; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #0071E3; background: rgba(0,113,227,.16); pointer-events: none; z-index: 200; will-change: transform;"></div>
 
-  <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif;">
-    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
-      <a href="/" class="tf-hdr-logo">
-        <img src="/static/images/tapeflicker_brand_logo_transparent.png" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
-        <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
-      </a>
-      <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
-        <a href="/courses/" class="tf-hdr-link" style="white-space: nowrap;">Courses</a>
-        <a href="/events/" class="tf-hdr-link">Events</a>
-        <a href="/about/" class="tf-hdr-link">About</a>
-        <a href="/contact/" class="tf-hdr-link">Contact</a>
-      </nav>
-      {% endverbatim %}
-      {% if request.user.is_authenticated %}
-          {% if request.user.is_staff %}
-          <a href="{% url 'manager:dashboard' %}" class="tf-hdr-btn">Main Dashboard</a>
-          {% endif %}
-          <a href="{% url 'dashboard:home' %}" class="tf-hdr-link" style="white-space: nowrap;">Profile</a>
-          <a href="{% url 'accounts:logout' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign out</a>
-      {% else %}
-          <a href="{% url 'accounts:login' %}" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
-          <a href="{% url 'accounts:signup' %}" class="tf-hdr-btn">Get started</a>
-      {% endif %}
-      {% verbatim %}
-    </div>
-  </header>
+{% endverbatim %}
+  {% include 'includes/navbar.html' %}
+  {% verbatim %}
+
 
   <section id="top" style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 78px) clamp(18px, 4vw, 44px) clamp(26px, 3vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(24px, 4vw, 60px); align-items: center;">
     <div>
