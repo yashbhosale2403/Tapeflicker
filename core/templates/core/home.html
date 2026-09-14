@@ -16,6 +16,7 @@
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
+  html, body { scrollbar-gutter: stable !important; }
   * { box-sizing: border-box; }
   body { margin: 0; background: #FBFBFD; color: #1D1D1F; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: #0071E3; text-decoration: none; }
@@ -26,6 +27,43 @@
   .tf-curtain.tf-in { animation: tf-grow 1.15s cubic-bezier(.22,1,.36,1) forwards; }
   @keyframes tf-grow { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
   @keyframes tf-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .tf-hdr-link {
+    color: #424245 !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease !important;
+  }
+  .tf-hdr-link:hover {
+    color: #1D1D1F !important;
+  }
+  .tf-hdr-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1D1D1F !important;
+    text-decoration: none !important;
+    transition: opacity 0.15s ease !important;
+  }
+  .tf-hdr-logo:hover {
+    opacity: 0.85 !important;
+  }
+  .tf-hdr-btn {
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    padding: 7px 15px !important;
+    border-radius: 999px !important;
+    border: 0 !important;
+    cursor: pointer !important;
+    background: #1D1D1F !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+    text-decoration: none !important;
+    transition: background-color 0.15s ease !important;
+  }
+  .tf-hdr-btn:hover {
+    background-color: #000000 !important;
+    color: #fff !important;
+  }
 </style>
 </helmet>
 
@@ -33,20 +71,20 @@
 
   <div data-tf-cursor="1" style="position: fixed; top: 0; left: 0; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #0071E3; background: rgba(0,113,227,.16); pointer-events: none; z-index: 200; will-change: transform;"></div>
 
-  <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06);">
+  <header style="position: sticky; top: 0; z-index: 60; background: rgba(251,251,253,.75); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,.06); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif;">
     <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 44px); min-height: 54px; display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); flex-wrap: wrap; row-gap: 0;">
-      <a href="/" style="display: flex; align-items: center; gap: 8px; color: #1D1D1F;" style-hover="color: #1D1D1F;">
+      <a href="/" class="tf-hdr-logo">
         <img src="/static/images/tapeflicker_brand_logo_transparent.png" alt="Tapeflicker" style="height: 24px; width: auto; display: block;" />
         <span style="font-size: 15px; font-weight: 600; letter-spacing: -.02em;">Tapeflicker</span>
       </a>
       <nav style="display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: 12.5px; color: #424245; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 6px 0;">
-        <a href="/courses/" style="color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Courses</a>
-        <a href="/events/" style="color: #424245;" style-hover="color: #1D1D1F;">Events</a>
-        <a href="/about/" style="color: #424245;" style-hover="color: #1D1D1F;">About</a>
-        <a href="/contact/" style="color: #424245;" style-hover="color: #1D1D1F;">Contact</a>
+        <a href="/courses/" class="tf-hdr-link" style="white-space: nowrap;">Courses</a>
+        <a href="/events/" class="tf-hdr-link">Events</a>
+        <a href="/about/" class="tf-hdr-link">About</a>
+        <a href="/contact/" class="tf-hdr-link">Contact</a>
       </nav>
-      <a href="/accounts/login/" style="font-size: 12.5px; color: #424245; white-space: nowrap;" style-hover="color: #1D1D1F;">Sign in</a>
-      <a href="/accounts/signup/" style="font-size: 12.5px; font-weight: 500; padding: 7px 15px; border-radius: 999px; border: 0; cursor: pointer; background: #1D1D1F; color: #fff; white-space: nowrap; flex: 0 0 auto; text-decoration: none;" style-hover="background: #000;">Get started</a>
+      <a href="/accounts/login/" class="tf-hdr-link" style="white-space: nowrap;">Sign in</a>
+      <a href="/accounts/signup/" class="tf-hdr-btn">Get started</a>
     </div>
   </header>
 
