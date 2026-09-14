@@ -350,8 +350,8 @@ class Component extends DCLogic {
     tempCanvas.width = width;
     tempCanvas.height = height;
 
-    const fontSize = Math.min(width * 0.155, 64);
-    tempCtx.font = `900 ${fontSize}px "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    const fontSize = Math.max(38, Math.min(width * 0.10, 84));
+    tempCtx.font = `900 ${fontSize}px "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
     tempCtx.textAlign = "center";
     tempCtx.textBaseline = "middle";
     tempCtx.fillStyle = "#000";
@@ -359,27 +359,28 @@ class Component extends DCLogic {
 
     const imageData = tempCtx.getImageData(0, 0, width, height);
     const targets = [];
-    const step = 3;
+    const step = 2;
 
     for (let y = 0; y < height; y += step) {
       for (let x = 0; x < width; x += step) {
         const index = (y * width + x) * 4;
         const alpha = imageData.data[index + 3];
-        if (alpha > 140) {
+        if (alpha > 100) {
           targets.push({ x: x, y: y });
         }
       }
     }
 
     const colors = [
-      "rgba(0, 113, 227, 0.92)",   // Premium Apple Blue
-      "rgba(0, 178, 255, 0.88)",  // Vibrant Electric Cyan
-      "rgba(88, 86, 214, 0.88)",  // Deep Indigo Accent
-      "rgba(29, 29, 31, 0.88)",   // Sleek Dark Charcoal
+      "rgba(0, 113, 227, 0.96)",   // Bright Apple Blue
+      "rgba(0, 180, 255, 0.96)",  // Electric Cyan
+      "rgba(99, 102, 241, 0.96)",  // Vivid Indigo Accent
+      "rgba(255, 255, 255, 0.95)", // High Contrast White Core
+      "rgba(2, 132, 199, 0.95)"    // Deep Cerulean
     ];
 
     const particles = [];
-    const particleCount = Math.min(targets.length, 950);
+    const particleCount = Math.min(targets.length, 2200);
 
     for (let i = 0; i < particleCount; i++) {
       const targetIndex = Math.floor((i / particleCount) * targets.length);
@@ -391,7 +392,7 @@ class Component extends DCLogic {
         vy: 0,
         targetX: target.x,
         targetY: target.y,
-        size: Math.random() * 2 + 1.1,
+        size: Math.random() * 1.2 + 1.3,
         color: colors[i % colors.length]
       });
     }
@@ -400,26 +401,33 @@ class Component extends DCLogic {
       if (this.pcv !== cv || !cv.isConnected) return;
       ctx.clearRect(0, 0, width, height);
 
+      // Soft ambient clarity backdrop
+      ctx.fillStyle = "rgba(0, 113, 227, 0.04)";
+      ctx.font = tempCtx.font;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("TAPEFLICKER", width / 2, height / 2);
+
       particles.forEach((p) => {
         const dx = p.targetX - p.x;
         const dy = p.targetY - p.y;
 
-        p.vx += dx * 0.024;
-        p.vy += dy * 0.024;
+        p.vx += dx * 0.032;
+        p.vy += dy * 0.032;
 
         const mouseDX = p.x - mouse.x;
         const mouseDY = p.y - mouse.y;
         const distance = Math.sqrt(mouseDX * mouseDX + mouseDY * mouseDY);
-        const interactionRadius = 135;
+        const interactionRadius = 130;
 
         if (distance < interactionRadius) {
           const force = (interactionRadius - distance) / interactionRadius;
-          p.vx += (mouseDX / (distance || 1)) * force * 5.2;
-          p.vy += (mouseDY / (distance || 1)) * force * 5.2;
+          p.vx += (mouseDX / (distance || 1)) * force * 5.0;
+          p.vy += (mouseDY / (distance || 1)) * force * 5.0;
         }
 
-        p.vx *= 0.84;
-        p.vy *= 0.84;
+        p.vx *= 0.82;
+        p.vy *= 0.82;
         p.x += p.vx;
         p.y += p.vy;
 
