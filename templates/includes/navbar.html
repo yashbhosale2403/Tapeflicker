@@ -195,7 +195,7 @@
 
     <!-- User Action Links -->
     <div class="tf-hdr-actions">
-      <button type="button" data-theme-toggle onclick="window.toggleTheme()" style="background: transparent; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease;" title="Toggle Dark/Light Mode">
+      <button type="button" data-theme-toggle style="background: transparent; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease;" title="Toggle Dark/Light Mode">
         <span class="theme-toggle-icon" style="font-size: 14px;">🌙</span>
       </button>
 
@@ -295,6 +295,18 @@
       updateIcons();
     }
 
+    // Event delegation for theme toggle button (prevents React Error #231)
+    document.addEventListener('click', function(e) {
+      var toggleBtn = e.target.closest('[data-theme-toggle]');
+      if (toggleBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof window.toggleTheme === 'function') {
+          window.toggleTheme();
+        }
+      }
+    });
+
     // Mobile menu drawer handling
     document.addEventListener('DOMContentLoaded', function() {
       var mobileBtn = document.getElementById('tf-nav-mobile-btn');
@@ -311,4 +323,5 @@
     });
   })();
 </script>
+
 
