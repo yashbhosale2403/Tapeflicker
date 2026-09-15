@@ -19,6 +19,7 @@ class ContentSecurityPolicyMiddleware:
             "img-src 'self' data: https://*.googleusercontent.com https://images.unsplash.com https://www.gstatic.com https://res.cloudinary.com",
             "font-src 'self' data: https://fonts.gstatic.com",
             "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
+            "media-src 'self' data: blob: https://commondatastorage.googleapis.com https://assets.mixkit.co https://*.cloudinary.com",
             "connect-src 'self' ws: wss: https://identitytoolkit.googleapis.com https://securetoken.googleapis.com",
             "object-src 'none'",
             "base-uri 'self'"
