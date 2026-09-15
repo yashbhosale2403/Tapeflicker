@@ -108,6 +108,8 @@
   .tf-quote-btn:hover { background: #F0F0F3 !important; }
   .tf-close-btn:hover { background: rgba(255,255,255,.25) !important; color: #fff !important; }
   .tf-done-btn:hover { background: #0058B0 !important; }
+  .tf-demo-modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px); }
+  .tf-demo-modal.is-open { display: flex; }
 </style>
 </helmet>
 
@@ -175,7 +177,7 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 12px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
         <div onClick="{{ c.go }}" class="tf-curtain tf-course-card" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; cursor: pointer;">
-          <div class="tf-course-thumb" style="{{ c.tintStyle }}">
+          <div class="tf-course-thumb" style="background-color: {{ c.tint }};">
             <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);">course art</span>
             <span style="position: absolute; right: 10px; top: 10px; font-family: ui-monospace, monospace; font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff;">{{ c.hours }}</span>
           </div>
@@ -230,7 +232,7 @@
       <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
         <div onClick="{{ e.toggle }}" class="tf-event-card" style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s; cursor: pointer;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="tf-event-tag" style="{{ e.tagStyle }}">{{ e.tag }}</span>
+            <span class="tf-event-tag" style="background-color: {{ e.tagColor }};">{{ e.tag }}</span>
             <span style="font-size: 11.5px; color: #86868B;">{{ e.date }}</span>
           </div>
           <div style="font-size: 16px; font-weight: 600; letter-spacing: -.022em;">{{ e.title }}</div>
@@ -255,8 +257,8 @@
     </div>
     <div style="display: flex; align-items: center; justify-content: center; min-height: clamp(300px, 34vw, 420px); perspective: 1400px; width: 100%; padding: 0 2%;">
       <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
-        <div onClick="{{ g.focus }}" onMouseEnter="{{ g.focus }}" class="tf-gear-card" style="{{ g.cardStyle }}">
-          <div class="tf-gear-thumb" style="{{ g.thumbStyle }}">
+        <div onClick="{{ g.focus }}" onMouseEnter="{{ g.focus }}" class="tf-gear-card" style="z-index: {{ g.zIndex }}; opacity: {{ g.opacity }}; box-shadow: {{ g.boxShadow }}; transform: {{ g.transform }};">
+          <div class="tf-gear-thumb" style="background-image: url('{{ g.image }}');">
             <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; backdrop-filter: blur(8px);">Out of stock</span>
           </div>
           <div style="padding: 13px 15px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -301,7 +303,7 @@
 {% verbatim %}
 
   <sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: {{ demoOpen ? 'flex' : 'none' }}; align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px);">
+    <div onClick="{{ closeDemo }}" class="tf-demo-modal {{ demoOpen ? 'is-open' : '' }}">
       <div onClick="{{ stopProp }}" style="width: min(840px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 80px rgba(0,0,0,.6); display: flex; flex-direction: column;">
         <!-- Header bar -->
         <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);">
@@ -677,6 +679,10 @@ class Component extends DCLogic {
         return {
           ...g,
           notified: on,
+          zIndex: 10 - abs,
+          opacity: Math.max(1 - abs * 0.22, 0.3),
+          boxShadow: act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)",
+          transform: `translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
           cardStyle: `z-index:${10 - abs};opacity:${Math.max(1 - abs * 0.22, 0.3)};box-shadow:${act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)"};transform:translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
           thumbStyle: `background-image:url('${g.image}')`,
           focus: () => this.setState({ gearFocus: i }),
