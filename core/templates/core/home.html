@@ -274,15 +274,34 @@
 {% verbatim %}
 
   <sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div style="width: min(760px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; box-shadow: 0 30px 70px rgba(0,0,0,.4);">
-        <div style="position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 12px);">
-          <span style="font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">platform demo video</span>
+    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px);">
+      <div onClick="{{ stopProp }}" style="width: min(840px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 80px rgba(0,0,0,.6); display: flex; flex-direction: column;">
+        <!-- Header bar -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #0071E3;"></span>
+            <span style="font-size: 13.5px; font-weight: 600; color: #fff; letter-spacing: -.01em;">Tapeflicker Platform Demo</span>
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.1); color: rgba(255,255,255,.7); font-family: ui-monospace, monospace;">2 min tour</span>
+          </div>
+          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font: inherit; font-size: 13px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">✕</button>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px; padding: 13px 16px; color: rgba(255,255,255,.7); font-size: 12.5px;">
-          <span>2 min tour · labs, cohorts, certificates</span>
+
+        <!-- Video Frame -->
+        <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden;">
+          <iframe
+            src="{{ demoVideoUrl }}"
+            title="Tapeflicker Platform Demo"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Footer Info bar -->
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: rgba(255,255,255,.7); font-size: 12.5px; background: rgba(255,255,255,.02); border-top: 1px solid rgba(255,255,255,.06);">
+          <span>⚡ Interactive Labs, Cohorts, Cyber Sandboxes & Certificates</span>
           <span style="flex: 1;"></span>
-          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; font: inherit; font-size: 12px; padding: 6px 13px; border-radius: 999px;">Close</button>
+          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: #0071E3; color: #fff; font: inherit; font-size: 12.5px; font-weight: 500; padding: 7px 18px; border-radius: 999px; transition: background 0.15s ease;">Done watching</button>
         </div>
       </div>
     </div>
@@ -644,8 +663,10 @@ class Component extends DCLogic {
       nextQuote: () => this.setState(s => ({ quote: (s.quote + 1) % QUOTES.length })),
       perks: ["Project-led learning", "Industry mentors", "Career-grade certificates", "Premium cyber lab access"],
       demoOpen: demo,
+      demoVideoUrl: "https://www.youtube-nocookie.com/embed/rfscVS0vtbw?autoplay=1&rel=0",
       openDemo: () => this.setState({ demo: true }),
       closeDemo: () => this.setState({ demo: false }),
+      stopProp: (e) => { if (e && typeof e.stopPropagation === 'function') e.stopPropagation(); },
     };
   }
 }
