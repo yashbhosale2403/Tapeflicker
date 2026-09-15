@@ -301,7 +301,7 @@
 {% verbatim %}
 
   <sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px);">
+    <div onClick="{{ closeDemo }}" style="position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: {{ demoOpen ? 'flex' : 'none' }}; align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px);">
       <div onClick="{{ stopProp }}" style="width: min(840px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 80px rgba(0,0,0,.6); display: flex; flex-direction: column;">
         <!-- Header bar -->
         <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);">
