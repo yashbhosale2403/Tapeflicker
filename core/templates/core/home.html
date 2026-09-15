@@ -131,7 +131,7 @@
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 12px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
-        <div class="tf-curtain" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s;" style-hover="box-shadow: 0 14px 30px rgba(0,0,0,.1); transform: translateY(-2px);" style-hover="transform: translateY(-2px);">
+        <div onClick="{{ c.go }}" class="tf-curtain" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; cursor: pointer;" style-hover="box-shadow: 0 14px 30px rgba(0,0,0,.1); transform: translateY(-2px);">
           <div style="{{ c.thumbStyle }}">
             <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);">course art</span>
             <span style="position: absolute; right: 10px; top: 10px; font-family: ui-monospace, monospace; font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff;">{{ c.hours }}</span>
@@ -143,7 +143,7 @@
             <div style="display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px;">
               <span style="font-size: 12px; color: #6E6E73; padding: 4px 9px; border-radius: 999px; background: #F2F2F5;">{{ c.format }}</span>
               <span style="flex: 1;"></span>
-              <a href="/courses/" style="font-size: 12.5px; font-weight: 500; color: #0071E3; text-decoration: none;">View path →</a>
+              <span style="font-size: 12.5px; font-weight: 500; color: #0071E3;">View path →</span>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@
   <section id="events" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
       <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
-        <div style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s;" style-hover="box-shadow: 0 12px 26px rgba(0,0,0,.08);">
+        <div onClick="{{ e.toggle }}" style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s; cursor: pointer;" style-hover="box-shadow: 0 12px 26px rgba(0,0,0,.08);">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="{{ e.tagStyle }}">{{ e.tag }}</span>
             <span style="font-size: 11.5px; color: #86868B;">{{ e.date }}</span>
@@ -212,7 +212,7 @@
     </div>
     <div style="display: flex; align-items: center; justify-content: center; min-height: clamp(300px, 34vw, 420px); perspective: 1400px; width: 100%; padding: 0 2%;">
       <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
-        <div onMouseEnter="{{ g.focus }}" style="{{ g.cardStyle }}">
+        <div onClick="{{ g.focus }}" onMouseEnter="{{ g.focus }}" style="{{ g.cardStyle }}">
           <div style="{{ g.thumbStyle }}">
             <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; backdrop-filter: blur(8px);">Out of stock</span>
           </div>
@@ -582,6 +582,7 @@ class Component extends DCLogic {
       })),
       courses: list.map(c => ({
         ...c,
+        go: () => { window.location.href = '/courses/'; },
         thumbStyle: `position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:${c.tint};background-image:repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 12px)`,
       })),
       noResults: list.length === 0,

@@ -65,7 +65,7 @@
     <section style="max-width: 1280px; margin: 0 auto; padding: clamp(20px, 3vw, 36px) clamp(18px, 4vw, 44px) clamp(50px, 7vw, 90px);">
         <div id="courses-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
             {% for course in courses %}
-            <div class="tf-curtain course-card-apple" data-title="{{ course.title|lower }}" data-category="{{ course.category.name|lower }}" data-difficulty="{{ course.difficulty|lower }}">
+            <div class="tf-curtain course-card-apple" onclick="window.location.href='{% url 'courses:detail' course.id %}';" style="cursor: pointer;" data-title="{{ course.title|lower }}" data-category="{{ course.category.name|lower }}" data-difficulty="{{ course.difficulty|lower }}">
                 
                 <!-- Thumbnail Art & Badges -->
                 <div style="position: relative; aspect-ratio: 16/10; width: 100%; overflow: hidden; background: #1a2332;">
