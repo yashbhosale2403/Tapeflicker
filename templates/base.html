@@ -52,22 +52,21 @@
     <script>
         (function () {
             const root = document.documentElement;
-            let savedTheme = null;
+            let savedTheme = 'light';
             try {
-                savedTheme = localStorage.getItem('theme');
+                savedTheme = localStorage.getItem('theme') || 'light';
             } catch (e) {
-                savedTheme = null;
+                savedTheme = 'light';
             }
-            const theme = savedTheme || 'light';
-            root.setAttribute('data-theme', theme);
-            if (theme === 'dark') {
+            root.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
                 root.classList.add('dark');
             } else {
                 root.classList.remove('dark');
             }
 
             window.toggleTheme = function () {
-                const currentTheme = root.getAttribute('data-theme') || 'dark';
+                const currentTheme = root.getAttribute('data-theme') || 'light';
                 const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 root.setAttribute('data-theme', nextTheme);
                 if (nextTheme === 'dark') {
@@ -84,7 +83,7 @@
                 toggles.forEach((toggleBtn) => {
                     const icon = toggleBtn.querySelector('.theme-toggle-icon');
                     if (icon) {
-                        icon.textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+                        icon.textContent = nextTheme === 'dark' ? '☀️' : '🌙';
                     }
                 });
                 return nextTheme;

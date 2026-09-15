@@ -9,7 +9,23 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2.1">
 <script src="{% static 'js/react.production.min.js' %}"></script>
 <script src="{% static 'js/react-dom.production.min.js' %}"></script>
-<script src="{% static 'js/support.js' %}"></script>
+<script>
+(function () {
+    const root = document.documentElement;
+    let savedTheme = 'light';
+    try {
+        savedTheme = localStorage.getItem('theme') || 'light';
+    } catch (e) {
+        savedTheme = 'light';
+    }
+    root.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+        root.classList.add('dark');
+    } else {
+        root.classList.remove('dark');
+    }
+})();
+</script>
 </head>
 <body>
 {% verbatim %}
