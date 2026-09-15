@@ -110,6 +110,31 @@
   .tf-done-btn:hover { background: #0058B0 !important; }
   .tf-demo-modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: clamp(16px, 4vw, 32px); }
   .tf-demo-modal.is-open { display: flex; }
+  .tf-tint-2A2F44 { background-color: #2A2F44; }
+  .tf-tint-26372F { background-color: #26372F; }
+  .tf-tint-3A3524 { background-color: #3A3524; }
+  .tf-tint-3A2C36 { background-color: #3A2C36; }
+  .tf-tint-243544 { background-color: #243544; }
+  .tf-tint-33303F { background-color: #33303F; }
+  .tf-tint-2C3A3F { background-color: #2C3A3F; }
+  .tf-tint-3B2F3B { background-color: #3B2F3B; }
+  .tf-tag-FF3B30 { background-color: #FF3B30; }
+  .tf-tag-0071E3 { background-color: #0071E3; }
+  .tf-tag-34C759 { background-color: #34C759; }
+  .tf-gear-img-0 { background-image: url('/static/images/tapeflicker_tshirt.png'); }
+  .tf-gear-img-1 { background-image: url('/static/images/tapeflicker_bag.png'); }
+  .tf-gear-img-2 { background-image: url('/static/images/tapeflicker_stickers.png'); }
+  .tf-gear-img-3 { background-image: url('/static/images/tapeflicker_hoodie.png'); }
+  .tf-gear-img-4 { background-image: url('/static/images/tapeflicker_notebook.png'); }
+  .tf-gear-pos-m4 { z-index: 6; opacity: 0.3; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(-8.8%) translateZ(-240px) rotateY(72deg) scale(0.7); }
+  .tf-gear-pos-m3 { z-index: 7; opacity: 0.34; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(-6.6%) translateZ(-180px) rotateY(54deg) scale(0.7); }
+  .tf-gear-pos-m2 { z-index: 8; opacity: 0.56; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(-4.4%) translateZ(-120px) rotateY(36deg) scale(0.8); }
+  .tf-gear-pos-m1 { z-index: 9; opacity: 0.78; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(-2.2%) translateZ(-60px) rotateY(18deg) scale(0.9); }
+  .tf-gear-pos-0 { z-index: 10; opacity: 1; box-shadow: 0 25px 45px rgba(0,0,0,.18); transform: translateX(0%) translateZ(0px) rotateY(0deg) scale(1); }
+  .tf-gear-pos-p1 { z-index: 9; opacity: 0.78; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(2.2%) translateZ(-60px) rotateY(-18deg) scale(0.9); }
+  .tf-gear-pos-p2 { z-index: 8; opacity: 0.56; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(4.4%) translateZ(-120px) rotateY(-36deg) scale(0.8); }
+  .tf-gear-pos-p3 { z-index: 7; opacity: 0.34; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(6.6%) translateZ(-180px) rotateY(-54deg) scale(0.7); }
+  .tf-gear-pos-p4 { z-index: 6; opacity: 0.3; box-shadow: 0 6px 14px rgba(0,0,0,.06); transform: translateX(8.8%) translateZ(-240px) rotateY(-72deg) scale(0.7); }
 </style>
 </helmet>
 
@@ -177,7 +202,7 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 12px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
         <div onClick="{{ c.go }}" class="tf-curtain tf-course-card" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; cursor: pointer;">
-          <div class="tf-course-thumb" style="background-color: {{ c.tint }};">
+          <div class="tf-course-thumb {{ c.tintClass }}">
             <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);">course art</span>
             <span style="position: absolute; right: 10px; top: 10px; font-family: ui-monospace, monospace; font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff;">{{ c.hours }}</span>
           </div>
@@ -232,7 +257,7 @@
       <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
         <div onClick="{{ e.toggle }}" class="tf-event-card" style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s; cursor: pointer;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="tf-event-tag" style="background-color: {{ e.tagColor }};">{{ e.tag }}</span>
+            <span class="tf-event-tag {{ e.tagClass }}">{{ e.tag }}</span>
             <span style="font-size: 11.5px; color: #86868B;">{{ e.date }}</span>
           </div>
           <div style="font-size: 16px; font-weight: 600; letter-spacing: -.022em;">{{ e.title }}</div>
@@ -257,8 +282,8 @@
     </div>
     <div style="display: flex; align-items: center; justify-content: center; min-height: clamp(300px, 34vw, 420px); perspective: 1400px; width: 100%; padding: 0 2%;">
       <sc-for list="{{ gear }}" as="g" hint-placeholder-count="3">
-        <div onClick="{{ g.focus }}" onMouseEnter="{{ g.focus }}" class="tf-gear-card" style="z-index: {{ g.zIndex }}; opacity: {{ g.opacity }}; box-shadow: {{ g.boxShadow }}; transform: {{ g.transform }};">
-          <div class="tf-gear-thumb" style="background-image: url('{{ g.image }}');">
+        <div onClick="{{ g.focus }}" onMouseEnter="{{ g.focus }}" class="tf-gear-card {{ g.posClass }}">
+          <div class="tf-gear-thumb {{ g.imgClass }}">
             <span style="position: absolute; left: 10px; top: 10px; font-size: 10.5px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; backdrop-filter: blur(8px);">Out of stock</span>
           </div>
           <div style="padding: 13px 15px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -651,7 +676,7 @@ class Component extends DCLogic {
       })),
       courses: list.map(c => ({
         ...c,
-        tintStyle: `background-color:${c.tint}`,
+        tintClass: "tf-tint-" + (c.tint || "").replace("#", ""),
         go: () => { window.location.href = '/courses/'; },
       })),
       noResults: list.length === 0,
@@ -667,7 +692,7 @@ class Component extends DCLogic {
         const on = rsvp.includes(i);
         return {
           ...e,
-          tagStyle: `background-color:${e.tagColor}`,
+          tagClass: "tf-tag-" + (e.tagColor || "").replace("#", ""),
           reserved: on,
           btnLabel: on ? "✓ Reserved" : "Reserve seat",
           toggle: () => this.setState(s => ({ rsvp: s.rsvp.includes(i) ? s.rsvp.filter(x => x !== i) : s.rsvp.concat(i) })),
@@ -675,16 +700,13 @@ class Component extends DCLogic {
       }),
       gear: GEAR.map((g, i) => {
         const on = notified.includes(i);
-        const off = i - gearFocus, abs = Math.abs(off), act = off === 0;
+        const off = i - gearFocus;
+        const offKey = off < 0 ? "m" + Math.abs(off) : off === 0 ? "0" : "p" + off;
         return {
           ...g,
           notified: on,
-          zIndex: 10 - abs,
-          opacity: Math.max(1 - abs * 0.22, 0.3),
-          boxShadow: act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)",
-          transform: `translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
-          cardStyle: `z-index:${10 - abs};opacity:${Math.max(1 - abs * 0.22, 0.3)};box-shadow:${act ? "0 25px 45px rgba(0,0,0,.18)" : "0 6px 14px rgba(0,0,0,.06)"};transform:translateX(${off * 2.2}%) translateZ(${-abs * 60}px) rotateY(${off * -18}deg) scale(${Math.max(1 - abs * 0.1, 0.7)})`,
-          thumbStyle: `background-image:url('${g.image}')`,
+          posClass: "tf-gear-pos-" + offKey,
+          imgClass: "tf-gear-img-" + i,
           focus: () => this.setState({ gearFocus: i }),
           btnLabel: on ? "✓ We'll ping you" : "Notify me",
           notify: () => this.setState(s => ({ notified: s.notified.includes(i) ? s.notified : s.notified.concat(i) })),
