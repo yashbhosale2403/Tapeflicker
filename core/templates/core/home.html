@@ -81,6 +81,15 @@
     background-color: #000000 !important;
     color: #fff !important;
   }
+  .tf-btn-start:hover { background: #0058B0 !important; color: #fff !important; }
+  .tf-btn-demo:hover { background: #F0F0F3 !important; }
+  .tf-btn-filter:hover { border-color: rgba(0,0,0,.24) !important; }
+  .tf-course-card:hover { box-shadow: 0 14px 30px rgba(0,0,0,.1) !important; transform: translateY(-2px) !important; }
+  .tf-pillar-card:hover { border-color: rgba(0,0,0,.18) !important; }
+  .tf-event-card:hover { box-shadow: 0 12px 26px rgba(0,0,0,.08) !important; }
+  .tf-quote-btn:hover { background: #F0F0F3 !important; }
+  .tf-close-btn:hover { background: rgba(255,255,255,.25) !important; color: #fff !important; }
+  .tf-done-btn:hover { background: #0058B0 !important; }
 </style>
 </helmet>
 
@@ -106,8 +115,8 @@
         Affordable premium tech education for builders, ethical hackers, developers and innovators — project-led, mentor-guided, career-grade.
       </p>
       <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;">
-        <a href="/courses/" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; background: #0071E3; color: #fff;" style-hover="background: #0058B0; color: #fff;">Start learning</a>
-        <button onClick="{{ openDemo }}" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(0,0,0,.14); background: #fff; color: #1D1D1F; cursor: pointer;" style-hover="background: #F0F0F3;">Watch demo</button>
+        <a href="/courses/" class="tf-btn-start" style="font-size: 14px; font-weight: 500; padding: 11px 22px; border-radius: 999px; background: #0071E3; color: #fff;">Start learning</a>
+        <button onClick="{{ openDemo }}" class="tf-btn-demo" style="font-size: 14px; font-weight: 500; padding: 11px 20px; border-radius: 999px; border: 1px solid rgba(0,0,0,.14); background: #fff; color: #1D1D1F; cursor: pointer;">Watch demo</button>
       </div>
       <div style="display: flex; gap: 28px; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,.08); flex-wrap: wrap;">
         <sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="3">
@@ -141,13 +150,13 @@
       <div style="flex: 1;"></div>
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
         <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
-          <button onClick="{{ f.go }}" style="{{ f.style }}" style-hover="border-color: rgba(0,0,0,.24);">{{ f.label }}</button>
+          <button onClick="{{ f.go }}" class="tf-btn-filter" style="{{ f.style }}">{{ f.label }}</button>
         </sc-for>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 12px;">
       <sc-for list="{{ courses }}" as="c" hint-placeholder-count="4">
-        <div onClick="{{ c.go }}" class="tf-curtain" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; cursor: pointer;" style-hover="box-shadow: 0 14px 30px rgba(0,0,0,.1); transform: translateY(-2px);">
+        <div onClick="{{ c.go }}" class="tf-curtain tf-course-card" style="border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; cursor: pointer;">
           <div style="{{ c.thumbStyle }}">
             <span style="font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);">course art</span>
             <span style="position: absolute; right: 10px; top: 10px; font-family: ui-monospace, monospace; font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff;">{{ c.hours }}</span>
@@ -185,7 +194,7 @@
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px;">
       <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="4">
-        <div onClick="{{ p.go }}" style="{{ p.style }}" style-hover="border-color: rgba(0,0,0,.18);">
+        <div onClick="{{ p.go }}" class="tf-pillar-card" style="{{ p.style }}">
           <div style="display: flex; align-items: center; gap: 12px;">
             <span style="{{ p.numStyle }}">{{ p.num }}</span>
             <span style="font-size: 17px; font-weight: 600; letter-spacing: -.022em;">{{ p.title }}</span>
@@ -201,7 +210,7 @@
   <section id="events" style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 3.5vw, 48px) clamp(18px, 4vw, 44px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
       <sc-for list="{{ events }}" as="e" hint-placeholder-count="3">
-        <div onClick="{{ e.toggle }}" style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s; cursor: pointer;" style-hover="box-shadow: 0 12px 26px rgba(0,0,0,.08);">
+        <div onClick="{{ e.toggle }}" class="tf-event-card" style="padding: 18px 20px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,0,0,.07); display: flex; flex-direction: column; gap: 8px; transition: box-shadow .18s; cursor: pointer;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="{{ e.tagStyle }}">{{ e.tag }}</span>
             <span style="font-size: 11.5px; color: #86868B;">{{ e.date }}</span>
@@ -251,8 +260,8 @@
         <div style="font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #86868B; font-weight: 600;">Community</div>
         <h2 style="margin: 10px 0 0; font-size: clamp(25px, 2.8vw, 36px); line-height: 1.08; letter-spacing: -.035em; font-weight: 600;">Loved by engineers</h2>
         <div style="display: flex; gap: 8px; margin-top: 18px;">
-          <button onClick="{{ prevQuote }}" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;" style-hover="background: #F0F0F3;">←</button>
-          <button onClick="{{ nextQuote }}" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;" style-hover="background: #F0F0F3;">→</button>
+          <button onClick="{{ prevQuote }}" class="tf-quote-btn" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;">←</button>
+          <button onClick="{{ nextQuote }}" class="tf-quote-btn" style="width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(0,0,0,.14); background: #fff; cursor: pointer; font-size: 14px; color: #1D1D1F;">→</button>
         </div>
       </div>
       <div style="padding: clamp(22px, 3vw, 34px); border-radius: 18px; background: #fff; border: 1px solid rgba(0,0,0,.07);">
@@ -283,7 +292,7 @@
             <span style="font-size: 13.5px; font-weight: 600; color: #fff; letter-spacing: -.01em;">Tapeflicker Platform Demo</span>
             <span style="font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.1); color: rgba(255,255,255,.7); font-family: ui-monospace, monospace;">2 min tour</span>
           </div>
-          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font: inherit; font-size: 13px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">✕</button>
+          <button onClick="{{ closeDemo }}" class="tf-close-btn" style="border: 0; cursor: pointer; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); font: inherit; font-size: 13px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">✕</button>
         </div>
 
         <!-- Video Frame -->
@@ -301,7 +310,7 @@
         <div style="display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: rgba(255,255,255,.7); font-size: 12.5px; background: rgba(255,255,255,.02); border-top: 1px solid rgba(255,255,255,.06);">
           <span>⚡ Interactive Labs, Cohorts, Cyber Sandboxes & Certificates</span>
           <span style="flex: 1;"></span>
-          <button onClick="{{ closeDemo }}" style="border: 0; cursor: pointer; background: #0071E3; color: #fff; font: inherit; font-size: 12.5px; font-weight: 500; padding: 7px 18px; border-radius: 999px; transition: background 0.15s ease;">Done watching</button>
+          <button onClick="{{ closeDemo }}" class="tf-done-btn" style="border: 0; cursor: pointer; background: #0071E3; color: #fff; font: inherit; font-size: 12.5px; font-weight: 500; padding: 7px 18px; border-radius: 999px; transition: background 0.15s ease;">Done watching</button>
         </div>
       </div>
     </div>
