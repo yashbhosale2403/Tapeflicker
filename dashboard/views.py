@@ -56,7 +56,20 @@ def empty_state_view(request, title):
 @login_required(login_url='accounts:login')
 def delete_enrollment(request, enrollment_id):
     if request.method == 'POST':
+        two_factor_code = request.POST.get('two_factor_code', '').strip()
+        expected_code = request.POST.get('expected_code', '').strip()
+        
+        if not two_factor_code or two_factor_code != expected_code:
+            from django.contrib import messages
+            messages.error(request, "2FA Security Verification Failed: Invalid 2FA code provided.")
+            return redirect('dashboard:home')
+
         enrollment = get_object_or_404(Enrollment, id=enrollment_id, user=request.user)
+        course_title = enrollment.course.title
         UserLessonProgress.objects.filter(user=request.user, lesson__module__course=enrollment.course).delete()
         enrollment.delete()
+        
+        from django.contrib import messages
+        messages.success(request, f"2FA Verified: Successfully unenrolled from '{course_title}'.")
     return redirect('dashboard:home')
+

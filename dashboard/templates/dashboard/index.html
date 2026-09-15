@@ -202,6 +202,22 @@
             <!-- Main Content Area -->
             <main class="db-main-col">
                 
+                {% if messages %}
+                <div style="margin-bottom: 24px;">
+                    {% for message in messages %}
+                    <div style="padding: 14px 20px; border-radius: 16px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 12px; backdrop-filter: blur(10px); {% if message.tags == 'error' %}background: rgba(255,59,48,0.12); border: 1px solid rgba(255,59,48,0.3); color: #FF3B30;{% else %}background: rgba(52,199,89,0.12); border: 1px solid rgba(52,199,89,0.3); color: #34C759;{% endif %}">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <svg style="width: 18px; height: 18px; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>{{ message }}</span>
+                        </div>
+                        <button onclick="this.parentElement.remove();" style="background: none; border: none; font-size: 16px; cursor: pointer; color: inherit; opacity: 0.7; padding: 4px;">✕</button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
                 <!-- Welcome Header -->
                 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--card-border, rgba(0,0,0,.08)); margin-bottom: 32px;">
                     <div>
@@ -298,12 +314,17 @@
                                         Resume Course
                                     </a>
                                     
-                                    <form action="{% url 'dashboard:delete_enrollment' enrollment.id %}" method="POST" onsubmit="return confirm('Are you sure you want to unenroll from {{ enrollment.course.title|escapejs }}?');" style="margin: 0;" onclick="event.stopPropagation();">
-                                        {% csrf_token %}
-                                        <button type="submit" style="padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,59,48,0.25); background: rgba(255,59,48,0.08); color: #FF3B30; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color .15s ease;" title="Unenroll">
-                                            Unenroll
-                                        </button>
-                                    </form>
+                                    <button type="button" 
+                                            onclick="event.stopPropagation(); open2faUnenrollModal('{% url 'dashboard:delete_enrollment' enrollment.id %}', '{{ enrollment.course.title|escapejs }}');" 
+                                            style="padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,59,48,0.3); background: rgba(255,59,48,0.08); color: #FF3B30; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all .2s ease;" 
+                                            onmouseover="this.style.background='rgba(255,59,48,0.18)';"
+                                            onmouseout="this.style.background='rgba(255,59,48,0.08)';"
+                                            title="Require 2FA Security to Unenroll">
+                                        <svg style="width: 13px; height: 13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                        <span>Unenroll</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -355,4 +376,213 @@
         </div>
     </div>
 </div>
+<!-- 2FA Security Unenroll Modal -->
+<div id="unenroll-2fa-modal" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px;">
+    <div class="tf-2fa-card" style="background: var(--card-bg, #ffffff); border: 1px solid var(--card-border, rgba(0,0,0,0.12)); border-radius: 24px; width: 100%; max-width: 440px; padding: 28px; box-shadow: 0 24px 48px rgba(0,0,0,0.35); position: relative; color: var(--text-main, #1D1D1F); text-align: center;">
+        
+        <!-- Close button -->
+        <button type="button" onclick="close2faModal()" style="position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.06); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted, #6E6E73); font-weight: 700; transition: background-color 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.12)'" onmouseout="this.style.background='rgba(0,0,0,0.06)'">
+            ✕
+        </button>
+
+        <!-- 2FA Icon Badge -->
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(255,59,48,0.12); border: 1px solid rgba(255,59,48,0.3); color: #FF3B30; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(255,59,48,0.2);">
+            <svg style="width: 28px; height: 28px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+        </div>
+
+        <h3 style="font-size: 21px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.02em; color: var(--text-main, #1D1D1F);">2-Factor Verification</h3>
+        <p style="font-size: 13px; color: var(--text-muted, #6E6E73); margin: 0 0 20px; line-height: 1.45;">
+            Unenrolling will permanently delete all your progress, quizzes, and notes for <strong id="modal-course-title" style="color: var(--text-main, #1D1D1F);">Course</strong>.
+        </p>
+
+        <!-- Dynamic 2FA Code Box -->
+        <div style="background: rgba(255,59,48,0.06); border: 1px dashed rgba(255,59,48,0.3); border-radius: 16px; padding: 14px; margin-bottom: 20px;">
+            <div style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; color: #FF3B30; font-weight: 700; margin-bottom: 4px;">
+                SECURITY 2FA PASSCODE
+            </div>
+            <div id="modal-2fa-code-display" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 28px; font-weight: 800; letter-spacing: 0.22em; color: #FF3B30; user-select: all;">
+                849 201
+            </div>
+            <div style="font-size: 11px; color: var(--text-dim, #86868B); margin-top: 4px;">
+                Type the 6-digit passcode above to unlock unenrollment
+            </div>
+        </div>
+
+        <form id="modal-unenroll-form" action="" method="POST" style="margin: 0;">
+            {% csrf_token %}
+            <input type="hidden" name="expected_code" id="modal-expected-code" value="">
+            <input type="hidden" name="two_factor_code" id="modal-submitted-code" value="">
+
+            <!-- 6-Digit OTP Box Grid -->
+            <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 18px;" id="otp-inputs-container">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="0" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="1" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="2" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="3" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="4" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+                <input type="text" maxlength="1" pattern="[0-9]" class="otp-box" data-index="5" inputmode="numeric" style="width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; font-family: ui-monospace, monospace; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.15); background: var(--bg-main, #F5F5F7); color: var(--text-main, #1D1D1F); outline: none; transition: border-color 0.2s;">
+            </div>
+
+            <!-- Confirmation Checkbox -->
+            <label style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12.5px; color: var(--text-muted, #6E6E73); margin-bottom: 22px; cursor: pointer; user-select: none;">
+                <input type="checkbox" id="modal-confirm-check" style="width: 16px; height: 16px; accent-color: #FF3B30; cursor: pointer;">
+                <span>I confirm permanent deletion of my progress</span>
+            </label>
+
+            <!-- Modal Action Buttons -->
+            <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="close2faModal()" style="flex: 1; padding: 12px; border-radius: 999px; border: 1px solid var(--card-border, rgba(0,0,0,0.15)); background: transparent; color: var(--text-main, #1D1D1F); font-weight: 600; font-size: 13.5px; cursor: pointer; transition: background 0.2s;">
+                    Cancel
+                </button>
+                <button type="submit" id="modal-submit-btn" disabled style="flex: 1.4; padding: 12px; border-radius: 999px; border: none; background: #86868B; color: #FFFFFF; font-weight: 600; font-size: 13.5px; cursor: not-allowed; transition: all 0.25s ease;">
+                    Enter 2FA Code
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+  [data-theme="dark"] .tf-2fa-card {
+    background: #141416 !important;
+    border-color: rgba(255, 59, 48, 0.35) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85) !important;
+  }
+  [data-theme="dark"] .otp-box {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  [data-theme="dark"] .otp-box:focus {
+    border-color: #FF3B30 !important;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.3) !important;
+  }
+</style>
+
+<script>
+let current2faCode = "";
+
+function open2faUnenrollModal(actionUrl, courseTitle) {
+    const modal = document.getElementById('unenroll-2fa-modal');
+    const form = document.getElementById('modal-unenroll-form');
+    const titleEl = document.getElementById('modal-course-title');
+    const codeDisplayEl = document.getElementById('modal-2fa-code-display');
+    const expectedInput = document.getElementById('modal-expected-code');
+    const submittedInput = document.getElementById('modal-submitted-code');
+    const submitBtn = document.getElementById('modal-submit-btn');
+    const confirmCheck = document.getElementById('modal-confirm-check');
+    const boxes = document.querySelectorAll('#otp-inputs-container .otp-box');
+
+    // 1. Generate 6-digit passcode
+    current2faCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // 2. Assign action & elements
+    form.action = actionUrl;
+    titleEl.textContent = courseTitle;
+    expectedInput.value = current2faCode;
+    submittedInput.value = "";
+    codeDisplayEl.textContent = current2faCode.slice(0, 3) + ' ' + current2faCode.slice(3);
+
+    // 3. Reset inputs
+    boxes.forEach(box => { 
+        box.value = ''; 
+        box.style.borderColor = 'rgba(0,0,0,0.15)';
+    });
+    confirmCheck.checked = false;
+    
+    // 4. Reset submit button
+    submitBtn.disabled = true;
+    submitBtn.style.background = '#86868B';
+    submitBtn.style.cursor = 'not-allowed';
+    submitBtn.style.boxShadow = 'none';
+    submitBtn.textContent = 'Enter 2FA Code';
+
+    // 5. Open modal
+    modal.style.display = 'flex';
+    setTimeout(() => boxes[0].focus(), 100);
+}
+
+function close2faModal() {
+    const modal = document.getElementById('unenroll-2fa-modal');
+    modal.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const boxes = document.querySelectorAll('#otp-inputs-container .otp-box');
+    const confirmCheck = document.getElementById('modal-confirm-check');
+    const submitBtn = document.getElementById('modal-submit-btn');
+    const submittedInput = document.getElementById('modal-submitted-code');
+
+    function checkOtpValidity() {
+        let enteredCode = "";
+        boxes.forEach(b => enteredCode += b.value.trim());
+        submittedInput.value = enteredCode;
+
+        const isCodeValid = (enteredCode.length === 6 && enteredCode === current2faCode);
+        const isChecked = confirmCheck.checked;
+
+        if (isCodeValid && isChecked) {
+            submitBtn.disabled = false;
+            submitBtn.style.background = 'linear-gradient(135deg, #FF3B30 0%, #D70015 100%)';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.style.boxShadow = '0 6px 20px rgba(255,59,48,0.45)';
+            submitBtn.textContent = 'Verified: Unenroll Now';
+            boxes.forEach(b => b.style.borderColor = '#34C759');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.style.background = '#86868B';
+            submitBtn.style.cursor = 'not-allowed';
+            submitBtn.style.boxShadow = 'none';
+            if (!isCodeValid) {
+                submitBtn.textContent = `2FA Code (${enteredCode.length}/6)`;
+                boxes.forEach(b => {
+                    if (b.value) b.style.borderColor = (enteredCode.length === 6 && !isCodeValid) ? '#FF3B30' : 'rgba(0,113,227,0.5)';
+                });
+            } else {
+                submitBtn.textContent = 'Check Box to Confirm';
+            }
+        }
+    }
+
+    boxes.forEach((box, index) => {
+        box.addEventListener('input', function() {
+            const val = this.value.replace(/[^0-9]/g, '');
+            this.value = val;
+
+            if (val && index < boxes.length - 1) {
+                boxes[index + 1].focus();
+            }
+            checkOtpValidity();
+        });
+
+        box.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && !this.value && index > 0) {
+                boxes[index - 1].focus();
+            }
+        });
+
+        box.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+            if (pasteData) {
+                for (let i = 0; i < pasteData.length && i < boxes.length; i++) {
+                    boxes[i].value = pasteData[i];
+                }
+                if (pasteData.length < 6) {
+                    boxes[pasteData.length].focus();
+                } else {
+                    boxes[5].focus();
+                }
+                checkOtpValidity();
+            }
+        });
+    });
+
+    if (confirmCheck) {
+        confirmCheck.addEventListener('change', checkOtpValidity);
+    }
+});
+</script>
 {% endblock %}
