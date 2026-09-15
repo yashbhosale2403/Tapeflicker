@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2.1">
 <script src="{% static 'js/react.production.min.js' %}"></script>
 <script src="{% static 'js/react-dom.production.min.js' %}"></script>
+<script src="{% static 'js/support.js' %}"></script>
 <script>
 (function () {
     const root = document.documentElement;
@@ -25,6 +26,25 @@
         root.classList.remove('dark');
     }
 })();
+window.openDemo = function(e) {
+    if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+    const m = document.querySelector('.tf-demo-modal');
+    if (m) m.classList.add('is-open');
+    const v = document.getElementById('demo-video');
+    if (v) { v.currentTime = 0; v.play().catch(function(){}); }
+    if (window.__tfComp) window.__tfComp.setState({ demo: true });
+};
+window.closeDemo = function(e) {
+    if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+    const m = document.querySelector('.tf-demo-modal');
+    if (m) m.classList.remove('is-open');
+    const v = document.getElementById('demo-video');
+    if (v) v.pause();
+    if (window.__tfComp) window.__tfComp.setState({ demo: false });
+};
+window.stopProp = function(e) {
+    if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+};
 </script>
 </head>
 <body>
@@ -327,8 +347,7 @@
   {% include 'includes/footer.html' %}
 {% verbatim %}
 
-  <sc-if value="{{ demoOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeDemo }}" class="tf-demo-modal {{ demoOpen ? 'is-open' : '' }}">
+    <div onClick="{{ closeDemo }}" class="tf-demo-modal">
       <div onClick="{{ stopProp }}" style="width: min(840px, 100%); border-radius: 20px; overflow: hidden; background: #0E0E10; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 30px 80px rgba(0,0,0,.6); display: flex; flex-direction: column;">
         <!-- Header bar -->
         <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);">
@@ -364,7 +383,6 @@
         </div>
       </div>
     </div>
-  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0071E3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#0071E3&quot;,&quot;#C8F250&quot;,&quot;#1D1D1F&quot;,&quot;#FF3B30&quot;]}}">
@@ -584,6 +602,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    window.__tfComp = this;
     this.startParticles();
     this.onScroll = () => {
       const doc = document.scrollingElement || document.documentElement;
@@ -720,19 +739,9 @@ class Component extends DCLogic {
       nextQuote: () => this.setState(s => ({ quote: (s.quote + 1) % QUOTES.length })),
       perks: ["Project-led learning", "Industry mentors", "Career-grade certificates", "Premium cyber lab access"],
       demoOpen: demo,
-      openDemo: () => {
-        this.setState({ demo: true });
-        setTimeout(() => {
-          const v = document.getElementById('demo-video');
-          if (v) { v.currentTime = 0; v.play().catch(() => {}); }
-        }, 50);
-      },
-      closeDemo: () => {
-        const v = document.getElementById('demo-video');
-        if (v) { v.pause(); }
-        this.setState({ demo: false });
-      },
-      stopProp: (e) => { if (e && typeof e.stopPropagation === 'function') e.stopPropagation(); },
+      openDemo: window.openDemo,
+      closeDemo: window.closeDemo,
+      stopProp: window.stopProp,
     };
   }
 }
