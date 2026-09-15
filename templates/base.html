@@ -120,19 +120,8 @@
         {% endblock %}
     </main>
 
-    <!-- Exact 1:1 Light Theme Shared Footer -->
-    <footer style="border-top: 1px solid rgba(0,0,0,.07); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; background: #FBFBFD;">
-      <div style="max-width: 1280px; margin: 0 auto; padding: 22px clamp(18px, 4vw, 44px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: #86868B;">
-        <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" style="height: 20px; width: auto; display: block; opacity: .8;" />
-        <span>© 2026 Tapeflicker Inc.</span>
-        <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #34C759;"></span>All systems operational</span>
-        <div style="flex: 1;"></div>
-        <a href="{% url 'courses:list' %}" style="color: #86868B; text-decoration: none;">Courses</a>
-        <a href="{% url 'core:about' %}" style="color: #86868B; text-decoration: none;">About</a>
-        <a href="{% url 'core:about' %}" style="color: #86868B; text-decoration: none;">Privacy</a>
-        <a href="{% url 'core:contact' %}" style="color: #86868B; text-decoration: none;">Contact</a>
-      </div>
-    </footer>
+    <!-- Shared Orbit Journey Footer -->
+    {% include 'includes/footer.html' %}
 
     <!-- Scripts -->
     <script>

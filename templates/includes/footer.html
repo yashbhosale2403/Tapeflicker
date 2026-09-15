@@ -1,0 +1,435 @@
+{% load static %}
+<!-- Tapeflicker Pitch-Black Orbit Footer (Always Solid Black in Light & Dark Mode) -->
+<style>
+/* Main Footer Container - Always Pitch Black */
+.tf-orbit-footer,
+[data-theme="light"] .tf-orbit-footer,
+[data-theme="dark"] .tf-orbit-footer {
+  height: 33vh !important;
+  min-height: 290px !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #F4F2EB !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(22px, 3vw, 36px) clamp(20px, 4vw, 54px) 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Sora', 'Inter', sans-serif !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-sizing: border-box !important;
+}
+
+.tf-footer-top {
+  position: relative !important;
+  z-index: 5 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+.tf-footer-heading,
+[data-theme="light"] .tf-footer-heading {
+  font-family: 'Sora', -apple-system, sans-serif !important;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -.06em !important;
+  line-height: .92 !important;
+  max-width: 440px !important;
+  margin: 0 !important;
+  color: #FFFFFF !important;
+}
+
+.tf-footer-heading span,
+[data-theme="light"] .tf-footer-heading span {
+  background: linear-gradient(135deg, #0071E3 0%, #00B4FF 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: #00B4FF !important;
+}
+
+.tf-footer-copy,
+[data-theme="light"] .tf-footer-copy {
+  color: #AAAAAF !important;
+  max-width: 250px !important;
+  line-height: 1.5 !important;
+  font-size: 12.5px !important;
+}
+
+/* Vibrant Orbital System */
+.tf-orbit-system {
+  position: absolute !important;
+  width: min(28vh, 270px) !important;
+  height: min(28vh, 270px) !important;
+  left: 74% !important;
+  top: 48% !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: auto !important;
+}
+
+.tf-ring,
+[data-theme="light"] .tf-ring {
+  position: absolute !important;
+  inset: 0 !important;
+  border: 1.8px solid rgba(0, 180, 255, 0.55) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 14px rgba(0, 180, 255, 0.25) !important;
+}
+
+.tf-ring.r2,
+[data-theme="light"] .tf-ring.r2 {
+  inset: 15% !important;
+  transform: rotate(38deg) scaleX(.72) !important;
+  border-color: rgba(99, 102, 241, 0.65) !important;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.25) !important;
+}
+
+.tf-ring.r3,
+[data-theme="light"] .tf-ring.r3 {
+  inset: 28% !important;
+  transform: rotate(-32deg) scaleX(.55) !important;
+  border-color: rgba(52, 199, 89, 0.65) !important;
+  box-shadow: 0 0 12px rgba(52, 199, 89, 0.25) !important;
+}
+
+/* Central Core with Main Logo */
+.tf-core,
+[data-theme="light"] .tf-core {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 84px !important;
+  height: 84px !important;
+  border: 1.8px solid rgba(0, 180, 255, 0.75) !important;
+  border-radius: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #000000 !important;
+  background-color: #000000 !important;
+  z-index: 3 !important;
+  box-shadow: 0 0 24px rgba(0, 180, 255, 0.5), inset 0 0 14px rgba(0, 180, 255, 0.25) !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+  padding: 10px !important;
+}
+
+.tf-core:hover {
+  transform: translate(-50%, -50%) scale(1.08) !important;
+  border-color: #00B4FF !important;
+  box-shadow: 0 0 32px rgba(0, 180, 255, 0.8), inset 0 0 18px rgba(0, 180, 255, 0.4) !important;
+}
+
+.tf-core img {
+  height: 54px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 0 10px rgba(0, 180, 255, 0.85)) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.tf-core:hover img {
+  transform: scale(1.05) !important;
+}
+
+.tf-orbit {
+  position: absolute !important;
+  inset: 0 !important;
+  animation: tf-spin 18s linear infinite !important;
+}
+
+.tf-orbit.o2 {
+  animation-duration: 25s !important;
+  animation-direction: reverse !important;
+}
+
+.tf-orbit.o3 {
+  animation-duration: 34s !important;
+}
+
+.tf-planet {
+  position: absolute !important;
+  left: 50% !important;
+  top: -7px !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(0, 113, 227, 0.7) !important;
+  transform: translateX(-50%) !important;
+  cursor: pointer !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease !important;
+  text-decoration: none !important;
+  display: block !important;
+}
+
+.tf-planet:hover {
+  transform: translateX(-50%) scale(2.2) !important;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 1), 0 0 45px rgba(0, 180, 255, 0.9) !important;
+}
+
+.tf-planet span {
+  position: absolute !important;
+  left: 22px !important;
+  top: -6px !important;
+  white-space: nowrap !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .14em !important;
+  color: #FFFFFF !important;
+  opacity: 0 !important;
+  transform: translateX(-8px) !important;
+  transition: all 0.3s ease !important;
+  pointer-events: none !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.tf-planet:hover span {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.tf-orbit.o2 .tf-planet {
+  top: 14% !important;
+  left: 7% !important;
+  background: #00B4FF !important;
+  box-shadow: 0 0 16px rgba(0, 180, 255, 0.9) !important;
+  width: 11px !important;
+  height: 11px !important;
+}
+
+.tf-orbit.o3 .tf-planet {
+  top: 50% !important;
+  left: 0 !important;
+  background: #34C759 !important;
+  box-shadow: 0 0 14px rgba(52, 199, 89, 0.9) !important;
+  width: 9px !important;
+  height: 9px !important;
+}
+
+@keyframes tf-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Footer Bottom Links Bar */
+.tf-footer-bottom,
+[data-theme="light"] .tf-footer-bottom {
+  position: relative !important;
+  z-index: 5 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding-top: 14px !important;
+  color: #888890 !important;
+  font-size: 11px !important;
+  letter-spacing: .08em !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+
+.tf-footer-brand-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.tf-footer-status-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(52, 199, 89, 0.14) !important;
+  border: 1px solid rgba(52, 199, 89, 0.3) !important;
+  color: #34C759 !important;
+  font-size: 10.5px !important;
+}
+
+.tf-footer-status-dot {
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #34C759 !important;
+  box-shadow: 0 0 6px #34C759 !important;
+}
+
+.tf-footer-links-group {
+  display: flex !important;
+  gap: 22px !important;
+}
+
+.tf-footer-links-group a,
+[data-theme="light"] .tf-footer-links-group a {
+  color: #AAAAB2 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.tf-footer-links-group a:hover,
+[data-theme="light"] .tf-footer-links-group a:hover {
+  color: #FFFFFF !important;
+}
+
+.tf-back-to-top,
+[data-theme="light"] .tf-back-to-top {
+  cursor: pointer !important;
+  color: #AAAAB2 !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  user-select: none !important;
+}
+
+.tf-back-to-top:hover,
+[data-theme="light"] .tf-back-to-top:hover {
+  color: #00B4FF !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Scroll Progress Bar */
+.tf-scroll-progress {
+  position: fixed !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  height: 3px !important;
+  width: 0% !important;
+  background: linear-gradient(90deg, #0071E3 0%, #00B4FF 50%, #6366F1 100%) !important;
+  z-index: 100 !important;
+  transition: width 0.08s linear !important;
+}
+
+@media(max-width: 700px) {
+  .tf-orbit-footer {
+    height: auto !important;
+    min-height: 480px !important;
+  }
+  .tf-orbit-system {
+    width: min(75vw, 240px) !important;
+    height: min(75vw, 240px) !important;
+    left: 50% !important;
+    top: 52% !important;
+  }
+  .tf-footer-top {
+    margin-bottom: 180px !important;
+  }
+  .tf-footer-copy {
+    display: none !important;
+  }
+  .tf-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+}
+</style>
+
+<footer class="tf-orbit-footer" id="tf-orbit-footer">
+
+  <div class="tf-footer-top">
+    <h2 class="tf-footer-heading">
+      Keep<br><span>exploring.</span>
+    </h2>
+    <div class="tf-footer-copy">
+      A quiet orbital system turning the footer into the final visual moment of your learning journey.
+    </div>
+  </div>
+
+  <div class="tf-orbit-system" id="tf-orbit-system">
+
+    <div class="tf-ring"></div>
+    <div class="tf-ring r2"></div>
+    <div class="tf-ring r3"></div>
+
+    <div class="tf-core" title="Tapeflicker">
+      <img src="{% static 'images/tapeflicker_brand_logo_transparent.png' %}" alt="Tapeflicker" />
+    </div>
+
+    <div class="tf-orbit o1">
+      <a href="{% url 'courses:list' %}" class="tf-planet" title="Explore Courses">
+        <span>COURSES</span>
+      </a>
+    </div>
+
+    <div class="tf-orbit o2">
+      <a href="{% url 'core:about' %}" class="tf-planet" title="About Tapeflicker">
+        <span>ABOUT</span>
+      </a>
+    </div>
+
+    <div class="tf-orbit o3">
+      <a href="{% url 'core:contact' %}" class="tf-planet" title="Contact Us">
+        <span>CONTACT</span>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="tf-footer-bottom">
+    <div class="tf-footer-brand-info">
+      <div>© 2026 TAPEFLICKER INC.</div>
+      <div class="tf-footer-status-pill">
+        <span class="tf-footer-status-dot"></span>
+        <span>Operational</span>
+      </div>
+    </div>
+
+    <div class="tf-footer-links-group">
+      <a href="{% url 'courses:list' %}">Courses</a>
+      <a href="{% url 'core:about' %}">About</a>
+      <a href="{% url 'core:about' %}">Privacy</a>
+      <a href="{% url 'core:contact' %}">Contact</a>
+    </div>
+
+    <div class="tf-back-to-top" id="tf-back-to-top">BACK TO TOP ↑</div>
+  </div>
+
+</footer>
+
+<div class="tf-scroll-progress" id="tf-scroll-progress"></div>
+
+<script>
+(function() {
+  const footer = document.getElementById("tf-orbit-footer");
+  const system = document.getElementById("tf-orbit-system");
+  const progress = document.getElementById("tf-scroll-progress");
+  const backToTop = document.getElementById("tf-back-to-top");
+
+  if (!footer || !system) return;
+
+  function updateOrbitScroll() {
+    const r = footer.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
+
+    system.style.transform =
+      `translate(-50%, calc(-50% + ${-p * 50}px)) rotate(${p * 18}deg) scale(${1 + p * 0.12})`;
+
+    if (progress) {
+      const docScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const docHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+      const scrollPct = docHeight > 0 ? (docScroll / docHeight) * 100 : 0;
+      progress.style.width = scrollPct + "%";
+    }
+  }
+
+  window.addEventListener("scroll", updateOrbitScroll, { passive: true });
+  window.addEventListener("resize", updateOrbitScroll);
+  document.addEventListener("DOMContentLoaded", updateOrbitScroll);
+  updateOrbitScroll();
+
+  if (backToTop) {
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+})();
+</script>
