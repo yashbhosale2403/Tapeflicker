@@ -73,7 +73,27 @@ def verify_firebase_token(request):
                 import random
                 if not picture:
                     picture = f"/static/images/avatars/avatar_{random.randint(1, 15)}.png"
-                user_profile = UserProfile.objects.create(user=user, firebase_uid=uid, avatar_url=picture)
+
+                # Firebase is the identity provider. Create or reuse a Django
+                # account before attaching the required one-to-one profile.
+                user = User.objects.filter(email=email).first() if email else None
+                if user is None:
+                    base_username = (email.split("@")[0] if email else f"firebase_{uid}")[:150]
+                    username = base_username or f"firebase_{uid}"
+                    suffix = 1
+                    while User.objects.filter(username=username).exists():
+                        suffix_text = f"_{suffix}"
+                        username = f"{base_username[:150-len(suffix_text)]}{suffix_text}"
+                        suffix += 1
+                    user = User.objects.create_user(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name,
+                    )
+                user_profile = UserProfile.objects.create(
+                    user=user, firebase_uid=uid, avatar_url=picture
+                )
             
             # Update streak and last active date
             from datetime import date, timedelta
